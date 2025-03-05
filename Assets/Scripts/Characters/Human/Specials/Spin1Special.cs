@@ -14,7 +14,7 @@ namespace Characters
 
         public Spin1Special(BaseCharacter owner): base(owner)
         {
-            Cooldown = 1f;
+            Cooldown = 1f; // changed by Ata, 5 Mar 25
         }
 
         protected override void Activate()

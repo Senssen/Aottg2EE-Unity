@@ -5,7 +5,7 @@ namespace Characters
 {
     class PotatoSpecial : BaseEmoteSpecial
     {
-        protected override float ActiveTime => 20f;
+        protected override float ActiveTime => 20f; // changed by Ata, 5 Mar 25
         protected override bool GroundedOnly => false;
         private float _oldSpeed;
         private float _currentSpeed;
