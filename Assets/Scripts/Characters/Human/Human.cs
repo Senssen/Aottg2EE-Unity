@@ -15,6 +15,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UI;
+using Unity.VisualScripting;
 using UnityEngine;
 using Utility;
 using Weather;
@@ -126,6 +127,7 @@ namespace Characters
         private float _hookHumanConstantTimeLeft;
         private bool _isReelingOut;
         private Dictionary<BaseTitan, float> _lastNapeHitTimes = new Dictionary<BaseTitan, float>();
+        private Horse PassengerHorse = null;
 
         protected override void CreateDetection()
         {
@@ -336,6 +338,19 @@ namespace Characters
 
         public void Unmount(bool immediate)
         {
+            if (MountState == HumanMountState.Passenger && !immediate)
+            {
+                PlayAnimation(HumanAnimations.HorseDismount);
+                Cache.Rigidbody.AddForce((((Vector3.up * 10f) - (Cache.Transform.forward * 2f)) - (Cache.Transform.right * 1f)), ForceMode.VelocityChange);
+                UnmountHorseAsPassenger();
+                return;
+            }
+            if (MountState == HumanMountState.Passenger && immediate)
+            {
+                UnmountHorseAsPassenger();
+                return;
+            }
+
             SetInterpolation(true);
             if (MountState == HumanMountState.Horse && !immediate)
             {
@@ -1428,7 +1443,7 @@ namespace Characters
                     Cache.Rigidbody.velocity = Horse.Cache.Rigidbody.velocity;
                     return;
                 }
-                if (MountState == HumanMountState.MapObject)
+                if (MountState == HumanMountState.MapObject || MountState == HumanMountState.Passenger)
                 {
                     Cache.Rigidbody.velocity = Vector3.zero;
                     ToggleSparks(false);
@@ -1509,7 +1524,8 @@ namespace Characters
                             newVelocity = GetTargetDirection() * TargetMagnitude * Stats.RunSpeed;
                             if (!Animation.IsPlaying(HumanAnimations.Run) && !Animation.IsPlaying(HumanAnimations.Jump) &&
                                 !Animation.IsPlaying(HumanAnimations.RunBuffed) && (!Animation.IsPlaying(HumanAnimations.HorseMount) ||
-                                Animation.GetNormalizedTime(HumanAnimations.HorseMount) >= 0.5f))
+                                Animation.GetNormalizedTime(HumanAnimations.HorseMount) >= 0.5f) && 
+                                (!Animation.IsPlaying(HumanAnimations.PassengerMount) || Animation.GetNormalizedTime(HumanAnimations.PassengerMount) >= 0.5f))
                             {
                                 CrossFade(RunAnimation, 0.1f);
                                 _stepPhase = 0;
@@ -1517,7 +1533,8 @@ namespace Characters
                             if (!Animation.IsPlaying(HumanAnimations.WallRun))
                                 _targetRotation = GetTargetRotation();
                         }
-                        else if (!(Animation.IsPlaying(StandAnimation) || State == HumanState.Land || Animation.IsPlaying(HumanAnimations.Jump) || Animation.IsPlaying(HumanAnimations.HorseMount) || Animation.IsPlaying(HumanAnimations.Grabbed)))
+                        else if (!(Animation.IsPlaying(StandAnimation) || State == HumanState.Land || Animation.IsPlaying(HumanAnimations.Jump) || 
+                            Animation.IsPlaying(HumanAnimations.HorseMount) || Animation.IsPlaying(HumanAnimations.PassengerMount) || Animation.IsPlaying(HumanAnimations.Grabbed)))
                         {
                             CrossFade(StandAnimation, 0.1f);
                         }
@@ -1554,6 +1571,13 @@ namespace Characters
                         float distance = Vector3.Distance(Horse.Cache.Transform.position, Cache.Transform.position);
                         force += (Horse.Cache.Transform.position - Cache.Transform.position).normalized * 0.6f * Gravity.magnitude * distance / 12f;
                     }
+                    if (Animation.IsPlaying(HumanAnimations.PassengerMount) && Animation.GetNormalizedTime(HumanAnimations.PassengerMount) > 0.18f && Animation.GetNormalizedTime(HumanAnimations.PassengerMount) < 1f)
+                    {
+                        force = -_currentVelocity;
+                        force.y = 6f;
+                        float distance = Vector3.Distance(PassengerHorse.Cache.Transform.position, Cache.Transform.position);
+                        force += (PassengerHorse.Cache.Transform.position + Vector3.back * 1f - Cache.Transform.position).normalized * 0.6f * Gravity.magnitude * distance / 12f;
+                    }
                     if (!IsStock(pivot) && !pivot)
                     {
                         _currentVelocity += force;
@@ -1573,8 +1597,15 @@ namespace Characters
                         if (!Animation.IsPlaying(HumanAnimations.HorseIdle))
                             CrossFade(HumanAnimations.HorseIdle, 0.1f);
                     }
+                    if (PassengerHorse != null && Animation.IsPlaying(HumanAnimations.PassengerMount) && Cache.Rigidbody.velocity.y < 0f && Vector3.Distance(PassengerHorse.Cache.Transform.position + Vector3.up * 1.65f + Vector3.back * 1f, Cache.Transform.position) < 1f)
+                    {
+                        FinishMountHorseAsPassenger();
+                        SetInterpolation(false);
+                        if (!Animation.IsPlaying(HumanAnimations.HorseIdle))
+                            CrossFade(HumanAnimations.HorseIdle, 0.1f);
+                    }
                     else if (Animation.GetNormalizedTime(HumanAnimations.Dash) >= 0.99f || (State == HumanState.Idle && !Animation.IsPlaying(HumanAnimations.Dash) && !Animation.IsPlaying(HumanAnimations.WallRun) && !Animation.IsPlaying(HumanAnimations.ToRoof)
-                        && !Animation.IsPlaying(HumanAnimations.HorseMount) && !Animation.IsPlaying(HumanAnimations.HorseDismount) && !Animation.IsPlaying(HumanAnimations.AirRelease)
+                        && !Animation.IsPlaying(HumanAnimations.HorseMount) && !Animation.IsPlaying(HumanAnimations.PassengerMount) && !Animation.IsPlaying(HumanAnimations.HorseDismount) && !Animation.IsPlaying(HumanAnimations.AirRelease)
                         && MountState == HumanMountState.None && (!Animation.IsPlaying(HumanAnimations.AirHookLJust) || Animation.GetNormalizedTime(HumanAnimations.AirHookLJust) >= 1f) && (!Animation.IsPlaying(HumanAnimations.AirHookRJust) || Animation.GetNormalizedTime(HumanAnimations.AirHookRJust) >= 1f)))
                     {
                         if (_wallSlide)
@@ -2661,6 +2692,154 @@ namespace Characters
             ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.SetSpecialIcon(HumanSpecials.GetSpecialIcon(special));
         }
 
+        #region Horse Passenger
+
+        public void StartMountingPassengerHorse()
+        {
+            FindClosestHorse();
+            if (PassengerHorse == null || PassengerHorse._hasPassenger)
+                return;
+            if(PassengerHorse._hasPassenger == true)
+                Debug.Log("Target has a passenger!");
+
+            PlayAnimation(HumanAnimations.PassengerMount);
+            TargetAngle = PassengerHorse.PassengerSeat.transform.rotation.eulerAngles.y;
+            PlaySound(HumanSounds.Dodge);
+        }
+
+        public void FinishMountHorseAsPassenger()
+        {
+            Cache.PhotonView.RPC("FinishMountHorseAsPassengerRPC", RpcTarget.AllBuffered, photonView.ViewID, PassengerHorse.photonView.ViewID);
+            SyncOwnerPositionForPassenger(PassengerHorse.photonView.ViewID); 
+        }
+
+        [PunRPC]
+        public void FinishMountHorseAsPassengerRPC(int _targetHumanID, int _targetHorseID, PhotonMessageInfo info)
+        {
+            PhotonView _targetHumanPV = PhotonView.Find(_targetHumanID);
+            PhotonView _targetHorsePV = PhotonView.Find(_targetHorseID);
+
+            if (_targetHumanPV != null && _targetHorsePV != null)
+            {
+                Human _targetHuman = _targetHumanPV.GetComponent<Human>();
+                Horse _targetHorse = _targetHorsePV.GetComponent<Horse>();
+
+                _targetHuman.gameObject.transform.position = _targetHorse.PassengerSeat.transform.position;
+                _targetHuman.gameObject.transform.SetParent(_targetHorse.PassengerSeat.transform);
+                _targetHuman.MountState = HumanMountState.Passenger;
+                _targetHuman.MountedTransform = _targetHorse.PassengerSeat.transform;
+                _targetHorse._hasPassenger = true;
+            } 
+        }
+
+        public void SyncOwnerPositionForPassenger(int targetHorseID)
+        {
+            PhotonView targetHorsePV = PhotonView.Find(targetHorseID);
+            if (targetHorsePV != null)
+            {
+                Horse targetHorse = targetHorsePV.GetComponent<Horse>();
+                Human targetHuman = PhotonView.Find(targetHorse.OwnerNetworkID).GetComponent<Human>();
+                if (targetHorse != null)
+                {
+                    Human owner = targetHuman;
+                    owner.transform.position = targetHorse.transform.position;                    
+                }
+                else
+                {
+                    if (targetHorse == null)
+                        Debug.Log("Target horse not found!");
+                    if (targetHuman == null)
+                        Debug.Log("Target horse's owner not found!");
+                }
+            }
+            else
+            {
+                Debug.LogError("Horse with ViewID " + targetHorseID + " not found!");
+            }
+        }
+
+        public void UnmountHorseAsPassenger(bool immediate = false)
+        {
+            photonView.RPC("UnmountHorseAsPassengerRPC", RpcTarget.AllBuffered, photonView.ViewID, PassengerHorse.photonView.ViewID);
+
+            if (!immediate)
+            {
+                PlayAnimation(HumanAnimations.HorseDismount);
+                Cache.Rigidbody.AddForce((((Vector3.up * 10f) - (Cache.Transform.forward * 2f)) - (Cache.Transform.right * 1f)), ForceMode.VelocityChange);
+            }
+        }
+
+        [PunRPC]
+        public void UnmountHorseAsPassengerRPC(int passengerID, int horseID, PhotonMessageInfo sender)
+        {
+            Human passenger = PhotonView.Find(passengerID).GetComponent<Human>();
+            Horse passengerHorse = PhotonView.Find(horseID).GetComponent<Horse>();
+
+            if (passenger != null && passengerHorse != null)
+            {
+                passenger.gameObject.transform.position = passenger.gameObject.transform.position;
+                passenger.gameObject.transform.parent = null;
+                passenger.MountState = HumanMountState.None;
+                passenger.MountedTransform = null;
+                passenger.PassengerHorse = null;
+                passengerHorse._hasPassenger = false;
+            }
+        }
+
+        private void FindClosestHorse()
+        {
+            Horse[] allHorses = FindObjectsByType<Horse>(FindObjectsSortMode.None);
+            float radius = 15f;
+
+            Horse horse = null;
+            float closestDistance = Mathf.Infinity;
+
+            foreach (Horse _horse in allHorses)
+            {
+                GameObject horseObject = _horse.gameObject;
+
+                if (_horse.IsMine() || _horse._hasPassenger)
+                {
+                    Debug.Log("My Own Horse OR It Has Passenger");
+                    continue;
+                }
+
+                float distance = Vector3.Distance(horseObject.transform.position, gameObject.transform.position);
+
+                if (distance <= radius && distance < closestDistance)
+                {
+                    horse = _horse;
+                    closestDistance = distance;
+                }
+            }
+
+            if (horse != null)
+                SetPassengerHorse(horse);
+            else
+                Debug.Log("No horse found in given radius!");
+        }
+
+        public void SetPassengerHorse(Horse _horse)
+        {
+            Cache.PhotonView.RPC("SetPassengerHorseRPC", RpcTarget.AllBuffered, photonView.ViewID, _horse.photonView.ViewID );
+        }
+
+        [PunRPC]
+        public void SetPassengerHorseRPC(int targetHumanID, int targetHorseID, PhotonMessageInfo info)
+        {
+            PhotonView _targetHumanPV = PhotonView.Find(targetHumanID);
+            PhotonView _targetHorsePV = PhotonView.Find(targetHorseID);
+
+            if (_targetHumanPV != null && _targetHorsePV != null)
+            {
+                Human _targetHuman = _targetHumanPV.GetComponent<Human>();
+                Horse _targetHorse = _targetHorsePV.GetComponent<Horse>();
+                _targetHuman.PassengerHorse = _targetHorse;
+            }
+        }
+
+        #endregion
+
         protected void LoadSkin(Player player = null)
         {
             if (IsMine())
@@ -3490,7 +3669,8 @@ namespace Characters
     {
         None,
         Horse,
-        MapObject
+        MapObject,
+        Passenger
     }
 
     public enum HumanCarryState

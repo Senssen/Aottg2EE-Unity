@@ -408,6 +408,7 @@
 		"Keybinds.Human.Reload": "Reload",
 		"Keybinds.Human.Salute": "Salute",
 		"Keybinds.Human.HorseMount": "Horse mount",
+		"Keybinds.Human.PassengerMount": "Horse mount as passenger",
 		"Keybinds.Human.HorseWalk": "Horse walk",
 		"Keybinds.Human.HorseJump": "Horse jump",
 		"Keybinds.Human.NapeLock": "Nape lock",
