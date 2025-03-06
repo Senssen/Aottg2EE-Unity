@@ -2976,7 +2976,7 @@ namespace Characters
             if (State == HumanState.Grab || State == HumanState.Reload || MountState == HumanMountState.MapObject
                 || State == HumanState.Stun)
                 return;
-            if (MountState == HumanMountState.Horse)
+            if (MountState == HumanMountState.Horse || MountState == HumanMountState.Passenger)
                 Unmount(true);
             if (CarryState == HumanCarryState.Carry)
                 Cache.PhotonView.RPC("UncarryRPC", RpcTarget.All, new object[0]);
