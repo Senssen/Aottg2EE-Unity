@@ -1282,7 +1282,6 @@ namespace Characters
                 {
                     if (PassengerHorse == null)
                     {
-                        Debug.Log("Passenger horse is woosh");
                         DropOffHorseAsPassenger();
                     }
                     else
@@ -2806,8 +2805,15 @@ namespace Characters
             photonView.RPC("DropOffHorseAsPassengerRPC", RpcTarget.AllBuffered, photonView.ViewID);
         }
         
+
+        /* 
+            Added by Ata 09 March 2025
+            The reason this is separate from UnmountHorseAsPassenger is that the host's (one the player rides as passenger) 
+            horse gets destroyed when the host gets grabbed or hit by a titan.
+            That results in the host horse no longer being available, which throws errors on the code above.
+        */
         [PunRPC]
-        public void DropOffHorseAsPassengerRPC(int passengerID, PhotonMessageInfo sender)
+        public void DropOffHorseAsPassengerRPC(int passengerID, PhotonMessageInfo sender) 
         {
             Human passenger = PhotonView.Find(passengerID).GetComponent<Human>();
 
