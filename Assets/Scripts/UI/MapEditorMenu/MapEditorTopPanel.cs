@@ -13,6 +13,7 @@ using Map;
 using System.Threading;
 using System.IO;
 using Utility;
+using UnityEngine.SceneManagement;
 
 namespace UI
 {
@@ -114,6 +115,11 @@ namespace UI
 
             // tutorial
             ElementFactory.CreateDefaultButton(group, style, UIManager.GetLocale("MainMenu", "Intro", "TutorialButton"), elementHeight: dropdownHeight, onClick: () => OnButtonClick("Tutorial"));
+
+            // custom scene loading
+            MapEditorSettings settings = SettingsManager.MapEditorSettings;
+            ElementFactory.CreateInputSetting(group, style, settings.SceneName, "Scene Name", elementWidth: 200f);
+            ElementFactory.CreateTextButton(group, style, "Load Scene", onClick: () => OnButtonClick("Scene"));
         }
 
         public bool IsDropdownOpen()
@@ -267,6 +273,12 @@ namespace UI
                 ToggleLights();
             else if (name == "Tutorial")
                 _menu.ExternalLinkPopup.Show("https://aottg2.gitbook.io/custom-maps");
+            else if (name == "Scene") // custom scene loading
+            {
+                SceneLoader.CustomSceneLoad = true;
+                MapEditorSettings settings = SettingsManager.MapEditorSettings;
+                SceneManager.LoadSceneAsync(settings.SceneName.Value, LoadSceneMode.Additive);
+            }
         }
 
         public void ToggleSnap()
