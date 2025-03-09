@@ -240,7 +240,7 @@ namespace Characters
         public bool CanJump()
         {
             return (Grounded && CarryState != HumanCarryState.Carry && (State == HumanState.Idle || State == HumanState.Slide) &&
-                !Animation.IsPlaying(HumanAnimations.Jump) && !Animation.IsPlaying(HumanAnimations.HorseMount));
+                !Animation.IsPlaying(HumanAnimations.Jump) && !Animation.IsPlaying(HumanAnimations.HorseMount) && !Animation.IsPlaying(HumanAnimations.HorseMount));
         }
 
         public void Jump()
@@ -1523,8 +1523,8 @@ namespace Characters
                         {
                             newVelocity = GetTargetDirection() * TargetMagnitude * Stats.RunSpeed;
                             if (!Animation.IsPlaying(HumanAnimations.Run) && !Animation.IsPlaying(HumanAnimations.Jump) &&
-                                !Animation.IsPlaying(HumanAnimations.RunBuffed) && (!Animation.IsPlaying(HumanAnimations.HorseMount) ||
-                                Animation.GetNormalizedTime(HumanAnimations.HorseMount) >= 0.5f) && 
+                                !Animation.IsPlaying(HumanAnimations.RunBuffed) && 
+                                (!Animation.IsPlaying(HumanAnimations.HorseMount) || Animation.GetNormalizedTime(HumanAnimations.HorseMount) >= 0.5f) && 
                                 (!Animation.IsPlaying(HumanAnimations.PassengerMount) || Animation.GetNormalizedTime(HumanAnimations.PassengerMount) >= 0.5f))
                             {
                                 CrossFade(RunAnimation, 0.1f);
