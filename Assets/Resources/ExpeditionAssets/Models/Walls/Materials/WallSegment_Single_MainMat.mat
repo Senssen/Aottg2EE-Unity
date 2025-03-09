@@ -72,6 +72,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _WallSegment_Single_BottomGrimeTex:
+        m_Texture: {fileID: 2800000, guid: ce70d821ffcce44498ca3388fffc0892, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _WallSegment_Single_MainTex:
         m_Texture: {fileID: 2800000, guid: 811c9d6e987d1e047aa7ddee978194a9, type: 3}
         m_Scale: {x: 1, y: 1}
