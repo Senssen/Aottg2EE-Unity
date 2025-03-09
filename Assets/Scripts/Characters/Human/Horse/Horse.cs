@@ -10,6 +10,7 @@ namespace Characters
     class Horse: BaseCharacter
     {
         Human _owner;
+        public int OwnerNetworkID;
         HorseComponentCache HorseCache;
         public HorseState State;
         private float WalkSpeed = 15f;
@@ -21,10 +22,21 @@ namespace Characters
         private float _teleportTimeLeft;
         private float _jumpCooldownLeft;
         
+        [SerializeField]
+        public Transform PassengerSeat;
+        public bool _hasPassenger = false;
+        
         public void Init(Human human)
         {
             base.Init(true, human.Team);
             _owner = human;
+            photonView.RPC(nameof(SetOwnerRPC), RpcTarget.AllBuffered, human.photonView.ViewID);
+        }
+
+        [PunRPC]
+        public void SetOwnerRPC(int ownerID, PhotonMessageInfo info)
+        {
+            OwnerNetworkID = ownerID;
         }
 
         protected override void CreateCache(BaseComponentCache cache)

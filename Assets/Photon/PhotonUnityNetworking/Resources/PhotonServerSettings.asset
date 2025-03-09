@@ -132,6 +132,10 @@ MonoBehaviour:
   - AnnounceRPC
   - ConfirmCarryRPC
   - BlowAwayRPC
+  - SetOwnerRPC
+  - FinishMountHorseAsPassengerRPC
+  - SetPassengerHorseRPC
+  - UnmountHorseAsPassengerRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
