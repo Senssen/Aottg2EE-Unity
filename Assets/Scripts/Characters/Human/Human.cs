@@ -1278,6 +1278,18 @@ namespace Characters
                         Cache.Transform.rotation = Horse.Cache.Transform.rotation;
                     }
                 }
+                else if (MountState == HumanMountState.Passenger)
+                {
+                    if (PassengerHorse == null)
+                    {
+                        Debug.Log("Passenger horse is woosh");
+                        DropOffHorseAsPassenger();
+                    }
+                    else
+                    {
+                        Cache.Transform.rotation = PassengerHorse.Cache.Transform.rotation;
+                    }
+                }
                 else if (State == HumanState.Attack)
                 {
                     if (Setup.Weapon == HumanWeapon.Blade)
@@ -2719,6 +2731,9 @@ namespace Characters
             PhotonView _targetHumanPV = PhotonView.Find(_targetHumanID);
             PhotonView _targetHorsePV = PhotonView.Find(_targetHorseID);
 
+            Debug.Log("_targetHumanID: " + _targetHumanID);
+            Debug.Log("_targetHorseID: " + _targetHorseID);
+
             if (_targetHumanPV != null && _targetHorsePV != null)
             {
                 Human _targetHuman = _targetHumanPV.GetComponent<Human>();
@@ -2783,6 +2798,26 @@ namespace Characters
                 passenger.MountedTransform = null;
                 passenger.PassengerHorse = null;
                 passengerHorse._hasPassenger = false;
+            }
+        }
+
+        public void DropOffHorseAsPassenger()
+        {
+            photonView.RPC("DropOffHorseAsPassengerRPC", RpcTarget.AllBuffered, photonView.ViewID);
+        }
+        
+        [PunRPC]
+        public void DropOffHorseAsPassengerRPC(int passengerID, PhotonMessageInfo sender)
+        {
+            Human passenger = PhotonView.Find(passengerID).GetComponent<Human>();
+
+            if (passenger != null)
+            {
+                passenger.gameObject.transform.position = passenger.gameObject.transform.position;
+                passenger.gameObject.transform.parent = null;
+                passenger.MountState = HumanMountState.None;
+                passenger.MountedTransform = null;
+                passenger.PassengerHorse = null;
             }
         }
 

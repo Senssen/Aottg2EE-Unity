@@ -9,7 +9,7 @@ namespace Characters
 {
     class Horse: BaseCharacter
     {
-        Human _owner;
+        public Human _owner;
         public int OwnerNetworkID;
         HorseComponentCache HorseCache;
         public HorseState State;
@@ -277,6 +277,11 @@ namespace Characters
             }
             else
                 Grounded = false;
+        }
+
+        public override void GetHitRPC(int viewId, string name, int damage, string type, string collider)
+        {
+            return;
         }
     }
 

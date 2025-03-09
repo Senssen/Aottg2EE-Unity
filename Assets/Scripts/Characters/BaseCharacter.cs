@@ -459,6 +459,7 @@ namespace Characters
         [PunRPC]
         public virtual void GetHitRPC(int viewId, string name, int damage, string type, string collider)
         {
+            Debug.Log("View ID of the entity getting hit: " + viewId);
             if (Dead)
                 return;
             if (damage == 0)
