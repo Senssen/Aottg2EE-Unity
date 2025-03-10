@@ -15,6 +15,7 @@
         public KeybindSetting Jump = new KeybindSetting(new string[] { "LeftShift", "None" });
         public KeybindSetting Reload = new KeybindSetting(new string[] { "R", "None" });
         public KeybindSetting HorseMount = new KeybindSetting(new string[] { "LeftControl", "None" });
+        public KeybindSetting PassengerMount = new KeybindSetting(new string[] { "Z", "None" }); // TODO: add all languages
         public KeybindSetting HorseWalk = new KeybindSetting(new string[] { "LeftShift", "None" });
         public KeybindSetting HorseJump = new KeybindSetting(new string[] { "Space", "None" });
         public KeybindSetting NapeLock = new KeybindSetting(new string[] { "None", "None" });
