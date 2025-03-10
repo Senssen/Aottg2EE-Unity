@@ -8,5 +8,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Startup.unity
     guid: c7b37102d87ffcd42af87ed74b5d4777
+  - enabled: 1
+    path: Assets/Scenes/SceneLoaderTest.unity
+    guid: a2257dc91f5cd724db84c90059308273
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

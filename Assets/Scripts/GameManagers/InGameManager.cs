@@ -257,6 +257,13 @@ namespace GameManagers
                 ChatManager.AddLine("Welcome to " + PhotonNetwork.CurrentRoom.GetStringProperty(RoomProperty.Name).Trim().HexColor() + ". \nType /help for a list of commands.",
                     ChatTextColor.System);
             SceneLoader.LoadScene(SceneName.InGame);
+
+            if (!PhotonNetwork.IsMasterClient) return;
+            InGameSet settingsUI = SettingsManager.InGameUI;
+            if (settingsUI.General.SceneLoading.Value != "" && settingsUI.General.MapCategory.Value == "Custom")
+            {
+                RPCManager.PhotonView.RPC("LoadSceneRPC", RpcTarget.AllBuffered, new object[] { settingsUI.General.SceneLoading.Value });
+            }
         }
 
         public void RegisterMainCharacterDie()
