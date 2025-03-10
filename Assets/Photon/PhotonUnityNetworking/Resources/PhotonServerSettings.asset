@@ -132,7 +132,11 @@ MonoBehaviour:
   - AnnounceRPC
   - ConfirmCarryRPC
   - BlowAwayRPC
+<<<<<<< HEAD
   - LoadSceneRPC
+=======
+  - ToggleBladeFireRPC
+>>>>>>> b08dd07d87127169686bfff2ee20bfd73058e6bb
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
