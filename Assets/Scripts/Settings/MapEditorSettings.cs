@@ -19,6 +19,7 @@ namespace Settings
         public FloatSetting SnapScale = new FloatSetting(0.1f, minValue: 0f);
         public FloatSetting PlacementDistance = new FloatSetting(50f, minValue: 0f);
         public BoolSetting PlaceOnFirstSurface = new BoolSetting(true);
+        public StringSetting SceneName = new StringSetting(string.Empty, maxLength: 100);
 
         public override void Apply()
         {
