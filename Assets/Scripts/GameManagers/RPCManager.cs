@@ -11,6 +11,7 @@ using Photon.Pun;
 using Spawnables;
 using System.Collections;
 using Utility;
+using UnityEngine.SceneManagement;
 
 namespace GameManagers
 {
@@ -261,5 +262,20 @@ namespace GameManagers
         {
             PhotonView = GetComponent<PhotonView>();
         }
+
+        #region Expedition RPCs
+ 
+        [PunRPC]
+        public void LoadSceneRPC(string SceneName, PhotonMessageInfo info)
+        {
+            if (!info.Sender.IsMasterClient) return;
+
+            SceneLoader.CustomSceneLoad = true;
+            SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
+
+            ChatManager.AddLine($"Scene {SceneName} Loaded!\nSent By {info.Sender.NickName.StripHex()}");
+        }
+ 
+        #endregion
     }
 }
