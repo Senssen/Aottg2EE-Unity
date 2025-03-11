@@ -134,6 +134,11 @@ MonoBehaviour:
   - BlowAwayRPC
   - LoadSceneRPC
   - ToggleBladeFireRPC
+  - DropOffHorseAsPassengerRPC
+  - FinishMountHorseAsPassengerRPC
+  - SetOwnerRPC
+  - SetPassengerHorseRPC
+  - UnmountHorseAsPassengerRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
