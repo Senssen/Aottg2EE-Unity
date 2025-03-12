@@ -476,6 +476,8 @@ namespace Characters
         {
             if (HasGrabImmunity())
                 return;
+            if (MountState == HumanMountState.Horse && Horse._hasPassenger)
+                return;
             if (MountState != HumanMountState.None && MountState != HumanMountState.Passenger)
                 Unmount(true);
             if (MountState == HumanMountState.Passenger)
