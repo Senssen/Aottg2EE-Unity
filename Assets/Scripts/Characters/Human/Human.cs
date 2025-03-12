@@ -476,8 +476,10 @@ namespace Characters
         {
             if (HasGrabImmunity())
                 return;
-            if (MountState != HumanMountState.None)
+            if (MountState != HumanMountState.None && MountState != HumanMountState.Passenger)
                 Unmount(true);
+            if (MountState == HumanMountState.Passenger)
+                DropOffHorseAsPassenger();
             Transform hand;
             if (type == "GrabLeft")
                 hand = grabber.BaseTitanCache.GrabLSocket;
@@ -1289,6 +1291,7 @@ namespace Characters
                     }
                     else
                     {
+                        Cache.Transform.position = PassengerHorse.Cache.Transform.gameObject.GetComponent<Horse>().PassengerSeat.position;
                         Cache.Transform.rotation = PassengerHorse.Cache.Transform.rotation;
                     }
                 }
@@ -2767,10 +2770,9 @@ namespace Characters
                 Human _targetHuman = _targetHumanPV.GetComponent<Human>();
                 Horse _targetHorse = _targetHorsePV.GetComponent<Horse>();
 
-                _targetHuman.gameObject.transform.position = _targetHorse.PassengerSeat.transform.position;
-                _targetHuman.gameObject.transform.SetParent(_targetHorse.PassengerSeat.transform);
                 _targetHuman.MountState = HumanMountState.Passenger;
                 _targetHorse._hasPassenger = true;
+                PassengerHorse = _targetHorse;
             } 
         }
 
@@ -2813,8 +2815,6 @@ namespace Characters
 
             if (passenger != null && passengerHorse != null)
             {
-                passenger.gameObject.transform.position = passenger.gameObject.transform.position;
-                passenger.gameObject.transform.parent = null;
                 passenger.MountState = HumanMountState.None;
                 passenger.PassengerHorse = null;
                 passengerHorse._hasPassenger = false;
