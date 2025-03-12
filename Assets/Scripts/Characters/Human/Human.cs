@@ -129,7 +129,7 @@ namespace Characters
         private float _hookHumanConstantTimeLeft;
         private bool _isReelingOut;
         private Dictionary<BaseTitan, float> _lastNapeHitTimes = new Dictionary<BaseTitan, float>();
-        private Horse PassengerHorse = null;
+        public Horse PassengerHorse = null;
 
         protected override void CreateDetection()
         {
@@ -2762,9 +2762,6 @@ namespace Characters
             PhotonView _targetHumanPV = PhotonView.Find(_targetHumanID);
             PhotonView _targetHorsePV = PhotonView.Find(_targetHorseID);
 
-            Debug.Log("_targetHumanID: " + _targetHumanID);
-            Debug.Log("_targetHorseID: " + _targetHorseID);
-
             if (_targetHumanPV != null && _targetHorsePV != null)
             {
                 Human _targetHuman = _targetHumanPV.GetComponent<Human>();
@@ -2773,7 +2770,6 @@ namespace Characters
                 _targetHuman.gameObject.transform.position = _targetHorse.PassengerSeat.transform.position;
                 _targetHuman.gameObject.transform.SetParent(_targetHorse.PassengerSeat.transform);
                 _targetHuman.MountState = HumanMountState.Passenger;
-                _targetHuman.MountedTransform = _targetHorse.PassengerSeat.transform;
                 _targetHorse._hasPassenger = true;
             } 
         }
@@ -2804,15 +2800,9 @@ namespace Characters
             }
         }
 
-        public void UnmountHorseAsPassenger(bool immediate = false)
+        public void UnmountHorseAsPassenger()
         {
             photonView.RPC("UnmountHorseAsPassengerRPC", RpcTarget.AllBuffered, photonView.ViewID, PassengerHorse.photonView.ViewID);
-
-            if (!immediate)
-            {
-                PlayAnimation(HumanAnimations.HorseDismount);
-                Cache.Rigidbody.AddForce((((Vector3.up * 10f) - (Cache.Transform.forward * 2f)) - (Cache.Transform.right * 1f)), ForceMode.VelocityChange);
-            }
         }
 
         [PunRPC]
@@ -2826,7 +2816,6 @@ namespace Characters
                 passenger.gameObject.transform.position = passenger.gameObject.transform.position;
                 passenger.gameObject.transform.parent = null;
                 passenger.MountState = HumanMountState.None;
-                passenger.MountedTransform = null;
                 passenger.PassengerHorse = null;
                 passengerHorse._hasPassenger = false;
             }
@@ -2854,7 +2843,6 @@ namespace Characters
                 passenger.gameObject.transform.position = passenger.gameObject.transform.position;
                 passenger.gameObject.transform.parent = null;
                 passenger.MountState = HumanMountState.None;
-                passenger.MountedTransform = null;
                 passenger.PassengerHorse = null;
             }
         }

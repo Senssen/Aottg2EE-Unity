@@ -359,6 +359,11 @@ namespace Controllers
                 else if (_humanInput.HorseJump.GetKeyDown())
                     _human.Horse.Jump();
             }
+            else if (_human.MountState == HumanMountState.Passenger)
+            {
+                if (_humanInput.HorseMount.GetKeyDown() || _humanInput.PassengerMount.GetKeyDown())
+                    _human.Unmount(false);
+            }
         }
 
         private void ToggleUI()
