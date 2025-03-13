@@ -322,7 +322,7 @@ namespace GameManagers
                 if (args.Length != 6)
                 {
                     AddLine("Invalid arguments passed! Correct usage: /spawn [PrefabName][Tag][Position][Rotation][Scale]", ChatTextColor.Error);
-                    AddLine("Example usage: /spawn Test test_prefab_1 (-16,2,-500) (1,1,1,1) (1,1,1)", ChatTextColor.Error);
+                    AddLine("Example usage: /spawn Test test_prefab_1 (-16,2,-500) (0,0,0,1) (1,1,1)", ChatTextColor.Error);
                     return;
                 }
 
