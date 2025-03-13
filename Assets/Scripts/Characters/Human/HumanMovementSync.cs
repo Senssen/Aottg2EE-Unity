@@ -50,6 +50,11 @@ namespace Characters
                     _transform.position = _human.MountedTransform.TransformPoint(_human.MountedPositionOffset);
                     _transform.rotation = Quaternion.Euler(_human.MountedTransform.rotation.eulerAngles + _human.MountedRotationOffset);
                 }
+                else if (_human.MountState == HumanMountState.Passenger && _human.PassengerHorse != null)
+                {
+                    _transform.position = _human.PassengerHorse.PassengerSeat.TransformPoint(Vector3.zero);
+                    _transform.rotation = Quaternion.Euler(_human.PassengerHorse.PassengerSeat.rotation.eulerAngles);
+                }
                 else if (_human.CarryState == HumanCarryState.Carry && _human.Carrier != null)
                 {
                     Vector3 offset = _human.Carrier.Cache.Transform.forward * -0.4f + _human.Carrier.Cache.Transform.up * 0.5f;
