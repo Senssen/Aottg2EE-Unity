@@ -331,6 +331,8 @@ namespace Controllers
                     else if (_humanInput.HorseMount.GetKeyDown() && _human.Horse != null && _human.MountState == HumanMountState.None &&
                     Vector3.Distance(_human.Horse.Cache.Transform.position, _human.Cache.Transform.position) < 15f && !_human.HasDirection)
                         _human.MountHorse();
+                    else if (_humanInput.PassengerMount.GetKeyDown() && _human.MountState == HumanMountState.None)
+                        _human.StartMountingPassengerHorse();
                     else if (_humanInput.Dodge.GetKeyDown())
                     {
                         if (_human.HasDirection)
@@ -356,6 +358,11 @@ namespace Controllers
                     _human.Unmount(false);
                 else if (_humanInput.HorseJump.GetKeyDown())
                     _human.Horse.Jump();
+            }
+            else if (_human.MountState == HumanMountState.Passenger)
+            {
+                if (_humanInput.HorseMount.GetKeyDown() || _humanInput.PassengerMount.GetKeyDown())
+                    _human.Unmount(false);
             }
         }
 
