@@ -1,4 +1,5 @@
 This folder (Resources/GamePfs) exists for the purpose of the /spawn command, allowing you to spawn and kill prefabs inside your lobby.
+
 To set up your prefab make sure it is located within this folder and the prefab has the PhotonView component attached, then you can build and use it in the game.
 
 --------------------------------------------------------------
