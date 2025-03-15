@@ -1,0 +1,39 @@
+This folder (Resources/GamePfs) exists for the purpose of the /spawn command, allowing you to spawn and kill prefabs inside your lobby.
+To set up your prefab make sure it is located within this folder and the prefab has the PhotonView component attached, then you can build and use it in the game.
+
+--------------------------------------------------------------
+
+The syntax to spawn your prefab in game is:
+
+/spawn [PREFAB NAME] [TAG] [LOCATION] [ROTATION] [SCALE]
+
+Which would for example be:
+
+/spawn Barrel Barrel1 0,0,0 0,0,0,1 1,1,1
+
+
+
+Barrel refering to the actual prefab name you placed in this folder.
+
+Barrel1 being a tag attached so you can easily target this model using /kill without killing other spawned Barrel models. 
+(If you have duplicate tags all barrels with the same tag will be removed.)
+
+0,0,0 the position coordinates in X,Y,Z (0,0,0 would be the world's center.)
+
+0,0,0,1 being the rotation values in X,Y,Z,W (If you're unsure how to use quaternions, there's plenty of euler angle > quaternion converters online.)
+
+1,1,1 being the size of the model in X,Y,Z (1 being the default size of the model.)
+
+--------------------------------------------------------------
+
+The syntax to kill your prefab in game is:
+
+/kill [TAG]
+
+Which would for example be:
+
+/kill Barrel1
+
+
+
+This will kill any object with the Barrel1 tag added in the initial spawn command.
