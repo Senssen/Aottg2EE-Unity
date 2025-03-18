@@ -139,6 +139,7 @@ MonoBehaviour:
   - SetOwnerRPC
   - SetPassengerHorseRPC
   - UnmountHorseAsPassengerRPC
+  - moveToRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

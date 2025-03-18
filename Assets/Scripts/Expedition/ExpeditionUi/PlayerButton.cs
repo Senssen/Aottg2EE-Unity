@@ -4,11 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerButton : MonoBehaviour
 {
     [SerializeField]
-    private Text Button_Text;
+    private TMP_Text Button_Text;
     public Player PhotonPlayer { get; private set; }
 
     public void SetPlayerInfo(Player player)

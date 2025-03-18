@@ -74,7 +74,7 @@ namespace UI
                 }
             }
             RebuildCategoryPanel();
-            GameObject.Find("Expedition UI").GetComponent<ExpeditionUiManager>().OpenEmMenu();
+            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().OpenEmMenu();
             UIManager.CurrentMenu.MessagePopup.Show("Settings reset to default.");
         }
 
@@ -101,11 +101,11 @@ namespace UI
                 case "Back":
                     if (SceneLoader.SceneName == SceneName.InGame)
                         ((InGameMenu)UIManager.CurrentMenu).SkipAHSSInput = true;
-                    GameObject.Find("Expedition UI").GetComponent<ExpeditionUiManager>().CloseEmMenu();
+                    GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().CloseEmMenu();
                     Hide();
                     break;
                 case "Default":
-                    GameObject.Find("Expedition UI").GetComponent<ExpeditionUiManager>().CloseEmMenu();
+                    GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().CloseEmMenu();
                     UIManager.CurrentMenu.ConfirmPopup.Show("Are you sure you want to reset to default?", () => OnConfirmSetDefault(),
                         "Reset default");
                     break;
