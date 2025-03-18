@@ -56,6 +56,7 @@
 		"Join": "Join",
 		"Icon": "Icon",
 		"Clear": "Clear",
+		"Expedition": "Expedition",
 		"ExternalLinkConfirm": "You are about to open an external link",
 		"PressAnyKey": "Press any key to continue.",
 		"None": "None",
@@ -198,6 +199,11 @@
 		"Mode.MaxWaves": "Max waves",
 		"Mode.RespawnOnWave": "Respawn on waves"
 	},
+	"ExpeditionPopup": {
+ 		"Top.PlayersButton": "Players",
+ 		"Top.EM SettingsButton": "EM Settings",
+ 		"Top.Command ListButton": "Command List"
+ 	},
 	"SettingsPopup": {
 		"Top.GeneralButton": "General",
 		"Top.SoundButton": "Sound",
@@ -207,6 +213,9 @@
 		"Top.SkinsButton": "Skins",
 		"Top.GameButton": "Game",
 		"Top.AbilityButton": "Ability",
+		"Top.Players": "Players",
+ 		"Top.EM Settings": "EM Settings",
+ 		"Top.Command List": "Command List",
 		"KeybindPopup.Title": "Enter new keybind",
 		"KeybindPopup.Unbind": "Unbind",
 		"KeybindPopup.CurrentKey": "Current key",
