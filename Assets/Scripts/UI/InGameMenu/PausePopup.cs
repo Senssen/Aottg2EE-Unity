@@ -50,7 +50,7 @@ namespace UI
                     UIManager.CurrentMenu.MessagePopup.Show("This is for MasterClient only.");
                     return;
                 }
-                menu._expeditionPopup.Show();
+                
                 GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().OpenEmMenu();
                 Hide();
             }

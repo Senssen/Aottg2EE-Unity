@@ -25,11 +25,13 @@ public class ExpeditionUiManager : MonoBehaviour
     public virtual void CloseEmMenu()
     {
         CanvasObj.SetActive(false);
+        EmVariables.SetActive(false);
     }
 
     public virtual void OpenEmMenu()
     {
         CanvasObj.SetActive(true);
+        EmVariables.SetActive(true);
     }
     public void OnTPPlayerButtonClick(int setting)
     {
@@ -60,6 +62,43 @@ public class ExpeditionUiManager : MonoBehaviour
                      float.Parse(tpCoordsSplit[2])
                 });
                 break;
+        }
+    }
+
+    public void GiveRoles(int Role)
+    {
+        string RoleName = "";
+        ExitGames.Client.Photon.Hashtable playerProps = new ExitGames.Client.Photon.Hashtable();
+        switch (Role)
+        {
+            case 0:
+                RoleName = "Logistician";
+                break;
+            case 1:
+                RoleName = "Cannoneer";
+                break;
+            case 2:
+                RoleName = "Carpenter";
+                break;
+            case 3:
+                RoleName = "Veteran";
+                break;
+            case 4:
+                RoleName = "Wagon";
+                break;
+        }
+
+        if (RoleName == string.Empty) return;
+
+        if (EmVariables.SelectedPlayer.CustomProperties.ContainsKey(RoleName))
+        {
+            playerProps[RoleName] = true;
+            EmVariables.SelectedPlayer.SetCustomProperties(playerProps);
+        }
+        else
+        {
+            playerProps.Remove(RoleName);
+            EmVariables.SelectedPlayer.SetCustomProperties(playerProps);
         }
     }
 }
