@@ -4620,6 +4620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanvasObj: {fileID: 6854325756230979293}
+  CoordsInputField: {fileID: 8339270474814447154}
 --- !u!114 &437955393226296028
 MonoBehaviour:
   m_ObjectHideFlags: 0
