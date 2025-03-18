@@ -8,7 +8,7 @@ TerrainLayer:
   m_PrefabAsset: {fileID: 0}
   m_Name: Momo_Shiganshina_Floor1
   m_DiffuseTexture: {fileID: 2800000, guid: 8a395f2f6a289ad4182dcb789db91fa4, type: 3}
-  m_NormalMapTexture: {fileID: 0}
+  m_NormalMapTexture: {fileID: 2800000, guid: e7398e62b2367b84b8e4f452eb20e6b3, type: 3}
   m_MaskMapTexture: {fileID: 0}
   m_TileSize: {x: 10, y: 10}
   m_TileOffset: {x: 0, y: 0}

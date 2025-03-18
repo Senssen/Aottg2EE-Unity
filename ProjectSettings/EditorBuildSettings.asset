@@ -8,8 +8,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Startup.unity
     guid: c7b37102d87ffcd42af87ed74b5d4777
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/ExpeditionAssets/Functional/Scenes/LoadScene.unity
     guid: 797417bd709e8944a8efb632424101bf
+  - enabled: 1
+    path: Assets/Resources/ExpeditionAssets/Functional/Scenes/CityDiorama.unity
+    guid: 75d3fd1278f541d46be0f623cc512cb6
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

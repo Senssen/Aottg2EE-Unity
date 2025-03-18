@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 25ae1a80960a6f24da1dcc70bf48cd0f
+timeCreated: 1491150451
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 87042
+  packageName: WorldSkies Pro
+  packageVersion: 1.0
+  assetPath: Assets/WorldSkies/Skies/Sky_02_mat.mat
+  uploadId: 171230
