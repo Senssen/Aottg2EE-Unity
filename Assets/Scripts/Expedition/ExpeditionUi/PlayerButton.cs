@@ -17,42 +17,21 @@ public class PlayerButton : MonoBehaviour
         PhotonPlayer = player;
         NameRefresh();
     }
-
-    private float timer = 0;
-    private void FixedUpdate()
-    {
-        timer += Time.fixedDeltaTime;
-        if (timer >= .5f)
-        {
-            NameRefresh();
-            timer = 0f;
-        }
-    }
     public void OnClick_Button()
     {
         EmVariables.SelectedPlayer = PhotonPlayer;
     }
 
-    private void Start()
-    {
-        Invoke(nameof(NameRefresh), 1f);
-    }
-
-    private void OnEnable()
-    {
-        Invoke(nameof(NameRefresh), 1f);
-    }
-
-    private void NameRefresh()
+    public void NameRefresh()
     {
         Button_Text.text = 
             $"[{PhotonPlayer.ActorNumber}]" +
             $" {PhotonPlayer.GetStringProperty(PlayerProperty.Name)}";
 
-        if (PhotonPlayer.CustomProperties.ContainsKey("Cannoneer")) { Button_Text.text += " [<color = #74B831>CAN</color>]"; }
-        if (PhotonPlayer.CustomProperties.ContainsKey("Carpenter")) { Button_Text.text += " [<color = #2C84DC>CAR</color>]"; }
-        if (PhotonPlayer.CustomProperties.ContainsKey("Veteran")) { Button_Text.text += " [<color = #7B31B8>VET</color>]"; }
-        if (PhotonPlayer.CustomProperties.ContainsKey("Logistician")) { Button_Text.text += " [<color = #DC2C2C>LOG</color>]"; }
-        if (PhotonPlayer.CustomProperties.ContainsKey("Wagon")) { Button_Text.text += " [<color = #DC2C2C>WAG</color>]"; }
+        if (PhotonPlayer.CustomProperties.ContainsKey("Cannoneer")) { Button_Text.text += " [<color=#74B831>CAN</color>]"; }
+        if (PhotonPlayer.CustomProperties.ContainsKey("Carpenter")) { Button_Text.text += " [<color=#2C84DC>CAR</color>]"; }
+        if (PhotonPlayer.CustomProperties.ContainsKey("Veteran")) { Button_Text.text += " [<color=#7B31B8>VET</color>]"; }
+        if (PhotonPlayer.CustomProperties.ContainsKey("Logistician")) { Button_Text.text += " [<color=#DC2C2C>LOG</color>]"; }
+        if (PhotonPlayer.CustomProperties.ContainsKey("Wagon")) { Button_Text.text += " [<color=#DC2C2C>WAG</color>]"; }
     }
 }

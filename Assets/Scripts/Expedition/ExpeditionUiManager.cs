@@ -68,7 +68,7 @@ public class ExpeditionUiManager : MonoBehaviour
     public void GiveRoles(int Role)
     {
         string RoleName = "";
-        ExitGames.Client.Photon.Hashtable playerProps = new ExitGames.Client.Photon.Hashtable();
+        ExitGames.Client.Photon.Hashtable playerProps = EmVariables.SelectedPlayer.CustomProperties;
         switch (Role)
         {
             case 0:
@@ -90,15 +90,23 @@ public class ExpeditionUiManager : MonoBehaviour
 
         if (RoleName == string.Empty) return;
 
-        if (EmVariables.SelectedPlayer.CustomProperties.ContainsKey(RoleName))
-        {
-            playerProps[RoleName] = true;
-            EmVariables.SelectedPlayer.SetCustomProperties(playerProps);
-        }
-        else
-        {
+        if (playerProps.ContainsKey(RoleName))
             playerProps.Remove(RoleName);
-            EmVariables.SelectedPlayer.SetCustomProperties(playerProps);
+        else
+            playerProps.Add(RoleName, true);
+
+        InvokeNameRefresh(playerProps);
+    }
+
+    private void InvokeNameRefresh(ExitGames.Client.Photon.Hashtable props)
+    {
+        EmVariables.SelectedPlayer.SetCustomProperties(props);
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Expedition Menu Player Button");
+        foreach (GameObject obj in objects)
+        {
+            PlayerButton btn = obj.GetComponent<PlayerButton>();
+            if (btn && btn.PhotonPlayer.ActorNumber == EmVariables.SelectedPlayer.ActorNumber)
+                btn.NameRefresh();
         }
     }
 }
