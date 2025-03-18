@@ -656,6 +656,63 @@ Transform:
   - {fileID: 560683665}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &149190556
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -36.677692
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 26.950186
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -24.970118
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591524833245603134, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_Name
+      value: ChimneySmokePF
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
 --- !u!1001 &164583500
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1010,6 +1067,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b73adbf3246b664f9722eaebdb75752, type: 3}
+--- !u!4 &235430353 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+  m_PrefabInstance: {fileID: 7091318231491483595}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &236923814
 GameObject:
   m_ObjectHideFlags: 0
@@ -1752,6 +1814,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5234198733876249736, guid: 8b73adbf3246b664f9722eaebdb75752, type: 3}
   m_PrefabInstance: {fileID: 1841846538}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &589058018
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -192.21567
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0000076293945
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -175.74107
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591524833245603134, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_Name
+      value: ChimneySmokePF_2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
 --- !u!1001 &595797211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2927,6 +3046,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4491230976527919981, guid: 9c9f0f83bd7e15d4d97241ac795877fd, type: 3}
   m_PrefabInstance: {fileID: 441010906}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &966234499
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -111.52768
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 25.425928
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -71.10864
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591524833245603134, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_Name
+      value: ChimneySmokePF_1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
 --- !u!1001 &974721142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5549,6 +5725,7 @@ Transform:
   - {fileID: 1591206682}
   - {fileID: 636076264}
   - {fileID: 131343139}
+  - {fileID: 235430353}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1756532221
@@ -6797,6 +6974,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4622d7b37bc62a47a172a8576175252, type: 3}
+--- !u!1001 &7091318231491483595
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1751198262}
+    m_Modifications:
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 55.880005
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -149.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 53.06462
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444429848345910094, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591524833245603134, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
+      propertyPath: m_Name
+      value: ChimneySmokePF
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 64969332a06d1964bb0b8c5918e5addc, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -6806,3 +7040,6 @@ SceneRoots:
   - {fileID: 807058691}
   - {fileID: 1018447549}
   - {fileID: 1751198262}
+  - {fileID: 149190556}
+  - {fileID: 966234499}
+  - {fileID: 589058018}
