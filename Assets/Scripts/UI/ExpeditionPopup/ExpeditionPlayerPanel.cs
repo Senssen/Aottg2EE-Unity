@@ -30,7 +30,7 @@ namespace UI
 
             ElementStyle style = new ElementStyle(titleWidth: 200f, themePanel: ThemePanel);
 
-            #region Left Side
+            /* #region Left Side
 
             foreach (Player player in PhotonNetwork.PlayerList)
             {
@@ -39,7 +39,7 @@ namespace UI
                                                                     onClick: () => OnPlayerButtonClick(player));
             }
 
-            #endregion
+            #endregion */
 
             #region Right Side
 

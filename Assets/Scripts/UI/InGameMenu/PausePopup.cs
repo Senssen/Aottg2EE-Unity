@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Photon.Pun;
 
 namespace UI
 {
@@ -44,7 +45,13 @@ namespace UI
             }
             else if (name == "Expedition")
             {
+                if (!PhotonNetwork.IsMasterClient)
+                {
+                    UIManager.CurrentMenu.MessagePopup.Show("This is for MasterClient only.");
+                    return;
+                }
                 menu._expeditionPopup.Show();
+                GameObject.Find("Expedition UI").GetComponent<ExpeditionUiManager>().OpenEmMenu();
                 Hide();
             }
             else if (name == "Back")
