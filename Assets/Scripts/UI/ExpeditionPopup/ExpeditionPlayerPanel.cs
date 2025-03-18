@@ -19,6 +19,7 @@ namespace UI
         private Player selectedPlayer;
         private string tpCoords;
         private List<SaveableSettingsContainer> _saveableSettings = new List<SaveableSettingsContainer>();
+        private float timer = 0f;
         public override void Setup(BasePanel parent = null)
         {
             base.Setup(parent);
@@ -90,7 +91,12 @@ namespace UI
 
         private void FixedUpdate()
         {
-
+            timer += Time.fixedDeltaTime;
+            if (timer >= 1f)
+            {
+                RebuildCategoryPanel();
+                timer = 0f;
+            }
         }
 
         private void UpdateSettings()
