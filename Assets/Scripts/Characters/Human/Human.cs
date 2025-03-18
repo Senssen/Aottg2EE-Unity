@@ -2903,6 +2903,20 @@ namespace Characters
 
         #endregion
 
+        #region MC Teleport
+
+        [PunRPC]
+        public void moveToRPC(float x, float y, float z, PhotonMessageInfo info)
+        {
+            if (info.Sender.IsMasterClient)
+            {
+                if (MountState == HumanMountState.Horse) Horse.transform.position = new Vector3(x, y, z);
+                else transform.position = new Vector3(x, y, z);
+            }
+        }
+
+        #endregion
+
         protected void LoadSkin(Player player = null)
         {
             if (IsMine())

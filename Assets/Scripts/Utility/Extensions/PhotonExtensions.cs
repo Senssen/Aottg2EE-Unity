@@ -1,4 +1,6 @@
 ﻿using GameManagers;
+using NUnit.Framework.Internal.Commands;
+using Photon.Pun;
 using Map;
 using Photon.Realtime;
 using System;
@@ -115,4 +117,33 @@ static class PhotonExtensions
         }
         return position;
     }
+
+    #region Expedition Mod
+    public static GameObject GetMyPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+         
+        foreach (GameObject player in players)
+        {
+            PhotonView pv = player.GetComponent<PhotonView>();
+            if (pv.IsMine)
+                return player;
+        }
+        return null;
+    } 
+ 
+    public static GameObject GetPlayerFromID(int actorNumber)
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject player in players)
+        {
+            PhotonView pv = player.GetComponent<PhotonView>();
+            if (pv != null && pv.OwnerActorNr == actorNumber)
+                return player;
+        }
+        return null;
+    }
+
+    #endregion
 }
