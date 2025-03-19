@@ -12,6 +12,7 @@ Shader "Assets/Momo_FoliageShader"
 		_GradientPower("Gradient Power", Range( 0 , 10)) = 1
 		_LeavesThickness("Leaves Thickness", Range( 0.1 , 0.95)) = 0.5
 		_Smoothness("Smoothness", Range( 0 , 1)) = 0
+		[ToggleOff] _SpecularHighlights("Specular Highlights", Float) = 1.0
 		[Toggle(_TRANSLUCENCYONOFF_ON)] _TRANSLUCENCYONOFF("TRANSLUCENCY ON/OFF", Float) = 1
 		[Header(Translucency)]
 		_Translucency("Strength", Range( 0 , 50)) = 1
@@ -43,6 +44,7 @@ Shader "Assets/Momo_FoliageShader"
 		#include "Lighting.cginc"
 		#pragma target 3.5
 		#pragma multi_compile_instancing
+		#pragma shader_feature_local _SPECULARHIGHLIGHTS_OFF
 		#pragma shader_feature _CUSTOMWIND_ON
 		#pragma shader_feature_local _SNOWONOFF_ON
 		#pragma shader_feature_local _TRANSLUCENCYONOFF_ON
