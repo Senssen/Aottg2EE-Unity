@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/ExpeditionAssets/Functional/Scenes/CityDiorama.unity
     guid: 75d3fd1278f541d46be0f623cc512cb6
+  - enabled: 1
+    path: Assets/Resources/ExpeditionAssets/Functional/Scenes/GiantTreeTest.unity
+    guid: 0f1c03e2e0d8fa846b21fb9e20bb68cd
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
