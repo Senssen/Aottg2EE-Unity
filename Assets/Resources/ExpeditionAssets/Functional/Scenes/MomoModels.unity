@@ -1542,6 +1542,18 @@ PrefabInstance:
       value: Momo_Tree_GiantTree1PF
       objectReference: {fileID: 0}
     - target: {fileID: 6423960262938585992, guid: 54c59d8bd2144bc40a5467b19f3fcbeb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8685406
+      objectReference: {fileID: 0}
+    - target: {fileID: 6423960262938585992, guid: 54c59d8bd2144bc40a5467b19f3fcbeb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8685406
+      objectReference: {fileID: 0}
+    - target: {fileID: 6423960262938585992, guid: 54c59d8bd2144bc40a5467b19f3fcbeb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8685406
+      objectReference: {fileID: 0}
+    - target: {fileID: 6423960262938585992, guid: 54c59d8bd2144bc40a5467b19f3fcbeb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 242.19849
       objectReference: {fileID: 0}

@@ -1,2 +1,0 @@
-Due to the nature of Shader graphs not easily supporting GPU instancing, using windy leaf trees in large amounts is ill advised.
-I recommend to only use these trees in small mission like maps, but if you do wish to use it on large scale expedition maps, do NOT use them for forests.

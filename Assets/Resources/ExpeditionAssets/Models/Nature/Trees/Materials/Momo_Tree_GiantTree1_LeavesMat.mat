@@ -14,7 +14,6 @@ Material:
   m_ValidKeywords:
   - _CUSTOMWIND_ON
   - _SPECULARHIGHLIGHTS_OFF
-  - _TRANSLUCENCYONOFF_ON
   m_InvalidKeywords:
   - _BUILTIN_ALPHATEST_ON
   - _BUILTIN_AlphaClip
@@ -115,17 +114,17 @@ Material:
     - _SnowGradient: 0.83
     - _SpecularHighlights: 0
     - _SrcBlend: 1
-    - _TRANSLUCENCYONOFF: 1
+    - _TRANSLUCENCYONOFF: 0
     - _TransAmbient: 0.2
     - _TransDirect: 1
     - _TransNormalDistortion: 0.1
-    - _TransScattering: 2
+    - _TransScattering: 1
     - _TransShadow: 0.9
     - _Translucency: 1
     - _UVSec: 0
     - _WindDensity: 0.19
     - _WindMovement: 0.5
-    - _WindStrength: 0.077
+    - _WindStrength: 0.108
     - _Wind_Intensity: 0.2
     - _Wind_Speed: 0.2
     - _ZWrite: 1
