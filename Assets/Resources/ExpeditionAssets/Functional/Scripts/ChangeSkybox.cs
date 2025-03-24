@@ -9,7 +9,7 @@ public class ChangeSkybox : MonoBehaviour
     public Material _skyboxMaterial;
     void Awake()
     {
-        Invoke("UpdateSkybox",2);
+        Invoke("UpdateSkybox",5);
     }
 
     private void UpdateSkybox()
