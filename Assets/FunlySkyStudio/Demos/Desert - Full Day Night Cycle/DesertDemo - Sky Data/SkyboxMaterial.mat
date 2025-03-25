@@ -2,21 +2,34 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SkyboxMaterial
   m_Shader: {fileID: 4800000, guid: a449307a7b4cccf45b5b0e8cc47be915, type: 3}
-  m_ShaderKeywords: CLOUDS CUBEMAP_CLOUD_FORMAT_RGBA GRADIENT_BACKGROUND HORIZON_FOG
-    MOON MOON_CUSTOM_TEXTURE NOISE_CLOUDS STAR_LAYER_1 SUN
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - CLOUDS
+  - CUBEMAP_CLOUD_FORMAT_RGBA
+  - GRADIENT_BACKGROUND
+  - HORIZON_FOG
+  - MOON
+  - MOON_CUSTOM_TEXTURE
+  - NOISE_CLOUDS
+  - STAR_LAYER_1
+  - SUN
+  m_InvalidKeywords:
+  - 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -80,6 +93,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _CloudAlpha: 1
     - _CloudCubemapDoubleLayerHeight: 0
@@ -121,7 +135,7 @@ Material:
     - _StarLayer1Density: 0.01
     - _StarLayer1EdgeFade: 0.645
     - _StarLayer1HDRBoost: 1
-    - _StarLayer1MaxRadius: 0
+    - _StarLayer1MaxRadius: 0.0029654857
     - _StarLayer1RotationSpeed: 0
     - _StarLayer1SpriteAnimationSpeed: 1
     - _StarLayer1SpriteItemCount: 1
@@ -152,7 +166,7 @@ Material:
     - _SunSpriteAnimationSpeed: 1
     - _SunSpriteItemCount: 1
     m_Colors:
-    - _CloudColor1: {r: 1, g: 0.96311677, b: 0.88373756, a: 1}
+    - _CloudColor1: {r: 1, g: 0.88786894, b: 0.6873269, a: 1}
     - _CloudColor2: {r: 0.41911763, g: 0.41911763, b: 0.41911763, a: 1}
     - _CloudCubemapDoubleLayerTintColor: {r: 1, g: 1, b: 1, a: 1}
     - _CloudCubemapNormalDoubleLitColor: {r: 1, g: 1, b: 1, a: 1}
@@ -161,12 +175,12 @@ Material:
     - _CloudCubemapNormalShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _CloudCubemapNormalToLight: {r: 0, g: 1, b: 0, a: 0}
     - _CloudCubemapTintColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GradientSkyLowerColor: {r: 0.92057455, g: 0.75594157, b: 0.881971, a: 1}
-    - _GradientSkyMiddleColor: {r: 0.5688431, g: 0.7344088, b: 0.86915714, a: 1}
-    - _GradientSkyUpperColor: {r: 0.38021854, g: 0.5419024, b: 0.92543167, a: 1}
+    - _GradientSkyLowerColor: {r: 0.8839955, g: 0.60331076, b: 0.15805636, a: 1}
+    - _GradientSkyMiddleColor: {r: 1, g: 0.7647059, b: 0.7647059, a: 1}
+    - _GradientSkyUpperColor: {r: 0.5331832, g: 0.69685954, b: 0.82691175, a: 1}
     - _HorizonFogColor: {r: 1, g: 1, b: 1, a: 1}
     - _MoonColor: {r: 0.39705884, g: 0.39705884, b: 0.39705884, a: 1}
-    - _MoonPosition: {r: 0.9695947, g: -0.24471629, b: 0, a: 0}
+    - _MoonPosition: {r: -0.98189205, g: -0.18943475, b: 0.0015639463, a: 0}
     - _MoonSpriteDimensions: {r: 0, g: 0, b: 0, a: 0}
     - _StarBasicTintColor: {r: 1, g: 1, b: 1, a: 1}
     - _StarLayer1Color: {r: 1, g: 1, b: 1, a: 1}
@@ -175,6 +189,7 @@ Material:
     - _StarLayer2SpriteDimensions: {r: 0, g: 0, b: 0, a: 0}
     - _StarLayer3Color: {r: 0.22, g: 1, b: 0.55, a: 1}
     - _StarLayer3SpriteDimensions: {r: 0, g: 0, b: 0, a: 0}
-    - _SunColor: {r: 0.868, g: 0.5983978, b: 0.3095383, a: 1}
-    - _SunPosition: {r: -0.9724653, g: 0.23304287, b: 0.0015489314, a: 0}
+    - _SunColor: {r: 0.84761757, g: 0.5363856, b: 0.20292275, a: 1}
+    - _SunPosition: {r: 0.9776007, g: 0.21046823, b: 0, a: 0}
     - _SunSpriteDimensions: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

@@ -2,22 +2,34 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SkyboxMaterial
   m_Shader: {fileID: 4800000, guid: a449307a7b4cccf45b5b0e8cc47be915, type: 3}
-  m_ShaderKeywords: ' CLOUDS CUBEMAP_CLOUD_FORMAT_RGBA GRADIENT_BACKGROUND HORIZON_FOG
-    MOON MOON_ALPHA_BLEND MOON_CUSTOM_TEXTURE NOISE_CLOUDS STAR_LAYER_2_CUSTOM_TEXTURE
-    VERTEX_GRADIENT_BACKGROUND'
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - CLOUDS
+  - CUBEMAP_CLOUD_FORMAT_RGBA
+  - GRADIENT_BACKGROUND
+  - HORIZON_FOG
+  - MOON
+  - MOON_ALPHA_BLEND
+  - MOON_CUSTOM_TEXTURE
+  - NOISE_CLOUDS
+  - STAR_LAYER_2_CUSTOM_TEXTURE
+  m_InvalidKeywords:
+  - 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -38,7 +50,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CloudNoiseTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 9965f768a31984e6cb608340e2f4dd5a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -46,7 +58,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MoonTex:
-        m_Texture: {fileID: 2800000, guid: 8004381ac39c40a48b677ea6927a41c5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 80e3914c20d754b25bfe115c456436b7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _StarBasicCubemap:
@@ -81,6 +93,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _CloudAlpha: 1
     - _CloudCubemapDoubleLayerHeight: 0
@@ -94,8 +107,8 @@ Material:
     - _CloudCubemapRotationSpeed: 0.01
     - _CloudDensity: 1
     - _CloudDirection: 0.18
-    - _CloudFadeAmount: 0.95
-    - _CloudFadePosition: 0.961
+    - _CloudFadeAmount: 1
+    - _CloudFadePosition: 0.962
     - _CloudHeight: 0.7
     - _CloudSpeed: 0.1
     - _CloudTextureTiling: 0.55
@@ -162,9 +175,9 @@ Material:
     - _CloudCubemapNormalShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _CloudCubemapNormalToLight: {r: 0, g: 1, b: 0, a: 0}
     - _CloudCubemapTintColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GradientSkyLowerColor: {r: 0.060445502, g: 0.13167135, b: 0.19117647, a: 1}
-    - _GradientSkyMiddleColor: {r: 0, g: 0.014452319, b: 0.1102941, a: 1}
-    - _GradientSkyUpperColor: {r: 0.0034061454, g: 0.13976927, b: 0.46323532, a: 1}
+    - _GradientSkyLowerColor: {r: 0.5, g: 0.77241385, b: 1, a: 1}
+    - _GradientSkyMiddleColor: {r: 0.2143801, g: 0.052714083, b: 0.5514706, a: 1}
+    - _GradientSkyUpperColor: {r: 0.20757425, g: 0.06812285, b: 0.46323532, a: 1}
     - _HorizonFogColor: {r: 1, g: 1, b: 1, a: 1}
     - _MoonColor: {r: 0.9539546, g: 0.9632353, b: 0.2903871, a: 1}
     - _MoonPosition: {r: 0.8156179, g: 0.5785909, b: 0, a: 0}
@@ -179,3 +192,4 @@ Material:
     - _SunColor: {r: 0.66, g: 0.65, b: 0.55, a: 1}
     - _SunPosition: {r: 0, g: 0, b: 0, a: 0}
     - _SunSpriteDimensions: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

@@ -90,7 +90,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.5735294, g: 0.5735294, b: 0.5735294, a: 1}
+          color: {r: 0.5496173, g: 0.61278343, b: 0.6509434, a: 1}
         m_Name: Fog Color
         m_Id: b832b01d-ce08-4539-aae9-296878e8346c
       - keyframes:
@@ -234,7 +234,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.7971698, g: 0.8954879, b: 1, a: 1}
+          color: {r: 1, g: 1, b: 1, a: 1}
         m_Name: Ambient Light - Sky Color
         m_Id: eeb7bf39-b7e0-469b-822a-01e2827c784c
       - keyframes:
@@ -383,7 +383,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.5
+          value: 0.462
         m_Name: Sky Middle Color Balance
         m_Id: f2fa9790-04eb-4644-aeda-e81a08b70814
         minValue: 0
@@ -393,7 +393,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: -0.092
+          value: -0.26
         m_Name: Horizon Position
         m_Id: 0d215a4b-f845-4855-b7b7-26d3b1f78953
         minValue: -1
@@ -403,7 +403,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.633
+          value: 0.57
         m_Name: Sky Gradient Length
         m_Id: 404d6edd-0cb2-4f7f-9b62-fef6389aca17
         minValue: 0
@@ -443,7 +443,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 1
+          value: 0.675
         m_Name: Cloud Density
         m_Id: 57d22e1d-2ec5-4f24-bac6-235f8630e7e6
         minValue: 0
@@ -453,7 +453,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.558
+          value: 0.615
         m_Name: Cloud Speed
         m_Id: 80a899e7-5bef-4f3d-8599-4445a878fc25
         minValue: 0
@@ -463,7 +463,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.6
+          value: 0.18
         m_Name: Cloud Direction
         m_Id: 58f9b61b-70b5-4af4-bbc5-d0fcb4d7c6a5
         minValue: 0
@@ -473,7 +473,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.7
+          value: 0.528
         m_Name: Cloud Height
         m_Id: dd76783e-79c0-4d34-9fb7-39bb1f94a9ae
         minValue: 0
@@ -483,7 +483,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.975
+          value: 0.93
         m_Name: Cloud Fade-Out Distance
         m_Id: 2d57e070-3b47-4f6f-b937-29fdde788bcc
         minValue: 0
@@ -493,7 +493,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.627
+          value: 0.022
         m_Name: Cloud Fade-Out Amount
         m_Id: decb53a3-9ab8-408e-9a24-ff12f0ee5072
         minValue: 0
@@ -513,7 +513,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.123
+          value: 0.098
         m_Name: Fog Height
         m_Id: bcee77f6-16d3-4763-b5d7-010e38db8cdc
         minValue: 0.03
@@ -1593,7 +1593,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 1
+          value: 0.675
         m_Name: Cloud Transparency
         m_Id: 5c34da97-74eb-4903-a40a-7fd4bf764500
         minValue: 0

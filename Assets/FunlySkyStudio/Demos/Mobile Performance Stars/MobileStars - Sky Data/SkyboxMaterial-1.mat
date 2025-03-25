@@ -2,21 +2,35 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SkyboxMaterial-1
   m_Shader: {fileID: 4800000, guid: a449307a7b4cccf45b5b0e8cc47be915, type: 3}
-  m_ShaderKeywords: CLOUDS CUBEMAP_CLOUDS CUBEMAP_CLOUD_DOUBLE_LAYER CUBEMAP_CLOUD_FORMAT_RGBA
-    GRADIENT_BACKGROUND MOON MOON_ALPHA_BLEND MOON_CUSTOM_TEXTURE STARS_BASIC VERTEX_GRADIENT_BACKGROUND
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - CLOUDS
+  - CUBEMAP_CLOUDS
+  - CUBEMAP_CLOUD_DOUBLE_LAYER
+  - CUBEMAP_CLOUD_FORMAT_RGBA
+  - GRADIENT_BACKGROUND
+  - MOON
+  - MOON_ALPHA_BLEND
+  - MOON_CUSTOM_TEXTURE
+  - STARS_BASIC
+  - VERTEX_GRADIENT_BACKGROUND
+  m_InvalidKeywords:
+  - 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -80,6 +94,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _CloudAlpha: 1
     - _CloudCubemapDoubleLayerHeight: 0
@@ -154,13 +169,11 @@ Material:
     m_Colors:
     - _CloudColor1: {r: 0.54044116, g: 0.59208924, b: 0.61764705, a: 1}
     - _CloudColor2: {r: 0.64705884, g: 0.64705884, b: 0.64705884, a: 1}
-    - _CloudCubemapDoubleLayerTintColor: {r: 0.90502924, g: 0.842128, b: 0.9705882,
-        a: 1}
+    - _CloudCubemapDoubleLayerTintColor: {r: 0.90502924, g: 0.842128, b: 0.9705882, a: 1}
     - _CloudCubemapNormalDoubleLitColor: {r: 1, g: 1, b: 1, a: 1}
     - _CloudCubemapNormalDoubleShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _CloudCubemapNormalLitColor: {r: 1, g: 1, b: 1, a: 1}
-    - _CloudCubemapNormalShadowColor: {r: 0.66890645, g: 0.58147913, b: 0.6886792,
-        a: 1}
+    - _CloudCubemapNormalShadowColor: {r: 0.66890645, g: 0.58147913, b: 0.6886792, a: 1}
     - _CloudCubemapNormalToLight: {r: 0.0097260745, g: 0.43406487, b: 0.9008291, a: 0}
     - _CloudCubemapTintColor: {r: 0.82093424, g: 0.78719723, b: 0.9558824, a: 1}
     - _GradientSkyLowerColor: {r: 0, g: 0.20623739, b: 0.6102941, a: 1}
@@ -180,3 +193,4 @@ Material:
     - _SunColor: {r: 0.66, g: 0.65, b: 0.55, a: 1}
     - _SunPosition: {r: 0, g: 0, b: 0, a: 0}
     - _SunSpriteDimensions: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

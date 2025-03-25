@@ -1,23 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Funly.SkyStudio;
 using UnityEngine;
 
 public class ChangeSkybox : MonoBehaviour
 {
-    private GameObject _gameObject;
-    private Skybox _skybox;
-    public Material _skyboxMaterial;
+    public SkyProfile _dayCycle;
     void Awake()
     {
-        Invoke("UpdateSkybox",5);
+        Invoke("TransitionSkybox",5);
     }
-
-    private void UpdateSkybox()
+    private void TransitionSkybox()
     {
-        _gameObject = GameObject.Find("MainCamera(Clone)");
-        _skybox = _gameObject.GetComponent<Skybox>();
-        _skybox.material = _skyboxMaterial;
-
+        TimeOfDayController.instance.StartSkyProfileTransition(_dayCycle, 20);
+        Debug.Log("Called TransitionSkybox");
     }
 
 }
