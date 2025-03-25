@@ -274,7 +274,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 1, g: 1, b: 1, a: 1}
+          color: {r: 0.6603774, g: 0.5513528, b: 0.5513528, a: 1}
         m_Name: Moon Light Color
         m_Id: 377c61f7-653b-4a37-b6fd-9db1b11dc012
       - keyframes:
@@ -885,7 +885,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.376
+          value: 0.375
         m_Name: Moon Edge Feathering
         m_Id: 070fe8d8-d300-4c96-b14f-fd21451d063f
         minValue: 0.0001
@@ -905,7 +905,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.25
+          value: 0
         m_Name: Moon Light Intensity
         m_Id: b2f5b879-63a7-4b89-8e54-c3fc7adb6834
         minValue: 0
@@ -1945,7 +1945,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          texture: {fileID: 2800000, guid: 4e23ec4e04af612499abc07334def6ce, type: 3}
+          texture: {fileID: 2800000, guid: 66ee46d4b256926458d55b5731431510, type: 3}
         m_Name: Moon Texture
         m_Id: ab0f0b32-bb1b-4c6d-9ba9-0a8ccc6d665b
       - keyframes:
@@ -2179,7 +2179,7 @@ MonoBehaviour:
     - VertexGradientSkyFeature
     - CubemapCloudDoubleLayerCubemap
     - AmbientLightGradient
-    m_Values: 0101010101010000000000000000010000000000000000000101000101000000000000000001
+    m_Values: 0101010101010000000000000000010001000000000000000101000101000000000000000001
   lightningArtSet: {fileID: 11400000, guid: fcd26c6d0379bd1498f9fbfeaf211979, type: 2}
   rainSplashArtSet: {fileID: 11400000, guid: bc520d172250ae746bd6c81b2ca80510, type: 2}
   starLayer1DataTexture: {fileID: 2800000, guid: 5805bb336d9feb34887456f1fe50e9b4, type: 2}
