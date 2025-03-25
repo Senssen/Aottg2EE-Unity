@@ -95,7 +95,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CloudAlpha: 0.769
+    - _CloudAlpha: 1
     - _CloudCubemapDoubleLayerHeight: 0
     - _CloudCubemapDoubleLayerRotationSpeed: 0.02
     - _CloudCubemapHeight: 0
@@ -117,10 +117,10 @@ Material:
     - _GradientFadeBegin: -0.046
     - _GradientFadeEnd: 0.587
     - _GradientFadeMiddlePosition: 0.354
-    - _HorizonFogDensity: 0.16
+    - _HorizonFogDensity: 0.109963626
     - _HorizonFogLength: 0.153
     - _HorizonScaleFactor: 0.7
-    - _MoonAlpha: 0.57746994
+    - _MoonAlpha: 0.39638555
     - _MoonEdgeFade: 0.376
     - _MoonHDRBoost: 1
     - _MoonRadius: 0.052
@@ -135,7 +135,7 @@ Material:
     - _StarLayer1Density: 0.01
     - _StarLayer1EdgeFade: 0.4
     - _StarLayer1HDRBoost: 7.64
-    - _StarLayer1MaxRadius: 0.003035151
+    - _StarLayer1MaxRadius: 0.0014018416
     - _StarLayer1RotationSpeed: 0
     - _StarLayer1SpriteAnimationSpeed: 1
     - _StarLayer1SpriteItemCount: 1
@@ -162,11 +162,11 @@ Material:
     - _SunAlpha: 1
     - _SunEdgeFade: 1
     - _SunHDRBoost: 4.13
-    - _SunRadius: 0.1
+    - _SunRadius: 0.08963855
     - _SunSpriteAnimationSpeed: 1
     - _SunSpriteItemCount: 1
     m_Colors:
-    - _CloudColor1: {r: 0.24004248, g: 0.34947065, b: 0.46375644, a: 1}
+    - _CloudColor1: {r: 0.62556857, g: 0.75707, b: 0.7913748, a: 1}
     - _CloudColor2: {r: 0.89705884, g: 0.89705884, b: 0.89705884, a: 1}
     - _CloudCubemapDoubleLayerTintColor: {r: 1, g: 1, b: 1, a: 1}
     - _CloudCubemapNormalDoubleLitColor: {r: 1, g: 1, b: 1, a: 1}
@@ -175,12 +175,12 @@ Material:
     - _CloudCubemapNormalShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _CloudCubemapNormalToLight: {r: 0, g: 1, b: 0, a: 0}
     - _CloudCubemapTintColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GradientSkyLowerColor: {r: 0.46000007, g: 0.34877056, b: 0.2906996, a: 1}
-    - _GradientSkyMiddleColor: {r: 0.5099208, g: 0.45725647, b: 0.34923524, a: 1}
-    - _GradientSkyUpperColor: {r: 0.12589365, g: 0.20996068, b: 0.26492828, a: 1}
-    - _HorizonFogColor: {r: 0.34724766, g: 0.30606347, b: 0.32492292, a: 1}
+    - _GradientSkyLowerColor: {r: 0.82158726, g: 0.72996473, b: 0.6903009, a: 1}
+    - _GradientSkyMiddleColor: {r: 0.6090774, g: 0.64262414, b: 0.7102032, a: 1}
+    - _GradientSkyUpperColor: {r: 0.19032817, g: 0.3551796, b: 0.58044666, a: 1}
+    - _HorizonFogColor: {r: 0.6939852, g: 0.6491226, b: 0.6860458, a: 1}
     - _MoonColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MoonPosition: {r: -0.9704983, g: 0.24110316, b: 0.0015457984, a: 0}
+    - _MoonPosition: {r: -0.94866574, g: -0.31627694, b: 0.0015112499, a: 0}
     - _MoonSpriteDimensions: {r: 0, g: 0, b: 0, a: 0}
     - _StarBasicTintColor: {r: 1, g: 1, b: 1, a: 1}
     - _StarLayer1Color: {r: 1, g: 1, b: 1, a: 1}
@@ -189,7 +189,7 @@ Material:
     - _StarLayer2SpriteDimensions: {r: 0, g: 0, b: 0, a: 0}
     - _StarLayer3Color: {r: 0.21999997, g: 1, b: 0.54999995, a: 1}
     - _StarLayer3SpriteDimensions: {r: 0, g: 0, b: 0, a: 0}
-    - _SunColor: {r: 1, g: 0.6855334, b: 0.37263435, a: 1}
-    - _SunPosition: {r: 0.970559, g: -0.24086355, b: 0, a: 0}
+    - _SunColor: {r: 1, g: 0.764251, b: 0.48468104, a: 1}
+    - _SunPosition: {r: 0.94877, g: 0.31596762, b: 0, a: 0}
     - _SunSpriteDimensions: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
