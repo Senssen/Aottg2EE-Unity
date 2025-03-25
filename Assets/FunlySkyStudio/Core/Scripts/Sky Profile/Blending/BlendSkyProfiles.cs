@@ -155,7 +155,7 @@ namespace Funly.SkyStudio
                 return;
             }
             
-            m_TimeOfDayController = null;
+            //m_TimeOfDayController = null;
             blendedProfile = null;
             
             // Stop updating, and destroy the game object when done.
