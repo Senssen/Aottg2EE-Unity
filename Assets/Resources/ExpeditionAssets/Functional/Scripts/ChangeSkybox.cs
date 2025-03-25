@@ -9,11 +9,11 @@ public class ChangeSkybox : MonoBehaviour
     public TimeOfDayController _timeOfDayController;
     void Awake()
     {
-        Invoke("TransitionSkybox",5);
+        TransitionSkybox();
     }
     private void TransitionSkybox()
     {
-        _timeOfDayController.StartSkyProfileTransition(_dayCycle, 20);
+        _timeOfDayController.StartSkyProfileTransition(_dayCycle, 2);
         Debug.Log("Called TransitionSkybox");
     }
 

@@ -106,7 +106,7 @@ Material:
     - _CloudDirection: 0.18
     - _CloudFadeAmount: 0.022
     - _CloudFadePosition: 0.93
-    - _CloudHeight: 0.528
+    - _CloudHeight: 0
     - _CloudSpeed: 0.615
     - _CloudTextureTiling: 0.55
     - _DebugPointRadius: 0.03

@@ -473,7 +473,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.528
+          value: 0
         m_Name: Cloud Height
         m_Id: dd76783e-79c0-4d34-9fb7-39bb1f94a9ae
         minValue: 0
