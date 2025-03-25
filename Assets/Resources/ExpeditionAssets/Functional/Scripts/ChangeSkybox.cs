@@ -6,13 +6,14 @@ using UnityEngine;
 public class ChangeSkybox : MonoBehaviour
 {
     public SkyProfile _dayCycle;
+    public TimeOfDayController _timeOfDayController;
     void Awake()
     {
         Invoke("TransitionSkybox",5);
     }
     private void TransitionSkybox()
     {
-        TimeOfDayController.instance.StartSkyProfileTransition(_dayCycle, 20);
+        _timeOfDayController.StartSkyProfileTransition(_dayCycle, 20);
         Debug.Log("Called TransitionSkybox");
     }
 
