@@ -885,7 +885,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.0001
+          value: 0.376
         m_Name: Moon Edge Feathering
         m_Id: 070fe8d8-d300-4c96-b14f-fd21451d063f
         minValue: 0.0001
@@ -1945,7 +1945,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          texture: {fileID: 2800000, guid: 8004381ac39c40a48b677ea6927a41c5, type: 3}
+          texture: {fileID: 2800000, guid: 4e23ec4e04af612499abc07334def6ce, type: 3}
         m_Name: Moon Texture
         m_Id: ab0f0b32-bb1b-4c6d-9ba9-0a8ccc6d665b
       - keyframes:
