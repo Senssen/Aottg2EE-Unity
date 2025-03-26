@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class ChangeSkybox : MonoBehaviour
 {
-    public SkyProfile _dayCycle;
-    public TimeOfDayController _timeOfDayController;
     void Awake()
     {
-        TransitionSkybox();
+        Invoke("DisableSkybox", 3);
     }
-    private void TransitionSkybox()
+
+    private void DisableSkybox()
     {
-        _timeOfDayController.StartSkyProfileTransition(_dayCycle, 2);
-        Debug.Log("Called TransitionSkybox");
+        GameObject mainCamera = GameObject.Find("MainCamera(Clone)");
+        Skybox skybox = mainCamera.GetComponent<Skybox>();
+        skybox.enabled = false;
     }
 
 }
