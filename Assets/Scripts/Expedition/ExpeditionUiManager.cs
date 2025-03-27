@@ -12,14 +12,19 @@ public class ExpeditionUiManager : MonoBehaviour
     private GameObject CanvasObj;
     [SerializeField]
     private InputField CoordsInputField;
+    
+    private GeneralInputSettings _generalInputSettings;
 
 
     private void Start()
     {
+        _generalInputSettings = SettingsManager.InputSettings.General;
     }
 
     private void Update()
     {
+        if (CanvasObj.activeSelf && _generalInputSettings.Pause.GetKeyDown())
+            CloseEmMenu();
     }
 
     public void CloseEmMenu()

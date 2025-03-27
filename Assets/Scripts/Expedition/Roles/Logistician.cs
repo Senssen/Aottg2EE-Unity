@@ -33,7 +33,7 @@ public class Logistician : MonoBehaviour
 
     public void DropItem(RoleItems.SupplyItem _itemType)
     {
-        Vector3 position = transform.position + Vector3.back * 3;
+        Vector3 position = transform.position + (transform.forward * 4f) + new Vector3(0,1.5f,0);
         if (_itemType == RoleItems.SupplyItem.Gas && GasSupply > 0) {
             PhotonNetwork.Instantiate(ResourcePaths.Logistician + "/SpinningSupplyGasPrefab", position, transform.rotation, 0);
             UseSupply(_itemType);

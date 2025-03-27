@@ -5,6 +5,8 @@ using TMPro;
 using Settings;
 public class LogisticianUiManager : MonoBehaviour
 {
+    private readonly Color _selectColor = new Color(0.525f, 0.164f, 0.227f);
+
     [SerializeField]
     private GameObject CanvasObj;
     [SerializeField]
@@ -22,6 +24,8 @@ public class LogisticianUiManager : MonoBehaviour
     public TMP_Text WeaponText;
     [SerializeField]
     public TMP_Text GasText;
+    [SerializeField]
+    private AudioSource SelectSound;
 
 
     protected void Start()
@@ -77,11 +81,13 @@ public class LogisticianUiManager : MonoBehaviour
     {
         if (_itemType == "Gas") {
             SelectItem(RoleItems.SupplyItem.Gas);
-            GasImage.color = Color.red;
+            GasImage.color = _selectColor;
         } else if (_itemType == "Weapon") {
             SelectItem(RoleItems.SupplyItem.Weapon);
-            WeaponImage.color = Color.red;
+            WeaponImage.color = _selectColor;
         }
+
+        SelectSound.Play();
     }
 
     public void OnExitSupplyItem(string _itemType)
