@@ -51,36 +51,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6032410381880676077}
-          m_TargetAssemblyTypeName: ZippsUIManager, Assembly-CSharp
-          m_MethodName: OnHoverBladeOption
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6032410381880676077}
-          m_TargetAssemblyTypeName: ZippsUIManager, Assembly-CSharp
-          m_MethodName: OnHoverExitBladeOption
-          m_Mode: 1
+        - m_Target: {fileID: 1162887263039034645}
+          m_TargetAssemblyTypeName: LogisticianUiManager, Scripts
+          m_MethodName: OnExitSupplyItem
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: Weapon
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1162887263039034645}
+          m_TargetAssemblyTypeName: LogisticianUiManager, Scripts
+          m_MethodName: OnHoverSupplyItem
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Weapon
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!222 &6540793135124999423
@@ -4835,6 +4835,7 @@ GameObject:
   - component: {fileID: 159505812399660306}
   - component: {fileID: 6032410381880676077}
   - component: {fileID: 437955393226296028}
+  - component: {fileID: 1162887263039034645}
   m_Layer: 0
   m_Name: Expedition UI
   m_TagString: Untagged
@@ -4903,6 +4904,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerButtonPrefab: {fileID: 5452995724489166968, guid: 33834c6760b2f8143b3339a9ee6af76a, type: 3}
   ScrollViewContent: {fileID: 5100346474175494710}
+--- !u!114 &1162887263039034645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5546037500275061286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 881626a8b4881314e8c05058e6154799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanvasObj: {fileID: 4061999309171113525}
+  SelectScreen: {fileID: 3029648906447617835}
+  WeaponImage: {fileID: 848446283677411818}
+  GasImage: {fileID: 6637764748516229828}
+  WeaponText: {fileID: 6285510105426093513}
+  GasText: {fileID: 8735121743907772325}
 --- !u!1 &5806969838131676323
 GameObject:
   m_ObjectHideFlags: 0
@@ -7292,36 +7311,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6032410381880676077}
-          m_TargetAssemblyTypeName: ZippsUIManager, Assembly-CSharp
-          m_MethodName: OnHoverGasOption
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6032410381880676077}
-          m_TargetAssemblyTypeName: ZippsUIManager, Assembly-CSharp
-          m_MethodName: OnHoverExitGasOption
-          m_Mode: 1
+        - m_Target: {fileID: 1162887263039034645}
+          m_TargetAssemblyTypeName: LogisticianUiManager, Scripts
+          m_MethodName: OnExitSupplyItem
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: Gas
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1162887263039034645}
+          m_TargetAssemblyTypeName: LogisticianUiManager, Scripts
+          m_MethodName: OnHoverSupplyItem
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Gas
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!222 &6885679218146051293

@@ -9,26 +9,26 @@ using UnityEngine.UI;
 public class ExpeditionUiManager : MonoBehaviour
 {
     [SerializeField]
-    protected GameObject CanvasObj;
+    private GameObject CanvasObj;
     [SerializeField]
     private InputField CoordsInputField;
 
 
-    protected virtual void Start()
+    private void Start()
     {
     }
 
-    protected virtual void Update()
+    private void Update()
     {
     }
 
-    public virtual void CloseEmMenu()
+    public void CloseEmMenu()
     {
         CanvasObj.SetActive(false);
         EmVariables.SetActive(false);
     }
 
-    public virtual void OpenEmMenu()
+    public void OpenEmMenu()
     {
         CanvasObj.SetActive(true);
         EmVariables.SetActive(true);

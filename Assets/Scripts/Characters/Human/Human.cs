@@ -165,6 +165,8 @@ namespace Characters
             GetComponent<CapsuleCollider>().enabled = false;
             if (IsMine())
             {
+                GetComponent<Logistician>().ResetSupplies(); // Added by Ata for Logistician
+
                 FalseAttack();
                 SetCarrierTriggerCollider(false);
             }
@@ -908,6 +910,8 @@ namespace Characters
             }
             Weapon.Reset();
             Stats.CurrentGas = Stats.MaxGas;
+
+            GetComponent<Logistician>().ResetSupplies(); // Added by Ata for Logistician
         }
 
         public override void Emote(string emote)

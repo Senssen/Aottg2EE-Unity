@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility;
+using Characters;
 
 static class PhotonExtensions
 {
@@ -119,6 +120,19 @@ static class PhotonExtensions
     }
 
     #region Expedition Mod
+
+    public static GameObject GetMyHuman()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject player in players)
+        {
+            Human pv = player.GetComponent<Human>();
+            if (pv.IsMine())
+                return player;
+        }
+        return null;
+    }
     public static GameObject GetMyPlayer()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
