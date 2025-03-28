@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Momo_HQ_Shiganshina
+  m_Name: Momo_HQ_Shiganshina_TopFloorMat
   m_Shader: {fileID: 10703, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -26,7 +26,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: d5d6f2f80980e6f4eb1817c452229fd9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2af0dbb2c54c80b4c90732e8c53266f6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -50,7 +50,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: a3e5b996838bd464cb2d6d65938d910a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 230fd1eb75e8ebd4ea04858928e03c5b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:

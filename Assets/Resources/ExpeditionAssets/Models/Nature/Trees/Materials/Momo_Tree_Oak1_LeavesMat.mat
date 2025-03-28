@@ -104,7 +104,7 @@ Material:
     - _BumpScale: 1
     - _CUSTOMCOLORSTINTING: 0
     - _CUSTOMWIND: 1
-    - _Cutoff: 0.008
+    - _Cutoff: 0.364
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
@@ -135,9 +135,9 @@ Material:
     - _TransShadow: 0.9
     - _Translucency: 1
     - _UVSec: 0
-    - _WindDensity: 0.64
+    - _WindDensity: 0.43
     - _WindMovement: 0.5
-    - _WindStrength: 0.133
+    - _WindStrength: 0.025
     - _Wind_Intensity: 0.2
     - _Wind_Speed: 0.2
     - _ZWrite: 1
