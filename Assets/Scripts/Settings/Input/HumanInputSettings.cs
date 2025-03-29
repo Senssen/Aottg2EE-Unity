@@ -9,6 +9,10 @@
         public KeybindSetting HookRight = new KeybindSetting(new string[] { "E", "None" });
         public KeybindSetting HookBoth = new KeybindSetting(new string[] { "None", "None" });
         public KeybindSetting Dash = new KeybindSetting(new string[] { "LeftControl", "None" });
+        public KeybindSetting AbilityWheelMenu = new KeybindSetting(new string[] { "B", "None" }); // Added by Ata 12 May 24 for Ability Wheel//
+        public KeybindSetting Ability1 = new KeybindSetting(new string[] { "Alpha1", "None" }); // Added by Ata 12 May 24 for Ability Wheel//
+        public KeybindSetting Ability2 = new KeybindSetting(new string[] { "Alpha2", "None" }); // Added by Ata 20 May 24 for Ability Wheel//
+        public KeybindSetting Ability3 = new KeybindSetting(new string[] { "Alpha3", "None" }); // Added by Ata 20 May 24 for Ability Wheel//
         public KeybindSetting ReelIn = new KeybindSetting(new string[] { "WheelDown", "None" });
         public KeybindSetting ReelOut = new KeybindSetting(new string[] { "LeftAlt", "None" });
         public KeybindSetting Dodge = new KeybindSetting(new string[] { "LeftControl", "None" });

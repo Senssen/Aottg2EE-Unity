@@ -470,7 +470,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 27b08da425b809045b5890514670f519, type: 3}
+  m_audioClip: {fileID: 8300000, guid: dbadaea3d7ba7df46856bb017adbe8a6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -3865,14 +3865,14 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6032410381880676077}
-          m_TargetAssemblyTypeName: ZippsUIManager, Assembly-CSharp
-          m_MethodName: OnHoverAbility2
-          m_Mode: 1
+        - m_Target: {fileID: 3312321430935720009}
+          m_TargetAssemblyTypeName: VeteranManager, Scripts
+          m_MethodName: OnHoverAbility
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 2
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -3881,14 +3881,14 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6032410381880676077}
-          m_TargetAssemblyTypeName: ZippsUIManager, Assembly-CSharp
-          m_MethodName: OnHoverExitAbility2
-          m_Mode: 1
+        - m_Target: {fileID: 3312321430935720009}
+          m_TargetAssemblyTypeName: VeteranManager, Scripts
+          m_MethodName: OnHoverExitAbility
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 2
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -4933,6 +4933,7 @@ GameObject:
   - component: {fileID: 6032410381880676077}
   - component: {fileID: 437955393226296028}
   - component: {fileID: 1162887263039034645}
+  - component: {fileID: 3312321430935720009}
   m_Layer: 0
   m_Name: Expedition UI
   m_TagString: Untagged
@@ -5020,6 +5021,31 @@ MonoBehaviour:
   WeaponText: {fileID: 6285510105426093513}
   GasText: {fileID: 8735121743907772325}
   SelectSound: {fileID: 4038606810685002084}
+--- !u!114 &3312321430935720009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5546037500275061286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ff0a7ab9f117cd46bc2dc3f4e9071e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AbilityWheelCanvas: {fileID: 517199531377536921}
+  AbilityWheelAudio: {fileID: 7507861631206351151}
+  Ability1Image: {fileID: 7381971106270660009}
+  Ability2Image: {fileID: 2737362904099552626}
+  Ability3Image: {fileID: 8843935858745583873}
+  Ability1Selector: {fileID: 8287579861683833164}
+  Ability2Selector: {fileID: 4983081181347406781}
+  Ability3Selector: {fileID: 4300326262174170109}
+  AbilitySelectionSound: {fileID: 517199531377536921}
+  ChangeAbilityAudio: {fileID: 7507861631206351151}
+  Ability1Selected: 0
+  Ability2Selected: 0
+  Ability3Selected: 0
 --- !u!1 &5806969838131676323
 GameObject:
   m_ObjectHideFlags: 0
@@ -5209,14 +5235,14 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6032410381880676077}
-          m_TargetAssemblyTypeName: ZippsUIManager, Assembly-CSharp
-          m_MethodName: OnHoverAbility3
-          m_Mode: 1
+        - m_Target: {fileID: 3312321430935720009}
+          m_TargetAssemblyTypeName: VeteranManager, Scripts
+          m_MethodName: OnHoverAbility
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 3
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -5225,14 +5251,14 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6032410381880676077}
-          m_TargetAssemblyTypeName: ZippsUIManager, Assembly-CSharp
-          m_MethodName: OnHoverExitAbility3
-          m_Mode: 1
+        - m_Target: {fileID: 3312321430935720009}
+          m_TargetAssemblyTypeName: VeteranManager, Scripts
+          m_MethodName: OnHoverExitAbility
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 3
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -5599,14 +5625,14 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6032410381880676077}
-          m_TargetAssemblyTypeName: ZippsUIManager, Assembly-CSharp
-          m_MethodName: OnHoverAbility1
-          m_Mode: 1
+        - m_Target: {fileID: 3312321430935720009}
+          m_TargetAssemblyTypeName: VeteranManager, Scripts
+          m_MethodName: OnHoverAbility
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 1
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -5615,14 +5641,14 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6032410381880676077}
-          m_TargetAssemblyTypeName: ZippsUIManager, Assembly-CSharp
-          m_MethodName: OnHoverExitAbility1
-          m_Mode: 1
+        - m_Target: {fileID: 3312321430935720009}
+          m_TargetAssemblyTypeName: VeteranManager, Scripts
+          m_MethodName: OnHoverExitAbility
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 1
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -7773,7 +7799,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9221640670867112526
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7788,12 +7814,12 @@ RectTransform:
   m_Children:
   - {fileID: 7709838518484971627}
   - {fileID: 8292431521492544440}
-  - {fileID: 1445824040999872181}
-  - {fileID: 684509380836934891}
   - {fileID: 9143779828544277912}
+  - {fileID: 684509380836934891}
+  - {fileID: 1445824040999872181}
   - {fileID: 6947681827912593899}
-  - {fileID: 6327935735699683486}
   - {fileID: 4322429438179864155}
+  - {fileID: 6327935735699683486}
   - {fileID: 7539390951100214729}
   m_Father: {fileID: 1103271309396010901}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

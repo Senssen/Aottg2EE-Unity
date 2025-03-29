@@ -47,8 +47,18 @@ namespace UI
             if (!loadouts.Contains(charSettings.Loadout.Value))
                 charSettings.Loadout.Value = loadouts[0];
             var specials = HumanSpecials.GetSpecialNames(charSettings.Loadout.Value, miscSettings.AllowShifterSpecials.Value);
-            if (!specials.Contains(charSettings.Special.Value))
+            if (!specials.Contains(charSettings.Special.Value) || !specials.Contains(charSettings.Special_2.Value) || !specials.Contains(charSettings.Special_3.Value))
+            {
                 charSettings.Special.Value = HumanSpecials.DefaultSpecial;
+                charSettings.Special_2.Value = specials[1];
+                charSettings.Special_3.Value = specials[2];
+            }
+
+            if (charSettings.Loadout.Value == "Blades") // added by Ata 17 May 2024 
+                specials.Remove("Stock");
+
+            specials = FilterAbilities(specials, charSettings); // added by Ata 17 May 2024 
+
             string[] options = GetCharOptions();
             if (charSettings.CustomSet.Value >= options.Length)
             {
@@ -62,7 +72,14 @@ namespace UI
                 loadouts.ToArray(), elementWidth: 180f, optionsWidth: 180f, onDropdownOptionSelect: () => OnLoadoutClick());
             options = specials.ToArray();
             var maybeTooltip = UIManager.CurrentMenu is InGameMenu menu ? menu.SkillTooltipPopup : null;
+            
             ElementFactory.CreateIconPickSetting(DoublePanelLeft, dropdownStyle, charSettings.Special, UIManager.GetLocale(LocaleCategory, sub, "Special"),
+                options, GetSpecialIcons(options), UIManager.CurrentMenu.IconPickPopup, tooltips: GetSpecialTooltips(options), elementWidth: 180f, elementHeight: 40f, tooltipPopup: maybeTooltip);
+            
+            ElementFactory.CreateIconPickSetting(DoublePanelLeft, dropdownStyle, charSettings.Special_2, UIManager.GetLocale(LocaleCategory, sub, "Special"),
+                options, GetSpecialIcons(options), UIManager.CurrentMenu.IconPickPopup, tooltips: GetSpecialTooltips(options), elementWidth: 180f, elementHeight: 40f, tooltipPopup: maybeTooltip);
+            
+            ElementFactory.CreateIconPickSetting(DoublePanelLeft, dropdownStyle, charSettings.Special_3, UIManager.GetLocale(LocaleCategory, sub, "Special"),
                 options, GetSpecialIcons(options), UIManager.CurrentMenu.IconPickPopup, tooltips: GetSpecialTooltips(options), elementWidth: 180f, elementHeight: 40f, tooltipPopup: maybeTooltip);
 
             if (miscSettings.PVP.Value == (int)PVPMode.Team)
@@ -72,6 +89,33 @@ namespace UI
             }
             SyncStatBars();
         }
+
+        #region Special Ability Filter
+        private List<string> FilterAbilities(List<string> specials, InGameCharacterSettings charSettings)
+        {
+            if (specials.Contains(charSettings.Special.Value) && charSettings.Special.Value != "None") 
+                specials.Remove(charSettings.Special.Value);
+
+            if (specials.Contains(charSettings.Special_2.Value) && charSettings.Special_2.Value != "None") 
+                specials.Remove(charSettings.Special_2.Value);
+
+            if (specials.Contains(charSettings.Special_3.Value) && charSettings.Special_3.Value != "None") 
+                specials.Remove(charSettings.Special_3.Value);
+
+            foreach (var item in HumanSpecials.ShifterSpecials)
+            {
+                if (charSettings.Special.Value == item || charSettings.Special_2.Value == item || charSettings.Special_3.Value == item)
+                {
+                    foreach (var _item in HumanSpecials.ShifterSpecials)
+                    {
+                        specials.Remove(_item);
+                    }
+                }
+            }
+
+            return specials;
+        }
+        #endregion
 
         protected void OnLoadoutClick()
         {

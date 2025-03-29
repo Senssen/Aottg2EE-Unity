@@ -33,8 +33,10 @@ namespace Characters
                 foreach (string special in ShifterSpecials)
                     AddSpecialName(names, special);
             }
-            if (loadout == HumanLoadout.Thunderspear)
+            if (loadout != HumanLoadout.Blade)
                 AddSpecialName(names, "Stock");
+            /* if (loadout == HumanLoadout.Thunderspear)
+                AddSpecialName(names, "Stock"); */
             AddSpecialName(names, "None");
             return names;
         }
