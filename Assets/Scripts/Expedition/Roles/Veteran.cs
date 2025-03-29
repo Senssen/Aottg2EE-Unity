@@ -81,7 +81,7 @@ class Veteran : MonoBehaviour
             ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.SetSpecialIcon_3(HumanSpecials.GetSpecialIcon(human.SideSpecial_2));
         }
     }
-
+    
     public void PlayAbilitySelectSound()
     {
         SelectAbilityAudio.Play();
