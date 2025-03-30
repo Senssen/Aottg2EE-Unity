@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 8864076360405265430}
   - component: {fileID: 6498144408457206235}
   - component: {fileID: 5340999125093423905}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Impostor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -596,11 +596,11 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.1695706
+  - screenRelativeHeight: 0.10455236
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 1421371493728859956}
-  - screenRelativeHeight: 0.07874253
+  - screenRelativeHeight: 0.07096146
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 167620522017676565}

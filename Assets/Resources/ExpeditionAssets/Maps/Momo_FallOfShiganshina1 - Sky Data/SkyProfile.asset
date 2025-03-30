@@ -18,20 +18,8 @@ MonoBehaviour:
   - FogColorKey
   - FogDensityKey
   - AmbientLightSkyColorKey
-  - AmbientLightEquatorColorKey
   - AmbientLightGroundColorKey
-  - SunPositionKey
-  - MoonPositionKey
   - SkyUpperColorKey
-  - SkyMiddleColorKey
-  - SkyLowerColorKey
-  - Star1SizeKey
-  - CloudAlphaKey
-  - CloudColor1Key
-  - SunLightIntensityKey
-  - SunColorKey
-  - SunSizeKey
-  - MoonAlphaKey
   keyframeGroups:
     m_ColorGroup:
       m_Keys:
@@ -64,35 +52,15 @@ MonoBehaviour:
       m_Values:
       - keyframes:
         - m_Id: d34d30af-3314-4b75-b65c-c2a3b6793f08
-          m_Time: 0.1736527
+          m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.04423283, g: 0.075402796, b: 0.13207549, a: 1}
-        - m_Id: 68bc4a45-ed6e-4e16-a96c-2e6147a81cc7
-          m_Time: 0.248503
+          color: {r: 0.38047346, g: 0.4716981, b: 0.40708068, a: 1}
+        - m_Id: 117860e5-0a83-4497-ae06-c90c0c51af28
+          m_Time: 0.98849106
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.21239765, g: 0.352499, b: 0.4056604, a: 1}
-        - m_Id: 571e9d20-1bd7-4919-aee0-8a4ccb9e4322
-          m_Time: 0.33233532
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.1764706, g: 0.35686275, b: 0.6901961, a: 1}
-        - m_Id: b7c3af08-e4c1-45e8-9e1f-23fe2f6ef19c
-          m_Time: 0.6706587
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.1764706, g: 0.35686275, b: 0.6901961, a: 1}
-        - m_Id: 9e686b86-1880-483f-97b1-c72a7d59a967
-          m_Time: 0.75149703
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.16260235, g: 0.20636219, b: 0.3962264, a: 1}
-        - m_Id: 46a54461-fada-4101-bcdc-d790d0d54c1d
-          m_Time: 0.88023955
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.043137256, g: 0.07450981, b: 0.13333334, a: 1}
+          color: {r: 0.38047346, g: 0.4716981, b: 0.40708068, a: 1}
         m_Name: Sky Upper Color
         m_Id: edcafd85-9dab-432b-81be-76b2ee64fc3d
       - keyframes:
@@ -100,32 +68,7 @@ MonoBehaviour:
           m_Time: 0.1736527
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.08290317, g: 0.14017448, b: 0.254717, a: 1}
-        - m_Id: fe9ea91d-5e1d-4719-bef3-d06f85efae8b
-          m_Time: 0.248503
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.9622642, g: 0.79314417, b: 0.4493592, a: 1}
-        - m_Id: 49f57465-0685-4dd4-a530-335ed553e317
-          m_Time: 0.32934132
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.40784314, g: 0.5568628, b: 0.85882354, a: 1}
-        - m_Id: ca5a707e-4bbf-4ac9-af87-1b2172639af1
-          m_Time: 0.6706587
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.40899786, g: 0.5572841, b: 0.8584906, a: 1}
-        - m_Id: f56a26e1-5c45-4cbf-b29a-f4569dbbe81e
-          m_Time: 0.75149703
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.16078429, g: 0.41876414, b: 0.7529412, a: 1}
-        - m_Id: 26343872-2d89-4ef8-84f7-8a61f35c6420
-          m_Time: 0.88133335
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.08235294, g: 0.14117648, b: 0.25490198, a: 1}
+          color: {r: 0.64705884, g: 0.70980394, b: 0.6, a: 1}
         m_Name: Sky Middle Color
         m_Id: 737c3f4b-9a33-48c6-bc7a-43c7bb3c6380
       - keyframes:
@@ -133,32 +76,7 @@ MonoBehaviour:
           m_Time: 0.1736527
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.11053755, g: 0.17162684, b: 0.33962262, a: 1}
-        - m_Id: c347a7d0-0e78-40d7-8e69-817f69faf03d
-          m_Time: 0.248503
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.8301887, g: 0.5364204, b: 0.23887502, a: 1}
-        - m_Id: 3203f35c-b590-4705-9dda-82d5892a4985
-          m_Time: 0.33532935
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.8156863, g: 0.8627451, b: 1, a: 1}
-        - m_Id: e8d8f050-9744-456e-840a-42181d9f2ee0
-          m_Time: 0.66467065
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.8160377, g: 0.86273384, b: 1, a: 1}
-        - m_Id: a5106c49-1c96-470e-a219-aa9d42c8bd7a
-          m_Time: 0.75149703
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.37835318, g: 0.35893556, b: 0.6981132, a: 1}
-        - m_Id: 2fbbcaf6-bc3a-4f9c-8565-53ddfacc3705
-          m_Time: 0.88023955
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.10980392, g: 0.17254902, b: 0.34117648, a: 1}
+          color: {r: 0.84705883, g: 0.84705883, b: 0.6862745, a: 1}
         m_Name: Sky Lower Color
         m_Id: e06a7d5e-aeeb-464a-ab5c-411dcbbd3052
       - keyframes:
@@ -166,32 +84,7 @@ MonoBehaviour:
           m_Time: 0.17065868
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.21893913, g: 0.23159099, b: 0.3773585, a: 1}
-        - m_Id: 1d88bb94-a828-4e12-ae17-b696c546f172
-          m_Time: 0.26946107
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.2719384, g: 0.5276358, b: 0.5943396, a: 1}
-        - m_Id: b0368844-3993-4434-9fcb-04c4eda3931d
-          m_Time: 0.33233532
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 1, g: 1, b: 1, a: 1}
-        - m_Id: 1372792b-d622-40c7-830d-cc71b8daa7d1
-          m_Time: 0.66467065
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 1, g: 1, b: 1, a: 1}
-        - m_Id: 3526002e-a2c4-413c-8a19-9ff6654da617
-          m_Time: 0.75149703
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.8207547, g: 0.25938943, b: 0.5794186, a: 1}
-        - m_Id: 1b5d629e-d2bc-4b3a-8183-e01af0f083b0
-          m_Time: 0.88023955
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.21960784, g: 0.23529412, b: 0.38039216, a: 1}
+          color: {r: 1, g: 0.9764151, b: 0.9922984, a: 1}
         m_Name: Cloud Color 1
         m_Id: 2c135b0f-0207-43ae-8ba8-e1bbe2a25c70
       - keyframes:
@@ -199,40 +92,20 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.89705884, g: 0.89705884, b: 0.89705884, a: 1}
+          color: {r: 0.5896226, g: 0.9629652, b: 1, a: 1}
         m_Name: Cloud Color 2
         m_Id: 2504a86a-a902-4f97-82bf-395231ae07c2
       - keyframes:
         - m_Id: eeda9d99-9a4b-46f4-9151-004691241209
-          m_Time: 0.17065868
+          m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.13333336, g: 0.2152903, b: 0.42352942, a: 1}
-        - m_Id: 9d8ba3cd-fa57-446e-9ab5-5cdc74d64314
-          m_Time: 0.248503
+          color: {r: 0.6132076, g: 0.4701697, b: 0.3268512, a: 1}
+        - m_Id: 57a6c524-f570-4eec-aa35-e27264552f68
+          m_Time: 0.9974425
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.5566038, g: 0.3949024, b: 0.2284176, a: 1}
-        - m_Id: faea4461-36ba-4b21-979f-a5f3c80a5903
-          m_Time: 0.33532935
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.7882353, g: 0.8235294, b: 1, a: 1}
-        - m_Id: 688eb617-ea98-411c-9845-b56365235af2
-          m_Time: 0.6706587
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.7877358, g: 0.8218029, b: 1, a: 1}
-        - m_Id: 2460745f-063b-4977-966c-7abf870193a1
-          m_Time: 0.75149703
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.3958636, g: 0.3270737, b: 0.4716981, a: 1}
-        - m_Id: e24e19c4-7150-427f-b7f1-30e834c4fdf9
-          m_Time: 0.88023955
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.13333334, g: 0.21568628, b: 0.42352942, a: 1}
+          color: {r: 0.6132076, g: 0.4701697, b: 0.3268512, a: 1}
         m_Name: Fog Color
         m_Id: b832b01d-ce08-4539-aae9-296878e8346c
       - keyframes:
@@ -241,16 +114,6 @@ MonoBehaviour:
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
           color: {r: 1, g: 0.70354915, b: 0.3726415, a: 1}
-        - m_Id: d771788b-59df-4684-8a4d-923a46d0fb3d
-          m_Time: 0.5
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 1, g: 1, b: 0.9198113, a: 1}
-        - m_Id: 6f56ca53-f965-454f-ab84-8379434cca49
-          m_Time: 0.75149703
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 1, g: 0.4709979, b: 0.37254906, a: 1}
         m_Name: Sun Color
         m_Id: 1e703ce0-0a08-4a91-b51f-780a098762ac
       - keyframes:
@@ -258,7 +121,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 1, g: 1, b: 1, a: 1}
+          color: {r: 0.9811321, g: 0.8465251, b: 0.5970096, a: 1}
         m_Name: Sun Light Color
         m_Id: e0798d0e-e5a4-4687-a25b-c9e86ab7ad15
       - keyframes:
@@ -383,35 +246,15 @@ MonoBehaviour:
         m_Id: 2c2ab34b-1570-404e-9e40-ffa1ec43a3a1
       - keyframes:
         - m_Id: f7ad3e01-710d-46ba-a18c-caba415b198a
-          m_Time: 0.17065868
+          m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.1938412, g: 0.24064597, b: 0.41509432, a: 1}
-        - m_Id: 6f96e7f0-4e11-409f-b448-c5b7bbb1a2aa
-          m_Time: 0.248503
+          color: {r: 0.4245283, g: 0.37965053, b: 0.33041117, a: 1}
+        - m_Id: a746aecf-3196-4f5c-aab0-b7996de47c69
+          m_Time: 1
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.8490566, g: 0.81948084, b: 0.7729619, a: 1}
-        - m_Id: fe3d3a88-9eb2-48eb-a99f-12539544a9ac
-          m_Time: 0.33233532
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.7607843, g: 0.8745098, b: 1, a: 1}
-        - m_Id: fad393c6-db2c-46d7-83f3-eddc638be1ce
-          m_Time: 0.66467065
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.759434, g: 0.8729791, b: 1, a: 1}
-        - m_Id: b69272b2-6854-4406-a13d-813a02fb13f3
-          m_Time: 0.74251497
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.67058825, g: 0.7166162, b: 0.81960785, a: 1}
-        - m_Id: 07c567c3-3774-485c-ac23-15b4b12bfd76
-          m_Time: 0.88023955
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.19215687, g: 0.23921569, b: 0.41568628, a: 1}
+          color: {r: 0.4245283, g: 0.37965053, b: 0.33041117, a: 1}
         m_Name: Ambient Light - Sky Color
         m_Id: fd7913ec-6bf2-4830-88d0-fad2b58ceea8
       - keyframes:
@@ -419,65 +262,20 @@ MonoBehaviour:
           m_Time: 0.17065868
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.2305536, g: 0.25046077, b: 0.31132078, a: 1}
-        - m_Id: 8fcd0994-8695-4266-a832-e54c25bbbbce
-          m_Time: 0.248503
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.5283019, g: 0.513094, b: 0.48593807, a: 1}
-        - m_Id: 7d0cf20a-9d6b-4551-8484-15a9abd7c36f
-          m_Time: 0.33233532
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.58431375, g: 0.6039216, b: 0.7254902, a: 1}
-        - m_Id: a3601db8-1968-4bb5-a681-57a17979c1c2
-          m_Time: 0.66766465
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.58431375, g: 0.60571104, b: 0.7254902, a: 1}
-        - m_Id: 0524ec3f-18ba-4648-88a6-125715001e8c
-          m_Time: 0.74251497
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.4509804, g: 0.47518918, b: 0.54901963, a: 1}
-        - m_Id: 99ae5529-882e-4dc2-8bce-67e0c8e5b370
-          m_Time: 0.88023955
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.23137255, g: 0.2509804, b: 0.30980393, a: 1}
+          color: {r: 0.5188679, g: 0.4836996, b: 0.42831078, a: 1}
         m_Name: Ambient Light - Equator Color
         m_Id: cb21bdd0-62e8-4963-b35a-53460d9eeaea
       - keyframes:
         - m_Id: 101a419e-7c34-4259-967f-4e0611580bae
-          m_Time: 0.17065868
+          m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.19780171, g: 0.20067973, b: 0.3301887, a: 1}
-        - m_Id: 3db5fa6d-6306-4576-a4a5-797b6582d100
-          m_Time: 0.248503
+          color: {r: 0.7924528, g: 0.72210264, b: 0.6840513, a: 1}
+        - m_Id: 16262d58-1876-409c-be77-f8bb2dac92e5
+          m_Time: 0.9897698
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.5377358, g: 0.46912172, b: 0.35764506, a: 1}
-        - m_Id: cf82f5e4-7373-4104-8543-c1af74c88b70
-          m_Time: 0.32934132
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.49803922, g: 0.5019608, b: 0.6784314, a: 1}
-        - m_Id: 1f0779c4-816d-4fa0-83f6-909cc13ae302
-          m_Time: 0.66467065
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.49803922, g: 0.5013493, b: 0.6784314, a: 1}
-        - m_Id: 69401b3e-f589-4bac-a84c-cadead4c0c05
-          m_Time: 0.74251497
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.35686275, g: 0.44021705, b: 0.5372549, a: 1}
-        - m_Id: adf25ee0-e3a6-4c5c-8120-b70ee06a8a6b
-          m_Time: 0.88023955
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.19607843, g: 0.2, b: 0.32941177, a: 1}
+          color: {r: 0.7924528, g: 0.72210264, b: 0.6840513, a: 1}
         m_Name: Ambient Light - Ground Color
         m_Id: 6c5ee9d6-fe0d-4dd6-9644-64d972cd9f04
     m_NumberGroup:
@@ -670,7 +468,7 @@ MonoBehaviour:
           m_Time: 0.5
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.40300024
+          value: 0.547
         m_Name: Cloud Density
         m_Id: 57d22e1d-2ec5-4f24-bac6-235f8630e7e6
         minValue: 0
@@ -680,7 +478,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.506
+          value: 0.392
         m_Name: Cloud Speed
         m_Id: 80a899e7-5bef-4f3d-8599-4445a878fc25
         minValue: 0
@@ -710,7 +508,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.978
+          value: 0.479
         m_Name: Cloud Fade-Out Distance
         m_Id: 2d57e070-3b47-4f6f-b937-29fdde788bcc
         minValue: 0
@@ -720,32 +518,22 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 1
+          value: 0.443
         m_Name: Cloud Fade-Out Amount
         m_Id: decb53a3-9ab8-408e-9a24-ff12f0ee5072
         minValue: 0
         maxValue: 1
       - keyframes:
         - m_Id: fd144960-6655-41ce-855d-c3a2338b6dd4
-          m_Time: 0.248503
+          m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.16
-        - m_Id: 4dc96c92-996b-4aac-901a-3f33ab79efc5
-          m_Time: 0.41317365
+          value: 0.24
+        - m_Id: c321ef03-f2e7-4f49-be80-03f1a2cc3a76
+          m_Time: 0.9974425
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0
-        - m_Id: 5026e09c-e383-458a-9cfb-233aa075a867
-          m_Time: 0.66766465
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          value: 0
-        - m_Id: 5ccd9d73-fd9c-4ad8-b865-39ffffbbd25a
-          m_Time: 0.74850297
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          value: 0.16
+          value: 0.24
         m_Name: Fog Density
         m_Id: 8a44447f-05b8-46df-978c-be306a2df63c
         minValue: 0
@@ -755,7 +543,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.153
+          value: 0.051
         m_Name: Fog Height
         m_Id: bcee77f6-16d3-4763-b5d7-010e38db8cdc
         minValue: 0.03
@@ -775,17 +563,7 @@ MonoBehaviour:
           m_Time: 0.248503
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.1
-        - m_Id: 3761740c-cdb5-4db5-81bd-a44ba52745de
-          m_Time: 0.497006
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          value: 0.05
-        - m_Id: 516b43d5-4232-4df6-826f-c7a6fa2a99fc
-          m_Time: 0.75149703
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          value: 0.1
+          value: 0.06
         m_Name: Sun Size
         m_Id: e3737087-706a-4240-a0fc-978822ce08dd
         minValue: 0
@@ -795,7 +573,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 1
+          value: 0.632
         m_Name: Sun Edge Feathering
         m_Id: 5bd244f7-a047-4c37-9395-9aae3f3a2066
         minValue: 0.0001
@@ -805,7 +583,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 4.13
+          value: 3.41
         m_Name: Sun Bloom Intensity
         m_Id: 8d1e415d-caca-45ed-aa34-6460f4e9e38b
         minValue: 1
@@ -815,17 +593,7 @@ MonoBehaviour:
           m_Time: 0.172
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.1
-        - m_Id: 4da12b00-0d2b-40cd-8771-b39e783869f7
-          m_Time: 0.5
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          value: 0.75
-        - m_Id: 40233ed4-2807-490b-aa60-b405961a16aa
-          m_Time: 0.88123333
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          value: 0.1
+          value: 0.53
         m_Name: Sun Light Intensity
         m_Id: 279922cd-5969-41cc-9a98-5e2cf53db4fa
         minValue: 0
@@ -875,7 +643,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.052
+          value: 0.028
         m_Name: Moon Size
         m_Id: 0d2e1a42-1a65-45b4-b3b8-46cdf7caf68d
         minValue: 0
@@ -965,17 +733,7 @@ MonoBehaviour:
           m_Time: 0.37724552
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0
-        - m_Id: 7763ab46-e0a1-4039-9e87-d845106e22e6
-          m_Time: 0.66167665
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          value: 0
-        - m_Id: dd326f72-eb71-456a-af0e-c497ac086515
-          m_Time: 0.9915254
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          value: 0.007
+          value: 0.0048
         m_Name: Star 1 Size
         m_Id: c45fafb0-a5e8-417a-823c-ac2851792848
         minValue: 0
@@ -985,7 +743,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.538
+          value: 0.412
         m_Name: Star 1 Density
         m_Id: 7c8f1c1a-ae79-4874-9bda-27b4c30f507a
         minValue: 0
@@ -1375,7 +1133,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 1.55
+          value: 1.07
         m_Name: Cloud Texture Tiling
         m_Id: a833b147-1ca2-4aa6-af3b-9559b9f05ae9
         minValue: 0.1
@@ -1855,12 +1613,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 1
-        - m_Id: 0c66061a-c943-423c-a27e-aef0073115a6
-          m_Time: 0.497006
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          value: 0
+          value: 0.5
         m_Name: Moon Transparency
         m_Id: b05eedb2-3457-4d00-bc0d-2a2d1ef3615c
         minValue: 0
@@ -1870,27 +1623,7 @@ MonoBehaviour:
           m_Time: 0.1257485
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.3
-        - m_Id: 13405871-0775-43e8-b13e-549030564022
-          m_Time: 0.251497
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          value: 1
-        - m_Id: 12f33c60-bb79-4ad9-9c2c-2ac9b4028110
-          m_Time: 0.75149703
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          value: 1
-        - m_Id: e076d44f-96c4-4cc4-ae87-cc1e519f7ff6
-          m_Time: 0.88023955
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          value: 0.3
-        - m_Id: 1084da28-a4b7-4f26-89f1-c554fefbde77
-          m_Time: 0.9999
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          value: 0.3
+          value: 0.53
         m_Name: Cloud Transparency
         m_Id: 9d1f8075-d850-4594-a435-ec4321d75645
         minValue: 0
@@ -2071,29 +1804,8 @@ MonoBehaviour:
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
           spherePoint:
-            horizontalRotation: 0
-            verticalRotation: 0
-        - m_Id: c2e07a7e-28c3-42bb-8df7-3826ff20b4a3
-          m_Time: 0.5
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          spherePoint:
-            horizontalRotation: 0
-            verticalRotation: 1.57
-        - m_Id: 824e3f99-93e9-4794-8eec-6b9ae2b1b136
-          m_Time: 0.75149703
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          spherePoint:
-            horizontalRotation: 3.14
-            verticalRotation: 0
-        - m_Id: 58825de9-259d-48e3-b720-eab1eb497de8
-          m_Time: 1
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          spherePoint:
-            horizontalRotation: 0
-            verticalRotation: -1.57
+            horizontalRotation: 1.55
+            verticalRotation: 0.208
         m_Name: Sun Position
         m_Id: 679f0e37-e4e7-42f2-b550-7bea830ded0c
       - keyframes:
@@ -2102,29 +1814,8 @@ MonoBehaviour:
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
           spherePoint:
-            horizontalRotation: 3.14
-            verticalRotation: 0
-        - m_Id: dae33cb3-7f9c-4a2c-b960-721ab1e4704d
-          m_Time: 0.5
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          spherePoint:
-            horizontalRotation: 0
-            verticalRotation: -1.57
-        - m_Id: daa488dc-2041-4cf9-9ce8-3fa9c8b79706
-          m_Time: 0.75149703
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          spherePoint:
-            horizontalRotation: 0
-            verticalRotation: 0
-        - m_Id: fdf68caf-e205-41a2-b8a2-ccca5bb421a1
-          m_Time: 1
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          spherePoint:
-            horizontalRotation: 0
-            verticalRotation: 1.57
+            horizontalRotation: 4.044302
+            verticalRotation: 0.495489
         m_Name: Moon Position
         m_Id: 79975a6f-24ba-4fc3-accd-a52e9b8cc015
     m_BoolGroup:
