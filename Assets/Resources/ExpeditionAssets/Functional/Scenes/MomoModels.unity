@@ -3174,6 +3174,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Walls_District_LargePF
       objectReference: {fileID: 0}
+    - target: {fileID: 9127244445509309013, guid: 88026208be41fbc45b6e142262eb31af, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127244445509309013, guid: 88026208be41fbc45b6e142262eb31af, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127244445509309013, guid: 88026208be41fbc45b6e142262eb31af, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127244445509309013, guid: 88026208be41fbc45b6e142262eb31af, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1325
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127244445509309013, guid: 88026208be41fbc45b6e142262eb31af, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9127244445509309013, guid: 88026208be41fbc45b6e142262eb31af, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 546
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
