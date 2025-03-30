@@ -4717,134 +4717,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!1 &5490419852439088066
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5999452292736564933}
-  - component: {fileID: 8927297827050685152}
-  m_Layer: 0
-  m_Name: Ability Switch
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &5999452292736564933
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5490419852439088066}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 974243097467367966}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &8927297827050685152
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5490419852439088066}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 27b08da425b809045b5890514670f519, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &5512862234171971594
 GameObject:
   m_ObjectHideFlags: 0
@@ -4958,7 +4830,6 @@ Transform:
   - {fileID: 1103271309396010901}
   - {fileID: 823083241588534477}
   - {fileID: 7370772161114941102}
-  - {fileID: 5999452292736564933}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &159505812399660306
@@ -5034,18 +4905,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AbilityWheelCanvas: {fileID: 517199531377536921}
-  AbilityWheelAudio: {fileID: 7507861631206351151}
   Ability1Image: {fileID: 7381971106270660009}
   Ability2Image: {fileID: 2737362904099552626}
   Ability3Image: {fileID: 8843935858745583873}
   Ability1Selector: {fileID: 8287579861683833164}
   Ability2Selector: {fileID: 4983081181347406781}
   Ability3Selector: {fileID: 4300326262174170109}
-  AbilitySelectionSound: {fileID: 517199531377536921}
-  ChangeAbilityAudio: {fileID: 7507861631206351151}
+  LoadoutParent: {fileID: 6644799849494387966}
+  LoadoutImage: {fileID: 1752280004441483817}
+  LoadoutSelector: {fileID: 5116916343924649540}
   Ability1Selected: 0
   Ability2Selected: 0
   Ability3Selected: 0
+  LastHoveredLoadout: 0
 --- !u!1 &5806969838131676323
 GameObject:
   m_ObjectHideFlags: 0
@@ -5504,14 +5376,14 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6032410381880676077}
-          m_TargetAssemblyTypeName: ZippsUIManager, Assembly-CSharp
-          m_MethodName: OnHoverLoadout
-          m_Mode: 1
+        - m_Target: {fileID: 3312321430935720009}
+          m_TargetAssemblyTypeName: VeteranManager, Scripts
+          m_MethodName: OnHoverAbility
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 4
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -5520,14 +5392,14 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6032410381880676077}
-          m_TargetAssemblyTypeName: ZippsUIManager, Assembly-CSharp
-          m_MethodName: OnHoverExitLoadout
-          m_Mode: 1
+        - m_Target: {fileID: 3312321430935720009}
+          m_TargetAssemblyTypeName: VeteranManager, Scripts
+          m_MethodName: OnHoverExitAbility
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 4
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0

@@ -6,6 +6,8 @@ using Settings;
 using Characters;
 using System.Collections;
 using UI;
+using GameManagers;
+using CustomLogic;
 public class VeteranManager : MonoBehaviour
 {
     private readonly Color _selectColor = new Color(0.525f, 0.164f, 0.227f);
@@ -25,9 +27,17 @@ public class VeteranManager : MonoBehaviour
     [SerializeField]
     private RawImage Ability3Selector;
 
+    [SerializeField]
+    private GameObject LoadoutParent;
+    [SerializeField]
+    private Image LoadoutImage;
+    [SerializeField]
+    private RawImage LoadoutSelector;
+
     public bool Ability1Selected = false; // made public so i can set to red on human spawn //
     public bool Ability2Selected = false; // made public so i can set to white on human spawn //
     public bool Ability3Selected = false; // made public so i can set to white on human spawn //
+    public bool LastHoveredLoadout = false;
 
     private HumanInputSettings _humanInput;
     private Human _human;
@@ -41,6 +51,7 @@ public class VeteranManager : MonoBehaviour
     void Update()
     {
         AbilityWheelUpdate();
+        UpdateLoadoutVisibility();
     }
     public void SetWheelImages()
     {
@@ -83,16 +94,25 @@ public class VeteranManager : MonoBehaviour
         return sprite;
     }
 
+    private Sprite LoadSpriteForLoadout(string spriteName) {
+        string path = "UI/Icons/EmIcons/Vet" + spriteName;
+        Sprite sprite = Resources.Load<Sprite>(path);
+        if (sprite == null)
+        {
+            Debug.LogError("Sprite not found at path: " + path);
+        }
+        return sprite;
+    }
+
     public void OnHoverAbility(int number)
     {
-        _human = PhotonExtensions.GetMyHuman().gameObject.GetComponent<Human>();
-        _veteran = PhotonExtensions.GetMyHuman().gameObject.GetComponent<Veteran>();
         if (number == 1) {
             if (SettingsManager.InGameCharacterSettings.Special.Value.Length > 0 && SettingsManager.InGameCharacterSettings.Special.Value != "None")
             {
                 Ability1Selected = true;
                 Ability2Selected = false;
                 Ability3Selected = false;
+                LastHoveredLoadout = false;
 
                 Ability1Selector.color = _selectColor;
             }
@@ -102,6 +122,7 @@ public class VeteranManager : MonoBehaviour
                 Ability1Selected = false;
                 Ability2Selected = true;
                 Ability3Selected = false;
+                LastHoveredLoadout = false;
 
                 Ability2Selector.color = _selectColor;
             }
@@ -111,9 +132,16 @@ public class VeteranManager : MonoBehaviour
                 Ability1Selected = false;
                 Ability2Selected = false;
                 Ability3Selected = true;
+                LastHoveredLoadout = false;
 
                 Ability3Selector.color = _selectColor;
             }
+        } else if (number == 4) {
+            Ability1Selected = false;
+            Ability2Selected = false;
+            Ability3Selected = false;
+            LastHoveredLoadout = true; 
+            LoadoutImage.color = _selectColor;
         }
     }
 
@@ -128,6 +156,9 @@ public class VeteranManager : MonoBehaviour
         } else if (number == 3) {
             Ability3Selected = false;
             Ability3Selector.color = Color.white;
+        } else if (number == 4) {
+            LastHoveredLoadout = false; 
+            LoadoutImage.color = Color.white;
         }
     }
 
@@ -141,6 +172,9 @@ public class VeteranManager : MonoBehaviour
         Ability1Selector.color = Color.white;
         Ability2Selector.color = Color.white;
         Ability3Selector.color = Color.white;
+
+        LoadoutSelector.color = new Color(184f/255f, 184f/255f, 184f/255f);
+        LoadoutImage.color = Color.white;
 
         if (Ability1Selected) {
             if (_human.CurrentSpecial != SettingsManager.InGameCharacterSettings.Special.Value) {
@@ -157,6 +191,9 @@ public class VeteranManager : MonoBehaviour
                 _veteran.SwitchCurrentSpecial(SettingsManager.InGameCharacterSettings.Special_3.Value, 3);
                 _veteran.PlayAbilitySelectSound();
             }
+        } else if (LastHoveredLoadout) {
+            _veteran.SwitchVeteranLoadout();
+            LastHoveredLoadout = false;
         }
     }
 
@@ -194,16 +231,55 @@ public class VeteranManager : MonoBehaviour
     {
         if (PhotonExtensions.GetMyPlayer() == null)
             return;
-
-        if (_humanInput.AbilityWheelMenu.GetKeyDown() && !InGameMenu.InMenu())
+        
+        if ((_human == null || _human.Dead) && AbilityWheelCanvas.activeSelf)
         {
+            HideAbilityWheel();
+            return;
+        }
+
+        if (_humanInput.AbilityWheelMenu.GetKeyDown() && !InGameMenu.InMenu() && !ChatManager.IsChatActive() && !CustomLogicManager.Cutscene)
+        {
+            if (_human == null)
+                _human = PhotonExtensions.GetMyHuman().GetComponent<Human>();
+            if (_veteran == null)
+                _veteran = PhotonExtensions.GetMyHuman().GetComponent<Veteran>();
+
             KeepSelectedAbilityColor();
             AbilityWheelCanvas.SetActive(true);
             EmVariables.IsOpen = true;
+
+            if (_human.Weapon_2 != null && PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Veteran"))
+                SetLoadoutImages();
         }
         if (_humanInput.AbilityWheelMenu.GetKeyUp())
         {
             HideAbilityWheel();
         }
+    }
+
+    private void UpdateLoadoutVisibility()
+    {
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Veteran"))
+        {
+            if (LoadoutParent.activeInHierarchy == false)
+                LoadoutParent.SetActive(true);
+        }
+        else
+        {
+            LoadoutParent.SetActive(false);
+        }
+    }
+
+    private void SetLoadoutImages()
+    {
+        if(_human.Setup.Weapon_2 == HumanWeapon.Blade)
+            LoadoutImage.sprite = LoadSpriteForLoadout("Blades");
+        if(_human.Setup.Weapon_2 == HumanWeapon.AHSS)
+            LoadoutImage.sprite = LoadSpriteForLoadout("AHSS");
+        if(_human.Setup.Weapon_2 == HumanWeapon.APG)
+            LoadoutImage.sprite = LoadSpriteForLoadout("APG");
+        if(_human.Setup.Weapon_2 == HumanWeapon.Thunderspear)
+            LoadoutImage.sprite = LoadSpriteForLoadout("TS");
     }
 }

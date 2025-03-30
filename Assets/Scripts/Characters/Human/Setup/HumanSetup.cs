@@ -68,6 +68,7 @@ namespace Characters
         // loaded settings from player spawning
         public HumanCustomSet CustomSet;
         public HumanWeapon Weapon;
+        public HumanWeapon Weapon_2;
         public JSONNode CurrentCostume;
         public JSONNode CurrentHair;
         public bool IsDeadBody;

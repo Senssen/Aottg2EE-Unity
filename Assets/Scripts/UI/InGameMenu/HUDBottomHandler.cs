@@ -366,7 +366,8 @@ namespace UI
                 UpdateHumanSpecial_2();
                 UpdateHumanSpecial_3();
                 UpdateGas();
-                if (_human.Weapon is BladeWeapon)
+                bool isExist = _bladeFillLeft != null && _bladeFillRight != null && _bladeBackground != null && _bladeReload != null && _bladeOut != null;
+                if (_human.Weapon is BladeWeapon && isExist) // exists check added by Ata 25 May 2024 because it broke loadout swapping //
                     UpdateBlade();
                 else if (_human.Weapon is APGWeapon)
                     UpdateAPG();

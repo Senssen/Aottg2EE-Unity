@@ -31,6 +31,7 @@ namespace Characters
         public BaseUseable Special_3;
         public BaseUseable[] SpecialsArray; // added by Ata 12 May 2024 for Ability Wheel //
         public BaseUseable Weapon;
+        public BaseUseable Weapon_2;
         public HookUseable HookLeft;
         public HookUseable HookRight;
         public HumanMountState MountState = HumanMountState.None;
@@ -888,6 +889,11 @@ namespace Characters
             {
                 return true;
             }
+            Logistician logistician = GetComponent<Logistician>();
+            if (logistician.WeaponSupply < logistician.MaxItemSupply || logistician.GasSupply < logistician.MaxItemSupply)
+            {
+                return true;
+            }
             if (isGasTank && Special is SupplySpecial && Special.UsesLeft <= 0)
             {
                 return true;
@@ -895,12 +901,32 @@ namespace Characters
             if (Weapon is BladeWeapon)
             {
                 var weapon = (BladeWeapon)Weapon;
-                return weapon.BladesLeft < weapon.MaxBlades || weapon.CurrentDurability < weapon.MaxDurability;
+                ThunderspearWeapon weapon2;
+
+                if (Weapon_2 != null) // conditions added by Ata 23 May 2024 for Veteran Role //
+                {
+                    weapon2 = (ThunderspearWeapon)Weapon_2; ;
+                    return weapon.BladesLeft < weapon.MaxBlades || weapon.CurrentDurability < weapon.MaxDurability || weapon2.NeedRefill();
+                } 
+                else
+                {
+                    return weapon.BladesLeft < weapon.MaxBlades || weapon.CurrentDurability < weapon.MaxDurability;
+                }
             }
             else if (Weapon is AmmoWeapon)
             {
                 var weapon = (AmmoWeapon)Weapon;
-                return weapon.NeedRefill();
+                BladeWeapon weapon2; // the object class cannot be fixed to BladeWeapon only since APG and AHHS could be Veterans as well. Doesn't break the game but creates some avoidable console errors //
+
+                if (Weapon_2 != null) // conditions added by Ata 23 May 2024 for Veteran Role //
+                {
+                    weapon2 = (BladeWeapon)Weapon_2;
+                    return weapon.NeedRefill() || weapon2.BladesLeft < weapon2.MaxBlades || weapon2.CurrentDurability < weapon2.MaxDurability;
+                }
+                else
+                {
+                    return weapon.NeedRefill();
+                }
             }
             return false;
         }
@@ -914,6 +940,10 @@ namespace Characters
                 ToggleBlades(true);
             }
             Weapon.Reset();
+
+            if (Weapon_2 != null)
+                Weapon_2.Reset(); // conditions added by Ata 23 May 2024 for Veteran Role //
+
             Stats.CurrentGas = Stats.MaxGas;
 
             GetComponent<Logistician>().ResetSupplies(); // Added by Ata for Logistician
@@ -1450,6 +1480,10 @@ namespace Characters
             {
                 Cache.Transform.position = GrabHand.transform.position;
                 Cache.Transform.rotation = GrabHand.transform.rotation;
+            }
+            if (Dead)
+            {
+                GetComponent<Veteran>().isVeteranSet = false;
             }
         }
 
@@ -2419,7 +2453,7 @@ namespace Characters
         {
             if (FinishSetup)
             {
-                Weapon.OnFixedUpdate();
+                Weapon?.OnFixedUpdate();
                 HookLeft.OnFixedUpdate();
                 HookRight.OnFixedUpdate();
                 
@@ -2672,6 +2706,10 @@ namespace Characters
                                SettingsManager.InGameCharacterSettings.Special_2.Value,
                                SettingsManager.InGameCharacterSettings.Special_3.Value); // added by Ata 12 May 2024 for Ability Wheel //
                 veteran.SwitchCurrentSpecial(SettingsManager.InGameCharacterSettings.Special.Value, 1);
+
+                GetComponent<Veteran>().isVeteranSet = false;
+                if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Veteran"))
+                    veteran.SetupVeteran();
             }
             FinishSetup = true;
             // ignore if name contains char_eyes, char_face, char_glasses

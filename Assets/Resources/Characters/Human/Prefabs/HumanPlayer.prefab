@@ -16669,6 +16669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectAbilityAudio: {fileID: 8587480454343791091}
+  isVeteranSet: 0
 --- !u!82 &8587480454343791091
 AudioSource:
   m_ObjectHideFlags: 0

@@ -5,9 +5,9 @@ using Utility;
 
 public class Logistician : MonoBehaviour
 {
-    private readonly int MaxItemSupply = 4;
-    private int WeaponSupply;
-    private int GasSupply;
+    public readonly int MaxItemSupply = 4;
+    public int WeaponSupply { get; private set; }
+    public int GasSupply { get; private set; }
     private LogisticianUiManager uiManager;
 
     [SerializeField]

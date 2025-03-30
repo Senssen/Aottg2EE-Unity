@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Settings;
+using UI;
+using GameManagers;
+using CustomLogic;
 public class LogisticianUiManager : MonoBehaviour
 {
     private readonly Color _selectColor = new Color(0.525f, 0.164f, 0.227f);
@@ -45,7 +48,7 @@ public class LogisticianUiManager : MonoBehaviour
             CanvasObj.SetActive(false);
         }
 
-        if (_humanInput.LogisticianMenu.GetKey() && SelectScreen.activeSelf == false) {
+        if (_humanInput.LogisticianMenu.GetKey() && SelectScreen.activeSelf == false && !InGameMenu.InMenu() && !ChatManager.IsChatActive() && !CustomLogicManager.Cutscene) {
             OpenSelectScreen();
         } else if (!_humanInput.LogisticianMenu.GetKey() && SelectScreen.activeSelf == true) {
             CloseSelectScreen();

@@ -265,6 +265,7 @@ namespace Controllers
             UpdateHookInput(inMenu);
             UpdateReelInput(inMenu);
             UpdateDashInput(inMenu);
+            UpdateLoadoutSwap(inMenu);
             bool canWeapon = _human.MountState == HumanMountState.None && !_illegalWeaponStates.Contains(_human.State) && !inMenu && !_human.Dead;
             var attackInput = _humanInput.AttackDefault;
             var specialInput = _humanInput.AttackSpecial;
@@ -299,11 +300,11 @@ namespace Controllers
                         _human._gunArmAim = attackInput.GetKey() || _human.Weapon.IsActive;
                     }
                     else
-                        _human.Weapon.ReadInput(attackInput);
+                        _human.Weapon?.ReadInput(attackInput); // null check added by Ata 25 May 2024 because it broke loadout swapping //
                 }
             }
             else
-                _human.Weapon.SetInput(false);
+                _human.Weapon?.SetInput(false); // null check added by Ata 25 May 2024 because it broke loadout swapping //
             if (_human.Special != null)
             {
                 bool canSpecial = _human.MountState == HumanMountState.None &&
@@ -322,10 +323,10 @@ namespace Controllers
                 else
                     _human.Special.SetInput(false);
 
-                if (_human.Special_2 != null && _humanInput.TriggerAbility2.GetKeyDown())
+                if (_human.Special_2 != null && _humanInput.TriggerAbility2.GetKeyDown() && !inMenu)
                     _human.Special_2.ReadInput(_humanInput.TriggerAbility2);
 
-                if (_human.Special_3 != null && _humanInput.TriggerAbility3.GetKeyDown())
+                if (_human.Special_3 != null && _humanInput.TriggerAbility3.GetKeyDown() && !inMenu)
                     _human.Special_3.ReadInput(_humanInput.TriggerAbility3);
             }
             if (inMenu || _human.Dead || _human.State == HumanState.Stun)
@@ -373,6 +374,19 @@ namespace Controllers
                     _human.Unmount(false);
             }
         }
+
+        #region Veteran Loadout Swap
+
+        void UpdateLoadoutSwap(bool inMenu)
+        {
+            if (!inMenu && _human.Weapon != null && _human.Weapon_2 != null && PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Veteran")) 
+            {
+                if (_humanInput.LoadoutSwap.GetKeyDown())
+                    _veteran.SwitchVeteranLoadout();
+            }
+        }
+
+        #endregion
 
         private void ToggleUI()
         {
