@@ -27,9 +27,8 @@ namespace Characters
         // setup
         public HumanComponentCache HumanCache;
         public BaseUseable Special;
-        public BaseUseable Special_2;
-        public BaseUseable Special_3;
-        public BaseUseable[] SpecialsArray; // added by Ata 12 May 2024 for Ability Wheel //
+        public BaseUseable Special_2; // added by Ata 12 May 2024 for Ability Wheel //
+        public BaseUseable Special_3; // added by Ata 12 May 2024 for Ability Wheel //
         public BaseUseable Weapon;
         public BaseUseable Weapon_2;
         public HookUseable HookLeft;
@@ -2454,16 +2453,13 @@ namespace Characters
             if (FinishSetup)
             {
                 Weapon?.OnFixedUpdate();
+                Weapon_2?.OnFixedUpdate();
                 HookLeft.OnFixedUpdate();
                 HookRight.OnFixedUpdate();
-                
-                /* if (Special != null)
-                    Special.OnFixedUpdate(); */
 
-                for (int i = 0; i < SpecialsArray.Length; i++) // changed by ata to update all specials in the ability wheel //
-                {
-                    SpecialsArray[i]?.OnFixedUpdate();
-                }
+                Special.OnFixedUpdate();
+                Special_2?.OnFixedUpdate();
+                Special_3?.OnFixedUpdate();
             }
         }
 
