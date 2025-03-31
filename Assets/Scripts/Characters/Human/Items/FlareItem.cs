@@ -1,4 +1,4 @@
-﻿using Projectiles;
+﻿    using Projectiles;
 using System.Collections;
 using UnityEngine;
 
@@ -26,12 +26,13 @@ namespace Characters
 
             if (Name == "Flash") {
                 ProjectileSpawner.Spawn(ProjectilePrefabs.Flash, start, Quaternion.identity, direction * Speed, Gravity, 6.5f, _owner.Cache.PhotonView.ViewID, "", new object[] { _color });    
+                human.PlaySound(HumanSounds.FlareLaunch);
             } else if (Name == "Acoustic") {
-                Debug.Log("not ready yet.");
+                AcousticFlareController.FireAcousticFlare(start, Quaternion.identity);
             } else {
                 ProjectileSpawner.Spawn(ProjectilePrefabs.Flare, start, Quaternion.identity, direction * Speed, Gravity, 6.5f, _owner.Cache.PhotonView.ViewID, "", new object[] { _color });    
+                human.PlaySound(HumanSounds.FlareLaunch);
             }
-            human.PlaySound(HumanSounds.FlareLaunch);
         }
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Characters;
 using CustomLogic;
 using GameManagers;
@@ -67,9 +65,6 @@ public class FlareWheelManager : MonoBehaviour
             }
 
             if (hoveredFlare != null && hoveredFlare >= 1 && hoveredFlare <= 8) {
-                if (hoveredFlare == 8)
-                    return; // do this for now til I add acoustic and flash flares
-
                 PhotonExtensions.GetMyHuman().GetComponent<Human>().UseItem((int)hoveredFlare - 1);
             }
         }
