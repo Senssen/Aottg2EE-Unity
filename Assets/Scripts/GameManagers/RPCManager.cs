@@ -257,6 +257,69 @@ namespace GameManagers
             Debug.Log(c);
         }
 
+        #region Wagon RPCs
+
+        [PunRPC]
+        public void AttachWagonHindge(Transform HorseToMount, PhotonMessageInfo Sender)
+        {
+            //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 
+                //return; 
+
+            GameObject wagon = NearestWagon(Sender.photonView.gameObject);
+
+            if (HorseToMount != null)
+            {
+                //set the connected body if the horse is a Rigidbody
+                Rigidbody horseRigidbody = HorseToMount.GetComponent<Rigidbody>();
+                if (horseRigidbody != null)
+                {
+                    Transform harnessObj = wagon.transform.Find("WagonHorseAttachment");
+                    
+                    harnessObj.position = horseRigidbody.position - horseRigidbody.transform.forward * 2.5f + Vector3.up * 0.8f; //adjust
+                    harnessObj.rotation = horseRigidbody.gameObject.transform.rotation * Quaternion.Euler(90, 0, 0); //adjust
+
+                    wagon.GetComponent<MomoWagon>().HarnessJoint.connectedBody = horseRigidbody;
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Parent or Child is not assigned!");
+            }
+        }
+
+        private GameObject NearestWagon(GameObject Wagoneer)
+        {
+            GameObject[] wagons = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None); // Get all objects in the scene
+            GameObject nearestWagon = null;
+            float nearestDistance = 1500f; //todo: adjust range
+
+            foreach (GameObject obj in wagons)
+            {
+                if (obj.name.Contains("Momo_Wagon")) // Check if the object is a "Wagon"
+                {
+                    float distance = Vector3.Distance(Wagoneer.transform.position, obj.transform.position);
+                    if (distance < nearestDistance)
+                    {
+                        nearestDistance = distance;
+                        nearestWagon = obj;
+                    }
+                }
+            }
+
+            if (nearestWagon != null)
+            {
+                Debug.Log("Found Wagon: " + nearestWagon.name);
+                return nearestWagon;
+            }
+            else
+            {
+                Debug.LogWarning("No wagon found!");
+                return null;
+            }
+        }
+
+        #endregion
+
         void Awake()
         {
             PhotonView = GetComponent<PhotonView>();

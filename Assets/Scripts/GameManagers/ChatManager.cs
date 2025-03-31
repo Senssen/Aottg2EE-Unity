@@ -322,6 +322,52 @@ namespace GameManagers
             InGameManager.LeaveRoom();
         }
 
+        #region Wagon Command
+
+        [CommandAttribute("mountwag", "/mountwag: Mount Nearest Wagon To Horse.", Alias = "m")]
+        private static void Mountwag(string[] args)
+        {
+            //check if player has Wagoneer
+            //if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
+                //return;
+
+            RPCManager.PhotonView.RPC(nameof(RPCManager.AttachWagonHindge), RpcTarget.AllBuffered, new object[] { FindMyHorse() });
+        }
+
+        public static Transform FindMyHorse()
+        {
+            GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>(); // Get all objects in the scene
+            Transform myHorse = null;
+
+            foreach (GameObject obj in allObjects)
+            {
+                if (obj.name.Contains("Horse")) // Check if the object has "Horse(Clone)" in its name
+                {
+                    PhotonView pv = obj.GetComponent<PhotonView>();
+                    if (pv != null && pv.IsMine) // Check if the object has a PhotonView and belongs to me
+                    {
+                        myHorse = obj.transform;
+                        break; // Stop searching once we find the correct horse
+                    }
+                }
+            }
+
+            if (myHorse != null)
+            {
+                //Debug.Log("Found my horse: " + myHorse.name);
+                AddLine($"Found my horse: {myHorse.name}", ChatTextColor.Error);
+                return myHorse; // Return the found horse
+            }
+            else
+            {
+                //Debug.LogWarning("No horse found with my PhotonView!");
+                AddLine($"No horse found with my PhotonView!", ChatTextColor.Error);
+                return null; // Return null if no matching horse is found
+            }
+        }
+
+#endregion
+
         [CommandAttribute("clear", "/clear: Clears the chat window.", Alias = "c")]
         private static void Clear(string[] args)
         {

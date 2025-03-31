@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wagon : MonoBehaviour
+public class MomoWagon : MonoBehaviour
 {
     [SerializeField] private Transform Wagon_Body;
     [SerializeField] private Transform Wagon_Saddle;
     [SerializeField] private Transform Front_Wheels;
     [SerializeField] private Transform Back_Wheels;
+    [SerializeField] public HingeJoint HarnessJoint;
 
     private Rigidbody wagonRigidbody;
     private float wheelCircumference;
@@ -23,14 +24,6 @@ public class Wagon : MonoBehaviour
     void FixedUpdate()
     {
         RotateWheels();
-    }
-
-    void parentwag()
-    {
-        /*GameObject foundObject = GameObject.Find("Horse(Clone)");
-
-        Wagon_Saddle.transform.position = foundObject.transform.position;
-        Wagon_Saddle.transform.SetParent(foundObject.transform);*/
     }
 
     void RotateWheels()
