@@ -38,14 +38,9 @@ class Veteran : MonoBehaviour
 
     public void SetAllSpecials(string special1, string special2, string special3)
     {
-        human.SpecialsArray = new BaseUseable[]
-        {
-                HumanSpecials.GetSpecialUseable(human, special1),
-                (special2.Length > 0) ? HumanSpecials.GetSpecialUseable(human, special2) : null,
-                (special3.Length > 0) ? HumanSpecials.GetSpecialUseable(human, special3) : null
-        };
-
-        // add the icons for all specials at some point //
+        human.Special = HumanSpecials.GetSpecialUseable(human, special1);
+        human.Special_2 = HumanSpecials.GetSpecialUseable(human, special2);
+        human.Special_3 = HumanSpecials.GetSpecialUseable(human, special3);
     }
 
     public void SwitchCurrentSpecial(string special, int newSpecial)
@@ -57,29 +52,30 @@ class Veteran : MonoBehaviour
                 human.State = HumanState.Idle;
 
             human.CurrentSpecial = special;
-            human.Special = human.SpecialsArray[newSpecial - 1];
+
+            human.Special = HumanSpecials.GetSpecialUseable(human, special);
             ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.SetSpecialIcon(HumanSpecials.GetSpecialIcon(special));
 
             if (newSpecial == 1)
             {
-                human.Special_2 = human.SpecialsArray[1];
-                human.Special_3 = human.SpecialsArray[2];
+                human.Special_2 = HumanSpecials.GetSpecialUseable(human, SettingsManager.InGameCharacterSettings.Special_2.Value);
+                human.Special_3 = HumanSpecials.GetSpecialUseable(human, SettingsManager.InGameCharacterSettings.Special_3.Value);
 
                 human.SideSpecial_1 = SettingsManager.InGameCharacterSettings.Special_2.Value;
                 human.SideSpecial_2 = SettingsManager.InGameCharacterSettings.Special_3.Value;
             }
             if (newSpecial == 2)
             {
-                human.Special_2 = human.SpecialsArray[0];
-                human.Special_3 = human.SpecialsArray[2];
+                human.Special_2 = HumanSpecials.GetSpecialUseable(human, SettingsManager.InGameCharacterSettings.Special.Value);
+                human.Special_3 = HumanSpecials.GetSpecialUseable(human, SettingsManager.InGameCharacterSettings.Special_3.Value);
 
                 human.SideSpecial_1 = SettingsManager.InGameCharacterSettings.Special.Value;
                 human.SideSpecial_2 = SettingsManager.InGameCharacterSettings.Special_3.Value;
             }
             if (newSpecial == 3)
             {
-                human.Special_2 = human.SpecialsArray[0];
-                human.Special_3 = human.SpecialsArray[1];
+                human.Special_2 = HumanSpecials.GetSpecialUseable(human, SettingsManager.InGameCharacterSettings.Special.Value);
+                human.Special_3 = HumanSpecials.GetSpecialUseable(human, SettingsManager.InGameCharacterSettings.Special_2.Value);
 
                 human.SideSpecial_1 = SettingsManager.InGameCharacterSettings.Special.Value;
                 human.SideSpecial_2 = SettingsManager.InGameCharacterSettings.Special_2.Value;
