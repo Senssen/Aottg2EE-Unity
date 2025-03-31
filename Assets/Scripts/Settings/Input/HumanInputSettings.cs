@@ -9,6 +9,7 @@
         public KeybindSetting HookRight = new KeybindSetting(new string[] { "E", "None" });
         public KeybindSetting HookBoth = new KeybindSetting(new string[] { "None", "None" });
         public KeybindSetting Dash = new KeybindSetting(new string[] { "LeftControl", "None" });
+        public KeybindSetting FlareWheelMenu = new KeybindSetting(new string[] { "V", "None" }); // Added by Ata 31 Mar 25 for Ability Wheel
         public KeybindSetting AbilityWheelMenu = new KeybindSetting(new string[] { "B", "None" }); // Added by Ata 12 May 24 for Ability Wheel
         public KeybindSetting TriggerAbility2 = new KeybindSetting(new string[] { "Alpha2", "None" }); // Added by Ata 20 May 24 for Ability Wheel
         public KeybindSetting TriggerAbility3 = new KeybindSetting(new string[] { "Alpha3", "None" }); // Added by Ata 20 May 24 for Ability Wheel
