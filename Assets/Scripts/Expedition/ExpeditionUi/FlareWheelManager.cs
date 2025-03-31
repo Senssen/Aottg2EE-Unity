@@ -67,7 +67,7 @@ public class FlareWheelManager : MonoBehaviour
             }
 
             if (hoveredFlare != null && hoveredFlare >= 1 && hoveredFlare <= 8) {
-                if (hoveredFlare == 7 || hoveredFlare == 8)
+                if (hoveredFlare == 8)
                     return; // do this for now til I add acoustic and flash flares
 
                 PhotonExtensions.GetMyHuman().GetComponent<Human>().UseItem((int)hoveredFlare - 1);

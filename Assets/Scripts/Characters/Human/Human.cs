@@ -2793,6 +2793,8 @@ namespace Characters
             Items.Add(new FlareItem(this, "Purple", new Color(153f / 255, 0f, 204f / 255, 0.7f), cooldown));
             Items.Add(new FlareItem(this, "Blue", new Color(0f, 102f / 255, 204f / 255, 0.7f), cooldown));
             Items.Add(new FlareItem(this, "Yellow", new Color(1f, 1f, 0f, 0.7f), cooldown));
+            Items.Add(new FlareItem(this, "Flash", new Color(255f, 255f, 255f, 0.7f), cooldown)); // added by ata 31 Mar 2025
+            Items.Add(new FlareItem(this, "Acoustic", new Color(255f, 255f, 255f, 0f), 120f)); // added by ata 31 Mar 2025
         }
 
         public void SetSpecial(string special)
