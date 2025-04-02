@@ -1652,6 +1652,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cd39bbb20c8af640a606c91f5559a8f, type: 3}
+--- !u!1001 &122727374
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7684797022712218831, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_Name
+      value: Momo_Stall_Shiganshina1PF_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 35.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 80.999985
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2074.5967
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071069
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b367c094b3566b848973c76a33a1649e, type: 3}
 --- !u!1001 &124845315
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1731,7 +1792,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2107.26
+      value: 2107.57
       objectReference: {fileID: 0}
     - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4252,6 +4313,10 @@ PrefabInstance:
     - target: {fileID: 7684797022712218831, guid: b367c094b3566b848973c76a33a1649e, type: 3}
       propertyPath: m_Name
       value: Momo_Stall_Shiganshina1PF_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8654,6 +8719,10 @@ PrefabInstance:
       value: Momo_Stall_Shiganshina1PF
       objectReference: {fileID: 0}
     - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -43.45
       objectReference: {fileID: 0}
@@ -10167,6 +10236,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3ad33f1211ece84db4f99df32d72369, type: 3}
+--- !u!1001 &676714173
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7684797022712218831, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_Name
+      value: Momo_Stall_Shiganshina1PF_7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 35.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 80.999985
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2055.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071069
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b367c094b3566b848973c76a33a1649e, type: 3}
 --- !u!1001 &684416343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20347,6 +20473,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaeea262ec3add743a700d5b9b8f35cb, type: 3}
+--- !u!1001 &1460182848
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7684797022712218831, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_Name
+      value: Momo_Stall_Shiganshina1PF_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -42.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 80.999985
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2074.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649666307103508539, guid: b367c094b3566b848973c76a33a1649e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b367c094b3566b848973c76a33a1649e, type: 3}
 --- !u!1001 &1461514562
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29633,3 +29816,6 @@ SceneRoots:
   - {fileID: 299259052}
   - {fileID: 128517435}
   - {fileID: 993030669}
+  - {fileID: 1460182848}
+  - {fileID: 122727374}
+  - {fileID: 676714173}
