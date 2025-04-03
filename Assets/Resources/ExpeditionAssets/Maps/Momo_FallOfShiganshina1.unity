@@ -38924,6 +38924,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Walls_District_LargePF
       objectReference: {fileID: 0}
+    - target: {fileID: 4933816653700250939, guid: 88026208be41fbc45b6e142262eb31af, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9127244445509309013, guid: 88026208be41fbc45b6e142262eb31af, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
