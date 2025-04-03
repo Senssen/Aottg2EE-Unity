@@ -7,7 +7,7 @@ public class GetParentPosition : MonoBehaviour
 {
     public Material material; // The material that uses the Shader Graph
 
-    void Update()
+    void FixedUpdate()
     {
         if (material != null)
         {
