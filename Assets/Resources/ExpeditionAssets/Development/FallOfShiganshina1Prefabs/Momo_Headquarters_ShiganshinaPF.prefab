@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8232992696407609567}
   - component: {fileID: 6470529024836144650}
   - component: {fileID: 6572992557932253814}
+  - component: {fileID: 6020806553525537799}
   m_Layer: 23
   m_Name: Momo_Headquarters_ShiganshinaPF
   m_TagString: Untagged
@@ -109,3 +110,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3827917314005766540, guid: f3c542a6da5789043a3d311c7f046438, type: 3}
+--- !u!208 &6020806553525537799
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100057578227432400}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 54.321003, y: 46.245003, z: 44.819}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 6.2830005, y: 46.140003, z: -3.535}
+  m_TimeToStationary: 0.5

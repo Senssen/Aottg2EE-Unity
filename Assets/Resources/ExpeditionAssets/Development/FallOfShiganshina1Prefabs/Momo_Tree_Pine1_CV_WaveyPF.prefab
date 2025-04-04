@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 2768335201756024523}
   - component: {fileID: 1535981454689636646}
   - component: {fileID: 4798926342195539547}
+  - component: {fileID: 5552843693951207825}
   m_Layer: 23
   m_Name: Momo_Tree_Pine1_CV_WaveyPF
   m_TagString: Untagged
@@ -253,6 +254,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &5552843693951207825
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7652752390334794019}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 9.179001, y: 15.321001, z: 9.529}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.307, y: 15.269001, z: -0.127}
+  m_TimeToStationary: 0.5
 --- !u!1 &8324567303458563421
 GameObject:
   m_ObjectHideFlags: 0

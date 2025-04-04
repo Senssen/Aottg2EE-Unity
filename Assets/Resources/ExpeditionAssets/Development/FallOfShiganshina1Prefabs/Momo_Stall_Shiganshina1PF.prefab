@@ -700,6 +700,7 @@ GameObject:
   - component: {fileID: 8649666307103508539}
   - component: {fileID: 7593318621589330257}
   - component: {fileID: 1495819717912357544}
+  - component: {fileID: 4078883084339409828}
   m_Layer: 23
   m_Name: Momo_Stall_Shiganshina1PF
   m_TagString: Untagged
@@ -785,3 +786,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &4078883084339409828
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7684797022712218831}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 4.451, y: 2.993, z: 3.6970003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.11100001, y: 2.8980002, z: 0.41000003}
+  m_TimeToStationary: 0.5

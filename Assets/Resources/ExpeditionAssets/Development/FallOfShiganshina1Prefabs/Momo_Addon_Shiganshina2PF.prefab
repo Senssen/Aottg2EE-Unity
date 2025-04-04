@@ -64,6 +64,7 @@ GameObject:
   - component: {fileID: 1431299681811836818}
   - component: {fileID: 1346621242639553177}
   - component: {fileID: 6509266188041961851}
+  - component: {fileID: 8031658848002490813}
   m_Layer: 23
   m_Name: Momo_Addon_Shiganshina2PF
   m_TagString: Untagged
@@ -139,6 +140,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &8031658848002490813
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2383480950288734863}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.236, y: 2.7340002, z: 2.647}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 2.7210002, z: -0.522}
+  m_TimeToStationary: 0.5
 --- !u!1 &6149390927856092190
 GameObject:
   m_ObjectHideFlags: 0

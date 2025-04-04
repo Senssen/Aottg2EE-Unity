@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1004700445346237759}
   - component: {fileID: 3575955887657536735}
   - component: {fileID: 464224652036425688}
+  - component: {fileID: 4664954487096463610}
   m_Layer: 23
   m_Name: Momo_House_Trost1PF
   m_TagString: Untagged
@@ -103,6 +104,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &4664954487096463610
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80443684459161804}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 13.877001, y: 11.88, z: 6.688}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.093, y: 11.870001, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &156464731047780620
 GameObject:
   m_ObjectHideFlags: 0
