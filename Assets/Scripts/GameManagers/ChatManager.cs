@@ -357,6 +357,8 @@ namespace GameManagers
             Quaternion rot;
             rot = playerTransform.rotation * Quaternion.Euler(0, 0, 0);
 
+            AddLine($"pos: {pos} rot: {rot}");
+
             RPCManager.PhotonView.RPC(nameof(RPCManager.SpawnWagon), RpcTarget.AllBuffered, new object[] { pos, rot });
         }
 

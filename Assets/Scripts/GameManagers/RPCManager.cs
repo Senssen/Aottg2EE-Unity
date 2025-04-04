@@ -266,7 +266,8 @@ namespace GameManagers
             //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 
             //return; 
 
-            Instantiate(Resources.Load("Assets/Resources/ExpeditionAssets/Functional/Wagon/Prefabs/Momo_Wagon1PF.prefab"), pos, rot);
+            GameObject wagonPrefab = Resources.Load<GameObject>("ExpeditionAssets/Functional/Wagon/Prefabs/Momo_Wagon1PF");
+            Instantiate(wagonPrefab, pos, rot);
         }
 
         [PunRPC]
@@ -285,7 +286,7 @@ namespace GameManagers
                 {
                     Transform harnessObj = wagon.transform.Find("WagonHorseAttachment");
                     
-                    harnessObj.position = horseRigidbody.position - horseRigidbody.transform.forward * 2.5f + Vector3.up * 0.8f; //adjust
+                    harnessObj.position = horseRigidbody.position - horseRigidbody.transform.forward * 2.3f + Vector3.up * 0.6f; //adjust
                     harnessObj.rotation = horseRigidbody.gameObject.transform.rotation * Quaternion.Euler(90, 0, 0); //adjust
 
                     wagon.GetComponent<MomoWagon>().HarnessJoint.connectedBody = horseRigidbody;
