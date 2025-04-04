@@ -259,6 +259,16 @@ namespace GameManagers
 
         #region Wagon RPCs
 
+
+        [PunRPC]
+        public void SpawnWagon(Vector3 pos, Quaternion rot, PhotonMessageInfo Sender)
+        {
+            //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 
+            //return; 
+
+            Instantiate(Resources.Load("Assets/Resources/ExpeditionAssets/Functional/Wagon/Prefabs/Momo_Wagon1PF.prefab"), pos, rot);
+        }
+
         [PunRPC]
         public void AttachWagonHindge(Transform HorseToMount, PhotonMessageInfo Sender)
         {

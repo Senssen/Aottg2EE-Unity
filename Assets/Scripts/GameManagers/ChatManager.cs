@@ -324,6 +324,42 @@ namespace GameManagers
 
         #region Wagon Command
 
+        [CommandAttribute("removewag", "/mountwag: Mount Nearest Wagon To Horse.", Alias = "m")]
+        private static void Removewag(string[] args)
+        {
+            //check if player has Wagoneer
+            //if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
+            //return;
+
+            Transform playerTransform = PhotonView.Find(PhotonNetwork.LocalPlayer.ActorNumber).gameObject.transform;
+
+            Vector3 pos;
+            pos = playerTransform.position + Vector3.up * 1 + playerTransform.forward * 3;
+
+            Quaternion rot;
+            rot = playerTransform.rotation * Quaternion.Euler(0, 0, 0);
+
+            RPCManager.PhotonView.RPC(nameof(RPCManager.SpawnWagon), RpcTarget.AllBuffered, new object[] { pos, rot });
+        }
+
+        [CommandAttribute("spawnwag", "/mountwag: Mount Nearest Wagon To Horse.", Alias = "m")]
+        private static void Spawnwag(string[] args)
+        {
+            //check if player has Wagoneer
+            //if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
+            //return;
+
+            Transform playerTransform = PhotonView.Find(PhotonNetwork.LocalPlayer.ActorNumber).gameObject.transform;
+
+            Vector3 pos;
+            pos = playerTransform.position + Vector3.up * 1 + playerTransform.forward * 3;
+
+            Quaternion rot;
+            rot = playerTransform.rotation * Quaternion.Euler(0, 0, 0);
+
+            RPCManager.PhotonView.RPC(nameof(RPCManager.SpawnWagon), RpcTarget.AllBuffered, new object[] { pos, rot });
+        }
+
         [CommandAttribute("mountwag", "/mountwag: Mount Nearest Wagon To Horse.", Alias = "m")]
         private static void Mountwag(string[] args)
         {
