@@ -324,7 +324,7 @@ namespace GameManagers
 
         #region Wagon Command
 
-        [CommandAttribute("removewag", "/mountwag: Mount Nearest Wagon To Horse.", Alias = "m")]
+        [CommandAttribute("removewag", "/mountwag: Mount Nearest Wagon To Horse.")]
         private static void Removewag(string[] args)
         {
             //check if player has Wagoneer
@@ -342,7 +342,7 @@ namespace GameManagers
             RPCManager.PhotonView.RPC(nameof(RPCManager.SpawnWagon), RpcTarget.AllBuffered, new object[] { pos, rot });
         }
 
-        [CommandAttribute("spawnwag", "/mountwag: Mount Nearest Wagon To Horse.", Alias = "m")]
+        [CommandAttribute("spawnwag", "/mountwag: Mount Nearest Wagon To Horse.")]
         private static void Spawnwag(string[] args)
         {
             //check if player has Wagoneer
@@ -360,7 +360,7 @@ namespace GameManagers
             RPCManager.PhotonView.RPC(nameof(RPCManager.SpawnWagon), RpcTarget.AllBuffered, new object[] { pos, rot });
         }
 
-        [CommandAttribute("mountwag", "/mountwag: Mount Nearest Wagon To Horse.", Alias = "m")]
+        [CommandAttribute("mountwag", "/mountwag: Mount Nearest Wagon To Horse.")]
         private static void Mountwag(string[] args)
         {
             //check if player has Wagoneer
