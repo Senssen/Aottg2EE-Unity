@@ -66,7 +66,6 @@ GameObject:
   - component: {fileID: 8130525048906004205}
   - component: {fileID: 1363753305600940017}
   - component: {fileID: 3926780414923125639}
-  - component: {fileID: -33227685735660560}
   m_Layer: 23
   m_Name: Momo_Tree_Birch1_WaveyPF
   m_TagString: Untagged
@@ -142,22 +141,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!208 &-33227685735660560
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8183127878559191697}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 6.0930004, y: 12.1380005, z: 6.057}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: -0.075, y: 12.155001, z: 0.202}
-  m_TimeToStationary: 0.5
 --- !u!1 &8945384274072920238
 GameObject:
   m_ObjectHideFlags: 0

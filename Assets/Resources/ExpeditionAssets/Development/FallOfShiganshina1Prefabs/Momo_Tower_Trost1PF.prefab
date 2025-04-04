@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 862874524323414529}
   - component: {fileID: 4595444408368298148}
   - component: {fileID: 4519550973135597174}
-  - component: {fileID: 2906408457772519373}
   m_Layer: 23
   m_Name: Momo_Tower_Trost1
   m_TagString: Untagged
@@ -84,22 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!208 &2906408457772519373
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524969372161403872}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 3.0030003, y: 17.986, z: 3.0030003}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 17.919, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &1706298653071522332
 GameObject:
   m_ObjectHideFlags: 0

@@ -231,7 +231,6 @@ GameObject:
   - component: {fileID: 8985953647877498024}
   - component: {fileID: 5289006930529179756}
   - component: {fileID: 3783170550985924558}
-  - component: {fileID: 6925837580421581499}
   m_Layer: 23
   m_Name: Momo_Tree_Oak2_WaveyPF
   m_TagString: Untagged
@@ -311,22 +310,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!208 &6925837580421581499
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4860779729527376915}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 9.249001, y: 7.9860005, z: 8.967}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0.54, y: 7.9020004, z: -0.512}
-  m_TimeToStationary: 0.5
 --- !u!1 &5301356187135331891
 GameObject:
   m_ObjectHideFlags: 0

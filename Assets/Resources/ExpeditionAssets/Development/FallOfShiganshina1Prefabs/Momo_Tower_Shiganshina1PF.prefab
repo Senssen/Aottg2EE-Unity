@@ -329,7 +329,6 @@ GameObject:
   - component: {fileID: 2475889538749819578}
   - component: {fileID: 2168232738517910796}
   - component: {fileID: 6532375747902342389}
-  - component: {fileID: 961054726313033138}
   m_Layer: 23
   m_Name: Momo_Tower_Shiganshina1PF
   m_TagString: Untagged
@@ -414,22 +413,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!208 &961054726313033138
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4726078401497352655}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 2.299, y: 16.886002, z: 2.299}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: -0.16600001, y: 16.886002, z: 0.015000001}
-  m_TimeToStationary: 0.5
 --- !u!1 &6019510239279427883
 GameObject:
   m_ObjectHideFlags: 0

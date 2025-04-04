@@ -66,7 +66,6 @@ GameObject:
   - component: {fileID: 484856987100043810}
   - component: {fileID: 1875887992615677313}
   - component: {fileID: 7843468430788946056}
-  - component: {fileID: 232106423824645426}
   m_Layer: 23
   m_Name: Momo_Tree_Aspen1_WaveyPF
   m_TagString: Untagged
@@ -142,22 +141,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!208 &232106423824645426
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5869666280712299339}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 6.0930004, y: 12.1380005, z: 6.057}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: -0.075, y: 12.155001, z: 0.202}
-  m_TimeToStationary: 0.5
 --- !u!1 &7028544809298455254
 GameObject:
   m_ObjectHideFlags: 0

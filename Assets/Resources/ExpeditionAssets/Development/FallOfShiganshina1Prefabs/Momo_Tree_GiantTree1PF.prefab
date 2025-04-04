@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6423960262938585992}
   - component: {fileID: 4774744742410406748}
   - component: {fileID: 4768040362178918676}
-  - component: {fileID: 4304149906666556959}
   m_Layer: 23
   m_Name: Momo_Tree_GiantTree1PF
   m_TagString: Untagged
@@ -101,22 +100,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!208 &4304149906666556959
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 478203676416390817}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 13.115, y: 112.20801, z: 10.15}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0.53000003, y: 111.76, z: -0.18200001}
-  m_TimeToStationary: 0.5
 --- !u!1 &926850988133257788
 GameObject:
   m_ObjectHideFlags: 0

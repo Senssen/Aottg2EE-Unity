@@ -497,7 +497,6 @@ GameObject:
   - component: {fileID: 1421371493728859956}
   - component: {fileID: 1606953916083664903}
   - component: {fileID: 6777137359296878021}
-  - component: {fileID: 831427740971648430}
   m_Layer: 23
   m_Name: Momo_House_Shiganshina2PF
   m_TagString: Untagged
@@ -633,22 +632,6 @@ MonoBehaviour:
   m_lastImpostor: {fileID: 1582312526246359103}
   m_folderPath: Assets/Resources/ExpeditionAssets/Models/Shiganshina/Impostors/
   m_cutMode: 0
---- !u!208 &831427740971648430
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3681900848974823824}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 13.01, y: 9.118, z: 4.4}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 9.118, z: -0.07}
-  m_TimeToStationary: 0.5
 --- !u!1 &5486605605776258328
 GameObject:
   m_ObjectHideFlags: 0
