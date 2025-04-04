@@ -349,10 +349,21 @@ namespace GameManagers
             //if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
             //return;
 
-            Transform playerTransform = PhotonView.Find(PhotonNetwork.LocalPlayer.ActorNumber).gameObject.transform;
+            Transform playerTransform = null;
+
+            PhotonView[] allPlayers = FindObjectsOfType<PhotonView>();
+
+            foreach (PhotonView pv in allPlayers)
+            {
+                if (pv.IsMine)
+                {
+                    playerTransform = pv.transform;
+                    break;
+                }
+            }
 
             Vector3 pos;
-            pos = playerTransform.position + Vector3.up * 1 + playerTransform.forward * 3;
+            pos = playerTransform.position /*+ Vector3.up * 1*/ + playerTransform.forward * 6;
 
             Quaternion rot;
             rot = playerTransform.rotation * Quaternion.Euler(0, 0, 0);
