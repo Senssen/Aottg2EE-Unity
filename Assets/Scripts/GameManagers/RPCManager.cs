@@ -261,6 +261,18 @@ namespace GameManagers
         #region Wagon RPCs
 
         [PunRPC]
+        public void UnmountWagon(GameObject Wagon, PhotonMessageInfo Sender)
+        {
+            //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 
+            //return; 
+
+            HingeJoint MountHinge = Wagon.transform.Find("WagonHorseAttachment").gameObject.GetComponent<HingeJoint>();
+            Rigidbody TempHingeMount = Wagon.transform.Find("Temp Hindge Mount").gameObject.GetComponent<Rigidbody>();
+
+            MountHinge.connectedBody = TempHingeMount;
+        }
+
+        [PunRPC]
         public void DeSpawnWagon(GameObject Wagon, PhotonMessageInfo Sender)
         {
             //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 

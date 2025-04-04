@@ -324,6 +324,19 @@ namespace GameManagers
 
         #region Wagon Command
 
+        [CommandAttribute("unmountwag", "/mountwag: Mount Nearest Wagon To Horse.")]
+        private static void Unmountwag(string[] args)
+        {
+            //check if player has Wagoneer
+            //if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
+            //return;
+
+            GameObject myplayer = MyPlayer().gameObject;
+            GameObject wag = NearestWagon(myplayer);
+
+            RPCManager.PhotonView.RPC(nameof(RPCManager.UnmountWagon), RpcTarget.AllBuffered, new object[] { wag });
+        }
+
         [CommandAttribute("removewag", "/mountwag: Mount Nearest Wagon To Horse.")]
         private static void Removewag(string[] args)
         {
