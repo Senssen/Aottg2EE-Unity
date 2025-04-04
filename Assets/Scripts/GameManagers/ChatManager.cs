@@ -331,15 +331,13 @@ namespace GameManagers
             //if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
             //return;
 
-            Transform playerTransform = PhotonView.Find(PhotonNetwork.LocalPlayer.ActorNumber).gameObject.transform;
+            GameObject myplayer = MyPlayer().gameObject;
+            GameObject wag = NearestWagon(myplayer);
 
-            Vector3 pos;
-            pos = playerTransform.position + Vector3.up * 1 + playerTransform.forward * 3;
+            if (Vector3.Distance(myplayer.transform.position, wag.transform.position) > 20 ) //destroy range
+                return;
 
-            Quaternion rot;
-            rot = playerTransform.rotation * Quaternion.Euler(0, 0, 0);
-
-            RPCManager.PhotonView.RPC(nameof(RPCManager.SpawnWagon), RpcTarget.AllBuffered, new object[] { pos, rot });
+            RPCManager.PhotonView.RPC(nameof(RPCManager.DeSpawnWagon), RpcTarget.AllBuffered, new object[] { wag });
         }
 
         [CommandAttribute("spawnwag", "/mountwag: Mount Nearest Wagon To Horse.")]
@@ -349,18 +347,7 @@ namespace GameManagers
             //if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
             //return;
 
-            Transform playerTransform = null;
-
-            PhotonView[] allPlayers = FindObjectsOfType<PhotonView>();
-
-            foreach (PhotonView pv in allPlayers)
-            {
-                if (pv.IsMine)
-                {
-                    playerTransform = pv.transform;
-                    break;
-                }
-            }
+            Transform playerTransform = MyPlayer();
 
             Vector3 pos;
             pos = playerTransform.position /*+ Vector3.up * 1*/ + playerTransform.forward * 6;
@@ -413,6 +400,44 @@ namespace GameManagers
                 AddLine($"No horse found with my PhotonView!", ChatTextColor.Error);
                 return null; // Return null if no matching horse is found
             }
+        }
+
+        private static Transform MyPlayer()
+        {
+            Transform playerTransform = null;
+
+            PhotonView[] allPlayers = FindObjectsOfType<PhotonView>();
+
+            foreach (PhotonView pv in allPlayers)
+            {
+                if (pv.IsMine)
+                {
+                    playerTransform = pv.transform;
+                    break;
+                }
+            }
+            return playerTransform;
+        }
+
+        private static GameObject NearestWagon(GameObject Wagoneer)
+        {
+            GameObject[] wagons = UnityEngine.Object.FindObjectsByType<GameObject>(FindObjectsSortMode.InstanceID); // Get all objects in the scene
+            GameObject nearestWagon = null;
+            float nearestDistance = 1500f; //max range to look for wagons
+
+            foreach (GameObject obj in wagons)
+            {
+                if (obj.name.Contains("Momo_Wagon")) // Check if the object is a "Wagon"
+                {
+                    float distance = Vector3.Distance(Wagoneer.transform.position, obj.transform.position);
+                    if (distance < nearestDistance)
+                    {
+                        nearestDistance = distance;
+                        nearestWagon = obj;
+                    }
+                }
+            }
+            return nearestWagon;
         }
 
 #endregion

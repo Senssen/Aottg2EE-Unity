@@ -11,6 +11,7 @@ using Photon.Pun;
 using Spawnables;
 using System.Collections;
 using Utility;
+using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 
 namespace GameManagers
 {
@@ -259,6 +260,14 @@ namespace GameManagers
 
         #region Wagon RPCs
 
+        [PunRPC]
+        public void DeSpawnWagon(GameObject Wagon, PhotonMessageInfo Sender)
+        {
+            //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 
+            //return; 
+
+            Destroy(Wagon);
+        }
 
         [PunRPC]
         public void SpawnWagon(Vector3 pos, Quaternion rot, PhotonMessageInfo Sender)
@@ -277,6 +286,9 @@ namespace GameManagers
                 //return; 
 
             GameObject wagon = NearestWagon(Sender.photonView.gameObject);
+
+            if (Vector3.Distance(wagon.transform.position, HorseToMount.position) > 20) //mount range
+                return;
 
             if (HorseToMount != null)
             {
@@ -300,9 +312,9 @@ namespace GameManagers
 
         private GameObject NearestWagon(GameObject Wagoneer)
         {
-            GameObject[] wagons = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None); // Get all objects in the scene
+            GameObject[] wagons = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.InstanceID); // Get all objects in the scene
             GameObject nearestWagon = null;
-            float nearestDistance = 1500f; //todo: adjust range
+            float nearestDistance = 1500f; //max range to look for wagons
 
             foreach (GameObject obj in wagons)
             {
