@@ -23960,6 +23960,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Momo_Church_Trost1PF
       objectReference: {fileID: 0}
+    - target: {fileID: 3099294721168632512, guid: 2357478f4b22504418f4595c228dfb5c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5806245789812021275, guid: 2357478f4b22504418f4595c228dfb5c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.6194
@@ -24011,6 +24015,10 @@ PrefabInstance:
     - target: {fileID: 5806245789812021275, guid: 2357478f4b22504418f4595c228dfb5c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758002406582159663, guid: 2357478f4b22504418f4595c228dfb5c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
