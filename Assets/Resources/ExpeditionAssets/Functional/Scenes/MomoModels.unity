@@ -15,14 +15,14 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 0
-  m_FogColor: {r: 0.40162167, g: 0.32913673, b: 0.29985854, a: 1}
+  m_FogColor: {r: 0.6139526, g: 0.50102454, b: 0.4194508, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.60914695, g: 0.6075382, b: 0.6419273, a: 1}
-  m_AmbientEquatorColor: {r: 0.4192802, g: 0.4169298, b: 0.42200127, a: 1}
-  m_AmbientGroundColor: {r: 0.4132676, g: 0.37083066, b: 0.34759182, a: 1}
+  m_AmbientSkyColor: {r: 0.8264211, g: 0.8335918, b: 0.831181, a: 1}
+  m_AmbientEquatorColor: {r: 0.54266495, g: 0.5363848, b: 0.5473661, a: 1}
+  m_AmbientGroundColor: {r: 0.5271795, g: 0.4778545, b: 0.4429505, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2143765562}
-  m_IndirectSpecularColor: {r: 0.20518547, g: 0.12880881, b: 0.08263708, a: 1}
+  m_IndirectSpecularColor: {r: 0.44570106, g: 0.28491786, b: 0.18503249, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -356,7 +356,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 79488597}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06359456, y: 0.7047973, z: -0.06369594, w: 0.70367557}
+  m_LocalRotation: {x: -0.047420636, y: 0.706074, z: 0.04749623, w: 0.7049503}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -576,7 +576,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 480937913}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.063580915, y: -0.70424247, z: -0.063580915, w: 0.70424247}
+  m_LocalRotation: {x: 0.047410462, y: -0.7055156, z: 0.047410462, w: 0.70551556}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -885,7 +885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SkyProfile: {fileID: 11400000, guid: 8cee9cc0aa28a2e46a5a390db711913c, type: 2}
-  m_SkyTime: 0.22
+  m_SkyTime: 0.27
   automaticTimeIncrement: 0
   copySkyProfile: 0
   automaticIncrementSpeed: 0.051
@@ -2099,7 +2099,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.19512194
+  m_Intensity: 0.29420733
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.802082
@@ -3793,6 +3793,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad8b96e0ee3aee74ca7f163c9a2bd0b0, type: 3}
+--- !u!1001 &6479791047327996419
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1628967014321972816, guid: 91df651ca10afd244a383a6bc20d1ea6, type: 3}
+      propertyPath: m_Name
+      value: Momo_Church_Trost1PF
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806245789812021275, guid: 91df651ca10afd244a383a6bc20d1ea6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 408.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806245789812021275, guid: 91df651ca10afd244a383a6bc20d1ea6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806245789812021275, guid: 91df651ca10afd244a383a6bc20d1ea6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -26.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806245789812021275, guid: 91df651ca10afd244a383a6bc20d1ea6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806245789812021275, guid: 91df651ca10afd244a383a6bc20d1ea6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806245789812021275, guid: 91df651ca10afd244a383a6bc20d1ea6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806245789812021275, guid: 91df651ca10afd244a383a6bc20d1ea6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806245789812021275, guid: 91df651ca10afd244a383a6bc20d1ea6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806245789812021275, guid: 91df651ca10afd244a383a6bc20d1ea6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5806245789812021275, guid: 91df651ca10afd244a383a6bc20d1ea6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 91df651ca10afd244a383a6bc20d1ea6, type: 3}
 --- !u!1001 &6489343322665199324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4070,3 +4127,4 @@ SceneRoots:
   - {fileID: 801785265}
   - {fileID: 802394017}
   - {fileID: 387116417}
+  - {fileID: 6479791047327996419}
