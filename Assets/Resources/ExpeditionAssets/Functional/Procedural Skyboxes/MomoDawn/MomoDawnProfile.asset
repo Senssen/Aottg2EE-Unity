@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 802ef6648d8f86f498c5fc5043f434bc, type: 3}
-  m_Name: SkyProfile
+  m_Name: MomoDawnProfile
   m_EditorClassIdentifier: 
   m_SkyboxMaterial: {fileID: 2100000, guid: c31fff4aae93f304f92cbeb4c7f8d180, type: 2}
   m_ShaderName: Funly/Sky Studio/Skybox/3D Standard
