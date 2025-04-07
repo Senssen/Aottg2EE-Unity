@@ -55,7 +55,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.65739584, g: 0.745283, b: 0.7094771, a: 1}
+          color: {r: 0.3058824, g: 0.3700065, b: 0.7176471, a: 1}
         m_Name: Sky Upper Color
         m_Id: edcafd85-9dab-432b-81be-76b2ee64fc3d
       - keyframes:
@@ -63,7 +63,7 @@ MonoBehaviour:
           m_Time: 0.1736527
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.7529412, g: 0.75686276, b: 0.6431373, a: 1}
+          color: {r: 0.5367569, g: 0.6526828, b: 0.6981132, a: 1}
         m_Name: Sky Middle Color
         m_Id: 737c3f4b-9a33-48c6-bc7a-43c7bb3c6380
       - keyframes:
@@ -71,7 +71,7 @@ MonoBehaviour:
           m_Time: 0.1736527
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.8, g: 0.7294118, b: 0.6, a: 1}
+          color: {r: 0.764151, g: 0.5924078, b: 0.2775454, a: 1}
         m_Name: Sky Lower Color
         m_Id: e06a7d5e-aeeb-464a-ab5c-411dcbbd3052
       - keyframes:
@@ -398,7 +398,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: -0.046
+          value: 0.069
         m_Name: Horizon Position
         m_Id: 0d215a4b-f845-4855-b7b7-26d3b1f78953
         minValue: -1
@@ -408,7 +408,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          value: 0.633
+          value: 0.566
         m_Name: Sky Gradient Length
         m_Id: 404d6edd-0cb2-4f7f-9b62-fef6389aca17
         minValue: 0

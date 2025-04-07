@@ -115,8 +115,8 @@ Material:
     - _CloudTextureTiling: 1.07
     - _DebugPointRadius: 0.03
     - _DebugPointsCount: 0
-    - _GradientFadeBegin: -0.046
-    - _GradientFadeEnd: 0.587
+    - _GradientFadeBegin: 0.069
+    - _GradientFadeEnd: 0.635
     - _GradientFadeMiddlePosition: 0.354
     - _HorizonFogDensity: 0.24
     - _HorizonFogLength: 0.051
@@ -176,9 +176,9 @@ Material:
     - _CloudCubemapNormalShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _CloudCubemapNormalToLight: {r: 0, g: 1, b: 0, a: 0}
     - _CloudCubemapTintColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GradientSkyLowerColor: {r: 0.8, g: 0.7294118, b: 0.6, a: 1}
-    - _GradientSkyMiddleColor: {r: 0.7529412, g: 0.75686276, b: 0.6431373, a: 1}
-    - _GradientSkyUpperColor: {r: 0.65739584, g: 0.745283, b: 0.7094771, a: 1}
+    - _GradientSkyLowerColor: {r: 0.764151, g: 0.5924078, b: 0.2775454, a: 1}
+    - _GradientSkyMiddleColor: {r: 0.5367569, g: 0.6526828, b: 0.6981132, a: 1}
+    - _GradientSkyUpperColor: {r: 0.3058824, g: 0.3700065, b: 0.7176471, a: 1}
     - _HorizonFogColor: {r: 0.5396493, g: 0.61563283, b: 0.6320754, a: 1}
     - _MoonColor: {r: 1, g: 1, b: 1, a: 1}
     - _MoonPosition: {r: -0.5449838, g: 0.4754619, b: -0.6906002, a: 0}
