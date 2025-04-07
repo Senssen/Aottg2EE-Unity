@@ -247,7 +247,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.6981132, g: 0.6264986, b: 0.48406908, a: 1}
+          color: {r: 0.6792453, g: 0.6362536, b: 0.54788184, a: 1}
         m_Name: Ambient Light - Equator Color
         m_Id: cb21bdd0-62e8-4963-b35a-53460d9eeaea
       - keyframes:
