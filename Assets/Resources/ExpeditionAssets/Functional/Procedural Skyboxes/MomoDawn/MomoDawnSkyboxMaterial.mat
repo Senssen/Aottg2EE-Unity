@@ -176,9 +176,9 @@ Material:
     - _CloudCubemapNormalShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _CloudCubemapNormalToLight: {r: 0, g: 1, b: 0, a: 0}
     - _CloudCubemapTintColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GradientSkyLowerColor: {r: 0.764151, g: 0.5924078, b: 0.2775454, a: 1}
-    - _GradientSkyMiddleColor: {r: 0.5367569, g: 0.6526828, b: 0.6981132, a: 1}
-    - _GradientSkyUpperColor: {r: 0.3058824, g: 0.3700065, b: 0.7176471, a: 1}
+    - _GradientSkyLowerColor: {r: 0.7735849, g: 0.6479892, b: 0.41963333, a: 1}
+    - _GradientSkyMiddleColor: {r: 0.49052152, g: 0.6779998, b: 0.6886792, a: 1}
+    - _GradientSkyUpperColor: {r: 0.3930669, g: 0.52257323, b: 0.6886792, a: 1}
     - _HorizonFogColor: {r: 0.5396493, g: 0.61563283, b: 0.6320754, a: 1}
     - _MoonColor: {r: 1, g: 1, b: 1, a: 1}
     - _MoonPosition: {r: -0.5449838, g: 0.4754619, b: -0.6906002, a: 0}
