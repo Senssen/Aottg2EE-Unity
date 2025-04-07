@@ -19,7 +19,7 @@ MonoBehaviour:
   - FogDensityKey
   - AmbientLightSkyColorKey
   - AmbientLightGroundColorKey
-  - SkyUpperColorKey
+  - AmbientLightEquatorColorKey
   keyframeGroups:
     m_ColorGroup:
       m_Keys:
@@ -55,12 +55,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.38047346, g: 0.4716981, b: 0.40708068, a: 1}
-        - m_Id: 117860e5-0a83-4497-ae06-c90c0c51af28
-          m_Time: 0.98849106
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.38047346, g: 0.4716981, b: 0.40708068, a: 1}
+          color: {r: 0.39248845, g: 0.5660378, b: 0.44312522, a: 1}
         m_Name: Sky Upper Color
         m_Id: edcafd85-9dab-432b-81be-76b2ee64fc3d
       - keyframes:
@@ -68,7 +63,7 @@ MonoBehaviour:
           m_Time: 0.1736527
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.64705884, g: 0.70980394, b: 0.6, a: 1}
+          color: {r: 0.6491408, g: 0.70980394, b: 0.6, a: 1}
         m_Name: Sky Middle Color
         m_Id: 737c3f4b-9a33-48c6-bc7a-43c7bb3c6380
       - keyframes:
@@ -76,7 +71,7 @@ MonoBehaviour:
           m_Time: 0.1736527
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.84705883, g: 0.84705883, b: 0.6862745, a: 1}
+          color: {r: 0.84705883, g: 0.8054189, b: 0.6862745, a: 1}
         m_Name: Sky Lower Color
         m_Id: e06a7d5e-aeeb-464a-ab5c-411dcbbd3052
       - keyframes:
@@ -100,12 +95,7 @@ MonoBehaviour:
           m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.6792453, g: 0.59250045, b: 0.51584196, a: 1}
-        - m_Id: 57a6c524-f570-4eec-aa35-e27264552f68
-          m_Time: 0.9974425
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.6784314, g: 0.5921569, b: 0.5176471, a: 1}
+          color: {r: 0.5849056, g: 0.53012186, b: 0.41660732, a: 1}
         m_Name: Fog Color
         m_Id: b832b01d-ce08-4539-aae9-296878e8346c
       - keyframes:
@@ -250,29 +240,19 @@ MonoBehaviour:
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
           color: {r: 0.4245283, g: 0.37965053, b: 0.33041117, a: 1}
-        - m_Id: a746aecf-3196-4f5c-aab0-b7996de47c69
-          m_Time: 1
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.4245283, g: 0.37965053, b: 0.33041117, a: 1}
         m_Name: Ambient Light - Sky Color
         m_Id: fd7913ec-6bf2-4830-88d0-fad2b58ceea8
       - keyframes:
         - m_Id: 9e3cb1f2-7514-4ae5-9668-4d5402755dbe
-          m_Time: 0.17065868
+          m_Time: 0
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
-          color: {r: 0.5188679, g: 0.4836996, b: 0.42831078, a: 1}
+          color: {r: 0.6415094, g: 0.55897284, b: 0.46902812, a: 1}
         m_Name: Ambient Light - Equator Color
         m_Id: cb21bdd0-62e8-4963-b35a-53460d9eeaea
       - keyframes:
         - m_Id: 101a419e-7c34-4259-967f-4e0611580bae
           m_Time: 0
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          color: {r: 0.7924528, g: 0.72210264, b: 0.6840513, a: 1}
-        - m_Id: 16262d58-1876-409c-be77-f8bb2dac92e5
-          m_Time: 0.9897698
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
           color: {r: 0.7924528, g: 0.72210264, b: 0.6840513, a: 1}
@@ -526,11 +506,6 @@ MonoBehaviour:
       - keyframes:
         - m_Id: fd144960-6655-41ce-855d-c3a2338b6dd4
           m_Time: 0
-          m_InterpolationCurve: 0
-          m_InterpolationDirection: 0
-          value: 0.24
-        - m_Id: c321ef03-f2e7-4f49-be80-03f1a2cc3a76
-          m_Time: 0.9974425
           m_InterpolationCurve: 0
           m_InterpolationDirection: 0
           value: 0.24
