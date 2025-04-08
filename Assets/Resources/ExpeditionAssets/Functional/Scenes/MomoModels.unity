@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2143765562}
-  m_IndirectSpecularColor: {r: 0.44570106, g: 0.28491786, b: 0.18503249, a: 1}
+  m_IndirectSpecularColor: {r: 0.4459116, g: 0.2850915, b: 0.18505815, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3618,6 +3618,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2360a0692f31d4b4dae72b3b612ebf8d, type: 3}
+--- !u!1001 &5796340204302779148
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 614575205607678280, guid: 199a0af6ccf6cd74e8e6fd5fcc7713d6, type: 3}
+      propertyPath: m_Name
+      value: Momo_Tower_RuinedCastle1PF
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440719131982840167, guid: 199a0af6ccf6cd74e8e6fd5fcc7713d6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 483.87234
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440719131982840167, guid: 199a0af6ccf6cd74e8e6fd5fcc7713d6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0000038146973
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440719131982840167, guid: 199a0af6ccf6cd74e8e6fd5fcc7713d6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -46.367172
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440719131982840167, guid: 199a0af6ccf6cd74e8e6fd5fcc7713d6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440719131982840167, guid: 199a0af6ccf6cd74e8e6fd5fcc7713d6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440719131982840167, guid: 199a0af6ccf6cd74e8e6fd5fcc7713d6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440719131982840167, guid: 199a0af6ccf6cd74e8e6fd5fcc7713d6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440719131982840167, guid: 199a0af6ccf6cd74e8e6fd5fcc7713d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440719131982840167, guid: 199a0af6ccf6cd74e8e6fd5fcc7713d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440719131982840167, guid: 199a0af6ccf6cd74e8e6fd5fcc7713d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 199a0af6ccf6cd74e8e6fd5fcc7713d6, type: 3}
 --- !u!1001 &6098348100963114533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4139,6 +4196,8 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 802394017}
+  - {fileID: 801785265}
   - {fileID: 1287756632}
   - {fileID: 1994142545}
   - {fileID: 1943699061}
@@ -4181,8 +4240,7 @@ SceneRoots:
   - {fileID: 6445435555104925853}
   - {fileID: 1271934308}
   - {fileID: 127579780}
-  - {fileID: 801785265}
-  - {fileID: 802394017}
   - {fileID: 387116417}
   - {fileID: 6479791047327996419}
   - {fileID: 1436990628327188440}
+  - {fileID: 5796340204302779148}
