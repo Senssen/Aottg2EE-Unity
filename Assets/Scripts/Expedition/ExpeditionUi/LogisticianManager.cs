@@ -17,7 +17,7 @@ public class LogisticianUiManager : MonoBehaviour
 
     private HumanInputSettings _humanInput;
 
-    private RoleItems.SupplyItem selectedItem;
+    private RoleItems.SupplyItem selectedItem = RoleItems.SupplyItem.None;
     
     [SerializeField]
     RawImage WeaponImage;
@@ -60,6 +60,7 @@ public class LogisticianUiManager : MonoBehaviour
         if (selectedItem != RoleItems.SupplyItem.None)
             PhotonExtensions.GetMyHuman().GetComponent<Logistician>().DropItem(selectedItem);
 
+        SelectItem(RoleItems.SupplyItem.None);
         GasImage.color = Color.white;
         WeaponImage.color = Color.white;
         SelectScreen.SetActive(false);

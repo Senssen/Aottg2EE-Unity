@@ -30,25 +30,25 @@ public class CollectGas : MonoBehaviour
             if (other.gameObject.GetPhotonView().IsMine)
             {
                 GameObject HumanObj = PhotonExtensions.GetMyHuman();
-                Human HumanComp = HumanObj.GetComponent<Human>();
+                Human human = HumanObj.GetComponent<Human>();
 
                 if (_itemType == RoleItems.SupplyItem.Gas)
                 {
-                    if (HumanComp.Stats.Gas == HumanComp.Stats.MaxGas)
+                    if (human.Stats.CurrentGas == human.Stats.MaxGas)
                         return;
 
                     if (DroppedByDead)
                     {
-                        HumanComp.Stats.CurrentGas = HumanComp.Stats.MaxGas * 0.3f;
+                        human.Stats.CurrentGas = human.Stats.MaxGas * 0.3f;
                     }
                     else
                     {
-                        HumanComp.Stats.CurrentGas = HumanComp.Stats.MaxGas;
+                        human.Stats.CurrentGas = human.Stats.MaxGas;
                     }
                 }
                 else if (_itemType == RoleItems.SupplyItem.Weapon)
                 {
-                    BaseUseable Weapon = HumanComp.Weapon;
+                    BaseUseable Weapon = human.Weapon;
                     if (Weapon is BladeWeapon)
                     {
                         var weapon = (BladeWeapon)Weapon;
