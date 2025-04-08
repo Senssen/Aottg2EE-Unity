@@ -34,6 +34,9 @@ public class CollectGas : MonoBehaviour
 
                 if (_itemType == RoleItems.SupplyItem.Gas)
                 {
+                    if (HumanComp.Stats.Gas == HumanComp.Stats.MaxGas)
+                        return;
+
                     if (DroppedByDead)
                     {
                         HumanComp.Stats.CurrentGas = HumanComp.Stats.MaxGas * 0.3f;
@@ -49,18 +52,27 @@ public class CollectGas : MonoBehaviour
                     if (Weapon is BladeWeapon)
                     {
                         var weapon = (BladeWeapon)Weapon;
+                        if (weapon.BladesLeft == weapon.MaxBlades)
+                            return;
+                        
                         if (weapon.BladesLeft < weapon.MaxBlades)
                             weapon.BladesLeft++;
                     }
                     else if (Weapon is AHSSWeapon || Weapon is APGWeapon)
                     {
                         var weaponAHSS = (AHSSWeapon)Weapon;
+                        if (weaponAHSS.AmmoLeft == weaponAHSS.MaxAmmo)
+                            return;
+
                         if (weaponAHSS.AmmoLeft < weaponAHSS.MaxAmmo)
                             weaponAHSS.AmmoLeft++;
                     }
                     else if (Weapon is ThunderspearWeapon)
                     {
                         var weaponTS = (ThunderspearWeapon)Weapon;
+                        if (weaponTS.AmmoLeft == weaponTS.MaxAmmo)
+                            return;
+
                         if (weaponTS.AmmoLeft < weaponTS.MaxAmmo)
                             weaponTS.AmmoLeft++;
                     }
