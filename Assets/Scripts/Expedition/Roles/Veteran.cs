@@ -18,10 +18,9 @@ class Veteran : MonoBehaviour
 
         human = gameObject.GetComponent<Human>();
 
-        _veteranManager.SetWheelImages(); // setting up the ability wheel UI //
-        _veteranManager.Ability1Selected = true; // setting up the ability wheel UI //
-        _veteranManager.Ability2Selected = false; // setting up the ability wheel UI //
-        _veteranManager.Ability3Selected = false; // setting up the ability wheel UI //
+        _veteranManager.Ability1Selected = true;
+        _veteranManager.Ability2Selected = false;
+        _veteranManager.Ability3Selected = false;
     }
 
     void Update()

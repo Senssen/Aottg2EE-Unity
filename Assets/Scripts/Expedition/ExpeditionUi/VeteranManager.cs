@@ -55,7 +55,7 @@ public class VeteranManager : MonoBehaviour
         AbilityWheelUpdate();
         UpdateLoadoutVisibility();
     }
-    public void SetWheelImages()
+    private void SetWheelImages()
     {
         if (SettingsManager.InGameCharacterSettings.Special.Value.Length == 0 || SettingsManager.InGameCharacterSettings.Special.Value == "None")
         {
@@ -248,6 +248,7 @@ public class VeteranManager : MonoBehaviour
             if (_veteran == null)
                 _veteran = PhotonExtensions.GetMyHuman().GetComponent<Veteran>();
 
+            SetWheelImages();
             KeepSelectedAbilityColor();
             AbilityWheelCanvas.SetActive(true);
             EmVariables.IsOpen = true;
