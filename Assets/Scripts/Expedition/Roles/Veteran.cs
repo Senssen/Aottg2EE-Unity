@@ -111,10 +111,12 @@ class Veteran : MonoBehaviour
         (human.Weapon, human.Weapon_2) = (human.Weapon_2, human.Weapon);
         (human.Setup.Weapon, human.Setup.Weapon_2) = (human.Setup.Weapon_2, human.Setup.Weapon);
 
-        human.Setup.CreateParts();
+        /* human.Setup.CreateParts();
         human.Setup.CreateWeapon();
         human.Setup.Create3dmg();
         human.Setup.CreateCape();
+        human.LateUpdateFPS(); */
+        human.Setup.CreateWeapon();
 
         if (human.Weapon is BladeWeapon)
         {
@@ -147,9 +149,9 @@ class Veteran : MonoBehaviour
                 HumanCustomSkinSet set = (HumanCustomSkinSet)SettingsManager.CustomSkinSettings.Human.GetSelectedSet();
 
                 string url = string.Join(",", new string[] { null, null, null, null, null,
-                    set.Skin.Value, set.Costume.Value, set.Logo.Value, set.GearL.Value, set.GearR.Value, null, set.Hoodie.Value,
+                    null, null, null, null, null, null, null,
                     set.WeaponTrail.Value, set.ThunderspearL.Value, set.ThunderspearR.Value, null, null,
-                    null, null, null, null, set.Back.Value });
+                    null, null, null, null, null });
 
                 /* string url = string.Join(",", new string[] { null, null, null, null, null,
                     null, null, null, set.GearL.Value, set.GearR.Value, null, null,

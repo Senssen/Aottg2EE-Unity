@@ -147,6 +147,7 @@ public class VeteranManager : MonoBehaviour
             Ability3Selected = false;
             LastHoveredLoadout = true; 
             LoadoutImage.color = _selectColor;
+            SelectionSound.Play();
         }
     }
 
