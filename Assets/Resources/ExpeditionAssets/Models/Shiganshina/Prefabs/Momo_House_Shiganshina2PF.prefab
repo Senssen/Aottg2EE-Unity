@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 8864076360405265430}
   - component: {fileID: 6498144408457206235}
   - component: {fileID: 5340999125093423905}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Impostor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
