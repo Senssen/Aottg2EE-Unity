@@ -2,6 +2,9 @@ using Characters;
 using UnityEngine;
 using Photon.Pun;
 using Utility;
+using Settings;
+using Cameras;
+using ApplicationManagers;
 
 public class Logistician : MonoBehaviour
 {
@@ -9,7 +12,6 @@ public class Logistician : MonoBehaviour
     public int WeaponSupply { get; private set; }
     public int GasSupply { get; private set; }
     private LogisticianUiManager uiManager;
-
     [SerializeField]
     private GameObject SupplyPack;
 
@@ -25,9 +27,9 @@ public class Logistician : MonoBehaviour
 
     public void Update()
     {
-        if (gameObject.GetPhotonView().Owner.CustomProperties.ContainsKey("Logistician") && SupplyPack.activeSelf == false)
+        if (gameObject.GetPhotonView().Owner.CustomProperties.ContainsKey("Logistician") && SupplyPack.activeSelf == false && ((InGameCamera)SceneLoader.CurrentCamera).CurrentCameraMode != CameraInputMode.FPS)
             SupplyPack.SetActive(true);
-        else if (!gameObject.GetPhotonView().Owner.CustomProperties.ContainsKey("Logistician") && SupplyPack.activeSelf == true)
+        else if ((!gameObject.GetPhotonView().Owner.CustomProperties.ContainsKey("Logistician") || ((InGameCamera)SceneLoader.CurrentCamera).CurrentCameraMode == CameraInputMode.FPS) && SupplyPack.activeSelf == true)
             SupplyPack.SetActive(false);
     }
 
@@ -62,7 +64,5 @@ public class Logistician : MonoBehaviour
             uiManager.WeaponText.text = $"{WeaponSupply}";
         }
     }
-
-    
 
 }
