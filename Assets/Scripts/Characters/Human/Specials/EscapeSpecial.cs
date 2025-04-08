@@ -11,6 +11,7 @@ namespace Characters
         public EscapeSpecial(BaseCharacter owner) : base(owner)
         {
             Cooldown = 1800f; // changed by Ata, 5 Mar 25
+            _lastUseTime = Time.time - Cooldown;
         }
 
         public override bool CanUse()
