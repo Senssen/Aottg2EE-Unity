@@ -17,6 +17,8 @@ public class FlareWheelManager : MonoBehaviour
     private AudioSource SelectAudio;
     [SerializeField]
     private RawImage[] SelectorImages = new RawImage[8];
+    [SerializeField]
+    private RawImage[] RoundImages = new RawImage[8];
     void Start()
     {
         _humanInput = SettingsManager.InputSettings.Human;
@@ -36,6 +38,7 @@ public class FlareWheelManager : MonoBehaviour
         if (i >= 1 && i <= 8) {
             hoveredFlare = i;
             SelectorImages[i-1].color = _selectColor;
+            RoundImages[i-1].color = _selectColor;
             SelectAudio.Play();
         } else {
             hoveredFlare = null;
@@ -46,6 +49,7 @@ public class FlareWheelManager : MonoBehaviour
     {
         if (i >= 1 && i <= 8) {
             SelectorImages[i-1].color = Color.white;
+            RoundImages[i-1].color = Color.white;
         }
         
         hoveredFlare = null;
@@ -62,6 +66,7 @@ public class FlareWheelManager : MonoBehaviour
 
             for (int i = 0; i < SelectorImages.Length; ++i) {
                 SelectorImages[i].color = Color.white;
+                RoundImages[i].color = Color.white;
             }
 
             if (hoveredFlare != null && hoveredFlare >= 1 && hoveredFlare <= 8) {
