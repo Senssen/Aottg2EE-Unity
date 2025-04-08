@@ -33,6 +33,8 @@ public class VeteranManager : MonoBehaviour
     private Image LoadoutImage;
     [SerializeField]
     private RawImage LoadoutSelector;
+    [SerializeField]
+    private AudioSource SelectionSound;
 
     public bool Ability1Selected = false; // made public so i can set to red on human spawn //
     public bool Ability2Selected = false; // made public so i can set to white on human spawn //
@@ -115,6 +117,7 @@ public class VeteranManager : MonoBehaviour
                 LastHoveredLoadout = false;
 
                 Ability1Selector.color = _selectColor;
+                SelectionSound.Play();
             }
         } else if (number == 2) {
             if (SettingsManager.InGameCharacterSettings.Special_2.Value.Length > 0 && SettingsManager.InGameCharacterSettings.Special_2.Value != "None")
@@ -125,6 +128,7 @@ public class VeteranManager : MonoBehaviour
                 LastHoveredLoadout = false;
 
                 Ability2Selector.color = _selectColor;
+                SelectionSound.Play();
             }
         } else if (number == 3) {
             if (SettingsManager.InGameCharacterSettings.Special_3.Value.Length > 0 && SettingsManager.InGameCharacterSettings.Special_3.Value != "None")
@@ -135,6 +139,7 @@ public class VeteranManager : MonoBehaviour
                 LastHoveredLoadout = false;
 
                 Ability3Selector.color = _selectColor;
+                SelectionSound.Play();
             }
         } else if (number == 4) {
             Ability1Selected = false;
@@ -179,17 +184,14 @@ public class VeteranManager : MonoBehaviour
         if (Ability1Selected) {
             if (_human.CurrentSpecial != SettingsManager.InGameCharacterSettings.Special.Value) {
                 _veteran.SwitchCurrentSpecial(SettingsManager.InGameCharacterSettings.Special.Value, 1);
-                _veteran.PlayAbilitySelectSound();
             }
         } else if (Ability2Selected) {
             if (_human.CurrentSpecial != SettingsManager.InGameCharacterSettings.Special_2.Value) {
                 _veteran.SwitchCurrentSpecial(SettingsManager.InGameCharacterSettings.Special_2.Value, 2);
-                _veteran.PlayAbilitySelectSound();
             }
         } else if (Ability3Selected) {
             if (_human.CurrentSpecial != SettingsManager.InGameCharacterSettings.Special_3.Value) {
                 _veteran.SwitchCurrentSpecial(SettingsManager.InGameCharacterSettings.Special_3.Value, 3);
-                _veteran.PlayAbilitySelectSound();
             }
         } else if (LastHoveredLoadout) {
             _veteran.SwitchVeteranLoadout();

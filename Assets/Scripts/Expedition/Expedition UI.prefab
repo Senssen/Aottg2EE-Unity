@@ -552,7 +552,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: dbadaea3d7ba7df46856bb017adbe8a6, type: 3}
+  m_audioClip: {fileID: 8300000, guid: cca8973875f093848aab80f4a5f14415, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -3364,7 +3364,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7012918035335913162
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6517,8 +6517,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanvasObj: {fileID: 4061999309171113525}
   SelectScreen: {fileID: 3029648906447617835}
-  WeaponImage: {fileID: 848446283677411818}
-  GasImage: {fileID: 6637764748516229828}
+  WeaponImage: {fileID: 3692282732431653029}
+  GasImage: {fileID: 3356907426690660560}
   WeaponText: {fileID: 6285510105426093513}
   GasText: {fileID: 8735121743907772325}
   SelectSound: {fileID: 4038606810685002084}
@@ -6544,6 +6544,7 @@ MonoBehaviour:
   LoadoutParent: {fileID: 6644799849494387966}
   LoadoutImage: {fileID: 1752280004441483817}
   LoadoutSelector: {fileID: 5116916343924649540}
+  SelectionSound: {fileID: 7507861631206351151}
   Ability1Selected: 0
   Ability2Selected: 0
   Ability3Selected: 0

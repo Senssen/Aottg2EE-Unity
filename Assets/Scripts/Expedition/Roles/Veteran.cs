@@ -11,8 +11,6 @@ class Veteran : MonoBehaviour
 {
     private Human human;
     private VeteranManager _veteranManager;
-    [SerializeField]
-    private AudioSource SelectAbilityAudio;
     public bool isVeteranSet = false;
     void Start()
     {
@@ -84,11 +82,6 @@ class Veteran : MonoBehaviour
             ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.SetSpecialIcon_2(HumanSpecials.GetSpecialIcon(human.SideSpecial_1));
             ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.SetSpecialIcon_3(HumanSpecials.GetSpecialIcon(human.SideSpecial_2));
         }
-    }
-
-    public void PlayAbilitySelectSound()
-    {
-        SelectAbilityAudio.Play();
     }
 
     #region Veteran Specific
