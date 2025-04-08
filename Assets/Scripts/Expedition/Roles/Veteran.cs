@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using Characters;
-using NUnit.Framework;
 using Photon.Pun;
 using Settings;
 using UI;

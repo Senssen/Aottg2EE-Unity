@@ -115,6 +115,12 @@ namespace UI
                 options, GetSpecialIcons(options), UIManager.CurrentMenu.IconPickPopup, tooltips: GetSpecialTooltips(options), elementWidth: 180f, elementHeight: 40f, tooltipPopup: maybeTooltip,
                     onSelect: () => CreateSpecialAbilitySelections(_doublePanel, _dropdownStyle)
                 );
+
+            if (((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler) {
+                ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.SetSpecialIcon_2(HumanSpecials.GetSpecialIcon(charSettings.Special.Value));
+                ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.SetSpecialIcon_2(HumanSpecials.GetSpecialIcon(charSettings.Special_2.Value));
+                ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.SetSpecialIcon_3(HumanSpecials.GetSpecialIcon(charSettings.Special_3.Value));
+            }
         }
 
         private List<string> FilterAbilities(List<string> specials, InGameCharacterSettings charSettings)
