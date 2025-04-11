@@ -121,6 +121,7 @@ Material:
     - _ClusterParams: {r: 6, g: 6, b: 0, a: 0}
     - _ClusterParams2: {r: 3, g: 3, b: 0, a: 0}
     - _DistanceNoiseScaleStrengthFade: {r: 10, g: 0.5, b: 100, a: 250}
+    - _DistanceResampleNoiseParams: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _NoiseUVParams: {r: 3.49, g: 1.63, b: 0, a: 0}
     - _NormalNoiseScaleStrength: {r: 1.67, g: 0.96, b: 0, a: 0}
     - _ResampleDistanceParams: {r: 0.3, g: 200, b: 300, a: 0}

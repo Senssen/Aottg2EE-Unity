@@ -99,6 +99,7 @@ Shader "PlayableTerrain"
       #define _STOCHASTIC 1
       #define _TEXTURECLUSTERTRIPLANARNOISE 1
       #define _TEXTURECLUSTERNOISE2 1
+      #define _MSRENDERLOOP_SURFACESHADER 1
 
 #pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap forwardadd
 
@@ -6399,6 +6400,7 @@ float3 GetTessFactors ()
       #define _STOCHASTIC 1
       #define _TEXTURECLUSTERTRIPLANARNOISE 1
       #define _TEXTURECLUSTERNOISE2 1
+      #define _MSRENDERLOOP_SURFACESHADER 1
 
 #pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap forwardadd
 
@@ -12627,6 +12629,7 @@ float3 GetTessFactors ()
       #define _STOCHASTIC 1
       #define _TEXTURECLUSTERTRIPLANARNOISE 1
       #define _TEXTURECLUSTERNOISE2 1
+      #define _MSRENDERLOOP_SURFACESHADER 1
 
 #pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap forwardadd
 
@@ -18943,6 +18946,7 @@ float3 GetTessFactors ()
       #define _STOCHASTIC 1
       #define _TEXTURECLUSTERTRIPLANARNOISE 1
       #define _TEXTURECLUSTERNOISE2 1
+      #define _MSRENDERLOOP_SURFACESHADER 1
 
 #pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap forwardadd
 
@@ -25064,6 +25068,7 @@ float3 GetTessFactors ()
       #define _STOCHASTIC 1
       #define _TEXTURECLUSTERTRIPLANARNOISE 1
       #define _TEXTURECLUSTERNOISE2 1
+      #define _MSRENDERLOOP_SURFACESHADER 1
 
 #pragma instancing_options assumeuniformscaling nomatrices nolightprobe nolightmap forwardadd
 
@@ -31186,7 +31191,7 @@ float3 GetTessFactors ()
       UsePass "Hidden/Nature/Terrain/Utilities/SELECTION"
 
    }
-   Dependency "BaseMapShader" =  "Hidden/PlayableTerrain_Base336314102"
-   Fallback "Hidden/PlayableTerrain_Base336314102"
+   Dependency "BaseMapShader" =  "Hidden/PlayableTerrain_Base-934531643"
+   Fallback "Hidden/PlayableTerrain_Base-934531643"
    CustomEditor "MicroSplatShaderGUI"
 }
