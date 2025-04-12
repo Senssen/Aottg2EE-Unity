@@ -833,13 +833,19 @@ namespace Characters
                 else
                     _reloadAnimation = HumanAnimations.ChangeBladeAir;
             }
-            CrossFade(_reloadAnimation, 0.1f, 0f);
+            
+            PlayReloadAnimation(_reloadAnimation);
+            ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.Reload();
+        }
+
+        public void PlayReloadAnimation(string anim)
+        {
+            CrossFade(anim, 0.1f, 0f);
             State = HumanState.Reload;
-            _stateTimeLeft = Animation.GetTotalTime(_reloadAnimation);
+            _stateTimeLeft = Animation.GetTotalTime(anim);
             _needFinishReload = true;
             _reloadTimeLeft = _stateTimeLeft;
             _reloadCooldownLeft = _reloadTimeLeft + 0.5f;
-            ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.Reload();
         }
 
         protected void FinishReload()
