@@ -37,6 +37,7 @@ public class CollectGas : MonoBehaviour
                     if (human.Stats.CurrentGas == human.Stats.MaxGas)
                         return;
 
+                    human.PlaySound(HumanSounds.Refill);
                     if (DroppedByDead)
                     {
                         human.Stats.CurrentGas = human.Stats.MaxGas * 0.3f;
@@ -55,8 +56,10 @@ public class CollectGas : MonoBehaviour
                         if (weapon.BladesLeft == weapon.MaxBlades)
                             return;
                         
-                        if (weapon.BladesLeft < weapon.MaxBlades)
+                        if (weapon.BladesLeft < weapon.MaxBlades) {
                             weapon.BladesLeft++;
+                            human.PlaySound(HumanSounds.BladeReloadGround);
+                        }
                     }
                     else if (Weapon is AHSSWeapon || Weapon is APGWeapon)
                     {
@@ -64,8 +67,10 @@ public class CollectGas : MonoBehaviour
                         if (weaponAHSS.AmmoLeft == weaponAHSS.MaxAmmo)
                             return;
 
-                        if (weaponAHSS.AmmoLeft < weaponAHSS.MaxAmmo)
+                        if (weaponAHSS.AmmoLeft < weaponAHSS.MaxAmmo) {
                             weaponAHSS.AmmoLeft++;
+                            human.PlaySound(HumanSounds.GunReload);
+                        }
                     }
                     else if (Weapon is ThunderspearWeapon)
                     {
@@ -73,8 +78,10 @@ public class CollectGas : MonoBehaviour
                         if (weaponTS.AmmoLeft == weaponTS.MaxAmmo)
                             return;
 
-                        if (weaponTS.AmmoLeft < weaponTS.MaxAmmo)
+                        if (weaponTS.AmmoLeft < weaponTS.MaxAmmo) {
                             weaponTS.AmmoLeft++;
+                            human.PlaySound(HumanSounds.GunReload);
+                        }
                     }
                 }
             }
