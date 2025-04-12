@@ -7,6 +7,8 @@ public static class EmVariables
 {
     public static bool IsOpen = false;
     public static Player SelectedPlayer;
+    public static int DetailDistance;
+    public static int DetailDensity;
 
     public static void SetActive(bool b)
     {
