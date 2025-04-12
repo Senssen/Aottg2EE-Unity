@@ -74,5 +74,12 @@ public class FlareWheelManager : MonoBehaviour
             }
         }
     }
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (!hasFocus) {
+            ControlFlareWheel(false);
+        }
+    }
     
 }

@@ -103,4 +103,11 @@ public class LogisticianUiManager : MonoBehaviour
         }
         SelectItem(RoleItems.SupplyItem.None);
     }
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (!hasFocus) {
+            CloseSelectScreen();
+        }
+    }
 }
