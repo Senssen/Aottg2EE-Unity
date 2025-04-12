@@ -29,6 +29,7 @@ namespace Characters
         public BaseUseable Special;
         public BaseUseable Special_2; // added by Ata 12 May 2024 for Ability Wheel //
         public BaseUseable Special_3; // added by Ata 12 May 2024 for Ability Wheel //
+        public BaseUseable[] SpecialsArray;
         public BaseUseable Weapon;
         public BaseUseable Weapon_2;
         public HookUseable HookLeft;
@@ -2457,7 +2458,7 @@ namespace Characters
                 HookLeft.OnFixedUpdate();
                 HookRight.OnFixedUpdate();
 
-                Special.OnFixedUpdate();
+                Special?.OnFixedUpdate();
                 Special_2?.OnFixedUpdate();
                 Special_3?.OnFixedUpdate();
 
