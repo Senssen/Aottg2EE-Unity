@@ -2460,6 +2460,10 @@ namespace Characters
                 Special.OnFixedUpdate();
                 Special_2?.OnFixedUpdate();
                 Special_3?.OnFixedUpdate();
+
+                if (Weapon is BladeWeapon) {
+                    ((BladeWeapon)Weapon).FixedUpdateBladeToggle();
+                }
             }
         }
 

@@ -16852,6 +16852,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4995271365690675047, guid: a1e469c69675a564dac973877f6995ba, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8199807647128747056, guid: a1e469c69675a564dac973877f6995ba, type: 3}
       propertyPath: m_Name
       value: SupplyPackPrefab
