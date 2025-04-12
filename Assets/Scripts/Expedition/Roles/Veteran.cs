@@ -123,15 +123,23 @@ class Veteran : MonoBehaviour
 
         if (human.Weapon is BladeWeapon)
         {
+            if (human.Grounded)
+                human.CrossFade(HumanAnimations.ChangeBlade, 0.1f, 0f);
+            else
+                human.CrossFade(HumanAnimations.ChangeBladeAir, 0.1f, 0f);
+
             if (((BladeWeapon)human.Weapon).CurrentDurability <= 0)
                 human.ToggleBlades(false);
         }
         if (human.Weapon is ThunderspearWeapon)
         {
+            if (human.Grounded)
+                human.CrossFade(HumanAnimations.AHSSGunReloadBoth, 0.1f, 0f);
+            else
+                human.CrossFade(HumanAnimations.AHSSGunReloadBothAir, 0.1f, 0f);
+
             if (((ThunderspearWeapon)human.Weapon).RoundLeft <= 0)
-            {
                 human.SetThunderspears(false, false);
-            }
         }
 
         ReloadGearSkin();
