@@ -21,6 +21,7 @@ namespace Characters
         protected BasicTitanAnimations BasicAnimations;
         public bool IsCrawler;
         protected string _runAnimation;
+        protected string _walkAnimation;
         public BasicTitanSetup Setup;
         public Quaternion _oldHeadRotation;
         public Quaternion? LateUpdateHeadRotation = Quaternion.identity;
@@ -65,6 +66,39 @@ namespace Characters
                 else
                     _runAnimation = BasicAnimations.Runs[runAnimationType - 1];
             }
+
+            #region Faker Titan added by Snake on 1 June 24
+
+            if (data != null && data.HasKey("WalkAnimation"))
+            {
+                _walkAnimation = data["WalkAnimation"];
+            }
+            else
+            {
+                // Default walk animation
+                _walkAnimation = BasicAnimations.Walk;
+            }
+
+            if (Random.value * 100f  <= SettingsManager.InGameCurrent.Titan.TitanChanceFaker.Value)
+            {
+                if (Name == "Punk" || Name == "Thrower")
+                {
+                    _runAnimation = Random.value > 0.5f ? BasicAnimations.Walk : BasicAnimations.Runs[0];
+                }
+                else if (Name == "Abnormal" || Name == "Jumper")
+                {
+                    _runAnimation = Random.value > 0.5f ? BasicAnimations.Walk : BasicAnimations.Runs[1];
+                }
+                else if (Name == "Titan")
+                {
+                    _walkAnimation = Random.value > 0.5f ? BasicAnimations.Runs[0] : BasicAnimations.Runs[1];
+                }
+
+                Name += "<color=#772732> [F]</color>";
+            }
+
+            #endregion
+
             Cache.PhotonView.RPC("SetCrawlerRPC", RpcTarget.AllBuffered, new object[] { IsCrawler });
             base.Init(ai, team, data);
             Animation.SetSpeed(BasicAnimations.CoverNape, 1.2f);
@@ -329,6 +363,20 @@ namespace Characters
             StateActionWithTime(TitanState.Run, _runAnimation, 0f, 0.5f);
             if (IsCrawler && !BasicCache.CrawlerHitbox.IsActive())
                 BasicCache.CrawlerHitbox.Activate();
+        }
+
+        //Faker Titan added by Snake on 1 June 24
+        public override void Walk()
+        {
+            if (!string.IsNullOrEmpty(_walkAnimation))
+            {
+                _stepPhase = 0;
+                StateActionWithTime(TitanState.Walk, _walkAnimation, 0f, 0.5f);
+            }
+            else
+            {
+                Debug.LogError("Walk animation not set for BasicTitan");
+            }
         }
 
         public override void WallClimb()
