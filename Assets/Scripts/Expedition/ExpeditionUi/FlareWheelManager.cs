@@ -71,6 +71,7 @@ public class FlareWheelManager : MonoBehaviour
 
             if (hoveredFlare != null && hoveredFlare >= 1 && hoveredFlare <= 8) {
                 PhotonExtensions.GetMyHuman().GetComponent<Human>().UseItem((int)hoveredFlare - 1);
+                hoveredFlare = null;
             }
         }
     }
