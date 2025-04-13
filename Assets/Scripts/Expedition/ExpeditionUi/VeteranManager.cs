@@ -286,4 +286,11 @@ public class VeteranManager : MonoBehaviour
         if(_human.Setup.Weapon_2 == HumanWeapon.Thunderspear)
             LoadoutImage.sprite = LoadSpriteForLoadout("TS");
     }
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (!hasFocus) {
+            HideAbilityWheel();
+        }
+    }
 }

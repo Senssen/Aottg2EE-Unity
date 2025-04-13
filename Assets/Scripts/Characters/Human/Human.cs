@@ -15,7 +15,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UI;
-using Unity.VisualScripting;
 using UnityEngine;
 using Utility;
 using Weather;
@@ -29,6 +28,7 @@ namespace Characters
         public BaseUseable Special;
         public BaseUseable Special_2; // added by Ata 12 May 2024 for Ability Wheel //
         public BaseUseable Special_3; // added by Ata 12 May 2024 for Ability Wheel //
+        public BaseUseable[] SpecialsArray;
         public BaseUseable Weapon;
         public BaseUseable Weapon_2;
         public HookUseable HookLeft;
@@ -833,13 +833,19 @@ namespace Characters
                 else
                     _reloadAnimation = HumanAnimations.ChangeBladeAir;
             }
-            CrossFade(_reloadAnimation, 0.1f, 0f);
+            
+            PlayReloadAnimation(_reloadAnimation);
+            ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.Reload();
+        }
+
+        public void PlayReloadAnimation(string anim)
+        {
+            CrossFade(anim, 0.1f, 0f);
             State = HumanState.Reload;
-            _stateTimeLeft = Animation.GetTotalTime(_reloadAnimation);
+            _stateTimeLeft = Animation.GetTotalTime(anim);
             _needFinishReload = true;
             _reloadTimeLeft = _stateTimeLeft;
             _reloadCooldownLeft = _reloadTimeLeft + 0.5f;
-            ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.Reload();
         }
 
         protected void FinishReload()
@@ -2457,7 +2463,7 @@ namespace Characters
                 HookLeft.OnFixedUpdate();
                 HookRight.OnFixedUpdate();
 
-                Special.OnFixedUpdate();
+                Special?.OnFixedUpdate();
                 Special_2?.OnFixedUpdate();
                 Special_3?.OnFixedUpdate();
 
