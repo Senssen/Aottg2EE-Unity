@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/ExpeditionAssets/Maps/Momo_FallOfShiganshina.unity
     guid: 8708a07265c5c2d45bb467326615ad30
+  - enabled: 1
+    path: Assets/Resources/ExpeditionAssets/Maps/Momo_SouthernShiganshina.unity
+    guid: 652aece27df611847a16750f00eb34af
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
