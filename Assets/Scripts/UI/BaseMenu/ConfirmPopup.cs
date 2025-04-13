@@ -51,7 +51,7 @@ namespace UI
                 _onConfirm.Invoke();
             Hide();
 
-            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().CloseEmMenu();
+            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlMenu(false);
         }
     }
 }

@@ -75,8 +75,14 @@ namespace Controllers
             }
             int forward = 0;
             int right = 0;
-            if (_generalInput.Autorun.GetKeyDown())
+            if (_generalInput.Autorun.GetKeyDown()) {
                 _autorun = !_autorun;
+
+                ExpeditionUiManager uiManager = GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>();
+                if (_human.MountState == HumanMountState.Horse) {
+                    uiManager.ControlHorseUi(_autorun);
+                }
+            }
             if (_generalInput.Forward.GetKey())
                 forward = 1;
             else if (_generalInput.Back.GetKey())

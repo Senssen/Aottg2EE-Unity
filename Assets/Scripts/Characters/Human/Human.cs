@@ -374,6 +374,7 @@ namespace Characters
                 SetTriggerCollider(false);
             }
             _lastMountMessage = null;
+            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>()?.ControlHorseUi(false);
             Cache.PhotonView.RPC("UnmountRPC", RpcTarget.All, new object[0]);
         }
 
