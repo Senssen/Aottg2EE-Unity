@@ -38,12 +38,6 @@ Shader "Terrain_7"
       // distance noise
       [NoScaleOffset]_DistanceNoise("Detail Noise (Lum/Normal)", 2D) = "grey" {}
       _DistanceNoiseScaleStrengthFade("Detail Scale", Vector) = (0.25, 0.5, 100, 250)
-      // distance resampling
-      // uv scale, near, fast
-      _ResampleDistanceParams("ResampleDistanceParams", Vector) = (0.25, 180, 500, 0)
-
-
-     _DistanceResampleAlbedoStrength("Resampled Albedo Strength", Range(0.1, 1.0)) = 1
 
 
       _StochasticContrast("Contrast", Range(0.001, 0.999)) = 0.2
@@ -90,7 +84,6 @@ Shader "Terrain_7"
       #define _BRANCHSAMPLES 1
       #define _BRANCHSAMPLESAGR 1
       #define _DISTANCENOISE 1
-      #define _DISTANCERESAMPLE 1
       #define _STOCHASTIC 1
       #define _MSRENDERLOOP_SURFACESHADER 1
 
@@ -1037,7 +1030,6 @@ Shader "Terrain_7"
          
 
 
-     half _DistanceResampleAlbedoStrength;
 
          half _StochasticContrast;
          half _StochasticScale;
@@ -6388,7 +6380,6 @@ float3 GetTessFactors ()
       #define _BRANCHSAMPLES 1
       #define _BRANCHSAMPLESAGR 1
       #define _DISTANCENOISE 1
-      #define _DISTANCERESAMPLE 1
       #define _STOCHASTIC 1
       #define _MSRENDERLOOP_SURFACESHADER 1
 
@@ -7327,7 +7318,6 @@ float3 GetTessFactors ()
          
 
 
-     half _DistanceResampleAlbedoStrength;
 
          half _StochasticContrast;
          half _StochasticScale;
@@ -12614,7 +12604,6 @@ float3 GetTessFactors ()
       #define _BRANCHSAMPLES 1
       #define _BRANCHSAMPLESAGR 1
       #define _DISTANCENOISE 1
-      #define _DISTANCERESAMPLE 1
       #define _STOCHASTIC 1
       #define _MSRENDERLOOP_SURFACESHADER 1
 
@@ -13559,7 +13548,6 @@ float3 GetTessFactors ()
          
 
 
-     half _DistanceResampleAlbedoStrength;
 
          half _StochasticContrast;
          half _StochasticScale;
@@ -18928,7 +18916,6 @@ float3 GetTessFactors ()
       #define _BRANCHSAMPLES 1
       #define _BRANCHSAMPLESAGR 1
       #define _DISTANCENOISE 1
-      #define _DISTANCERESAMPLE 1
       #define _STOCHASTIC 1
       #define _MSRENDERLOOP_SURFACESHADER 1
 
@@ -19848,7 +19835,6 @@ float3 GetTessFactors ()
          
 
 
-     half _DistanceResampleAlbedoStrength;
 
          half _StochasticContrast;
          half _StochasticScale;
@@ -25047,7 +25033,6 @@ float3 GetTessFactors ()
       #define _BRANCHSAMPLES 1
       #define _BRANCHSAMPLESAGR 1
       #define _DISTANCENOISE 1
-      #define _DISTANCERESAMPLE 1
       #define _STOCHASTIC 1
       #define _MSRENDERLOOP_SURFACESHADER 1
 
@@ -25984,7 +25969,6 @@ float3 GetTessFactors ()
          
 
 
-     half _DistanceResampleAlbedoStrength;
 
          half _StochasticContrast;
          half _StochasticScale;
@@ -31172,7 +31156,7 @@ float3 GetTessFactors ()
       UsePass "Hidden/Nature/Terrain/Utilities/SELECTION"
 
    }
-   Dependency "BaseMapShader" =  "Hidden/Terrain_7_Base2001911563"
-   Fallback "Hidden/Terrain_7_Base2001911563"
+   Dependency "BaseMapShader" =  "Hidden/Terrain_7_Base82434847"
+   Fallback "Hidden/Terrain_7_Base82434847"
    CustomEditor "MicroSplatShaderGUI"
 }

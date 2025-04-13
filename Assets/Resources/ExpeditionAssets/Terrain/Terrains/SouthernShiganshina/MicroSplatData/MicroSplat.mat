@@ -88,7 +88,8 @@ Material:
     - _StochasticScale: 1
     m_Colors:
     - _DistanceNoiseScaleStrengthFade: {r: 0.82, g: 0.4, b: 100, a: 250}
+    - _DistanceResampleNoiseParams: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _NoiseUVParams: {r: 1, g: 1, b: 0, a: 0}
-    - _ResampleDistanceParams: {r: 0.1, g: 5000, b: 5000, a: 0}
+    - _ResampleDistanceParams: {r: 0.4, g: 623, b: 700, a: 0}
     - _UVScale: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
