@@ -418,7 +418,7 @@ namespace Characters
             ToggleSparks(false);
         }
 
-        public void Dash(float targetAngle)
+        public void Dash(float targetAngle, bool _canBurst)
         {
             if (_dashTimeLeft <= 0f && Stats.CurrentGas > 0 && MountState == HumanMountState.None &&
                 State != HumanState.Grab && CarryState != HumanCarryState.Carry && _dashCooldownLeft <= 0f)
@@ -427,7 +427,7 @@ namespace Characters
                 Vector3 direction = GetTargetDirection();
                 Vector3 moveDirection = GetComponent<Rigidbody>().velocity;
                 float angle = Vector3.Angle(new Vector3(direction.x, 0, direction.z).normalized, new Vector3(moveDirection.x, 0, moveDirection.z).normalized);
-                bool _empowered = angle <= 10f;
+                bool _empowered = angle <= 10f && _canBurst;
                 Stats.UseDashGas(_empowered);
 
                 _originalDashSpeed = Cache.Rigidbody.velocity.magnitude;

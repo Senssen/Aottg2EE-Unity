@@ -505,7 +505,7 @@ namespace Controllers
                     }
                 }
                 if (currentDirection != HumanDashDirection.None)
-                    _human.Dash(GetDashAngle(currentDirection));
+                    _human.Dash(GetDashAngle(currentDirection), _humanInput.DashBurst.Value);
             }
         }
 
