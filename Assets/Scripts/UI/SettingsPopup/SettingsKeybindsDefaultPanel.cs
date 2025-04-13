@@ -25,6 +25,9 @@ namespace UI
             {
                 ElementFactory.CreateToggleSetting(DoublePanelRight, style, SettingsManager.InputSettings.Human.DashDoubleTap,
                 UIManager.GetLocale(cat, "Keybinds.Human", "DashDoubleTap"));
+                
+                ElementFactory.CreateToggleSetting(DoublePanelRight, style, SettingsManager.InputSettings.Human.DashUpDoubleTap,
+                UIManager.GetLocale(cat, "Keybinds.Human", "DashUpDoubleTap"), tooltip: UIManager.GetLocale(cat, "Keybinds.Human", "DashUpDoubleTapTooltip"));
 
                 ElementFactory.CreateToggleSetting(DoublePanelRight, style, SettingsManager.InputSettings.Human.WallSlideDash,
                 UIManager.GetLocale(cat, "Keybinds.Human", "WallSlideDash"), tooltip: UIManager.GetLocale(cat, "Keybinds.Human", "WallSlideDashTooltip"));

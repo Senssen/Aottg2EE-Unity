@@ -72,6 +72,11 @@ namespace Characters
         {
             UseGas(4f);
         }
+        
+        public void UseVerticalDashGas()
+        {
+            UseGas(6f);
+        }
 
         public void UseFrameGas()
         {

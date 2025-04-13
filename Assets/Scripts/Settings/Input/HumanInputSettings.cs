@@ -9,6 +9,8 @@
         public KeybindSetting HookRight = new KeybindSetting(new string[] { "E", "None" });
         public KeybindSetting HookBoth = new KeybindSetting(new string[] { "None", "None" });
         public KeybindSetting Dash = new KeybindSetting(new string[] { "LeftControl", "None" });
+        public KeybindSetting DashUp = new KeybindSetting(new string[] { "H", "None" });
+        public KeybindSetting DashDown = new KeybindSetting(new string[] { "LeftControl", "None" });
         public KeybindSetting ReelIn = new KeybindSetting(new string[] { "WheelDown", "None" });
         public KeybindSetting ReelOut = new KeybindSetting(new string[] { "LeftAlt", "None" });
         public KeybindSetting Dodge = new KeybindSetting(new string[] { "LeftControl", "None" });
@@ -19,6 +21,7 @@
         public KeybindSetting HorseJump = new KeybindSetting(new string[] { "Space", "None" });
         public KeybindSetting NapeLock = new KeybindSetting(new string[] { "None", "None" });
         public BoolSetting DashDoubleTap = new BoolSetting(true);
+        public BoolSetting DashUpDoubleTap = new BoolSetting(true);
         public BoolSetting WallSlideDash = new BoolSetting(true);
         public FloatSetting ReelOutScrollSmoothing = new FloatSetting(0.2f, minValue: 0f, maxValue: 1f);
         public BoolSetting SwapTSAttackSpecial = new BoolSetting(false);
