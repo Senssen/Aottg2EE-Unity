@@ -463,7 +463,7 @@ namespace Controllers
                             break;
                         }
                     }
-                    if (currentDirection == HumanDashDirection.None)
+                    /* if (currentDirection == HumanDashDirection.None)
                     {
                         if (_human.Stats.Perks["OmniDash"].CurrPoints == 1)
                         {
@@ -483,7 +483,7 @@ namespace Controllers
                             else
                                 _human.DashVertical(GetTargetAngle(direction), Vector3.up);
                         }
-                    }
+                    } */
                 }
                 if (SettingsManager.InputSettings.Human.DashDoubleTap.Value)
                 {
@@ -517,7 +517,7 @@ namespace Controllers
             {
                 if (_humanInput.DashUp.GetKeyDown())
                 {
-                    _human.DashVertical_Expedition(Vector3.up);
+                    _human.DashVertical(Vector3.up);
                 }
                 if (SettingsManager.InputSettings.Human.DashUpDoubleTap.Value)
                 {
@@ -532,12 +532,12 @@ namespace Controllers
                         if (_dashUpwardsTime == -1f)
                             _dashUpwardsTime = 0f;
                         else if (_dashUpwardsTime > 0f)
-                            _human.DashVertical_Expedition(Vector3.up);
+                            _human.DashVertical(Vector3.up);
                     }
                 }
                 if (_humanInput.DashDown.GetKeyDown() && !_human.Grounded)
                 {
-                    _human.DashVertical_Expedition(Vector3.down);
+                    _human.DashVertical(Vector3.down);
                 }
             }
         }

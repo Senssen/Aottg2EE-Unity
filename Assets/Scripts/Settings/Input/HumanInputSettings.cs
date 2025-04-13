@@ -37,7 +37,7 @@
         public KeybindSetting LoadoutSwap = new KeybindSetting(new string[] { "None", "None" }); // Added by Ata 25 May 24 for Veteran Role //
         public BoolSetting DashDoubleTap = new BoolSetting(true); // Dash Variants by Ata
         public BoolSetting DashUpDoubleTap = new BoolSetting(true); // Dash Variants by Ata
-        public BoolSetting EmpoweredDash = new BoolSetting(true); // Dash Variants by Ata
+        public BoolSetting DashBurst = new BoolSetting(true); // Dash Variants by Ata
         #endregion
     }
 }
