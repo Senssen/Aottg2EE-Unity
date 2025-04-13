@@ -418,14 +418,18 @@ namespace Characters
             ToggleSparks(false);
         }
 
-        public void Dash(float targetAngle)
+        public void Dash(float targetAngle, bool _canBurst)
         {
             if (_dashTimeLeft <= 0f && Stats.CurrentGas > 0 && MountState == HumanMountState.None &&
                 State != HumanState.Grab && CarryState != HumanCarryState.Carry && _dashCooldownLeft <= 0f)
             {
-                Stats.UseDashGas();
                 TargetAngle = targetAngle;
                 Vector3 direction = GetTargetDirection();
+                Vector3 moveDirection = GetComponent<Rigidbody>().velocity;
+                float angle = Vector3.Angle(new Vector3(direction.x, 0, direction.z).normalized, new Vector3(moveDirection.x, 0, moveDirection.z).normalized);
+                bool _empowered = angle <= 10f && _canBurst;
+                Stats.UseDashGas(_empowered);
+
                 _originalDashSpeed = Cache.Rigidbody.velocity.magnitude;
                 _targetRotation = GetTargetRotation();
                 if (!_wallSlide)
@@ -444,18 +448,24 @@ namespace Characters
 
                 State = HumanState.AirDodge;
                 FalseAttack();
-                Cache.Rigidbody.AddForce(direction * 40f, ForceMode.VelocityChange);
+
+                if (_empowered)
+                    Cache.Rigidbody.AddForce(direction * 80f, ForceMode.VelocityChange);
+                else
+                    Cache.Rigidbody.AddForce(direction * 40f, ForceMode.VelocityChange);
+
                 _dashCooldownLeft = 0.2f;
                 ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.ShakeGas();
             }
         }
 
-        public void DashVertical(float targetAngle, Vector3 direction)
+        // Removed by Ata for Perks being Unnecessary to the mod.
+        /* public void DashVertical(float targetAngle, Vector3 direction)
         {
             if (_dashTimeLeft <= 0f && Stats.CurrentGas > 0 && MountState == HumanMountState.None &&
                 State != HumanState.Grab && CarryState != HumanCarryState.Carry && _dashCooldownLeft <= 0f)
             {
-                Stats.UseDashGas();
+                Stats.UseVerticalDashGas();
                 TargetAngle = targetAngle;
                 _originalDashSpeed = Cache.Rigidbody.velocity.magnitude;
                 _targetRotation = Quaternion.LookRotation(direction);
@@ -467,6 +477,28 @@ namespace Characters
                 State = HumanState.AirDodge;
                 FalseAttack();
                 Cache.Rigidbody.AddForce(direction * 40f, ForceMode.VelocityChange);
+                _dashCooldownLeft = 0.2f;
+                ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.ShakeGas();
+            }
+        } */
+
+        // Now we have this name for us to use :)
+        public void DashVertical(Vector3 direction)
+        {
+            if (_dashTimeLeft <= 0f && Stats.CurrentGas > 0 && MountState == HumanMountState.None &&
+                State != HumanState.Grab && CarryState != HumanCarryState.Carry && _dashCooldownLeft <= 0f)
+            {
+                Stats.UseVerticalDashGas();
+                _originalDashSpeed = Cache.Rigidbody.velocity.magnitude;
+                _targetRotation = Quaternion.LookRotation(direction);
+                Cache.Rigidbody.rotation = _targetRotation;
+                EffectSpawner.Spawn(EffectPrefabs.GasBurst, Cache.Transform.position, Cache.Transform.rotation);
+                PlaySound(HumanSounds.GasBurst);
+                _dashTimeLeft = 0.5f;
+                CrossFade(HumanAnimations.Dash, 0.1f, 0.1f);
+                State = HumanState.AirDodge;
+                FalseAttack();
+                Cache.Rigidbody.AddForce(direction * 60f, ForceMode.VelocityChange);
                 _dashCooldownLeft = 0.2f;
                 ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.ShakeGas();
             }
@@ -1167,13 +1199,14 @@ namespace Characters
                 else
                     PlaySound(HumanSounds.BladeHit);
                 var weapon = (BladeWeapon)Weapon;
-                if (Stats.Perks["AdvancedAlloy"].CurrPoints == 1)
+                // Removed by Ata for Perks being Unnecessary to the mod.
+                /* if (Stats.Perks["AdvancedAlloy"].CurrPoints == 1)
                 {
                     if (damage < 500)
                         weapon.UseDurability(weapon.CurrentDurability);
                 }
-                else
-                    weapon.UseDurability(2f);
+                else */
+                weapon.UseDurability(2f);
                 if (weapon.CurrentDurability == 0f)
                 {
                     ToggleBlades(false);
@@ -2734,11 +2767,12 @@ namespace Characters
                 var bladeInfo = CharacterData.HumanWeaponInfo["Blade"];
                 float durability = Stats.Ammunition * 3f - 140f;
                 int bladeCount = bladeInfo["Blades"].AsInt;
-                if (Stats.Perks["DurableBlades"].CurrPoints > 0)
+                // Removed by Ata for Perks being Unnecessary to the mod.
+                /* if (Stats.Perks["DurableBlades"].CurrPoints > 0)
                 {
                     durability *= 2f;
                     bladeCount = Mathf.FloorToInt(bladeCount * 0.5f);
-                }
+                } */
                 Weapon = new BladeWeapon(this, durability, bladeCount);
             }
             else if (humanWeapon == (int)HumanWeapon.AHSS)
@@ -3512,8 +3546,9 @@ namespace Characters
                 Animation.SetSpeed(HumanAnimations.AHSSGunReloadBoth, 0.76f);
                 Animation.SetSpeed(HumanAnimations.AHSSGunReloadBothAir, 1f);
             }
-            int refillPoints = Stats.Perks["RefillTime"].CurrPoints;
-            Animation.SetSpeed(HumanAnimations.Refill, refillPoints + 1);
+            // Removed by Ata for Perks being Unnecessary to the mod.
+            /* int refillPoints = Stats.Perks["RefillTime"].CurrPoints; */
+            Animation.SetSpeed(HumanAnimations.Refill, /* refillPoints +  */1);
         }
 
         private bool HasHook()

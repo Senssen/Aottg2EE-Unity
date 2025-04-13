@@ -19,6 +19,7 @@ namespace Controllers
         protected HumanInputSettings _humanInput;
         protected Dictionary<HumanDashDirection, KeybindSetting> _dashKeys;
         protected Dictionary<HumanDashDirection, float> _dashTimes;
+        private float _dashUpwardsTime = -1f;
         protected static LayerMask HookMask = PhysicsLayer.GetMask(PhysicsLayer.TitanMovebox, PhysicsLayer.TitanPushbox,
             PhysicsLayer.MapObjectEntities, PhysicsLayer.MapObjectProjectiles, PhysicsLayer.MapObjectAll);
 
@@ -265,6 +266,7 @@ namespace Controllers
             UpdateHookInput(inMenu);
             UpdateReelInput(inMenu);
             UpdateDashInput(inMenu);
+            UpdateVerticalDashInput(inMenu);
             UpdateLoadoutSwap(inMenu);
             bool canWeapon = _human.MountState == HumanMountState.None && !_illegalWeaponStates.Contains(_human.State) && !inMenu && !_human.Dead;
             var attackInput = _humanInput.AttackDefault;
@@ -461,7 +463,7 @@ namespace Controllers
                             break;
                         }
                     }
-                    if (currentDirection == HumanDashDirection.None)
+                    /* if (currentDirection == HumanDashDirection.None)
                     {
                         if (_human.Stats.Perks["OmniDash"].CurrPoints == 1)
                         {
@@ -481,7 +483,7 @@ namespace Controllers
                             else
                                 _human.DashVertical(GetTargetAngle(direction), Vector3.up);
                         }
-                    }
+                    } */
                 }
                 if (SettingsManager.InputSettings.Human.DashDoubleTap.Value)
                 {
@@ -503,7 +505,40 @@ namespace Controllers
                     }
                 }
                 if (currentDirection != HumanDashDirection.None)
-                    _human.Dash(GetDashAngle(currentDirection));
+                    _human.Dash(GetDashAngle(currentDirection), _humanInput.DashBurst.Value);
+            }
+        }
+
+        void UpdateVerticalDashInput(bool inMenu)
+        {
+            if (_human.State != HumanState.AirDodge && _human.MountState == HumanMountState.None && _human.State != HumanState.Grab && _human.CarryState != HumanCarryState.Carry
+                && _human.State != HumanState.Stun && _human.State != HumanState.EmoteAction && _human.State != HumanState.SpecialAction
+                && !inMenu && !_human.Dead)
+            {
+                if (_humanInput.DashUp.GetKeyDown())
+                {
+                    _human.DashVertical(Vector3.up);
+                }
+                if (SettingsManager.InputSettings.Human.DashUpDoubleTap.Value)
+                {
+                    if (_dashUpwardsTime >= 0f)
+                    {
+                        _dashUpwardsTime += Time.deltaTime;
+                        if (_dashUpwardsTime > 0.2f)
+                            _dashUpwardsTime = -1f;
+                    }
+                    if (_humanInput.Jump.GetKeyDown())
+                    {
+                        if (_dashUpwardsTime == -1f)
+                            _dashUpwardsTime = 0f;
+                        else if (_dashUpwardsTime > 0f)
+                            _human.DashVertical(Vector3.up);
+                    }
+                }
+                if (_humanInput.DashDown.GetKeyDown() && !_human.Grounded)
+                {
+                    _human.DashVertical(Vector3.down);
+                }
             }
         }
 
