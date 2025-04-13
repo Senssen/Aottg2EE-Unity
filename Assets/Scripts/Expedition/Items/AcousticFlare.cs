@@ -65,7 +65,7 @@ public class AcousticFlare : MonoBehaviourPun, IPunObservable
         }
 
 
-        UI.MinimapHandler.CreateMinimapIcon(uiTransform, "Flare");
+        UI.MinimapHandler.CreateWaypointMinimapIcon(uiTransform);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

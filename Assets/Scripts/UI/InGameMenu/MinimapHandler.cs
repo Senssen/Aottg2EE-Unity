@@ -63,6 +63,14 @@ namespace UI
             SetupIcon(texture, Color.white, transform);
         }
 
+        public static void CreateWaypointMinimapIcon(Transform transform)
+        {
+            if (Instance == null)
+                return;
+            string texture = "Minimap/Textures/WaypointImage";
+            SetupIcon(texture, Color.white, transform);
+        }
+
         public static void CreateMinimapIcon(BaseCharacter character)
         {
             if (Instance == null)

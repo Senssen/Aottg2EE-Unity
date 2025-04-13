@@ -14,6 +14,12 @@ public class Logistician : MonoBehaviour
     private LogisticianUiManager uiManager;
     [SerializeField]
     private GameObject SupplyPack;
+    [SerializeField]
+    public AudioSource GasCollectSound;
+    [SerializeField]
+    public AudioSource BladeCollectSound;
+    [SerializeField]
+    public AudioSource AmmoCollectSound;
 
     public void Start()
     {
