@@ -348,7 +348,7 @@
 	"Thrower": {
 		"Default": {
 			"Name": "Thrower",
-			"IsRun": true,
+			"IsRun": false,
 			"FarAttackMaxRange": 160,
 			"Attacks": {
 				"AttackGrab*": 0.1,
@@ -379,7 +379,7 @@
 			"AttackWait": 0.5,
 			"AttackPause": 0.3,
 			"ActionPause": 0.3,
-			"RotateSpeed": 2.0,
+			"RotateSpeed": 2.0
 		},
 		"Abnormal": {
 			"TurnPause": 0.2,
@@ -388,7 +388,7 @@
 			"ActionPause": 0.2,
 			"RotateSpeed": 4.0,
 			"WalkSpeedBase": 10.0,
-			"RunSpeedBase": 20.0,
+			"RunSpeedBase": 20.0
 		}
 	}
 }
