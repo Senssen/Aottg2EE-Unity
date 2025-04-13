@@ -423,9 +423,14 @@ namespace Characters
             if (_dashTimeLeft <= 0f && Stats.CurrentGas > 0 && MountState == HumanMountState.None &&
                 State != HumanState.Grab && CarryState != HumanCarryState.Carry && _dashCooldownLeft <= 0f)
             {
-                Stats.UseDashGas();
                 TargetAngle = targetAngle;
                 Vector3 direction = GetTargetDirection();
+                Vector3 moveDirection = GetComponent<Rigidbody>().velocity;
+                float angle = Vector3.Angle(new Vector3(direction.x, 0, direction.z).normalized, new Vector3(moveDirection.x, 0, moveDirection.z).normalized);
+                bool _empowered = angle <= 10f;
+                Stats.UseDashGas(_empowered);
+                Debug.Log(angle);
+
                 _originalDashSpeed = Cache.Rigidbody.velocity.magnitude;
                 _targetRotation = GetTargetRotation();
                 if (!_wallSlide)
@@ -444,7 +449,12 @@ namespace Characters
 
                 State = HumanState.AirDodge;
                 FalseAttack();
-                Cache.Rigidbody.AddForce(direction * 40f, ForceMode.VelocityChange);
+
+                if (_empowered)
+                    Cache.Rigidbody.AddForce(direction * 80f, ForceMode.VelocityChange);
+                else
+                    Cache.Rigidbody.AddForce(direction * 40f, ForceMode.VelocityChange);
+
                 _dashCooldownLeft = 0.2f;
                 ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.ShakeGas();
             }
@@ -455,7 +465,7 @@ namespace Characters
             if (_dashTimeLeft <= 0f && Stats.CurrentGas > 0 && MountState == HumanMountState.None &&
                 State != HumanState.Grab && CarryState != HumanCarryState.Carry && _dashCooldownLeft <= 0f)
             {
-                Stats.UseDashGas();
+                Stats.UseVerticalDashGas();
                 TargetAngle = targetAngle;
                 _originalDashSpeed = Cache.Rigidbody.velocity.magnitude;
                 _targetRotation = Quaternion.LookRotation(direction);

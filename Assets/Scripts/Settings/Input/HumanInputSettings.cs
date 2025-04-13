@@ -20,8 +20,6 @@
         public KeybindSetting HorseWalk = new KeybindSetting(new string[] { "LeftShift", "None" });
         public KeybindSetting HorseJump = new KeybindSetting(new string[] { "Space", "None" });
         public KeybindSetting NapeLock = new KeybindSetting(new string[] { "None", "None" });
-        public BoolSetting DashDoubleTap = new BoolSetting(true);
-        public BoolSetting DashUpDoubleTap = new BoolSetting(true);
         public BoolSetting WallSlideDash = new BoolSetting(true);
         public FloatSetting ReelOutScrollSmoothing = new FloatSetting(0.2f, minValue: 0f, maxValue: 1f);
         public BoolSetting SwapTSAttackSpecial = new BoolSetting(false);
@@ -37,6 +35,9 @@
         public KeybindSetting TriggerAbility2 = new KeybindSetting(new string[] { "Alpha2", "None" }); // Added by Ata 20 May 24 for Ability Wheel
         public KeybindSetting TriggerAbility3 = new KeybindSetting(new string[] { "Alpha3", "None" }); // Added by Ata 20 May 24 for Ability Wheel
         public KeybindSetting LoadoutSwap = new KeybindSetting(new string[] { "None", "None" }); // Added by Ata 25 May 24 for Veteran Role //
+        public BoolSetting DashDoubleTap = new BoolSetting(true); // Dash Variants by Ata
+        public BoolSetting DashUpDoubleTap = new BoolSetting(true); // Dash Variants by Ata
+        public BoolSetting EmpoweredDash = new BoolSetting(true); // Dash Variants by Ata
         #endregion
     }
 }
