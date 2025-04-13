@@ -14,7 +14,9 @@ public class ExpeditionUiManager : MonoBehaviour
     private InputField CoordsInputField;
 
     [SerializeField]
-    private GameObject HorseUi;
+    private GameObject HorseAutorun;
+    [SerializeField]
+    private GameObject HumanAutorun;
     
     private GeneralInputSettings _generalInputSettings;
 
@@ -36,10 +38,21 @@ public class ExpeditionUiManager : MonoBehaviour
         EmVariables.SetActive(_open);
     }
 
-    public void ControlHorseUi(bool _open)
+    public void ControlHorseAutorun(bool _open)
     {
-        if (HorseUi.activeSelf != _open)
-            HorseUi.SetActive(_open);
+        if (HorseAutorun.activeSelf != _open)
+            HorseAutorun.SetActive(_open);
+
+        if (_open)
+            HumanAutorun.SetActive(false);
+    }
+    public void ControlHumanAutorun(bool _open)
+    {
+        if (HumanAutorun.activeSelf != _open)
+            HumanAutorun.SetActive(_open);
+        
+        if (_open)
+            HorseAutorun.SetActive(false);
     }
     public void OnTPPlayerButtonClick(int setting)
     {
