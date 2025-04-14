@@ -7,6 +7,9 @@ using Utility;
 using UnityEngine.AI;
 using Map;
 using GameManagers;
+using Photon.Realtime;
+using Photon.Pun;
+using System.Linq;
 
 namespace Controllers
 {
@@ -224,17 +227,31 @@ namespace Controllers
             }
             if (_focusTimeLeft <= 0f || _enemy == null)
             {
-                var enemy = FindNearestEnemy();
-                if (enemy != null)
-                    _enemy = enemy;
-                else if (_enemy != null)
-                {
-                    if (TeamInfo.SameTeam(_titan.Team, _enemy.GetTeam()) || Vector3.Distance(_titan.Cache.Transform.position, _enemy.GetPosition()) > FocusRange)
-                        _enemy = null;
+                if (_titan.Name.Contains("[S]")) {
+                    if (_enemy == null) {
+                        var enemy = FindRandomEnemy();
+                        if (enemy != null) {
+                            _enemy = enemy;
+                            Debug.Log($"Random Enemy Selected");
+                        }
+
+                        if (_enemy != null && _enemy.ValidTarget() && _usePathfinding && _agent.isOnNavMesh && _agent.pathPending == false && !(_moveToActive && _moveToIgnoreEnemies))
+                            SetAgentDestination(_enemy.GetPosition());
+                        _focusTimeLeft = FocusTime;
+                    }
+                } else {
+                    var enemy = FindNearestEnemy();
+                    if (enemy != null)
+                        _enemy = enemy;
+                    else if (_enemy != null)
+                    {
+                        if (TeamInfo.SameTeam(_titan.Team, _enemy.GetTeam()) || Vector3.Distance(_titan.Cache.Transform.position, _enemy.GetPosition()) > FocusRange)
+                            _enemy = null;
+                    }
+                    if (_enemy != null && _enemy.ValidTarget() && _usePathfinding && _agent.isOnNavMesh && _agent.pathPending == false && !(_moveToActive && _moveToIgnoreEnemies))
+                        SetAgentDestination(_enemy.GetPosition());
+                    _focusTimeLeft = FocusTime;
                 }
-                if (_enemy != null && _enemy.ValidTarget() && _usePathfinding && _agent.isOnNavMesh && _agent.pathPending == false && !(_moveToActive && _moveToIgnoreEnemies))
-                    SetAgentDestination(_enemy.GetPosition());
-                _focusTimeLeft = FocusTime;
             }
             _titan.TargetEnemy = _enemy;
             if (_moveToActive && _moveToIgnoreEnemies)
@@ -644,6 +661,39 @@ namespace Controllers
                 }
             }
             return nearestCharacter;
+        }
+        
+        protected ITargetable FindRandomEnemy()
+        {
+            List<GameObject> playerGOs = GameObject.FindGameObjectsWithTag("Player").ToList();
+            List<GameObject> wagonGOs = playerGOs.FindAll(go => go.GetComponent<PhotonView>().Owner.CustomProperties.ContainsKey("Wagon"));
+
+            return SelectRandomEnemy(playerGOs, wagonGOs);
+        }
+
+        private BaseCharacter SelectRandomEnemy(List<GameObject> players, List<GameObject> wagons)
+        {
+            float wagonRoll = Random.Range(0, 10);
+            bool shouldSelectWagon = wagonRoll > 3f && wagonRoll <= 6f;
+
+            if (shouldSelectWagon) {
+                int idx = Random.Range(0, wagons.Count);
+                BaseCharacter character = wagons[idx].GetComponent<BaseCharacter>();
+                if (character != null && !character.Dead) {
+                    return character;
+                } else {
+                    return SelectRandomEnemy(players, wagons);
+                }
+            } else {
+                int idx = Random.Range(0, players.Count);
+                BaseCharacter character = players[idx].GetComponent<BaseCharacter>();
+                if (character != null && !character.Dead) {
+                    return character;
+                } else {
+                    return SelectRandomEnemy(players, wagons);
+                }
+            }
+
         }
 
         private string GetRandomAttack(List<string> validAttacks)
