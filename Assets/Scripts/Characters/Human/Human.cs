@@ -927,7 +927,7 @@ namespace Characters
                 return true;
             }
             Logistician logistician = GetComponent<Logistician>();
-            if (logistician.WeaponSupply < logistician.MaxItemSupply || logistician.GasSupply < logistician.MaxItemSupply)
+            if (logistician.WeaponSupply < EmVariables.LogisticianMaxSupply || logistician.GasSupply < EmVariables.LogisticianMaxSupply)
             {
                 return true;
             }

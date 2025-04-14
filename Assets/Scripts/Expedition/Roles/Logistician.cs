@@ -8,7 +8,6 @@ using ApplicationManagers;
 
 public class Logistician : MonoBehaviour
 {
-    public readonly int MaxItemSupply = 4;
     public int WeaponSupply { get; private set; }
     public int GasSupply { get; private set; }
     private LogisticianUiManager uiManager;
@@ -23,8 +22,8 @@ public class Logistician : MonoBehaviour
 
     public void Start()
     {
-        WeaponSupply = MaxItemSupply;
-        GasSupply = MaxItemSupply;
+        WeaponSupply = EmVariables.LogisticianMaxSupply;
+        GasSupply = EmVariables.LogisticianMaxSupply;
         uiManager = GameObject.Find("Expedition UI(Clone)").GetComponent<LogisticianUiManager>();
 
         uiManager.WeaponText.text = $"{WeaponSupply}";
@@ -53,8 +52,8 @@ public class Logistician : MonoBehaviour
 
     public void ResetSupplies()
     {
-        WeaponSupply = MaxItemSupply;
-        GasSupply = MaxItemSupply;
+        WeaponSupply = EmVariables.LogisticianMaxSupply;
+        GasSupply = EmVariables.LogisticianMaxSupply;
 
         uiManager.WeaponText.text = $"{WeaponSupply}";
         uiManager.GasText.text = $"{GasSupply}";

@@ -12,13 +12,15 @@ public class ExpeditionUiManager : MonoBehaviour
     private GameObject CanvasObj;
     [SerializeField]
     private InputField CoordsInputField;
-    
+    [SerializeField]
+    private TMP_Text MaxLogisticianCount;
     private GeneralInputSettings _generalInputSettings;
 
 
     private void Start()
     {
         _generalInputSettings = SettingsManager.InputSettings.General;
+        MaxLogisticianCount.text = EmVariables.LogisticianMaxSupply.ToString();
     }
 
     private void Update()
@@ -62,12 +64,22 @@ public class ExpeditionUiManager : MonoBehaviour
                 string[] tpCoordsSplit = CoordsInputField.text.Split(' ');
                 TargetplayerGameObject.GetComponent<Human>().photonView.RPC("moveToRPC", EmVariables.SelectedPlayer, new object[]
                 {
-                     float.Parse(tpCoordsSplit[0]),
-                     float.Parse(tpCoordsSplit[1]),
-                     float.Parse(tpCoordsSplit[2])
+                    float.Parse(tpCoordsSplit[0]),
+                    float.Parse(tpCoordsSplit[1]),
+                    float.Parse(tpCoordsSplit[2])
                 });
                 break;
         }
+    }
+
+    public void ControlLogisticianMaxCount(bool _increase)
+    {
+        if (_increase)
+            EmVariables.LogisticianMaxSupply++;
+        else 
+            EmVariables.LogisticianMaxSupply--;
+        
+        MaxLogisticianCount.text = EmVariables.LogisticianMaxSupply.ToString();
     }
 
     public void GiveRoles(int Role)
