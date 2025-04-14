@@ -674,7 +674,7 @@ namespace Controllers
         private BaseCharacter SelectRandomEnemy(List<GameObject> players, List<GameObject> wagons)
         {
             float wagonRoll = Random.Range(0, 10);
-            bool shouldSelectWagon = wagonRoll > 3f && wagonRoll <= 6f;
+            bool shouldSelectWagon = wagonRoll > 3f && wagonRoll <= 6f && wagons.Count > 0;
 
             if (shouldSelectWagon) {
                 int idx = Random.Range(0, wagons.Count);
