@@ -1087,6 +1087,9 @@ namespace Characters
                 }
                 LoadSkin();
             }
+
+            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHorseAutorun(false);
+            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHumanAutorun(false);
         }
 
         public override void OnPlayerEnteredRoom(Player player)
