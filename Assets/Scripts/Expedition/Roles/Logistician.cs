@@ -58,6 +58,8 @@ public class Logistician : MonoBehaviour
 
         uiManager.WeaponText.text = $"{WeaponSupply}";
         uiManager.GasText.text = $"{GasSupply}";
+        uiManager.GasText.color = GetColorForItemCount(GasSupply);
+        uiManager.WeaponText.color = GetColorForItemCount(WeaponSupply);
     }
 
     private void UseSupply(RoleItems.SupplyItem _itemType)
@@ -65,9 +67,22 @@ public class Logistician : MonoBehaviour
         if (_itemType == RoleItems.SupplyItem.Gas) {
             GasSupply--;
             uiManager.GasText.text = $"{GasSupply}";
+            uiManager.GasText.color = GetColorForItemCount(GasSupply);
         } else if (_itemType == RoleItems.SupplyItem.Weapon) {
             WeaponSupply--;
             uiManager.WeaponText.text = $"{WeaponSupply}";
+            uiManager.WeaponText.color = GetColorForItemCount(WeaponSupply);
+        }
+    }
+
+    private Color GetColorForItemCount(int count)
+    {
+        if (count <= 0) {
+            return new Color(0.514f, 0.231f, 0.267f);
+        } else if (count > 0 && count <= 2) {
+            return new Color(0.8f, 0.608f, 0.278f);
+        } else {
+            return new Color(0.475f, 0.592f, 0.318f);
         }
     }
 
