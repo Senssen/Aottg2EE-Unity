@@ -375,6 +375,7 @@ namespace Characters
             }
             _lastMountMessage = null;
             Cache.PhotonView.RPC("UnmountRPC", RpcTarget.All, new object[0]);
+            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHumanAutorun(GetComponent<HumanPlayerController>().GetAutorunState());
         }
 
         [PunRPC]
@@ -1124,6 +1125,9 @@ namespace Characters
                 }
                 LoadSkin();
             }
+
+            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHorseAutorun(false);
+            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHumanAutorun(false);
         }
 
         public override void OnPlayerEnteredRoom(Player player)
@@ -1704,6 +1708,7 @@ namespace Characters
                         Cache.Transform.position = Horse.Cache.Transform.position + Vector3.up * 1.95f;
                         Cache.Transform.rotation = Horse.Cache.Transform.rotation;
                         MountState = HumanMountState.Horse;
+                        GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHorseAutorun(GetComponent<HumanPlayerController>().GetAutorunState());
                         SetInterpolation(false);
                         if (!Animation.IsPlaying(HumanAnimations.HorseIdle))
                             CrossFade(HumanAnimations.HorseIdle, 0.1f);

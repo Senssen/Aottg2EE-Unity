@@ -5,7 +5,6 @@ public static class SceneSettingsManager
     public static void SetTerrainDetails(int DetailDistance, int DetailDensity, int TreeDistance)
     {
         Terrain[] terrains = GameObject.FindObjectsByType<Terrain>(sortMode: FindObjectsSortMode.None);
-        Debug.Log(terrains.Length);
         foreach (Terrain terrain in terrains)
         {
             terrain.detailObjectDistance = DetailDistance;
