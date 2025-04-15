@@ -18,6 +18,6 @@ namespace Utility
         public static string Projectiles = "Projectiles/Prefabs";
         public static string Weather = "Weather";
         public static string Expedition = "GamePfs";
-        public static string Logistician = "ExpeditionAssets/MomosFolder/Functionality/Logistician/Prefabs";
+        public static string Logistician = "ExpeditionAssets/Functional/Logistician/Prefabs";
     }
 }

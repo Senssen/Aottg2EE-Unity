@@ -36,7 +36,8 @@ namespace UI
             CreateStatBar(UIManager.GetLocale(cat, sub, "Gas"), stats.Gas);
             CreateStatBar(UIManager.GetLocale(cat, sub, "Ammunition"), stats.Ammunition);
             ElementFactory.CreateTextButton(BottomBar, style, UIManager.GetLocale(cat, sub, "EditStats"), onClick: () => OnButtonClick("EditStats"));
-            ElementFactory.CreateTextButton(BottomBar, style, UIManager.GetLocale(cat, sub, "EditPerks"), onClick: () => OnButtonClick("EditPerks"));
+            // Removed by Ata for Perks being Unnecessary to the mod.
+            /* ElementFactory.CreateTextButton(BottomBar, style, UIManager.GetLocale(cat, sub, "EditPerks"), onClick: () => OnButtonClick("EditPerks")); */
         }
 
         protected void CreateStatBar(string title, int value)
@@ -66,7 +67,8 @@ namespace UI
                     ((CharacterEditorHumanMenu)UIManager.CurrentMenu)._editStatsPopup.Hide();
                 }
             }
-            else if (button == "EditPerks")
+            // Removed by Ata for Perks being Unnecessary to the mod.
+            /* else if (button == "EditPerks")
             {
                 if (!((CharacterEditorHumanMenu)UIManager.CurrentMenu)._editPerksPopup.IsActive)
                 {
@@ -77,7 +79,7 @@ namespace UI
                 {
                     ((CharacterEditorHumanMenu)UIManager.CurrentMenu)._editPerksPopup.Hide();
                 }
-            }
+            } */
         }
     }
 }

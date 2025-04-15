@@ -2,7 +2,7 @@ using Characters;
 using Photon.Pun;
 using UnityEngine;
 
-public class CollectGas : MonoBehaviour
+public class CollectItem : MonoBehaviour
 {
     [SerializeField] 
     private RoleItems.SupplyItem _itemType;
@@ -29,14 +29,15 @@ public class CollectGas : MonoBehaviour
         {
             if (other.gameObject.GetPhotonView().IsMine)
             {
-                GameObject HumanObj = PhotonExtensions.GetMyHuman();
-                Human human = HumanObj.GetComponent<Human>();
+                Human human = PhotonExtensions.GetMyHuman().GetComponent<Human>();
+                Logistician logistician = PhotonExtensions.GetMyHuman().GetComponent<Logistician>();
 
                 if (_itemType == RoleItems.SupplyItem.Gas)
                 {
                     if (human.Stats.CurrentGas == human.Stats.MaxGas)
                         return;
 
+                    logistician.GasCollectSound.Play();
                     if (DroppedByDead)
                     {
                         human.Stats.CurrentGas = human.Stats.MaxGas * 0.3f;
@@ -55,8 +56,10 @@ public class CollectGas : MonoBehaviour
                         if (weapon.BladesLeft == weapon.MaxBlades)
                             return;
                         
-                        if (weapon.BladesLeft < weapon.MaxBlades)
+                        if (weapon.BladesLeft < weapon.MaxBlades) {
                             weapon.BladesLeft++;
+                            logistician.BladeCollectSound.Play();
+                        }
                     }
                     else if (Weapon is AHSSWeapon || Weapon is APGWeapon)
                     {
@@ -64,8 +67,10 @@ public class CollectGas : MonoBehaviour
                         if (weaponAHSS.AmmoLeft == weaponAHSS.MaxAmmo)
                             return;
 
-                        if (weaponAHSS.AmmoLeft < weaponAHSS.MaxAmmo)
+                        if (weaponAHSS.AmmoLeft < weaponAHSS.MaxAmmo) {
                             weaponAHSS.AmmoLeft++;
+                            logistician.AmmoCollectSound.Play();
+                        }
                     }
                     else if (Weapon is ThunderspearWeapon)
                     {
@@ -73,8 +78,10 @@ public class CollectGas : MonoBehaviour
                         if (weaponTS.AmmoLeft == weaponTS.MaxAmmo)
                             return;
 
-                        if (weaponTS.AmmoLeft < weaponTS.MaxAmmo)
+                        if (weaponTS.AmmoLeft < weaponTS.MaxAmmo) {
                             weaponTS.AmmoLeft++;
+                            logistician.AmmoCollectSound.Play();
+                        }
                     }
                 }
             }
