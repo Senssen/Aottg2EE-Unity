@@ -1,8 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
-using System.Collections;
 using System.Collections.Generic;
-using Photon.Pun;
 using UnityEngine;
 
 public class PlayerListManager : MonoBehaviourPunCallbacks
@@ -12,15 +10,15 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private Transform ScrollViewContent;
 
-    private List<PlayerButton> PlayerListings = new List<PlayerButton>();
+    public List<PlayerButton> PlayerListings = new List<PlayerButton>();
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         PlayerButton listing = Instantiate(PlayerButtonPrefab, ScrollViewContent);
         if (listing != null)
             listing.SetPlayerInfo(newPlayer);
-        PlayerListings.Add(listing);
 
+        PlayerListings.Add(listing);
         base.OnPlayerEnteredRoom(newPlayer);
     }
 
@@ -41,8 +39,8 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
         PlayerButton listing = Instantiate(PlayerButtonPrefab, ScrollViewContent);
         if (listing != null)
             listing.SetPlayerInfo(PhotonNetwork.LocalPlayer);
-        PlayerListings.Add(listing);
 
+        PlayerListings.Add(listing);
         base.OnJoinedRoom();
     }
 

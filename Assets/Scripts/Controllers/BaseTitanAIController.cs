@@ -674,8 +674,8 @@ namespace Controllers
 
             List<MapTargetable> wagons = players.FindAll(p => p.GetGameObject().GetPhotonView().Owner.CustomProperties.ContainsKey("Wagon"));
 
-            float wagonRoll = Random.Range(0, 10);
-            bool shouldSelectWagon = wagonRoll > 3f && wagonRoll <= 6f && wagons.Count > 0;
+            int wagonRoll = Random.Range(0, 11);
+            bool shouldSelectWagon = wagonRoll <= 7 && wagons.Count > 0;
 
             if (shouldSelectWagon) {
                 int idx = Random.Range(0, wagons.Count);

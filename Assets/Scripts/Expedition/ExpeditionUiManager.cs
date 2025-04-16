@@ -36,6 +36,7 @@ public class ExpeditionUiManager : MonoBehaviour
 
     public void OpenEmMenu()
     {
+        InvokeNameRefresh();
         CanvasObj.SetActive(true);
         EmVariables.SetActive(true);
     }
@@ -105,18 +106,23 @@ public class ExpeditionUiManager : MonoBehaviour
             EmVariables.SelectedPlayer.SetCustomProperties(props);
         }
 
-        InvokeNameRefresh(EmVariables.SelectedPlayer.CustomProperties);
+        InvokeNameRefresh(EmVariables.SelectedPlayer.ActorNumber);
     }
 
-    private void InvokeNameRefresh(ExitGames.Client.Photon.Hashtable props)
+    public void InvokeNameRefresh(int actorNumber)
     {
-        EmVariables.SelectedPlayer.SetCustomProperties(props);
-        GameObject[] objects = GameObject.FindGameObjectsWithTag("Expedition Menu Player Button");
-        foreach (GameObject obj in objects)
+        foreach (PlayerButton btn in GetComponent<PlayerListManager>().PlayerListings)
         {
-            PlayerButton btn = obj.GetComponent<PlayerButton>();
-            if (btn && btn.PhotonPlayer.ActorNumber == EmVariables.SelectedPlayer.ActorNumber)
+            if (btn && btn.PhotonPlayer.ActorNumber == actorNumber)
                 btn.NameRefresh();
+        }
+    }
+
+    public void InvokeNameRefresh()
+    {
+        foreach (PlayerButton btn in GetComponent<PlayerListManager>().PlayerListings)
+        {
+            btn.NameRefresh();
         }
     }
 }

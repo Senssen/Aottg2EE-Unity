@@ -1,9 +1,6 @@
 using GameManagers;
 using Photon.Realtime;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class PlayerButton : MonoBehaviour
@@ -24,9 +21,7 @@ public class PlayerButton : MonoBehaviour
 
     public void NameRefresh()
     {
-        Button_Text.text = 
-            $"[{PhotonPlayer.ActorNumber}]" +
-            $" {PhotonPlayer.GetStringProperty(PlayerProperty.Name)}";
+        Button_Text.text = $"[{PhotonPlayer.ActorNumber}]" + $" {PhotonPlayer.GetStringProperty(PlayerProperty.Name)}";
 
         if (PhotonPlayer.CustomProperties.ContainsKey("Cannoneer")) { Button_Text.text += " [<color=#74B831>CAN</color>]"; }
         if (PhotonPlayer.CustomProperties.ContainsKey("Carpenter")) { Button_Text.text += " [<color=#2C84DC>CAR</color>]"; }
