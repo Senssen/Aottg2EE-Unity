@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using ExitGames.Client.Photon;
 public class ExpeditionUiManager : MonoBehaviour
 {
     [SerializeField]
@@ -94,10 +95,15 @@ public class ExpeditionUiManager : MonoBehaviour
 
         if (RoleName == string.Empty) return;
 
-        if (EmVariables.SelectedPlayer.CustomProperties.ContainsKey(RoleName))
-            EmVariables.SelectedPlayer.CustomProperties.Remove(RoleName);
-        else
-            EmVariables.SelectedPlayer.CustomProperties.Add(RoleName, true);
+        if (EmVariables.SelectedPlayer.CustomProperties.ContainsKey(RoleName)) {
+            Hashtable props = new Hashtable();
+            props[RoleName] = null;
+            EmVariables.SelectedPlayer.SetCustomProperties(props);
+        } else {
+            Hashtable props = new Hashtable();
+            props[RoleName] = true;
+            EmVariables.SelectedPlayer.SetCustomProperties(props);
+        }
 
         InvokeNameRefresh(EmVariables.SelectedPlayer.CustomProperties);
     }
