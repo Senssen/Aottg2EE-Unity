@@ -668,10 +668,13 @@ namespace Controllers
             if (players.Count == 0)
                 return FindNearestEnemy();
 
-            List<MapTargetable> wagons = players.FindAll(p => p.GetGameObject().GetComponent<PhotonView>().Owner.CustomProperties.ContainsKey("Wagon"));
+            List<MapTargetable> wagons = players.FindAll(p => p.GetGameObject().GetPhotonView().Owner.CustomProperties.ContainsKey("Wagon"));
+
+            Debug.Log("Wagons: " + wagons.Count);
 
             float wagonRoll = Random.Range(0, 10);
-            bool shouldSelectWagon = wagonRoll > 3f && wagonRoll <= 6f && (wagons.Count - 1) > 0;
+            bool shouldSelectWagon = wagonRoll > 3f && wagonRoll <= 6f && wagons.Count > 0;
+            Debug.Log("Should Select Wagon: " + shouldSelectWagon);
 
             if (shouldSelectWagon) {
                 int idx = Random.Range(0, wagons.Count - 1);
