@@ -32,7 +32,7 @@ namespace Controllers
         public bool IsRun;
         public bool IsTurn;
         public float TurnAngle;
-        private float initialDelay = 5f;
+        private float initialDelay = 2f;
         protected Vector3 _moveToPosition;
         protected float _moveAngle;
         protected bool _moveToActive;
@@ -674,11 +674,8 @@ namespace Controllers
 
             List<MapTargetable> wagons = players.FindAll(p => p.GetGameObject().GetPhotonView().Owner.CustomProperties.ContainsKey("Wagon"));
 
-            Debug.Log("Wagons: " + wagons.Count);
-
             float wagonRoll = Random.Range(0, 10);
             bool shouldSelectWagon = wagonRoll > 3f && wagonRoll <= 6f && wagons.Count > 0;
-            Debug.Log("Should Select Wagon: " + shouldSelectWagon);
 
             if (shouldSelectWagon) {
                 int idx = Random.Range(0, wagons.Count);
