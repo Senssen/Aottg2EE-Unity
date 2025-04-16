@@ -32,6 +32,7 @@ namespace Controllers
         public bool IsRun;
         public bool IsTurn;
         public float TurnAngle;
+        private float initialDelay = 5f;
         protected Vector3 _moveToPosition;
         protected float _moveAngle;
         protected bool _moveToActive;
@@ -228,7 +229,10 @@ namespace Controllers
             if (_focusTimeLeft <= 0f || _enemy == null)
             {
                 if (_titan.Name.Contains("[S]")) {
-                    if (_enemy == null) {
+                    if (initialDelay > 0)
+                        initialDelay -= Time.fixedDeltaTime;
+
+                    if (_enemy == null && initialDelay <= 0) {
                         var enemy = FindRandomEnemy();
                         if (enemy != null) {
                             _enemy = enemy;
