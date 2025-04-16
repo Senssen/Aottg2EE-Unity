@@ -232,7 +232,6 @@ namespace Controllers
                         var enemy = FindRandomEnemy();
                         if (enemy != null) {
                             _enemy = enemy;
-                            Debug.Log($"Random Enemy Selected");
                         }
 
                         if (_enemy != null && _enemy.ValidTarget() && _usePathfinding && _agent.isOnNavMesh && _agent.pathPending == false && !(_moveToActive && _moveToIgnoreEnemies))
@@ -665,35 +664,32 @@ namespace Controllers
         
         protected ITargetable FindRandomEnemy()
         {
-            List<GameObject> playerGOs = GameObject.FindGameObjectsWithTag("Player").ToList();
-            List<GameObject> wagonGOs = playerGOs.FindAll(go => go.GetComponent<PhotonView>().Owner.CustomProperties.ContainsKey("Wagon"));
+            List<MapTargetable> players = MapLoader.MapTargetables.FindAll(targetable => targetable.GetTeam() == "Human" && targetable.GetGameObject().GetComponent<BaseCharacter>().Dead == false);
+            if (players.Count == 0)
+                return FindNearestEnemy();
 
-            return SelectRandomEnemy(playerGOs, wagonGOs);
-        }
+            List<MapTargetable> wagons = players.FindAll(p => p.GetGameObject().GetComponent<PhotonView>().Owner.CustomProperties.ContainsKey("Wagon"));
 
-        private BaseCharacter SelectRandomEnemy(List<GameObject> players, List<GameObject> wagons)
-        {
             float wagonRoll = Random.Range(0, 10);
-            bool shouldSelectWagon = wagonRoll > 3f && wagonRoll <= 6f && wagons.Count > 0;
+            bool shouldSelectWagon = wagonRoll > 3f && wagonRoll <= 6f && (wagons.Count - 1) > 0;
 
             if (shouldSelectWagon) {
-                int idx = Random.Range(0, wagons.Count);
-                BaseCharacter character = wagons[idx].GetComponent<BaseCharacter>();
+                int idx = Random.Range(0, wagons.Count - 1);
+                BaseCharacter character = wagons[idx].GetGameObject().GetComponent<BaseCharacter>();
                 if (character != null && !character.Dead) {
                     return character;
                 } else {
-                    return SelectRandomEnemy(players, wagons);
+                    return FindRandomEnemy();
                 }
             } else {
-                int idx = Random.Range(0, players.Count);
-                BaseCharacter character = players[idx].GetComponent<BaseCharacter>();
+                int idx = Random.Range(0, players.Count - 1);
+                BaseCharacter character = players[idx].GetGameObject().GetComponent<BaseCharacter>();
                 if (character != null && !character.Dead) {
                     return character;
                 } else {
-                    return SelectRandomEnemy(players, wagons);
+                    return FindRandomEnemy();
                 }
             }
-
         }
 
         private string GetRandomAttack(List<string> validAttacks)
