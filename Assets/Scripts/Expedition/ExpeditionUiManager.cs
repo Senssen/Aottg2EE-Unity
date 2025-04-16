@@ -73,7 +73,6 @@ public class ExpeditionUiManager : MonoBehaviour
     public void GiveRoles(int Role)
     {
         string RoleName = "";
-        ExitGames.Client.Photon.Hashtable playerProps = EmVariables.SelectedPlayer.CustomProperties;
         switch (Role)
         {
             case 0:
@@ -95,12 +94,12 @@ public class ExpeditionUiManager : MonoBehaviour
 
         if (RoleName == string.Empty) return;
 
-        if (playerProps.ContainsKey(RoleName))
-            playerProps.Remove(RoleName);
+        if (EmVariables.SelectedPlayer.CustomProperties.ContainsKey(RoleName))
+            EmVariables.SelectedPlayer.CustomProperties.Remove(RoleName);
         else
-            playerProps.Add(RoleName, true);
+            EmVariables.SelectedPlayer.CustomProperties.Add(RoleName, true);
 
-        InvokeNameRefresh(playerProps);
+        InvokeNameRefresh(EmVariables.SelectedPlayer.CustomProperties);
     }
 
     private void InvokeNameRefresh(ExitGames.Client.Photon.Hashtable props)

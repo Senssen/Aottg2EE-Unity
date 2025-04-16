@@ -681,7 +681,7 @@ namespace Controllers
             Debug.Log("Should Select Wagon: " + shouldSelectWagon);
 
             if (shouldSelectWagon) {
-                int idx = Random.Range(0, wagons.Count - 1);
+                int idx = Random.Range(0, wagons.Count);
                 BaseCharacter character = wagons[idx].GetGameObject().GetComponent<BaseCharacter>();
                 if (character != null && !character.Dead) {
                     return character;
@@ -689,7 +689,7 @@ namespace Controllers
                     return FindRandomEnemy();
                 }
             } else {
-                int idx = Random.Range(0, players.Count - 1);
+                int idx = Random.Range(0, players.Count);
                 BaseCharacter character = players[idx].GetGameObject().GetComponent<BaseCharacter>();
                 if (character != null && !character.Dead) {
                     return character;
