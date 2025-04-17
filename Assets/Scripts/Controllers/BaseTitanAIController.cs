@@ -233,7 +233,8 @@ namespace Controllers
                         initialDelay -= Time.fixedDeltaTime;
 
                     if (_enemy == null && initialDelay <= 0) {
-                        var enemy = FindRandomEnemy();
+                        int wagonRoll = Random.Range(0, 11);
+                        var enemy = FindRandomEnemy(wagonRoll);
                         if (enemy != null) {
                             _enemy = enemy;
                         }
@@ -666,32 +667,33 @@ namespace Controllers
             return nearestCharacter;
         }
         
-        protected ITargetable FindRandomEnemy()
+        protected ITargetable FindRandomEnemy(int wagonRoll)
         {
-            List<MapTargetable> players = MapLoader.MapTargetables.FindAll(targetable => targetable.GetTeam() == "Human" && targetable.GetGameObject().GetComponent<BaseCharacter>().Dead == false);
+            List<GameObject> players = GameObject.FindGameObjectsWithTag("Player").ToList().FindAll(player => player.GetComponent<Human>().Dead == false);
             if (players.Count == 0)
                 return FindNearestEnemy();
 
-            List<MapTargetable> wagons = players.FindAll(p => p.GetGameObject().GetPhotonView().Owner.CustomProperties.ContainsKey("Wagon"));
+            List<GameObject> wagons = players.FindAll(player => player.GetComponent<PhotonView>().Owner.CustomProperties.ContainsKey("Wagon"));
 
-            int wagonRoll = Random.Range(0, 11);
-            bool shouldSelectWagon = wagonRoll <= 7 && wagons.Count > 0;
+            bool shouldSelectWagon = false;
+            if (wagons.Count > 0 && wagonRoll <= 6)
+                shouldSelectWagon = true;
 
             if (shouldSelectWagon) {
                 int idx = Random.Range(0, wagons.Count);
-                BaseCharacter character = wagons[idx].GetGameObject().GetComponent<BaseCharacter>();
+                Human character = wagons[idx].GetComponent<Human>();
                 if (character != null && !character.Dead) {
                     return character;
                 } else {
-                    return FindRandomEnemy();
+                    return FindRandomEnemy(wagonRoll);
                 }
             } else {
                 int idx = Random.Range(0, players.Count);
-                BaseCharacter character = players[idx].GetGameObject().GetComponent<BaseCharacter>();
+                Human character = players[idx].GetComponent<Human>();
                 if (character != null && !character.Dead) {
                     return character;
                 } else {
-                    return FindRandomEnemy();
+                    return FindRandomEnemy(wagonRoll);
                 }
             }
         }
