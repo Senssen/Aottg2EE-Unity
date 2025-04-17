@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Characters;
 using Photon.Pun;
 using Settings;
@@ -9,6 +11,7 @@ class Veteran : MonoBehaviour
     private Human human;
     private VeteranManager _veteranManager;
     public bool isVeteranSet = false;
+    public Dictionary<string, float> AbilityCooldowns = new Dictionary<string, float> {};
     void Start()
     {
         _veteranManager = FindFirstObjectByType<VeteranManager>();
@@ -23,6 +26,14 @@ class Veteran : MonoBehaviour
     void Update()
     {
         SetupVeteran();
+
+        foreach (var key in AbilityCooldowns.Keys.ToList())
+        {
+            AbilityCooldowns[key] -= Time.deltaTime;
+
+            if (AbilityCooldowns[key] <= 0f)
+                AbilityCooldowns.Remove(key);
+        }
     }
 
     public void SetMyHuman(Human _human)
@@ -30,11 +41,22 @@ class Veteran : MonoBehaviour
         human = _human;
     }
 
-    public void SetAllSpecials(string special1, string special2, string special3)
+    public void SetAllSpecials(string special1, string special2, string special3, bool _setCooldowns = false)
     {
         human.Special = HumanSpecials.GetSpecialUseable(human, special1);
         human.Special_2 = HumanSpecials.GetSpecialUseable(human, special2);
         human.Special_3 = HumanSpecials.GetSpecialUseable(human, special3);
+        
+        if (_setCooldowns && human.Special is ResetSpecial && AbilityCooldowns.TryGetValue(((ResetSpecial)human.Special).SpecialName, out float _storedCooldown_1)) {
+            human.Special.SetCooldownLeft(_storedCooldown_1);
+        }
+        if (_setCooldowns && human.Special_2 is ResetSpecial && AbilityCooldowns.TryGetValue(((ResetSpecial)human.Special_2).SpecialName, out float _storedCooldown_2)) {
+            human.Special_2.SetCooldownLeft(_storedCooldown_2);
+        }
+        if (_setCooldowns && human.Special_3 is ResetSpecial && AbilityCooldowns.TryGetValue(((ResetSpecial)human.Special_3).SpecialName, out float _storedCooldown_3)) {
+            human.Special_3.SetCooldownLeft(_storedCooldown_3);
+        }
+
         human.SpecialsArray = new BaseUseable[] 
         {
             human.Special,

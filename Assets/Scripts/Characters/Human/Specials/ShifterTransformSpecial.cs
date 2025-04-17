@@ -3,17 +3,15 @@ using UnityEngine;
 
 namespace Characters
 {
-    class ShifterTransformSpecial : ExtendedUseable
+    class ShifterTransformSpecial : ResetSpecial
     {
         public float LiveTime = 60f;
         protected string _shifter;
         protected override float ActiveTime => 0.8f;
 
-        public ShifterTransformSpecial(BaseCharacter owner, string shifter): base(owner)
+        public ShifterTransformSpecial(BaseCharacter owner, string shifter): base(owner, shifter, 60f)
         {
-            Cooldown = 60f;
             _shifter = shifter;
-            SetCooldownLeft(Cooldown);
         }
 
         protected override void Activate()
@@ -26,6 +24,11 @@ namespace Characters
             var human = (Human)_owner;
             if (!human.Dead)
                 human.TransformShifter(_shifter, LiveTime);
+        }
+
+        public override void SetInitialCooldown()
+        {
+            SetCooldownLeft(Cooldown);
         }
     }
 }
