@@ -52,17 +52,23 @@ public class Logistician : MonoBehaviour
 
     public void ResetSupplies()
     {
+        if (HasInfinite())
+            return;
+
         WeaponSupply = EmVariables.LogisticianMaxSupply;
         GasSupply = EmVariables.LogisticianMaxSupply;
 
-        uiManager.WeaponText.text = $"{WeaponSupply}";
         uiManager.GasText.text = $"{GasSupply}";
         uiManager.GasText.color = GetColorForItemCount(GasSupply);
+        uiManager.WeaponText.text = $"{WeaponSupply}";
         uiManager.WeaponText.color = GetColorForItemCount(WeaponSupply);
     }
 
     private void UseSupply(RoleItems.SupplyItem _itemType)
     {
+        if (HasInfinite())
+            return;
+
         if (_itemType == RoleItems.SupplyItem.Gas) {
             GasSupply--;
             uiManager.GasText.text = $"{GasSupply}";
@@ -76,13 +82,53 @@ public class Logistician : MonoBehaviour
 
     private Color GetColorForItemCount(int count)
     {
-        if (count <= 0) {
+        if (count == -1)
+            return new Color(0.475f, 0.592f, 0.318f);
+
+        if (count == 0) {
             return new Color(0.514f, 0.231f, 0.267f);
-        } else if (count > 0 && count <= 2) {
+        } else if ((count / EmVariables.LogisticianMaxSupply > 0f && count / EmVariables.LogisticianMaxSupply < .3f) || (count > 0 && count <= 2)) {
             return new Color(0.8f, 0.608f, 0.278f);
         } else {
             return new Color(0.475f, 0.592f, 0.318f);
         }
+    }
+
+    private bool HasInfinite()
+    {
+        return EmVariables.LogisticianMaxSupply == -1;
+    }
+
+    public void SetSupplies(int maxSupply)
+    {
+        PhotonView photonView = GetComponent<PhotonView>();
+        photonView.RPC("SetSuppliesRPC", RpcTarget.AllBuffered, maxSupply);
+    }
+
+    [PunRPC]
+    public void SetSuppliesRPC(int maxSupply, PhotonMessageInfo info)
+    {
+        if (maxSupply == -1) {
+            uiManager.GasText.text = "∞";
+            uiManager.GasText.color = GetColorForItemCount(maxSupply);
+            uiManager.WeaponText.text = "∞";
+            uiManager.WeaponText.color = GetColorForItemCount(maxSupply);
+        } else {
+            if (GasSupply > maxSupply || GasSupply == EmVariables.LogisticianMaxSupply || EmVariables.LogisticianMaxSupply == -1) {
+                GasSupply = maxSupply;
+            }
+
+            if (WeaponSupply > maxSupply || WeaponSupply == EmVariables.LogisticianMaxSupply || EmVariables.LogisticianMaxSupply == -1) {
+                WeaponSupply = maxSupply;
+            }
+
+            uiManager.GasText.text = $"{GasSupply}";
+            uiManager.GasText.color = GetColorForItemCount(GasSupply);
+            uiManager.WeaponText.text = $"{WeaponSupply}";
+            uiManager.WeaponText.color = GetColorForItemCount(WeaponSupply);
+        }
+        
+        EmVariables.LogisticianMaxSupply = maxSupply;
     }
 
 }

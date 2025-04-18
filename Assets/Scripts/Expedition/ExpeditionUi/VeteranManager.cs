@@ -170,6 +170,9 @@ public class VeteranManager : MonoBehaviour
 
     private void HideAbilityWheel()
     {
+        if (AbilityWheelCanvas.activeSelf == false)
+            return;
+
         AbilityWheelCanvas.SetActive(false);
         EmVariables.IsOpen = false;
         Ability1Image.color = Color.white;

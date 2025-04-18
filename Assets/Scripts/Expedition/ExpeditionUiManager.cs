@@ -45,6 +45,7 @@ public class ExpeditionUiManager : MonoBehaviour
         } else {
             PlayerListTab.SetActive(false);
             SettingsTab.SetActive(false);
+            EmVariables.SelectedPlayer = null;
         }
     }
 
@@ -88,9 +89,9 @@ public class ExpeditionUiManager : MonoBehaviour
                 string[] tpCoordsSplit = CoordsInput.text.Split(' ');
                 TargetplayerGameObject.GetComponent<Human>().photonView.RPC("moveToRPC", EmVariables.SelectedPlayer, new object[]
                 {
-                     float.Parse(tpCoordsSplit[0]),
-                     float.Parse(tpCoordsSplit[1]),
-                     float.Parse(tpCoordsSplit[2])
+                    float.Parse(tpCoordsSplit[0]),
+                    float.Parse(tpCoordsSplit[1]),
+                    float.Parse(tpCoordsSplit[2])
                 });
                 break;
         }
@@ -150,6 +151,7 @@ public class ExpeditionUiManager : MonoBehaviour
             SettingsTab.SetActive(false);
         } else if (option == 2) {
             SettingsTab.SetActive(true);
+            LogisticianMaxSupplyInput.text = EmVariables.LogisticianMaxSupply.ToString();
             PlayerListTab.SetActive(false);
         } else {
             Debug.Log($"No action specified for option {option}");
@@ -163,7 +165,7 @@ public class ExpeditionUiManager : MonoBehaviour
                 Debug.LogWarning("The MC may only set the logistician value to numbers greater than or equal to -1. -1 means infinite supply.");
             }
 
-            EmVariables.LogisticianMaxSupply = value;
+            PhotonExtensions.GetMyHuman().GetComponent<Logistician>().SetSupplies(value);
         } else {
             Debug.LogError($"The value set was not an integer: {LogisticianMaxSupplyInput.text}");
         }
