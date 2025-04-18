@@ -49,3 +49,4 @@
 *.unity3d filter=lfs diff=lfs merge=lfs -text
 # Exclude Folders
 /Assets/Resources/ExpeditionAssets/* filter= diff= merge=
+/Assets/Scripts/Expedition/* filter= diff= merge=
