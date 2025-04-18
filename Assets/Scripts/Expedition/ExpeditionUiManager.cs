@@ -1,9 +1,6 @@
 using Photon.Pun;
-using Photon.Realtime;
 using Characters;
 using Settings;
-using Unity.VisualScripting;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class ExpeditionUiManager : MonoBehaviour
@@ -11,7 +8,13 @@ public class ExpeditionUiManager : MonoBehaviour
     [SerializeField]
     private GameObject CanvasObj;
     [SerializeField]
-    private InputField CoordsInputField;
+    private GameObject PlayerListTab;
+    [SerializeField]
+    private GameObject SettingsTab;
+    [SerializeField]
+    private InputField CoordsInput;
+    [SerializeField]
+    private InputField LogisticianMaxSupplyInput;
 
     [SerializeField]
     private GameObject HorseAutorun;
@@ -36,6 +39,13 @@ public class ExpeditionUiManager : MonoBehaviour
     {
         CanvasObj.SetActive(_open);
         EmVariables.SetActive(_open);
+        
+        if (_open == true) {
+            PlayerListTab.SetActive(true);
+        } else {
+            PlayerListTab.SetActive(false);
+            SettingsTab.SetActive(false);
+        }
     }
 
     public void ControlHorseAutorun(bool _open)
@@ -75,7 +85,7 @@ public class ExpeditionUiManager : MonoBehaviour
                 ME.transform.position = TargetplayerGameObject.transform.position;
                 break;
             case 3: //TP player to coords
-                string[] tpCoordsSplit = CoordsInputField.text.Split(' ');
+                string[] tpCoordsSplit = CoordsInput.text.Split(' ');
                 TargetplayerGameObject.GetComponent<Human>().photonView.RPC("moveToRPC", EmVariables.SelectedPlayer, new object[]
                 {
                      float.Parse(tpCoordsSplit[0]),
@@ -128,6 +138,34 @@ public class ExpeditionUiManager : MonoBehaviour
             PlayerButton btn = obj.GetComponent<PlayerButton>();
             if (btn && btn.PhotonPlayer.ActorNumber == EmVariables.SelectedPlayer.ActorNumber)
                 btn.NameRefresh();
+        }
+    }
+
+    public void ControlTabButton(int option)
+    {
+        if (option == 0) {
+            ControlMenu(false);
+        } else if (option == 1) {
+            PlayerListTab.SetActive(true);
+            SettingsTab.SetActive(false);
+        } else if (option == 2) {
+            SettingsTab.SetActive(true);
+            PlayerListTab.SetActive(false);
+        } else {
+            Debug.Log($"No action specified for option {option}");
+        }
+    }
+
+    public void SetLogisticianMaxSupply()
+    {
+        if (int.TryParse(LogisticianMaxSupplyInput.text, out int value)) {
+            if (value < -1) {
+                Debug.LogWarning("The MC may only set the logistician value to numbers greater than or equal to -1. -1 means infinite supply.");
+            }
+
+            EmVariables.LogisticianMaxSupply = value;
+        } else {
+            Debug.LogError($"The value set was not an integer: {LogisticianMaxSupplyInput.text}");
         }
     }
 }
