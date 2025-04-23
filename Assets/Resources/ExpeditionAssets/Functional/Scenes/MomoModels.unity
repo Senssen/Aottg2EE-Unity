@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 57893672}
   - component: {fileID: 57893671}
   m_Layer: 23
-  m_Name: Cube
+  m_Name: RainfallFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,12 +241,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57893669}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -29.17, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -171.58, y: -0.4699993, z: -42.08281}
   m_LocalScale: {x: 20, y: 0.5, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 127579781}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &57893671
 BoxCollider:
@@ -289,7 +289,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 25f2692738f2421449e667f198a80da6, type: 2}
+  - {fileID: 2100000, guid: ab3d8be8ad489e241b63d043d8d829d6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -427,17 +427,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 4330526204348165671, guid: 76daa83e9c904d748803458ea258a491, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 57893670}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76daa83e9c904d748803458ea258a491, type: 3}
---- !u!4 &127579781 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4330526204348165671, guid: 76daa83e9c904d748803458ea258a491, type: 3}
-  m_PrefabInstance: {fileID: 127579780}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &252250743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3366,6 +3358,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08d69cc7a544f9c48a6a3534e38f3b6e, type: 3}
+--- !u!1001 &2381440430026605080
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3098897568078464017, guid: 8af0bd817710b514b9171022e93bc986, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -601.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098897568078464017, guid: 8af0bd817710b514b9171022e93bc986, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098897568078464017, guid: 8af0bd817710b514b9171022e93bc986, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -21.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098897568078464017, guid: 8af0bd817710b514b9171022e93bc986, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098897568078464017, guid: 8af0bd817710b514b9171022e93bc986, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098897568078464017, guid: 8af0bd817710b514b9171022e93bc986, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098897568078464017, guid: 8af0bd817710b514b9171022e93bc986, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098897568078464017, guid: 8af0bd817710b514b9171022e93bc986, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098897568078464017, guid: 8af0bd817710b514b9171022e93bc986, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098897568078464017, guid: 8af0bd817710b514b9171022e93bc986, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8464729096668301174, guid: 8af0bd817710b514b9171022e93bc986, type: 3}
+      propertyPath: m_Name
+      value: Momo_House_Village1PF
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8af0bd817710b514b9171022e93bc986, type: 3}
 --- !u!1001 &2496087842340899892
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5286,6 +5335,7 @@ SceneRoots:
   - {fileID: 6445435555104925853}
   - {fileID: 1271934308}
   - {fileID: 127579780}
+  - {fileID: 57893670}
   - {fileID: 387116417}
   - {fileID: 6479791047327996419}
   - {fileID: 1436990628327188440}
@@ -5308,3 +5358,4 @@ SceneRoots:
   - {fileID: 5386965425510116595}
   - {fileID: 661388431891170346}
   - {fileID: 2237544995745000968}
+  - {fileID: 2381440430026605080}
