@@ -145,7 +145,7 @@ namespace Settings
                 WeatherEffects.Value = (int)WeatherEffectLevel.Low;
                 ShadowDistance.Value = 500;
                 LightDistance.Value = 100;
-                DetailDistance.Value = 200;
+                DetailDistance.Value = 100;
                 DetailDensity.Value = 100;
                 TreeDistance.Value = 400;
                 Bloom.Value = (int)BloomLevel.Off;
@@ -168,8 +168,8 @@ namespace Settings
                 WeatherEffects.Value = (int)WeatherEffectLevel.Medium;
                 ShadowDistance.Value = 500;
                 LightDistance.Value = 250;
-                DetailDistance.Value = 500;
-                DetailDensity.Value = 250;
+                DetailDistance.Value = 100;
+                DetailDensity.Value = 500;
                 TreeDistance.Value = 1000;
                 Bloom.Value = (int)BloomLevel.Low;
                 MotionBlur.Value = (int)MotionBlurLevel.Off;
@@ -191,8 +191,8 @@ namespace Settings
                 WeatherEffects.Value = (int)WeatherEffectLevel.High;
                 ShadowDistance.Value = 1000;
                 LightDistance.Value = 500;
-                DetailDistance.Value = 800;
-                DetailDensity.Value = 380;
+                DetailDistance.Value = 100;
+                DetailDensity.Value = 800;
                 TreeDistance.Value = 2500;
                 Bloom.Value = (int)BloomLevel.Low;
                 MotionBlur.Value = (int)MotionBlurLevel.Off;
@@ -214,8 +214,8 @@ namespace Settings
                 WeatherEffects.Value = (int)WeatherEffectLevel.High;
                 ShadowDistance.Value = 1000;
                 LightDistance.Value = 1000;
-                DetailDistance.Value = 1000;
-                DetailDensity.Value = 500;
+                DetailDistance.Value = 100;
+                DetailDensity.Value = 1000;
                 TreeDistance.Value = 5000;
                 Bloom.Value = (int)BloomLevel.Low;
                 MotionBlur.Value = (int)MotionBlurLevel.Off;
@@ -226,7 +226,7 @@ namespace Settings
                 WaterFX.Value = (int)WaterFXLevel.High;
                 AutoExposure.Value = (int)AutoExposureLevel.On;
                 HDR.Value = false;
-                RenderDistance.Value = 10000;
+                RenderDistance.Value = 20000;
             }
         }
     }
