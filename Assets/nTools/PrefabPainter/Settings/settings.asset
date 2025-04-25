@@ -964,7 +964,7 @@ MonoBehaviour:
       settings:
         brushRadius: 1
         brushSpacing: 4.94
-        brushOverlapCheckMode: 0
+        brushOverlapCheckMode: 1
         brushOverlapDistance: 45
         brushOverlapCheckObjects: 1
         brushOverlapCheckLayers:
@@ -1272,7 +1272,7 @@ MonoBehaviour:
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
       selectedSlot: 0
-      selected: 1
+      selected: 0
       colorTag: 0
       customPreviewImage: {fileID: 0}
     - name: Momo_Tree_Oak1_CV_WaveyPF
@@ -1295,8 +1295,8 @@ MonoBehaviour:
         randomizeOrientationZ: 0
         scaleTransformMode: 0
         scaleMode: 0
-        scaleUniformMin: 1
-        scaleUniformMax: 3
+        scaleUniformMin: 3
+        scaleUniformMax: 6
         scalePerAxisMin: {x: 1, y: 1, z: 1}
         scalePerAxisMax: {x: 1, y: 1, z: 1}
         pinFixedRotation: 0
