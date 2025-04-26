@@ -17,7 +17,7 @@ MonoBehaviour:
     brushes:
     - name: Momo_Tree_Aspen1_WaveyPF
       settings:
-        brushRadius: 20
+        brushRadius: 0.01
         brushSpacing: 5
         brushOverlapCheckMode: 1
         brushOverlapDistance: 35
@@ -327,7 +327,7 @@ MonoBehaviour:
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
       selectedSlot: 0
-      selected: 0
+      selected: 1
       colorTag: 0
       customPreviewImage: {fileID: 0}
     - name: Momo_Tree_GiantTree1PF
@@ -1272,7 +1272,7 @@ MonoBehaviour:
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
       selectedSlot: 0
-      selected: 1
+      selected: 0
       colorTag: 0
       customPreviewImage: {fileID: 0}
     - name: Momo_Tree_Oak1_CV_WaveyPF
