@@ -66,7 +66,6 @@ GameObject:
   - component: {fileID: 484856987100043810}
   - component: {fileID: 1875887992615677313}
   - component: {fileID: 7843468430788946056}
-  - component: {fileID: 3490900911773560324}
   - component: {fileID: 3149593022818544300}
   m_Layer: 23
   m_Name: Momo_Tree_Aspen1_WaveyPF
@@ -144,29 +143,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3490900911773560324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5869666280712299339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fadcc2d9a34a1a34f93d4962ec37e6e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_data: {fileID: 11400000, guid: dc42226a3a777634cb73a72379baa529, type: 2}
-  m_rootTransform: {fileID: 484856987100043810}
-  m_lodGroup: {fileID: 3149593022818544300}
-  m_renderers:
-  - {fileID: 7843468430788946056}
-  m_lodReplacement: 1
-  m_renderPipelineInUse: 0
-  m_insertIndex: 0
-  m_lastImpostor: {fileID: 7037407069216264142}
-  m_folderPath: Assets/Resources/ExpeditionAssets/Models/Nature/Trees/Impostors/
-  m_cutMode: 0
 --- !u!205 &3149593022818544300
 LODGroup:
   m_ObjectHideFlags: 0
