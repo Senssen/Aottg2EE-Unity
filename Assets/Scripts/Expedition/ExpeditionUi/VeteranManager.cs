@@ -292,7 +292,7 @@ public class VeteranManager : MonoBehaviour
 
     void OnApplicationFocus(bool hasFocus)
     {
-        if (!hasFocus) {
+        if (!hasFocus && AbilityWheelCanvas.activeSelf) {
             HideAbilityWheel();
         }
     }

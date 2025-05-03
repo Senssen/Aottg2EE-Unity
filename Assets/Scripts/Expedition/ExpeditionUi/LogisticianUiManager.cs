@@ -106,7 +106,7 @@ public class LogisticianUiManager : MonoBehaviour
 
     void OnApplicationFocus(bool hasFocus)
     {
-        if (!hasFocus) {
+        if (!hasFocus && SelectScreen.activeSelf) {
             CloseSelectScreen();
         }
     }
