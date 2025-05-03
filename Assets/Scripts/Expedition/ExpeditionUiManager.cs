@@ -45,7 +45,7 @@ public class ExpeditionUiManager : MonoBehaviour
         } else {
             PlayerListTab.SetActive(false);
             SettingsTab.SetActive(false);
-            EmVariables.SelectedPlayer = null;
+            GetComponent<PlayerListManager>().ResetSelectedButton();
         }
     }
 

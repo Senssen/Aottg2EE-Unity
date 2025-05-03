@@ -15,7 +15,8 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
     [Header("Button Behavior")]
     private Button selectedButton;
     private Color selectedColor = new Color(0.12f, 0.23f, 0.34f);
-    private Color normalColor = new Color(0.15f, 0.30f, 0.46f);
+    private Color neutralColor = new Color(0.15f, 0.30f, 0.46f);
+    private Color hoverColor = new Color(0.30f, 0.52f, 0.77f);
     [SerializeField]
     AudioSource sound;
 
@@ -90,7 +91,7 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
     {
         if (selectedButton != null && selectedButton != btn)
         {
-            SetButtonColor(selectedButton, normalColor);
+            SetButtonColor(selectedButton, neutralColor);
         }
 
         selectedButton = btn;
@@ -106,5 +107,16 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
         cb.highlightedColor = color;
         cb.pressedColor = color;
         button.colors = cb;
+    }
+
+    public void ResetSelectedButton()
+    {
+        var cb = selectedButton.colors;
+        cb.normalColor = neutralColor;
+        cb.selectedColor = selectedColor;
+        cb.highlightedColor = hoverColor;
+        cb.pressedColor = selectedColor;
+        selectedButton.colors = cb;
+        EmVariables.SelectedPlayer = null;
     }
 }
