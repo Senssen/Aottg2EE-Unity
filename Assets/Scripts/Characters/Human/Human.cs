@@ -779,17 +779,24 @@ namespace Characters
             var character = (BaseShifter)_inGameManager.CurrentCharacter;
             character.PreviousHumanGas = Stats.CurrentGas;
             character.PreviousHumanWeapon = Weapon;
+            character.PreviousAbilityCooldowns = GetComponent<Veteran>().AbilityCooldowns;
             PhotonNetwork.LocalPlayer.SetCustomProperty(PlayerProperty.CharacterViewId, character.Cache.PhotonView.ViewID);
             PhotonNetwork.Destroy(gameObject);
         }
 
-        public IEnumerator WaitAndTransformFromShifter(float previousHumanGas, BaseUseable previousHumanWeapon)
+        public IEnumerator WaitAndTransformFromShifter(float previousHumanGas, BaseUseable previousHumanWeapon, Dictionary<string, float> previousAbilityCooldowns)
         {
             while (!FinishSetup)
             {
                 yield return null;
             }
             Stats.CurrentGas = previousHumanGas;
+
+            Veteran veteran = GetComponent<Veteran>();
+            InGameCharacterSettings _s = SettingsManager.InGameCharacterSettings;
+            veteran.AbilityCooldowns = previousAbilityCooldowns;
+            veteran.SetAllSpecials(_s.Special.Value, _s.Special_2.Value, _s.Special_3.Value, true);
+
             if (previousHumanWeapon is BladeWeapon)
             {
                 BladeWeapon previousBlade = (BladeWeapon)previousHumanWeapon;
