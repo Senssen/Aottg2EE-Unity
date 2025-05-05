@@ -32,5 +32,10 @@ namespace Map
         {
             return Team;
         }
+
+        public GameObject GetGameObject()
+        {
+            return _transform.gameObject;
+        }
     }
 }

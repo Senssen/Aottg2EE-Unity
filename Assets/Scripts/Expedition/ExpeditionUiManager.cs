@@ -3,6 +3,7 @@ using Characters;
 using Settings;
 using UnityEngine;
 using UnityEngine.UI;
+using ExitGames.Client.Photon;
 public class ExpeditionUiManager : MonoBehaviour
 {
     [SerializeField]
@@ -41,6 +42,7 @@ public class ExpeditionUiManager : MonoBehaviour
         EmVariables.SetActive(_open);
         
         if (_open == true) {
+            InvokeNameRefresh();
             PlayerListTab.SetActive(true);
         } else {
             PlayerListTab.SetActive(false);
@@ -100,7 +102,6 @@ public class ExpeditionUiManager : MonoBehaviour
     public void GiveRoles(int Role)
     {
         string RoleName = "";
-        ExitGames.Client.Photon.Hashtable playerProps = EmVariables.SelectedPlayer.CustomProperties;
         switch (Role)
         {
             case 0:
@@ -122,23 +123,33 @@ public class ExpeditionUiManager : MonoBehaviour
 
         if (RoleName == string.Empty) return;
 
-        if (playerProps.ContainsKey(RoleName))
-            playerProps.Remove(RoleName);
-        else
-            playerProps.Add(RoleName, true);
+        if (EmVariables.SelectedPlayer.CustomProperties.ContainsKey(RoleName)) {
+            Hashtable props = new Hashtable();
+            props[RoleName] = null;
+            EmVariables.SelectedPlayer.SetCustomProperties(props);
+        } else {
+            Hashtable props = new Hashtable();
+            props[RoleName] = true;
+            EmVariables.SelectedPlayer.SetCustomProperties(props);
+        }
 
-        InvokeNameRefresh(playerProps);
+        InvokeNameRefresh(EmVariables.SelectedPlayer.ActorNumber);
     }
 
-    private void InvokeNameRefresh(ExitGames.Client.Photon.Hashtable props)
+    public void InvokeNameRefresh(int actorNumber)
     {
-        EmVariables.SelectedPlayer.SetCustomProperties(props);
-        GameObject[] objects = GameObject.FindGameObjectsWithTag("Expedition Menu Player Button");
-        foreach (GameObject obj in objects)
+        foreach (PlayerButton btn in GetComponent<PlayerListManager>().PlayerListings)
         {
-            PlayerButton btn = obj.GetComponent<PlayerButton>();
-            if (btn && btn.PhotonPlayer.ActorNumber == EmVariables.SelectedPlayer.ActorNumber)
+            if (btn && btn.PhotonPlayer.ActorNumber == actorNumber)
                 btn.NameRefresh();
+        }
+    }
+
+    public void InvokeNameRefresh()
+    {
+        foreach (PlayerButton btn in GetComponent<PlayerListManager>().PlayerListings)
+        {
+            btn.NameRefresh();
         }
     }
 

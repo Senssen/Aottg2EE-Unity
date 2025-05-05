@@ -10,7 +10,7 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
     private PlayerButton PlayerButtonPrefab;
     [SerializeField]
     private Transform ScrollViewContent;
-    private List<PlayerButton> PlayerListings = new List<PlayerButton>();
+    public List<PlayerButton> PlayerListings = new List<PlayerButton>();
 
     [Header("Button Behavior")]
     private Button selectedButton;
@@ -25,6 +25,7 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
         PlayerButton listing = Instantiate(PlayerButtonPrefab, ScrollViewContent);
         if (listing != null)
             listing.SetPlayerInfo(newPlayer);
+
         PlayerListings.Add(listing);
 
         Button btn = listing.GetComponent<Button>();
@@ -50,6 +51,7 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
         PlayerButton listing = Instantiate(PlayerButtonPrefab, ScrollViewContent);
         if (listing != null)
             listing.SetPlayerInfo(PhotonNetwork.LocalPlayer);
+
         PlayerListings.Add(listing);
 
         Button btn = listing.GetComponent<Button>();
