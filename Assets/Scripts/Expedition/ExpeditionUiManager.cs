@@ -73,10 +73,10 @@ public class ExpeditionUiManager : MonoBehaviour
 
         if (isOpening) {
             rt.localScale = Vector3.one;
-            PlayerListScrollArea.verticalNormalizedPosition = 1f;
+            PlayerListScrollArea.verticalNormalizedPosition = 1f; // added this line because otherwise the player list might scroll randomly on first open
         } else {
             rt.localScale = Vector3.zero;
-            CanvasObj.SetActive(false);
+            CanvasObj.SetActive(false); // carried these canvas active settings here because otherwise they will be inactive before the coroutine ends
             PlayerListTab.SetActive(false);
             SettingsTab.SetActive(false);
         }
