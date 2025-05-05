@@ -9,9 +9,15 @@ public class ExpeditionUiManager : MonoBehaviour
     [SerializeField]
     private GameObject CanvasObj;
     [SerializeField]
+    private GameObject TabsParent;
+    [SerializeField]
     private GameObject PlayerListTab;
     [SerializeField]
     private GameObject SettingsTab;
+    [SerializeField]
+    private ScrollRect PlayerListScrollArea;
+    [SerializeField]
+    private float AnimationDuration = 0.5f;
     [SerializeField]
     private InputField CoordsInput;
     [SerializeField]
@@ -38,17 +44,47 @@ public class ExpeditionUiManager : MonoBehaviour
 
     public void ControlMenu(bool _open)
     {
-        CanvasObj.SetActive(_open);
         EmVariables.SetActive(_open);
-        
         if (_open == true) {
+            CanvasObj.SetActive(true);
             InvokeNameRefresh();
             PlayerListTab.SetActive(true);
+            StartCoroutine(AnimateUI(true));
         } else {
-            PlayerListTab.SetActive(false);
-            SettingsTab.SetActive(false);
+            StartCoroutine(AnimateUI(false));
             GetComponent<PlayerListManager>().ResetSelectedButton();
         }
+    }
+
+    System.Collections.IEnumerator AnimateUI(bool isOpening)
+    {
+        float time = 0f;
+        RectTransform rt = TabsParent.GetComponent<RectTransform>();
+        while (time < AnimationDuration)
+        {
+            if (isOpening) {
+                rt.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, time / AnimationDuration);
+            } else {
+                rt.localScale = Vector3.Lerp(Vector3.one, Vector3.zero, time / AnimationDuration);
+            }
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        if (isOpening) {
+            rt.localScale = Vector3.one;
+            PlayerListScrollArea.verticalNormalizedPosition = 1f;
+        } else {
+            rt.localScale = Vector3.zero;
+            CanvasObj.SetActive(false);
+            PlayerListTab.SetActive(false);
+            SettingsTab.SetActive(false);
+        }
+    }
+
+    public void UpdatePlayerListVerticalScroll()
+    {
+        PlayerListScrollArea.vertical = GetComponent<PlayerListManager>().PlayerListings.Count >= 5;
     }
 
     public void ControlHorseAutorun(bool _open)

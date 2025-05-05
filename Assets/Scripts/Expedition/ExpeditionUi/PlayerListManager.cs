@@ -31,6 +31,8 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
         Button btn = listing.GetComponent<Button>();
         btn.onClick.AddListener(() => OnPlayerButtonClick(btn));
 
+        GetComponent<ExpeditionUiManager>().UpdatePlayerListVerticalScroll();
+
         base.OnPlayerEnteredRoom(newPlayer);
     }
 
@@ -42,6 +44,8 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
             Destroy(PlayerListings[index].gameObject);
             PlayerListings.RemoveAt(index);
         }
+
+        GetComponent<ExpeditionUiManager>().UpdatePlayerListVerticalScroll();
 
         base.OnPlayerLeftRoom(otherPlayer);
     }
@@ -56,6 +60,8 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
 
         Button btn = listing.GetComponent<Button>();
         btn.onClick.AddListener(() => OnPlayerButtonClick(btn));
+
+        GetComponent<ExpeditionUiManager>().UpdatePlayerListVerticalScroll();
 
         base.OnJoinedRoom();
     }
@@ -72,6 +78,9 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
             }
             PlayerListings.Clear();
         }
+
+        GetComponent<ExpeditionUiManager>().UpdatePlayerListVerticalScroll();
+
         base.OnLeftRoom();
     }
 
@@ -86,6 +95,9 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
             }
             PlayerListings.Clear();
         }
+        
+        GetComponent<ExpeditionUiManager>().UpdatePlayerListVerticalScroll();
+
         base.OnDisconnected(cause);
     }
 
@@ -113,6 +125,9 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
 
     public void ResetSelectedButton()
     {
+        if (!selectedButton)
+            return;
+
         var cb = selectedButton.colors;
         cb.normalColor = neutralColor;
         cb.selectedColor = selectedColor;
