@@ -76,8 +76,15 @@ namespace Controllers
             }
             int forward = 0;
             int right = 0;
-            if (_generalInput.Autorun.GetKeyDown())
+            if (_generalInput.Autorun.GetKeyDown()) {
                 _autorun = !_autorun;
+
+                if (_human.MountState == HumanMountState.Horse) {
+                    GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHorseAutorun(_autorun);
+                } else if (_human.MountState == HumanMountState.None) {
+                    GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHumanAutorun(_autorun);
+                }
+            }
             if (_generalInput.Forward.GetKey())
                 forward = 1;
             else if (_generalInput.Back.GetKey())
@@ -86,23 +93,20 @@ namespace Controllers
                 right = -1;
             else if (_generalInput.Right.GetKey())
                 right = 1;
-            if (forward != 0 || right != 0)
-                _autorun = false;
-            if (_autorun)
-            {
-                forward = 1;
-                right = 0;
-            }
-            if (forward != 0 || right != 0)
-            {
+            if (_autorun && forward == 0 && right == 0) {
+                _character.HasDirection = true;
+                float magnitude;
+                Vector3 v = _character.transform.forward;
+                magnitude = (v.magnitude <= 0.95f) ? ((v.magnitude >= 0.25f) ? v.magnitude : 0f) : 1f;
+                _human.TargetMagnitude = magnitude;
+            } else if (forward != 0 || right != 0) {
                 _character.TargetAngle = GetTargetAngle(forward, right);
                 _character.HasDirection = true;
+                float magnitude;
                 Vector3 v = new Vector3(right, 0f, forward);
-                float magnitude = (v.magnitude <= 0.95f) ? ((v.magnitude >= 0.25f) ? v.magnitude : 0f) : 1f;
+                magnitude = (v.magnitude <= 0.95f) ? ((v.magnitude >= 0.25f) ? v.magnitude : 0f) : 1f;
                 _human.TargetMagnitude = magnitude;
-            }
-            else
-            {
+            } else {
                 _character.HasDirection = false;
                 _human.TargetMagnitude = 0f;
             }
@@ -559,6 +563,11 @@ namespace Controllers
         bool IsSpin3Special()
         {
             return _human.State == HumanState.SpecialAttack && _human.Special is Spin3Special;
+        }
+
+        public bool GetAutorunState()
+        {
+            return _autorun;
         }
     }
 }

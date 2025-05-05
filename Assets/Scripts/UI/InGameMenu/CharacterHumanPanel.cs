@@ -45,6 +45,9 @@ namespace UI
             if (lastCharSettings.CharacterType.Value == PlayerCharacter.Human)
             {
                 charSettings.Special.Value = lastCharSettings.Special.Value;
+                charSettings.Special_2.Value = lastCharSettings.Special_2.Value;
+                charSettings.Special_3.Value = lastCharSettings.Special_3.Value;
+
                 charSettings.Costume.Value = lastCharSettings.Costume.Value;
                 charSettings.CustomSet.Value = lastCharSettings.CustomSet.Value;
                 charSettings.Loadout.Value = lastCharSettings.Loadout.Value;
@@ -154,6 +157,9 @@ namespace UI
             InGameCharacterSettings charSettings = SettingsManager.InGameCharacterSettings;
             InGameCharacterSettings lastCharSettings = SettingsManager.InGameSettings.LastCharacter;
             lastCharSettings.Special.Value = charSettings.Special.Value;
+            lastCharSettings.Special_2.Value = charSettings.Special_2.Value;
+            lastCharSettings.Special_3.Value = charSettings.Special_3.Value;
+
             lastCharSettings.Costume.Value = charSettings.Costume.Value;
             lastCharSettings.CustomSet.Value = charSettings.CustomSet.Value;
             lastCharSettings.Loadout.Value = charSettings.Loadout.Value;
