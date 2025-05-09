@@ -38,6 +38,7 @@
         public BoolSetting DashDoubleTap = new BoolSetting(true); // Dash Variants by Ata
         public BoolSetting DashUpDoubleTap = new BoolSetting(true); // Dash Variants by Ata
         public BoolSetting DashBurst = new BoolSetting(true); // Dash Variants by Ata
+        public KeybindSetting SpawnCannon = new KeybindSetting(new string[] { "RightShift", "None" });
         #endregion
     }
 }

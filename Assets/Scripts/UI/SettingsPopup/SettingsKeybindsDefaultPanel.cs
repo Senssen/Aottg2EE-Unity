@@ -31,6 +31,9 @@ namespace UI
                 
                 ElementFactory.CreateToggleSetting(DoublePanelRight, style, SettingsManager.InputSettings.Human.DashBurst,
                 UIManager.GetLocale(cat, "Keybinds.Human", "DashBurst"), tooltip: UIManager.GetLocale(cat, "Keybinds.Human", "DashBurstTooltip"));
+                
+                ElementFactory.CreateToggleSetting(DoublePanelRight, style, SettingsManager.InputSettings.Human.SpawnCannon,
+                UIManager.GetLocale(cat, "Keybinds.Human", "SpawnCannon"), tooltip: UIManager.GetLocale(cat, "Keybinds.Human", "SpawnCannonTooltip"));
 
                 ElementFactory.CreateToggleSetting(DoublePanelRight, style, SettingsManager.InputSettings.Human.WallSlideDash,
                 UIManager.GetLocale(cat, "Keybinds.Human", "WallSlideDash"), tooltip: UIManager.GetLocale(cat, "Keybinds.Human", "WallSlideDashTooltip"));
