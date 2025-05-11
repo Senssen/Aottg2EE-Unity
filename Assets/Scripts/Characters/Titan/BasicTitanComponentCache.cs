@@ -18,6 +18,7 @@ namespace Characters
         public ParticleSystem ForearmSmokeL;
         public ParticleSystem ForearmSmokeR;
         public ParticleSystem NapeBlood;
+        public ParticleSystem HeadBlood;
 
         public BasicTitanComponentCache(GameObject owner): base(owner)
         {
@@ -74,6 +75,11 @@ namespace Characters
             NapeBlood.transform.localPosition = new Vector3(0f, 0.02f, -0.1f);
             NapeBlood.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
             NapeBlood.transform.localScale = Vector3.one * 0.01f;
+
+            HeadBlood = ResourceManager.InstantiateAsset<GameObject>(ResourcePaths.Characters, "Titans/Particles/Prefabs/HeadBloodParticle", true).GetComponent<ParticleSystem>();
+            HeadBlood.transform.SetParent(Neck);
+            HeadBlood.transform.localPosition = new Vector3(0f, 0f, 0f);
+            HeadBlood.transform.localScale = Vector3.one * 10000f;
         }
     }
 }

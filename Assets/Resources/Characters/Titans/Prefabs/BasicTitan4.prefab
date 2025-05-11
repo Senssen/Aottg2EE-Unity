@@ -509,6 +509,7 @@ MonoBehaviour:
   RockThrow1Speed: 200
   TargetViewId: -1
   LookAtTarget: 0
+  HeadComponent: {fileID: 146012}
 --- !u!114 &11446000
 MonoBehaviour:
   m_ObjectHideFlags: 0

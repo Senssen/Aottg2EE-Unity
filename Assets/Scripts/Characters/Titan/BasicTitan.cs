@@ -12,6 +12,7 @@ using CustomLogic;
 using Photon.Pun;
 using Projectiles;
 using Spawnables;
+using Codice.Foreign;
 
 namespace Characters
 {
@@ -41,6 +42,9 @@ namespace Characters
 
         public override List<string> EmoteActions => new List<string>() { "Laugh", "Nod", "Shake", "Roar" };
         private TitanCustomSet _customSet;
+
+        [SerializeField]
+        private GameObject HeadComponent;
 
         public void Init(bool ai, string team, JSONNode data, TitanCustomSet customSet)
         {
@@ -533,10 +537,14 @@ namespace Characters
             var settings = SettingsManager.InGameCurrent.Titan;
             if (type == "CannonBall" || type == "Rock")
             {
-                if (EmVariables.NonLethalCannons == true || IsLethalPart(collider) == false)
-                    Cripple(20f);
-                else
+                if (EmVariables.NonLethalCannons == true || IsLethalPart(collider) == false) {
+                    Cripple(2f);
+                } else {
                     base.GetHitRPC(viewId, name, damage, type, collider);
+                    HeadComponent.SetActive(false);
+                    BasicCache.Head.gameObject.SetActive(false);
+                    BasicCache.HeadBlood.Play(true);
+                }
 
                 return;
             }
