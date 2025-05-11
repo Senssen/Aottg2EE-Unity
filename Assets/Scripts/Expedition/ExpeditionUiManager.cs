@@ -105,6 +105,9 @@ public class ExpeditionUiManager : MonoBehaviour
     }
     public void OnTPPlayerButtonClick(int setting)
     {
+        if (EmVariables.SelectedPlayer == null)
+            return;
+
         GameObject TargetplayerGameObject = PhotonExtensions.GetPlayerFromID(EmVariables.SelectedPlayer.ActorNumber);
         Vector3 Mypos = PhotonExtensions.GetMyPlayer().transform.position;
 
@@ -137,6 +140,9 @@ public class ExpeditionUiManager : MonoBehaviour
 
     public void GiveRoles(int Role)
     {
+        if (EmVariables.SelectedPlayer == null)
+            return;
+
         string RoleName = "";
         switch (Role)
         {
