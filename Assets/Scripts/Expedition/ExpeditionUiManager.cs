@@ -4,6 +4,7 @@ using Settings;
 using UnityEngine;
 using UnityEngine.UI;
 using ExitGames.Client.Photon;
+using TMPro;
 public class ExpeditionUiManager : MonoBehaviour
 {
     [SerializeField]
@@ -30,6 +31,9 @@ public class ExpeditionUiManager : MonoBehaviour
     
     private GeneralInputSettings _generalInputSettings;
 
+    [SerializeField]
+    private TMP_Text NonLethalCannonText;
+
 
     private void Start()
     {
@@ -49,6 +53,7 @@ public class ExpeditionUiManager : MonoBehaviour
             CanvasObj.SetActive(true);
             InvokeNameRefresh();
             PlayerListTab.SetActive(true);
+            SetNonLethalCannonsText();
             StartCoroutine(AnimateUI(true));
         } else {
             StartCoroutine(AnimateUI(false));
@@ -222,5 +227,16 @@ public class ExpeditionUiManager : MonoBehaviour
         } else {
             Debug.LogError($"The value set was not an integer: {LogisticianMaxSupplyInput.text}");
         }
+    }
+
+    public void HandleSetNonLethalCannons()
+    {
+        PhotonExtensions.GetMyHuman().GetComponent<Cannoneer>().SetNonLethalCannons(!EmVariables.NonLethalCannons);
+        SetNonLethalCannonsText();
+    }
+
+    private void SetNonLethalCannonsText()
+    {
+        NonLethalCannonText.text = $"Non-lethal Cannons: {EmVariables.NonLethalCannons}";
     }
 }

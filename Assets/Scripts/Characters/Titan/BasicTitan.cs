@@ -533,7 +533,11 @@ namespace Characters
             var settings = SettingsManager.InGameCurrent.Titan;
             if (type == "CannonBall" || type == "Rock")
             {
-                base.GetHitRPC(viewId, name, damage, type, collider);
+                if (EmVariables.NonLethalCannons == true)
+                    Cripple(2f);
+                else
+                    base.GetHitRPC(viewId, name, damage, type, collider);
+
                 return;
             }
             if (settings.TitanArmorEnabled.Value && (!IsCrawler || settings.TitanArmorCrawlerEnabled.Value))
