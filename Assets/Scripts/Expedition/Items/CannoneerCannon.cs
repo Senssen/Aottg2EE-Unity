@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 using Projectiles;
 using Effects;
 using UnityEngine.UIElements;
+using UI;
 
 class CannoneerCannon : MonoBehaviour
 {
@@ -80,7 +81,7 @@ class CannoneerCannon : MonoBehaviour
 
     void Shoot()
     {
-        if (!PV.IsMine)
+        if (!PV.IsMine || InGameMenu.InMenu())
             return;
 
         if (timer <= 0f) {
@@ -101,6 +102,9 @@ class CannoneerCannon : MonoBehaviour
 
     private void Controls()
     {
+        if (!PV.IsMine || InGameMenu.InMenu())
+            return;
+
         if (_interactionInput.Interact.GetKeyDown()) { 
             UnMount();
         }
