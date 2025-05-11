@@ -40,8 +40,11 @@ class CannoneerCannon : MonoBehaviour
         CannonLine = BarrelEnd.GetComponent<LineRenderer>();
 
         if (PV.IsMine) {
+            CannonLine.startWidth = 0.5f;
+            CannonLine.endWidth = 40f;
+            CannonLine.positionCount = 100;
+            
             CannonLine.enabled = true;
-            CannonLine.textureMode = LineTextureMode.Tile;
         } else {
             CannonLine.enabled = false;
         }
@@ -139,18 +142,6 @@ class CannoneerCannon : MonoBehaviour
         Vector3 velocity = BarrelEnd.forward * 300f;
 
         float timeStep = 40f / velocity.magnitude;
-
-        CannonLine.startWidth = 0.5f;
-        CannonLine.endWidth = 40f;
-        CannonLine.positionCount = 100;
-        
-        float totalLength = 0f;
-        for (int i = 1; i < CannonLine.positionCount; i++)
-        {
-            totalLength += Vector3.Distance(CannonLine.GetPosition(i - 1), CannonLine.GetPosition(i));
-        }
-        float textureRepeatCount = totalLength / 1f;
-        CannonLine.material.mainTextureScale = new Vector2(textureRepeatCount, 1f);
 
         for (int i = 0; i < 100; i++)
         {
