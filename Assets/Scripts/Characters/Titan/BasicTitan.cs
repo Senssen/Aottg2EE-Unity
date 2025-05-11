@@ -533,8 +533,8 @@ namespace Characters
             var settings = SettingsManager.InGameCurrent.Titan;
             if (type == "CannonBall" || type == "Rock")
             {
-                if (EmVariables.NonLethalCannons == true)
-                    Cripple(2f);
+                if (EmVariables.NonLethalCannons == true || IsLethalPart(collider) == false)
+                    Cripple(20f);
                 else
                     base.GetHitRPC(viewId, name, damage, type, collider);
 
@@ -1404,6 +1404,11 @@ namespace Characters
             }
             else
                 base.CheckGround();
+        }
+
+        private bool IsLethalPart(string collider)
+        {
+            return collider == "head" || collider == "neck";
         }
     }
 }
