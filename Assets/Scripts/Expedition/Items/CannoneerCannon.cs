@@ -30,12 +30,21 @@ class CannoneerCannon : MonoBehaviour
     private readonly float BallSpeed = 300f;
     private float timer = 0f;
 
+    private readonly float GRAVITY = -20f;
+
     private void Awake()
     {
         PV = gameObject.GetComponent<PhotonView>();
         Hero = PhotonExtensions.GetPlayerFromID(PV.Owner.ActorNumber);
         Human = Hero.GetComponent<Human>();
         CannonLine = BarrelEnd.GetComponent<LineRenderer>();
+
+        if (PV.IsMine) {
+            CannonLine.enabled = true;
+            CannonLine.textureMode = LineTextureMode.Tile;
+        } else {
+            CannonLine.enabled = false;
+        }
     }
 
     void Start()
@@ -68,11 +77,14 @@ class CannoneerCannon : MonoBehaviour
 
     void Shoot()
     {
+        if (!PV.IsMine)
+            return;
+
         if (timer <= 0f) {
             timer = 2f;
             Vector3 position = BarrelEnd.transform.position;
             Vector3 velocity = BarrelEnd.forward.normalized * BallSpeed;
-            Vector3 gravity = new Vector3(0, -20, 0);
+            Vector3 gravity = new Vector3(0, GRAVITY, 0);
 
             EffectSpawner.Spawn(EffectPrefabs.Boom2, position, gameObject.transform.rotation, 0.5f);
             ProjectileSpawner.Spawn(ProjectilePrefabs.CannonBall, position, Quaternion.Euler(Vector3.zero), velocity, gravity, 6.0f, Human.GetComponent<PhotonView>().ViewID, Human.Team);
@@ -119,7 +131,10 @@ class CannoneerCannon : MonoBehaviour
 
     private void DrawLine()
     {
-        Vector3 gravity = new Vector3(0f, -30f, 0f);
+        if (!PV.IsMine)
+            return;
+
+        Vector3 gravityVector = new Vector3(0f, GRAVITY, 0f);
         Vector3 position = BarrelEnd.position;
         Vector3 velocity = BarrelEnd.forward * 300f;
 
@@ -128,12 +143,20 @@ class CannoneerCannon : MonoBehaviour
         CannonLine.startWidth = 0.5f;
         CannonLine.endWidth = 40f;
         CannonLine.positionCount = 100;
+        
+        float totalLength = 0f;
+        for (int i = 1; i < CannonLine.positionCount; i++)
+        {
+            totalLength += Vector3.Distance(CannonLine.GetPosition(i - 1), CannonLine.GetPosition(i));
+        }
+        float textureRepeatCount = totalLength / 1f;
+        CannonLine.material.mainTextureScale = new Vector2(textureRepeatCount, 1f);
 
         for (int i = 0; i < 100; i++)
         {
             CannonLine.SetPosition(i, position);
-            position += velocity * timeStep + 0.5f * timeStep * timeStep * gravity;
-            velocity += gravity * timeStep;
+            position += velocity * timeStep + 0.5f * timeStep * timeStep * gravityVector;
+            velocity += gravityVector * timeStep;
         }
     }
 

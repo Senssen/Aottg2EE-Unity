@@ -113,11 +113,11 @@ public class ExpeditionUiManager : MonoBehaviour
             case 0: //TP all to me 
                 foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player"))
                 {
-                    go.GetComponent<Human>().photonView.RPC("moveToRPC", RpcTarget.Others, new object[] { Mypos.x, Mypos.y, Mypos.z });
+                    go.GetComponent<Human>().photonView.RPC("MoveToRPC", RpcTarget.Others, new object[] { Mypos.x, Mypos.y, Mypos.z });
                 }
                 break;
             case 1: //TP player to me
-                TargetplayerGameObject.GetComponent<Human>().photonView.RPC("moveToRPC", EmVariables.SelectedPlayer, new object[] { Mypos.x, Mypos.y, Mypos.z });
+                TargetplayerGameObject.GetComponent<Human>().photonView.RPC("MoveToRPC", EmVariables.SelectedPlayer, new object[] { Mypos.x, Mypos.y, Mypos.z });
                 break;
             case 2: //TP me to player
                 GameObject ME = PhotonExtensions.GetMyPlayer();
@@ -125,7 +125,7 @@ public class ExpeditionUiManager : MonoBehaviour
                 break;
             case 3: //TP player to coords
                 string[] tpCoordsSplit = CoordsInput.text.Split(' ');
-                TargetplayerGameObject.GetComponent<Human>().photonView.RPC("moveToRPC", EmVariables.SelectedPlayer, new object[]
+                TargetplayerGameObject.GetComponent<Human>().photonView.RPC("MoveToRPC", EmVariables.SelectedPlayer, new object[]
                 {
                     float.Parse(tpCoordsSplit[0]),
                     float.Parse(tpCoordsSplit[1]),
