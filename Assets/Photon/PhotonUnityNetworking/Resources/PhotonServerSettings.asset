@@ -142,6 +142,7 @@ MonoBehaviour:
   - moveToRPC
   - SetSuppliesRPC
   - UnMountCannoneer
+  - MoveToRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
