@@ -363,7 +363,7 @@ namespace GameManagers
             Transform playerTransform = MyPlayer();
 
             Vector3 pos;
-            pos = playerTransform.position /*+ Vector3.up * 1*/ + playerTransform.forward * 6;
+            pos = playerTransform.position + playerTransform.forward * 6;
 
             Quaternion rot;
             rot = playerTransform.rotation * Quaternion.Euler(0, 0, 0);
@@ -403,13 +403,10 @@ namespace GameManagers
 
             if (myHorse != null)
             {
-                //Debug.Log("Found my horse: " + myHorse.name);
-                AddLine($"Found my horse: {myHorse.name}", ChatTextColor.Error);
                 return myHorse;
             }
             else
             {
-                //Debug.LogWarning("No horse found with my PhotonView!");
                 AddLine($"No horse found with my PhotonView!", ChatTextColor.Error);
                 return null;
             }
