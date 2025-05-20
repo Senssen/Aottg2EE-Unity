@@ -164,7 +164,7 @@ public class ExpeditionUiManager : MonoBehaviour
                 RoleName = "Veteran";
                 break;
             case 4:
-                RoleName = "Wagon";
+                RoleName = "Wagoneer";
                 break;
         }
 

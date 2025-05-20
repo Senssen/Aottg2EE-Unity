@@ -6,13 +6,9 @@ using Map;
 using Effects;
 using CustomLogic;
 using ApplicationManagers;
-using Characters;
 using Photon.Pun;
 using Spawnables;
-using System.Collections;
-using Utility;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 
 namespace GameManagers
 {
@@ -264,9 +260,7 @@ namespace GameManagers
         [PunRPC]
         public void UnmountWagon(GameObject Wagon, PhotonMessageInfo Sender)
         {
-            //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 
-            //return; 
-
+            
             HingeJoint MountHinge = Wagon.transform.Find("WagonHorseAttachment").gameObject.GetComponent<HingeJoint>();
             Rigidbody TempHingeMount = Wagon.transform.Find("Temp Hindge Mount").gameObject.GetComponent<Rigidbody>();
 
@@ -276,18 +270,12 @@ namespace GameManagers
         [PunRPC]
         public void DespawnWagon(GameObject Wagon, PhotonMessageInfo Sender)
         {
-            //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 
-            //return; 
-
             Destroy(Wagon);
         }
 
         [PunRPC]
         public void SpawnWagon(Vector3 pos, Quaternion rot, PhotonMessageInfo Sender)
         {
-            //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 
-            //return; 
-
             GameObject wagonPrefab = Resources.Load<GameObject>("ExpeditionAssets/Functional/Wagon/Prefabs/Momo_Wagon1PF");
             Instantiate(wagonPrefab, pos, rot);
         }
@@ -295,9 +283,6 @@ namespace GameManagers
         [PunRPC]
         public void AttachWagonHindge(Transform HorseToMount, PhotonMessageInfo Sender)
         {
-            //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 
-                //return; 
-
             GameObject wagon = FindNearestWagon(Sender.photonView.gameObject);
 
             if (Vector3.Distance(wagon.transform.position, HorseToMount.position) > 20) //mount range
@@ -343,15 +328,9 @@ namespace GameManagers
             }
 
             if (nearestWagon != null)
-            {
-                Debug.Log("Found Wagon: " + nearestWagon.name);
                 return nearestWagon;
-            }
             else
-            {
-                Debug.LogWarning("No wagon found!");
                 return null;
-            }
         }
 
         #endregion

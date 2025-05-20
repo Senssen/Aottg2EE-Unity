@@ -14,9 +14,7 @@ using Photon.Pun;
 using System;
 using System.Reflection;
 using System.Linq;
-using Map;
 using System.Collections;
-using NUnit.Framework.Constraints;
 
 
 namespace GameManagers
@@ -462,7 +460,7 @@ namespace GameManagers
         private static void UnmountWagon(string[] args)
         {
             //check if player has Wagoneer
-            if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
+            if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagoneer"))
                 return;
 
             GameObject myplayer = MyPlayer().gameObject;
@@ -475,7 +473,7 @@ namespace GameManagers
         private static void DespawnWagon(string[] args)
         {
             //check if player has Wagoneer
-            if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
+            if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagoneer"))
                 return;
 
             GameObject myplayer = MyPlayer().gameObject;
@@ -491,7 +489,7 @@ namespace GameManagers
         private static void SpawnWagon(string[] args)
         {
             //check if player has Wagoneer
-            if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
+            if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagoneer"))
                 return;
 
             Transform playerTransform = MyPlayer();
@@ -511,7 +509,7 @@ namespace GameManagers
         private static void MountWagon(string[] args)
         {
             //check if player has Wagoneer
-            if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
+            if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagoneer"))
                 return;
 
             RPCManager.PhotonView.RPC(nameof(RPCManager.AttachWagonHindge), RpcTarget.AllBuffered, new object[] { FindMyHorse() });
