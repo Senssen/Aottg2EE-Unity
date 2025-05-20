@@ -472,7 +472,7 @@ namespace GameManagers
                 wagoneer.SendRPC("DespawnWagon");
             } else if (args[1] == "mount") {
                 wagoneer.SendRPC("MountWagon");
-            } else if (args[1] == "unmout") {
+            } else if (args[1] == "unmount") {
                 wagoneer.SendRPC("UnmountWagon");
             } else {
                 AddLine($"There is not definition for arguement {args[1]}");

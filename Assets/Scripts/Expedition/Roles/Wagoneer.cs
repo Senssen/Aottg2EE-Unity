@@ -29,7 +29,7 @@ public class Wagoneer : MonoBehaviour
         Vector3 position = transform.position + transform.forward * 6;
         Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
 
-        GameObject go = PhotonNetwork.Instantiate(ResourcePaths.Wagoneer + "/Momo_Wagon1PF", position, rotation, 0);
+        PhotonNetwork.Instantiate(ResourcePaths.Wagoneer + "/Momo_Wagon1PF", position, rotation, 0);
         ChatManager.AddLine("Spawned a wagon.");
     }
 
