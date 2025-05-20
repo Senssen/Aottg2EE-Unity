@@ -623,6 +623,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1174710376674131410}
   - component: {fileID: 2813673872677019734}
+  - component: {fileID: 4769701251419597703}
   m_Layer: 24
   m_Name: Momo_Wagon1PF
   m_TagString: Untagged
@@ -665,6 +666,28 @@ MonoBehaviour:
   Front_Wheels: {fileID: 44652267614804764}
   Back_Wheels: {fileID: 6621474944936643806}
   HarnessJoint: {fileID: 1077665487770394360}
+--- !u!114 &4769701251419597703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2331935075035172494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 0
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &2501603749598362763
 GameObject:
   m_ObjectHideFlags: 0

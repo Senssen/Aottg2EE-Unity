@@ -456,130 +456,48 @@ namespace GameManagers
 
         #region Wagoneer
 
-        [CommandAttribute("unmountwagon", "/unmountwagon: Detach the wagon from the horse.")]
-        private static void UnmountWagon(string[] args)
+        [CommandAttribute("wagon", "/wagon [COMMAND]: Runs wagon commands. Allowed arguements: spawn, despawn, mount, unmount.")]
+        private static void ControlWagon(string[] args)
         {
-            //check if player has Wagoneer
-            if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagoneer"))
-                return;
+            GameObject go = GetMyPlayer();
+            Wagoneer wagoneer = null;
+            if (go != null)
+                wagoneer = go.GetComponent<Wagoneer>();
 
-            GameObject myplayer = MyPlayer().gameObject;
-            GameObject wag = FindNearestWagon(myplayer);
-
-            RPCManager.PhotonView.RPC(nameof(RPCManager.UnmountWagon), RpcTarget.AllBuffered, new object[] { wag });
-        }
-
-        [CommandAttribute("despawnwagon", "/despawnwagon: Despawn the wagon.")]
-        private static void DespawnWagon(string[] args)
-        {
-            //check if player has Wagoneer
-            if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagoneer"))
-                return;
-
-            GameObject myplayer = MyPlayer().gameObject;
-            GameObject wag = FindNearestWagon(myplayer);
-
-            if (Vector3.Distance(myplayer.transform.position, wag.transform.position) > 20 ) //destroy range
-                return;
-
-            RPCManager.PhotonView.RPC(nameof(RPCManager.DespawnWagon), RpcTarget.AllBuffered, new object[] { wag });
-        }
-
-        [CommandAttribute("spawnwagon", "/spawnwagon: Spawn a wagon.")]
-        private static void SpawnWagon(string[] args)
-        {
-            //check if player has Wagoneer
-            if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagoneer"))
-                return;
-
-            Transform playerTransform = MyPlayer();
-
-            Vector3 pos;
-            pos = playerTransform.position + playerTransform.forward * 6;
-
-            Quaternion rot;
-            rot = playerTransform.rotation * Quaternion.Euler(0, 0, 0);
-
-            AddLine($"pos: {pos} rot: {rot}");
-
-            RPCManager.PhotonView.RPC(nameof(RPCManager.SpawnWagon), RpcTarget.AllBuffered, new object[] { pos, rot });
-        }
-
-        [CommandAttribute("mountwagon", "/mountwagon: Mount the nearest wagon to the horse.")]
-        private static void MountWagon(string[] args)
-        {
-            //check if player has Wagoneer
-            if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagoneer"))
-                return;
-
-            RPCManager.PhotonView.RPC(nameof(RPCManager.AttachWagonHindge), RpcTarget.AllBuffered, new object[] { FindMyHorse() });
-        }
-
-        public static Transform FindMyHorse()
-        {
-            GameObject[] allObjects = FindObjectsByType<GameObject>(sortMode: FindObjectsSortMode.None);
-            Transform myHorse = null;
-
-            foreach (GameObject obj in allObjects)
-            {
-                if (obj.name.Contains("Horse"))
-                {
-                    PhotonView pv = obj.GetComponent<PhotonView>();
-                    if (pv != null && pv.IsMine)
-                    {
-                        myHorse = obj.transform;
-                        break;
-                    }
-                }
-            }
-
-            if (myHorse != null)
-            {
-                return myHorse;
-            }
-            else
-            {
-                AddLine($"No horse found with my PhotonView!", ChatTextColor.Error);
-                return null;
+            if (args.Length == 1) {
+                AddLine("You need to pass one of the following arguments to use this command: spawn, despawn, mount, unmount");
+            } else if (args[1] == "spawn") {
+                wagoneer.SendRPC("SpawnWagon");
+            } else if (args[1] == "despawn") {
+                wagoneer.SendRPC("DespawnWagon");
+            } else if (args[1] == "mount") {
+                wagoneer.SendRPC("MountWagon");
+            } else if (args[1] == "unmout") {
+                wagoneer.SendRPC("UnmountWagon");
+            } else {
+                AddLine($"There is not definition for arguement {args[1]}");
             }
         }
 
-        private static Transform MyPlayer()
+        private static GameObject GetMyPlayer()
         {
-            Transform playerTransform = null;
+            GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
 
-            PhotonView[] allPlayers = FindObjectsByType<PhotonView>(sortMode: FindObjectsSortMode.None);
-
-            foreach (PhotonView pv in allPlayers)
+            GameObject myGo = null;
+            for (int i = 0; i < allPlayers.Length; i++)
             {
-                if (pv.IsMine)
-                {
-                    playerTransform = pv.transform;
+                GameObject go = allPlayers[i];
+                PhotonView pv = go.GetComponent<PhotonView>();
+                if (pv != null && pv.IsMine) {
+                    myGo = go;
                     break;
                 }
             }
-            return playerTransform;
-        }
 
-        private static GameObject FindNearestWagon(GameObject Wagoneer)
-        {
-            GameObject[] wagons = FindObjectsByType<GameObject>(FindObjectsSortMode.InstanceID);
-            GameObject nearestWagon = null;
-            float nearestDistance = 1500f; //max range to look for wagons
+            if (myGo == null)
+                UnityEngine.Debug.LogWarning("A player game object could not be found!");
 
-            foreach (GameObject obj in wagons)
-            {
-                if (obj.name.Contains("Momo_Wagon"))
-                {
-                    float distance = Vector3.Distance(Wagoneer.transform.position, obj.transform.position);
-                    if (distance < nearestDistance)
-                    {
-                        nearestDistance = distance;
-                        nearestWagon = obj;
-                    }
-                }
-            }
-            return nearestWagon;
+            return myGo;
         }
 
         #endregion
