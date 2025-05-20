@@ -3022,7 +3022,7 @@ namespace Characters
         #region MC Teleport
 
         [PunRPC]
-        public void moveToRPC(float x, float y, float z, PhotonMessageInfo info)
+        public void MoveToRPC(float x, float y, float z, PhotonMessageInfo info)
         {
             if (info.Sender.IsMasterClient)
             {
