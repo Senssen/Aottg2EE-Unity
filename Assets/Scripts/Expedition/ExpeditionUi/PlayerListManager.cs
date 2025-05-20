@@ -2,6 +2,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerListManager : MonoBehaviourPunCallbacks
 {
@@ -9,8 +10,15 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
     private PlayerButton PlayerButtonPrefab;
     [SerializeField]
     private Transform ScrollViewContent;
-
     public List<PlayerButton> PlayerListings = new List<PlayerButton>();
+
+    [Header("Button Behavior")]
+    private Button selectedButton;
+    private Color selectedColor = new Color(0.12f, 0.23f, 0.34f);
+    private Color neutralColor = new Color(0.15f, 0.30f, 0.46f);
+    private Color hoverColor = new Color(0.30f, 0.52f, 0.77f);
+    [SerializeField]
+    AudioSource sound;
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
@@ -19,6 +27,12 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
             listing.SetPlayerInfo(newPlayer);
 
         PlayerListings.Add(listing);
+
+        Button btn = listing.GetComponent<Button>();
+        btn.onClick.AddListener(() => OnPlayerButtonClick(btn));
+
+        GetComponent<ExpeditionUiManager>().UpdatePlayerListVerticalScroll();
+
         base.OnPlayerEnteredRoom(newPlayer);
     }
 
@@ -31,6 +45,8 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
             PlayerListings.RemoveAt(index);
         }
 
+        GetComponent<ExpeditionUiManager>().UpdatePlayerListVerticalScroll();
+
         base.OnPlayerLeftRoom(otherPlayer);
     }
 
@@ -41,6 +57,12 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
             listing.SetPlayerInfo(PhotonNetwork.LocalPlayer);
 
         PlayerListings.Add(listing);
+
+        Button btn = listing.GetComponent<Button>();
+        btn.onClick.AddListener(() => OnPlayerButtonClick(btn));
+
+        GetComponent<ExpeditionUiManager>().UpdatePlayerListVerticalScroll();
+
         base.OnJoinedRoom();
     }
 
@@ -56,6 +78,9 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
             }
             PlayerListings.Clear();
         }
+
+        GetComponent<ExpeditionUiManager>().UpdatePlayerListVerticalScroll();
+
         base.OnLeftRoom();
     }
 
@@ -70,6 +95,45 @@ public class PlayerListManager : MonoBehaviourPunCallbacks
             }
             PlayerListings.Clear();
         }
+        
+        GetComponent<ExpeditionUiManager>().UpdatePlayerListVerticalScroll();
+
         base.OnDisconnected(cause);
+    }
+
+    void OnPlayerButtonClick(Button btn)
+    {
+        if (selectedButton != null && selectedButton != btn)
+        {
+            SetButtonColor(selectedButton, neutralColor);
+        }
+
+        selectedButton = btn;
+        SetButtonColor(btn, selectedColor);
+        sound.Play();
+    }
+
+    void SetButtonColor(Button button, Color color)
+    {
+        var cb = button.colors;
+        cb.normalColor = color;
+        cb.selectedColor = color;
+        cb.highlightedColor = color;
+        cb.pressedColor = color;
+        button.colors = cb;
+    }
+
+    public void ResetSelectedButton()
+    {
+        if (!selectedButton)
+            return;
+
+        var cb = selectedButton.colors;
+        cb.normalColor = neutralColor;
+        cb.selectedColor = selectedColor;
+        cb.highlightedColor = hoverColor;
+        cb.pressedColor = selectedColor;
+        selectedButton.colors = cb;
+        EmVariables.SelectedPlayer = null;
     }
 }
