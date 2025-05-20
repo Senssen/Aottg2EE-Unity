@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using CustomLogic;
 using UnityStandardAssets.ImageEffects;
 using Photon.Pun;
+using NUnit.Framework.Internal.Commands;
 
 namespace Cameras
 {
@@ -67,6 +68,11 @@ namespace Cameras
 
         public void ApplyGraphicsSettings()
         {
+            SceneSettingsManager.SetTerrainDetails(
+                SettingsManager.GraphicsSettings.DetailDistance.Value, 
+                SettingsManager.GraphicsSettings.DetailDensity.Value, 
+                SettingsManager.GraphicsSettings.TreeDistance.Value
+            );
             Camera.farClipPlane = SettingsManager.GraphicsSettings.RenderDistance.Value;
             var antiAliasing = Camera.GetComponent<Antialiasing>();
             antiAliasing.enabled = SettingsManager.GraphicsSettings.AntiAliasing.Value > 0;
@@ -237,7 +243,12 @@ namespace Cameras
                 if (_inGameManager.CurrentCharacter == null)
                 {
                     if (!ChatManager.IsChatActive() && !InGameMenu.InMenu() && _input.ChangeCamera.GetKeyDown())
-                        SpecMode.Next();
+                    {
+                        if (_follow == null && SpecMode.Current() == SpecateMode.LiveSpectate)
+                            SpecMode.Set(SpecateMode.FreeCam);
+                        else
+                            SpecMode.Next();
+                    }
                 }
                 else
                 {
@@ -493,7 +504,7 @@ namespace Cameras
                 Cache.Transform.position += direction * Time.deltaTime * speed;
                 float inputX = Input.GetAxis("Mouse X");
                 float inputY = Input.GetAxis("Mouse Y");
-                float camSpeed = 50f * GetSensitivityDeltaTime(SettingsManager.GeneralSettings.MouseSpeed.Value);
+                float camSpeed = SettingsManager.GeneralSettings.MouseSpeed.Value * 10f;
                 Cache.Transform.RotateAround(Cache.Transform.position, Vector3.up, inputX * camSpeed);
                 Cache.Transform.RotateAround(Cache.Transform.position, Cache.Transform.right, -inputY * camSpeed);
             }

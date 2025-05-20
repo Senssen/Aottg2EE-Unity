@@ -249,6 +249,9 @@ namespace UI
 
         public static bool InMenu()
         {
+            if (EmVariables.IsOpen == true) // Added by Ata for menu control
+                return true;
+            
             var menu = (InGameMenu)UIManager.CurrentMenu;
             foreach (BasePopup popup in menu._popups)
             {

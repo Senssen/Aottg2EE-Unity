@@ -17,5 +17,7 @@ namespace Utility
         public static string Spawnables = "Spawnables/Prefabs";
         public static string Projectiles = "Projectiles/Prefabs";
         public static string Weather = "Weather";
+        public static string Expedition = "GamePfs";
+        public static string Logistician = "ExpeditionAssets/Functional/Logistician/Prefabs";
     }
 }

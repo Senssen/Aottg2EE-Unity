@@ -26,7 +26,11 @@ namespace Characters
         // setup
         public HumanComponentCache HumanCache;
         public BaseUseable Special;
+        public BaseUseable Special_2; // added by Ata 12 May 2024 for Ability Wheel //
+        public BaseUseable Special_3; // added by Ata 12 May 2024 for Ability Wheel //
+        public BaseUseable[] SpecialsArray;
         public BaseUseable Weapon;
+        public BaseUseable Weapon_2;
         public HookUseable HookLeft;
         public HookUseable HookRight;
         public HumanMountState MountState = HumanMountState.None;
@@ -46,6 +50,8 @@ namespace Characters
         // state
         private HumanState _state = HumanState.Idle;
         public string CurrentSpecial;
+        public string SideSpecial_1;
+        public string SideSpecial_2;
         public BaseTitan Grabber;
         public Transform GrabHand;
         public Human Carrier;
@@ -128,6 +134,7 @@ namespace Characters
         private float _hookHumanConstantTimeLeft;
         private bool _isReelingOut;
         private Dictionary<BaseTitan, float> _lastNapeHitTimes = new Dictionary<BaseTitan, float>();
+        public Horse PassengerHorse = null;
 
         protected override void CreateDetection()
         {
@@ -163,6 +170,8 @@ namespace Characters
             GetComponent<CapsuleCollider>().enabled = false;
             if (IsMine())
             {
+                GetComponent<Logistician>().ResetSupplies(); // Added by Ata for Logistician
+
                 FalseAttack();
                 SetCarrierTriggerCollider(false);
             }
@@ -240,7 +249,7 @@ namespace Characters
         public bool CanJump()
         {
             return (Grounded && CarryState != HumanCarryState.Carry && (State == HumanState.Idle || State == HumanState.Slide) &&
-                !Animation.IsPlaying(HumanAnimations.Jump) && !Animation.IsPlaying(HumanAnimations.HorseMount));
+                !Animation.IsPlaying(HumanAnimations.Jump) && !Animation.IsPlaying(HumanAnimations.HorseMount) && !Animation.IsPlaying(HumanAnimations.HorseMount));
         }
 
         public void Jump()
@@ -338,6 +347,19 @@ namespace Characters
 
         public void Unmount(bool immediate)
         {
+            if (MountState == HumanMountState.Passenger && !immediate)
+            {
+                PlayAnimation(HumanAnimations.HorseDismount);
+                Cache.Rigidbody.AddForce((((Vector3.up * 10f) - (Cache.Transform.forward * 2f)) - (Cache.Transform.right * 1f)), ForceMode.VelocityChange);
+                UnmountHorseAsPassenger();
+                return;
+            }
+            if (MountState == HumanMountState.Passenger && immediate)
+            {
+                UnmountHorseAsPassenger();
+                return;
+            }
+
             SetInterpolation(true);
             if (MountState == HumanMountState.Horse && !immediate)
             {
@@ -353,6 +375,7 @@ namespace Characters
             }
             _lastMountMessage = null;
             Cache.PhotonView.RPC("UnmountRPC", RpcTarget.All, new object[0]);
+            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHumanAutorun(GetComponent<HumanPlayerController>().GetAutorunState());
         }
 
         [PunRPC]
@@ -396,14 +419,18 @@ namespace Characters
             ToggleSparks(false);
         }
 
-        public void Dash(float targetAngle)
+        public void Dash(float targetAngle, bool _canBurst)
         {
             if (_dashTimeLeft <= 0f && Stats.CurrentGas > 0 && MountState == HumanMountState.None &&
                 State != HumanState.Grab && CarryState != HumanCarryState.Carry && _dashCooldownLeft <= 0f)
             {
-                Stats.UseDashGas();
                 TargetAngle = targetAngle;
                 Vector3 direction = GetTargetDirection();
+                Vector3 moveDirection = GetComponent<Rigidbody>().velocity;
+                float angle = Vector3.Angle(new Vector3(direction.x, 0, direction.z).normalized, new Vector3(moveDirection.x, 0, moveDirection.z).normalized);
+                bool _empowered = angle <= 10f && _canBurst;
+                Stats.UseDashGas(_empowered);
+
                 _originalDashSpeed = Cache.Rigidbody.velocity.magnitude;
                 _targetRotation = GetTargetRotation();
                 if (!_wallSlide)
@@ -422,18 +449,24 @@ namespace Characters
 
                 State = HumanState.AirDodge;
                 FalseAttack();
-                Cache.Rigidbody.AddForce(direction * 40f, ForceMode.VelocityChange);
+
+                if (_empowered)
+                    Cache.Rigidbody.AddForce(direction * 80f, ForceMode.VelocityChange);
+                else
+                    Cache.Rigidbody.AddForce(direction * 40f, ForceMode.VelocityChange);
+
                 _dashCooldownLeft = 0.2f;
                 ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.ShakeGas();
             }
         }
 
-        public void DashVertical(float targetAngle, Vector3 direction)
+        // Removed by Ata for Perks being Unnecessary to the mod.
+        /* public void DashVertical(float targetAngle, Vector3 direction)
         {
             if (_dashTimeLeft <= 0f && Stats.CurrentGas > 0 && MountState == HumanMountState.None &&
                 State != HumanState.Grab && CarryState != HumanCarryState.Carry && _dashCooldownLeft <= 0f)
             {
-                Stats.UseDashGas();
+                Stats.UseVerticalDashGas();
                 TargetAngle = targetAngle;
                 _originalDashSpeed = Cache.Rigidbody.velocity.magnitude;
                 _targetRotation = Quaternion.LookRotation(direction);
@@ -445,6 +478,28 @@ namespace Characters
                 State = HumanState.AirDodge;
                 FalseAttack();
                 Cache.Rigidbody.AddForce(direction * 40f, ForceMode.VelocityChange);
+                _dashCooldownLeft = 0.2f;
+                ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.ShakeGas();
+            }
+        } */
+
+        // Now we have this name for us to use :)
+        public void DashVertical(Vector3 direction)
+        {
+            if (_dashTimeLeft <= 0f && Stats.CurrentGas > 0 && MountState == HumanMountState.None &&
+                State != HumanState.Grab && CarryState != HumanCarryState.Carry && _dashCooldownLeft <= 0f)
+            {
+                Stats.UseVerticalDashGas();
+                _originalDashSpeed = Cache.Rigidbody.velocity.magnitude;
+                _targetRotation = Quaternion.LookRotation(direction);
+                Cache.Rigidbody.rotation = _targetRotation;
+                EffectSpawner.Spawn(EffectPrefabs.GasBurst, Cache.Transform.position, Cache.Transform.rotation);
+                PlaySound(HumanSounds.GasBurst);
+                _dashTimeLeft = 0.5f;
+                CrossFade(HumanAnimations.Dash, 0.1f, 0.1f);
+                State = HumanState.AirDodge;
+                FalseAttack();
+                Cache.Rigidbody.AddForce(direction * 60f, ForceMode.VelocityChange);
                 _dashCooldownLeft = 0.2f;
                 ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.ShakeGas();
             }
@@ -461,8 +516,12 @@ namespace Characters
         {
             if (HasGrabImmunity())
                 return;
-            if (MountState != HumanMountState.None)
+            if (MountState == HumanMountState.Horse && Horse._hasPassenger)
+                return;
+            if (MountState != HumanMountState.None && MountState != HumanMountState.Passenger)
                 Unmount(true);
+            if (MountState == HumanMountState.Passenger)
+                DropOffHorseAsPassenger();
             Transform hand;
             if (type == "GrabLeft")
                 hand = grabber.BaseTitanCache.GrabLSocket;
@@ -720,17 +779,24 @@ namespace Characters
             var character = (BaseShifter)_inGameManager.CurrentCharacter;
             character.PreviousHumanGas = Stats.CurrentGas;
             character.PreviousHumanWeapon = Weapon;
+            character.PreviousAbilityCooldowns = GetComponent<Veteran>().AbilityCooldowns;
             PhotonNetwork.LocalPlayer.SetCustomProperty(PlayerProperty.CharacterViewId, character.Cache.PhotonView.ViewID);
             PhotonNetwork.Destroy(gameObject);
         }
 
-        public IEnumerator WaitAndTransformFromShifter(float previousHumanGas, BaseUseable previousHumanWeapon)
+        public IEnumerator WaitAndTransformFromShifter(float previousHumanGas, BaseUseable previousHumanWeapon, Dictionary<string, float> previousAbilityCooldowns)
         {
             while (!FinishSetup)
             {
                 yield return null;
             }
             Stats.CurrentGas = previousHumanGas;
+
+            Veteran veteran = GetComponent<Veteran>();
+            InGameCharacterSettings _s = SettingsManager.InGameCharacterSettings;
+            veteran.AbilityCooldowns = previousAbilityCooldowns;
+            veteran.SetAllSpecials(_s.Special.Value, _s.Special_2.Value, _s.Special_3.Value, true);
+
             if (previousHumanWeapon is BladeWeapon)
             {
                 BladeWeapon previousBlade = (BladeWeapon)previousHumanWeapon;
@@ -807,13 +873,19 @@ namespace Characters
                 else
                     _reloadAnimation = HumanAnimations.ChangeBladeAir;
             }
-            CrossFade(_reloadAnimation, 0.1f, 0f);
+            
+            PlayReloadAnimation(_reloadAnimation);
+            ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.Reload();
+        }
+
+        public void PlayReloadAnimation(string anim)
+        {
+            CrossFade(anim, 0.1f, 0f);
             State = HumanState.Reload;
-            _stateTimeLeft = Animation.GetTotalTime(_reloadAnimation);
+            _stateTimeLeft = Animation.GetTotalTime(anim);
             _needFinishReload = true;
             _reloadTimeLeft = _stateTimeLeft;
             _reloadCooldownLeft = _reloadTimeLeft + 0.5f;
-            ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.Reload();
         }
 
         protected void FinishReload()
@@ -862,6 +934,11 @@ namespace Characters
             {
                 return true;
             }
+            Logistician logistician = GetComponent<Logistician>();
+            if (EmVariables.LogisticianMaxSupply != -1 && (logistician.WeaponSupply < EmVariables.LogisticianMaxSupply || logistician.GasSupply < EmVariables.LogisticianMaxSupply))
+            {
+                return true;
+            }
             if (isGasTank && Special is SupplySpecial && Special.UsesLeft <= 0)
             {
                 return true;
@@ -869,12 +946,32 @@ namespace Characters
             if (Weapon is BladeWeapon)
             {
                 var weapon = (BladeWeapon)Weapon;
-                return weapon.BladesLeft < weapon.MaxBlades || weapon.CurrentDurability < weapon.MaxDurability;
+                ThunderspearWeapon weapon2;
+
+                if (Weapon_2 != null) // conditions added by Ata 23 May 2024 for Veteran Role //
+                {
+                    weapon2 = (ThunderspearWeapon)Weapon_2; ;
+                    return weapon.BladesLeft < weapon.MaxBlades || weapon.CurrentDurability < weapon.MaxDurability || weapon2.NeedRefill();
+                } 
+                else
+                {
+                    return weapon.BladesLeft < weapon.MaxBlades || weapon.CurrentDurability < weapon.MaxDurability;
+                }
             }
             else if (Weapon is AmmoWeapon)
             {
                 var weapon = (AmmoWeapon)Weapon;
-                return weapon.NeedRefill();
+                BladeWeapon weapon2; // the object class cannot be fixed to BladeWeapon only since APG and AHHS could be Veterans as well. Doesn't break the game but creates some avoidable console errors //
+
+                if (Weapon_2 != null) // conditions added by Ata 23 May 2024 for Veteran Role //
+                {
+                    weapon2 = (BladeWeapon)Weapon_2;
+                    return weapon.NeedRefill() || weapon2.BladesLeft < weapon2.MaxBlades || weapon2.CurrentDurability < weapon2.MaxDurability;
+                }
+                else
+                {
+                    return weapon.NeedRefill();
+                }
             }
             return false;
         }
@@ -888,7 +985,13 @@ namespace Characters
                 ToggleBlades(true);
             }
             Weapon.Reset();
+
+            if (Weapon_2 != null)
+                Weapon_2.Reset(); // conditions added by Ata 23 May 2024 for Veteran Role //
+
             Stats.CurrentGas = Stats.MaxGas;
+
+            GetComponent<Logistician>().ResetSupplies(); // Added by Ata for Logistician
         }
 
         public override void Emote(string emote)
@@ -1029,6 +1132,9 @@ namespace Characters
                 }
                 LoadSkin();
             }
+
+            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHorseAutorun(false);
+            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHumanAutorun(false);
         }
 
         public override void OnPlayerEnteredRoom(Player player)
@@ -1104,13 +1210,14 @@ namespace Characters
                 else
                     PlaySound(HumanSounds.BladeHit);
                 var weapon = (BladeWeapon)Weapon;
-                if (Stats.Perks["AdvancedAlloy"].CurrPoints == 1)
+                // Removed by Ata for Perks being Unnecessary to the mod.
+                /* if (Stats.Perks["AdvancedAlloy"].CurrPoints == 1)
                 {
                     if (damage < 500)
                         weapon.UseDurability(weapon.CurrentDurability);
                 }
-                else
-                    weapon.UseDurability(2f);
+                else */
+                weapon.UseDurability(2f);
                 if (weapon.CurrentDurability == 0f)
                 {
                     ToggleBlades(false);
@@ -1266,6 +1373,18 @@ namespace Characters
                         Cache.Transform.rotation = Horse.Cache.Transform.rotation;
                     }
                 }
+                else if (MountState == HumanMountState.Passenger)
+                {
+                    if (PassengerHorse == null)
+                    {
+                        DropOffHorseAsPassenger();
+                    }
+                    else
+                    {
+                        Cache.Transform.position = PassengerHorse.Cache.Transform.gameObject.GetComponent<Horse>().PassengerSeat.position;
+                        Cache.Transform.rotation = PassengerHorse.Cache.Transform.rotation;
+                    }
+                }
                 else if (State == HumanState.Attack)
                 {
                     if (Setup.Weapon == HumanWeapon.Blade)
@@ -1411,6 +1530,10 @@ namespace Characters
                 Cache.Transform.position = GrabHand.transform.position;
                 Cache.Transform.rotation = GrabHand.transform.rotation;
             }
+            if (Dead)
+            {
+                GetComponent<Veteran>().isVeteranSet = false;
+            }
         }
 
         protected override void FixedUpdate()
@@ -1442,7 +1565,7 @@ namespace Characters
                     Cache.Rigidbody.velocity = Horse.Cache.Rigidbody.velocity;
                     return;
                 }
-                if (MountState == HumanMountState.MapObject)
+                if (MountState == HumanMountState.MapObject || MountState == HumanMountState.Passenger)
                 {
                     Cache.Rigidbody.velocity = Vector3.zero;
                     ToggleSparks(false);
@@ -1522,8 +1645,9 @@ namespace Characters
                         {
                             newVelocity = GetTargetDirection() * TargetMagnitude * Stats.RunSpeed;
                             if (!Animation.IsPlaying(HumanAnimations.Run) && !Animation.IsPlaying(HumanAnimations.Jump) &&
-                                !Animation.IsPlaying(HumanAnimations.RunBuffed) && (!Animation.IsPlaying(HumanAnimations.HorseMount) ||
-                                Animation.GetNormalizedTime(HumanAnimations.HorseMount) >= 0.5f))
+                                !Animation.IsPlaying(HumanAnimations.RunBuffed) && 
+                                (!Animation.IsPlaying(HumanAnimations.HorseMount) || Animation.GetNormalizedTime(HumanAnimations.HorseMount) >= 0.5f) && 
+                                (!Animation.IsPlaying(HumanAnimations.PassengerMount) || Animation.GetNormalizedTime(HumanAnimations.PassengerMount) >= 0.5f))
                             {
                                 CrossFade(RunAnimation, 0.1f);
                                 _stepPhase = 0;
@@ -1531,7 +1655,8 @@ namespace Characters
                             if (!Animation.IsPlaying(HumanAnimations.WallRun))
                                 _targetRotation = GetTargetRotation();
                         }
-                        else if (!(Animation.IsPlaying(StandAnimation) || State == HumanState.Land || Animation.IsPlaying(HumanAnimations.Jump) || Animation.IsPlaying(HumanAnimations.HorseMount) || Animation.IsPlaying(HumanAnimations.Grabbed)))
+                        else if (!(Animation.IsPlaying(StandAnimation) || State == HumanState.Land || Animation.IsPlaying(HumanAnimations.Jump) || 
+                            Animation.IsPlaying(HumanAnimations.HorseMount) || Animation.IsPlaying(HumanAnimations.PassengerMount) || Animation.IsPlaying(HumanAnimations.Grabbed)))
                         {
                             CrossFade(StandAnimation, 0.1f);
                         }
@@ -1568,6 +1693,13 @@ namespace Characters
                         float distance = Vector3.Distance(Horse.Cache.Transform.position, Cache.Transform.position);
                         force += (Horse.Cache.Transform.position - Cache.Transform.position).normalized * 0.6f * Gravity.magnitude * distance / 12f;
                     }
+                    if (Animation.IsPlaying(HumanAnimations.PassengerMount) && Animation.GetNormalizedTime(HumanAnimations.PassengerMount) > 0.18f && Animation.GetNormalizedTime(HumanAnimations.PassengerMount) < 1f)
+                    {
+                        force = -_currentVelocity;
+                        force.y = 6f;
+                        float distance = Vector3.Distance(PassengerHorse.Cache.Transform.position, Cache.Transform.position);
+                        force += (PassengerHorse.Cache.Transform.position + Vector3.back * 1f - Cache.Transform.position).normalized * 0.6f * Gravity.magnitude * distance / 12f;
+                    }
                     if (!IsStock(pivot) && !pivot)
                     {
                         _currentVelocity += force;
@@ -1583,12 +1715,20 @@ namespace Characters
                         Cache.Transform.position = Horse.Cache.Transform.position + Vector3.up * 1.95f;
                         Cache.Transform.rotation = Horse.Cache.Transform.rotation;
                         MountState = HumanMountState.Horse;
+                        GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHorseAutorun(GetComponent<HumanPlayerController>().GetAutorunState());
+                        SetInterpolation(false);
+                        if (!Animation.IsPlaying(HumanAnimations.HorseIdle))
+                            CrossFade(HumanAnimations.HorseIdle, 0.1f);
+                    }
+                    if (PassengerHorse != null && Animation.IsPlaying(HumanAnimations.PassengerMount) && Cache.Rigidbody.velocity.y < 0f && Vector3.Distance(PassengerHorse.Cache.Transform.position + Vector3.up * 1.65f + Vector3.back * 1f, Cache.Transform.position) < 1f)
+                    {
+                        FinishMountHorseAsPassenger();
                         SetInterpolation(false);
                         if (!Animation.IsPlaying(HumanAnimations.HorseIdle))
                             CrossFade(HumanAnimations.HorseIdle, 0.1f);
                     }
                     else if (Animation.GetNormalizedTime(HumanAnimations.Dash) >= 0.99f || (State == HumanState.Idle && !Animation.IsPlaying(HumanAnimations.Dash) && !Animation.IsPlaying(HumanAnimations.WallRun) && !Animation.IsPlaying(HumanAnimations.ToRoof)
-                        && !Animation.IsPlaying(HumanAnimations.HorseMount) && !Animation.IsPlaying(HumanAnimations.HorseDismount) && !Animation.IsPlaying(HumanAnimations.AirRelease)
+                        && !Animation.IsPlaying(HumanAnimations.HorseMount) && !Animation.IsPlaying(HumanAnimations.PassengerMount) && !Animation.IsPlaying(HumanAnimations.HorseDismount) && !Animation.IsPlaying(HumanAnimations.AirRelease)
                         && MountState == HumanMountState.None && (!Animation.IsPlaying(HumanAnimations.AirHookLJust) || Animation.GetNormalizedTime(HumanAnimations.AirHookLJust) >= 1f) && (!Animation.IsPlaying(HumanAnimations.AirHookRJust) || Animation.GetNormalizedTime(HumanAnimations.AirHookRJust) >= 1f)))
                     {
                         if (_wallSlide)
@@ -2363,11 +2503,18 @@ namespace Characters
         {
             if (FinishSetup)
             {
-                Weapon.OnFixedUpdate();
+                Weapon?.OnFixedUpdate();
+                Weapon_2?.OnFixedUpdate();
                 HookLeft.OnFixedUpdate();
                 HookRight.OnFixedUpdate();
-                if (Special != null)
-                    Special.OnFixedUpdate();
+
+                Special?.OnFixedUpdate();
+                Special_2?.OnFixedUpdate();
+                Special_3?.OnFixedUpdate();
+
+                if (Weapon is BladeWeapon) {
+                    ((BladeWeapon)Weapon).FixedUpdateBladeToggle();
+                }
             }
         }
 
@@ -2600,7 +2747,20 @@ namespace Characters
             {
                 SetupWeapon(humanWeapon);
                 SetupItems();
-                SetSpecial(SettingsManager.InGameCharacterSettings.Special.Value);
+                
+                /* SetSpecial(SettingsManager.InGameCharacterSettings.Special.Value); */
+
+                Veteran veteran = GetComponent<Veteran>();
+                veteran.SetMyHuman(this);
+
+                veteran.SetAllSpecials(SettingsManager.InGameCharacterSettings.Special.Value,
+                               SettingsManager.InGameCharacterSettings.Special_2.Value,
+                               SettingsManager.InGameCharacterSettings.Special_3.Value); // added by Ata 12 May 2024 for Ability Wheel //
+                veteran.SwitchCurrentSpecial(SettingsManager.InGameCharacterSettings.Special.Value, 1);
+
+                GetComponent<Veteran>().isVeteranSet = false;
+                if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Veteran"))
+                    veteran.SetupVeteran();
             }
             FinishSetup = true;
             // ignore if name contains char_eyes, char_face, char_glasses
@@ -2619,11 +2779,12 @@ namespace Characters
                 var bladeInfo = CharacterData.HumanWeaponInfo["Blade"];
                 float durability = Stats.Ammunition * 3f - 140f;
                 int bladeCount = bladeInfo["Blades"].AsInt;
-                if (Stats.Perks["DurableBlades"].CurrPoints > 0)
+                // Removed by Ata for Perks being Unnecessary to the mod.
+                /* if (Stats.Perks["DurableBlades"].CurrPoints > 0)
                 {
                     durability *= 2f;
                     bladeCount = Mathf.FloorToInt(bladeCount * 0.5f);
-                }
+                } */
                 Weapon = new BladeWeapon(this, durability, bladeCount);
             }
             else if (humanWeapon == (int)HumanWeapon.AHSS)
@@ -2678,12 +2839,14 @@ namespace Characters
         {
             float cooldown = 30f;
             Items.Clear();
-            Items.Add(new FlareItem(this, "Green", new Color(0f, 1f, 0f, 0.7f), cooldown));
-            Items.Add(new FlareItem(this, "Red", new Color(1f, 0f, 0f, 0.7f), cooldown));
-            Items.Add(new FlareItem(this, "Black", new Color(0f, 0f, 0f, 0.7f), cooldown));
-            Items.Add(new FlareItem(this, "Purple", new Color(153f / 255, 0f, 204f / 255, 0.7f), cooldown));
-            Items.Add(new FlareItem(this, "Blue", new Color(0f, 102f / 255, 204f / 255, 0.7f), cooldown));
-            Items.Add(new FlareItem(this, "Yellow", new Color(1f, 1f, 0f, 0.7f), cooldown));
+            Items.Add(new FlareItem(this, "Green", new Color(118f / 255f, 182 / 255f, 31 / 255f, 0.7f), cooldown));
+            Items.Add(new FlareItem(this, "Red", new Color(246 / 255f, 24 / 255f, 12 / 255f, 0.7f), cooldown));
+            Items.Add(new FlareItem(this, "Black", new Color(6f / 255f, 9f / 255f, 17f / 255f, 0.7f), cooldown));
+            Items.Add(new FlareItem(this, "Purple", new Color(195f / 255f, 69f / 255f, 1f, 0.7f), cooldown));
+            Items.Add(new FlareItem(this, "Blue", new Color(27 / 255f, 96 / 255f, 1f, 0.7f), cooldown));
+            Items.Add(new FlareItem(this, "Yellow", new Color(1f, 158 / 255f, 23 / 255f, 0.7f), cooldown));
+            Items.Add(new FlareItem(this, "Flash", new Color(255f, 255f, 255f, 0.7f), cooldown)); // added by ata 31 Mar 2025
+            Items.Add(new FlareItem(this, "Acoustic", new Color(255f, 255f, 255f, 0f), 120f)); // added by ata 31 Mar 2025
         }
 
         public void SetSpecial(string special)
@@ -2692,6 +2855,183 @@ namespace Characters
             Special = HumanSpecials.GetSpecialUseable(this, special);
             ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.SetSpecialIcon(HumanSpecials.GetSpecialIcon(special));
         }
+
+        #region Horse Passenger
+
+        public void StartMountingPassengerHorse()
+        {
+            FindClosestHorse();
+            if (PassengerHorse == null || PassengerHorse._hasPassenger)
+                return;
+            if(PassengerHorse._hasPassenger == true)
+                Debug.Log("Target has a passenger!");
+
+            PlayAnimation(HumanAnimations.PassengerMount);
+            TargetAngle = PassengerHorse.PassengerSeat.transform.rotation.eulerAngles.y;
+            PlaySound(HumanSounds.Dodge);
+        }
+
+        public void FinishMountHorseAsPassenger()
+        {
+            Cache.PhotonView.RPC("FinishMountHorseAsPassengerRPC", RpcTarget.AllBuffered, photonView.ViewID, PassengerHorse.photonView.ViewID);
+            SyncOwnerPositionForPassenger(PassengerHorse.photonView.ViewID); 
+        }
+
+        [PunRPC]
+        public void FinishMountHorseAsPassengerRPC(int _targetHumanID, int _targetHorseID, PhotonMessageInfo info)
+        {
+            PhotonView _targetHumanPV = PhotonView.Find(_targetHumanID);
+            PhotonView _targetHorsePV = PhotonView.Find(_targetHorseID);
+
+            if (_targetHumanPV != null && _targetHorsePV != null)
+            {
+                Human _targetHuman = _targetHumanPV.GetComponent<Human>();
+                Horse _targetHorse = _targetHorsePV.GetComponent<Horse>();
+
+                _targetHuman.MountState = HumanMountState.Passenger;
+                _targetHorse._hasPassenger = true;
+                PassengerHorse = _targetHorse;
+            } 
+        }
+
+        public void SyncOwnerPositionForPassenger(int targetHorseID)
+        {
+            PhotonView targetHorsePV = PhotonView.Find(targetHorseID);
+            if (targetHorsePV != null)
+            {
+                Horse targetHorse = targetHorsePV.GetComponent<Horse>();
+                Human targetHuman = PhotonView.Find(targetHorse.OwnerNetworkID).GetComponent<Human>();
+                if (targetHorse != null)
+                {
+                    Human owner = targetHuman;
+                    owner.transform.position = targetHorse.transform.position;                    
+                }
+                else
+                {
+                    if (targetHorse == null)
+                        Debug.Log("Target horse not found!");
+                    if (targetHuman == null)
+                        Debug.Log("Target horse's owner not found!");
+                }
+            }
+            else
+            {
+                Debug.LogError("Horse with ViewID " + targetHorseID + " not found!");
+            }
+        }
+
+        public void UnmountHorseAsPassenger()
+        {
+            photonView.RPC("UnmountHorseAsPassengerRPC", RpcTarget.AllBuffered, photonView.ViewID, PassengerHorse.photonView.ViewID);
+        }
+
+        [PunRPC]
+        public void UnmountHorseAsPassengerRPC(int passengerID, int horseID, PhotonMessageInfo sender)
+        {
+            Human passenger = PhotonView.Find(passengerID).GetComponent<Human>();
+            Horse passengerHorse = PhotonView.Find(horseID).GetComponent<Horse>();
+
+            if (passenger != null && passengerHorse != null)
+            {
+                passenger.MountState = HumanMountState.None;
+                passenger.PassengerHorse = null;
+                passengerHorse._hasPassenger = false;
+            }
+        }
+
+        public void DropOffHorseAsPassenger()
+        {
+            photonView.RPC("DropOffHorseAsPassengerRPC", RpcTarget.AllBuffered, photonView.ViewID);
+        }
+
+
+        /* 
+            Added by Ata 09 March 2025
+            The reason this is separate from UnmountHorseAsPassenger is that the host's (one the player rides as passenger) 
+            horse gets destroyed when the host gets grabbed or hit by a titan.
+            That results in the host horse no longer being available, which throws errors on the code above.
+        */
+        [PunRPC]
+        public void DropOffHorseAsPassengerRPC(int passengerID, PhotonMessageInfo sender) 
+        {
+            Human passenger = PhotonView.Find(passengerID).GetComponent<Human>();
+
+            if (passenger != null)
+            {
+                passenger.gameObject.transform.position = passenger.gameObject.transform.position;
+                passenger.gameObject.transform.parent = null;
+                passenger.MountState = HumanMountState.None;
+                passenger.PassengerHorse = null;
+            }
+        }
+
+        private void FindClosestHorse()
+        {
+            Horse[] allHorses = FindObjectsByType<Horse>(FindObjectsSortMode.None);
+            float radius = 15f;
+
+            Horse horse = null;
+            float closestDistance = Mathf.Infinity;
+
+            foreach (Horse _horse in allHorses)
+            {
+                GameObject horseObject = _horse.gameObject;
+
+                if (_horse.IsMine() || _horse._hasPassenger)
+                {
+                    Debug.Log("My Own Horse OR It Has Passenger");
+                    continue;
+                }
+
+                float distance = Vector3.Distance(horseObject.transform.position, gameObject.transform.position);
+
+                if (distance <= radius && distance < closestDistance)
+                {
+                    horse = _horse;
+                    closestDistance = distance;
+                }
+            }
+
+            if (horse != null)
+                SetPassengerHorse(horse);
+            else
+                Debug.Log("No horse found in given radius!");
+        }
+
+        public void SetPassengerHorse(Horse _horse)
+        {
+            Cache.PhotonView.RPC("SetPassengerHorseRPC", RpcTarget.AllBuffered, photonView.ViewID, _horse.photonView.ViewID );
+        }
+
+        [PunRPC]
+        public void SetPassengerHorseRPC(int targetHumanID, int targetHorseID, PhotonMessageInfo info)
+        {
+            PhotonView _targetHumanPV = PhotonView.Find(targetHumanID);
+            PhotonView _targetHorsePV = PhotonView.Find(targetHorseID);
+
+            if (_targetHumanPV != null && _targetHorsePV != null)
+            {
+                Human _targetHuman = _targetHumanPV.GetComponent<Human>();
+                Horse _targetHorse = _targetHorsePV.GetComponent<Horse>();
+                _targetHuman.PassengerHorse = _targetHorse;
+            }
+        }
+
+        #endregion
+
+        #region MC Teleport
+
+        [PunRPC]
+        public void MoveToRPC(float x, float y, float z, PhotonMessageInfo info)
+        {
+            if (info.Sender.IsMasterClient)
+            {
+                if (MountState == HumanMountState.Horse) Horse.transform.position = new Vector3(x, y, z);
+                else transform.position = new Vector3(x, y, z);
+            }
+        }
+
+        #endregion
 
         protected void LoadSkin(Player player = null)
         {
@@ -2829,7 +3169,7 @@ namespace Characters
             if (State == HumanState.Grab || State == HumanState.Reload || MountState == HumanMountState.MapObject
                 || State == HumanState.Stun)
                 return;
-            if (MountState == HumanMountState.Horse)
+            if (MountState == HumanMountState.Horse || MountState == HumanMountState.Passenger)
                 Unmount(true);
             if (CarryState == HumanCarryState.Carry)
                 Cache.PhotonView.RPC("UncarryRPC", RpcTarget.All, new object[0]);
@@ -3218,8 +3558,9 @@ namespace Characters
                 Animation.SetSpeed(HumanAnimations.AHSSGunReloadBoth, 0.76f);
                 Animation.SetSpeed(HumanAnimations.AHSSGunReloadBothAir, 1f);
             }
-            int refillPoints = Stats.Perks["RefillTime"].CurrPoints;
-            Animation.SetSpeed(HumanAnimations.Refill, refillPoints + 1);
+            // Removed by Ata for Perks being Unnecessary to the mod.
+            /* int refillPoints = Stats.Perks["RefillTime"].CurrPoints; */
+            Animation.SetSpeed(HumanAnimations.Refill, /* refillPoints +  */1);
         }
 
         private bool HasHook()
@@ -3570,7 +3911,8 @@ namespace Characters
     {
         None,
         Horse,
-        MapObject
+        MapObject,
+        Passenger
     }
 
     public enum HumanCarryState

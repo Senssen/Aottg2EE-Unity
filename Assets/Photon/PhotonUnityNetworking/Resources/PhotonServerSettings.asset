@@ -132,7 +132,18 @@ MonoBehaviour:
   - AnnounceRPC
   - ConfirmCarryRPC
   - BlowAwayRPC
+  - LoadSceneRPC
   - ToggleBladeFireRPC
+  - DropOffHorseAsPassengerRPC
+  - FinishMountHorseAsPassengerRPC
+  - SetOwnerRPC
+  - SetPassengerHorseRPC
+  - UnmountHorseAsPassengerRPC
+  - moveToRPC
+  - SetSuppliesRPC
+  - UnMountCannoneer
+  - MoveToRPC
+  - SetNonLethalCannonsRPC
   - RequestAttachWagon
   - AttachWagon
   - AttachWagonHindge

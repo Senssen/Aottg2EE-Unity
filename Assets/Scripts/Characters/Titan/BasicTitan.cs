@@ -12,6 +12,7 @@ using CustomLogic;
 using Photon.Pun;
 using Projectiles;
 using Spawnables;
+using Codice.Foreign;
 
 namespace Characters
 {
@@ -21,6 +22,7 @@ namespace Characters
         protected BasicTitanAnimations BasicAnimations;
         public bool IsCrawler;
         protected string _runAnimation;
+        protected string _walkAnimation;
         public BasicTitanSetup Setup;
         public Quaternion _oldHeadRotation;
         public Quaternion? LateUpdateHeadRotation = Quaternion.identity;
@@ -40,6 +42,9 @@ namespace Characters
 
         public override List<string> EmoteActions => new List<string>() { "Laugh", "Nod", "Shake", "Roar" };
         private TitanCustomSet _customSet;
+
+        [SerializeField]
+        private GameObject HeadComponent;
 
         public void Init(bool ai, string team, JSONNode data, TitanCustomSet customSet)
         {
@@ -65,6 +70,34 @@ namespace Characters
                 else
                     _runAnimation = BasicAnimations.Runs[runAnimationType - 1];
             }
+
+            #region Faker and Stalker Titan added by Snake on 1 June 24
+
+            if (data != null && data.HasKey("WalkAnimation")) {
+                _walkAnimation = data["WalkAnimation"];
+            } else {
+                _walkAnimation = BasicAnimations.Walk;
+            }
+
+            bool _isFaker = Random.value * 100f  <= SettingsManager.InGameCurrent.Titan.TitanChanceFaker.Value; 
+            bool _isStalker = Random.value *100f  <= SettingsManager.InGameCurrent.Titan.TitanChanceStalker.Value;
+            if (_isFaker) {
+                if (Name == "Punk" || Name == "Thrower") {
+                    _runAnimation = Random.value > 0.5f ? BasicAnimations.Walk : BasicAnimations.Runs[0];
+                } else if (Name == "Abnormal" || Name == "Jumper") {
+                    _runAnimation = Random.value > 0.5f ? BasicAnimations.Walk : BasicAnimations.Runs[1];
+                } else if (Name == "Titan") {
+                    _walkAnimation = Random.value > 0.5f ? BasicAnimations.Runs[0] : BasicAnimations.Runs[1];
+                }
+
+                Name += "<color=#772732> [F]</color>";
+            }
+
+            if (_isStalker)
+                Name += "<color=#274D77> [S]</color>";
+
+            #endregion
+
             Cache.PhotonView.RPC("SetCrawlerRPC", RpcTarget.AllBuffered, new object[] { IsCrawler });
             base.Init(ai, team, data);
             Animation.SetSpeed(BasicAnimations.CoverNape, 1.2f);
@@ -331,6 +364,20 @@ namespace Characters
                 BasicCache.CrawlerHitbox.Activate();
         }
 
+        //Faker Titan added by Snake on 1 June 24
+        public override void Walk()
+        {
+            if (!string.IsNullOrEmpty(_walkAnimation))
+            {
+                _stepPhase = 0;
+                StateActionWithTime(TitanState.Walk, _walkAnimation, 0f, 0.5f);
+            }
+            else
+            {
+                Debug.LogError("Walk animation not set for BasicTitan");
+            }
+        }
+
         public override void WallClimb()
         {
             if (!CanWallClimb || _climbCooldownLeft > 0f)
@@ -490,7 +537,15 @@ namespace Characters
             var settings = SettingsManager.InGameCurrent.Titan;
             if (type == "CannonBall" || type == "Rock")
             {
-                base.GetHitRPC(viewId, name, damage, type, collider);
+                if (EmVariables.NonLethalCannons == true || IsLethalPart(collider) == false) {
+                    Cripple(2f);
+                } else {
+                    base.GetHitRPC(viewId, name, damage, type, collider);
+                    HeadComponent.SetActive(false);
+                    BasicCache.Head.gameObject.SetActive(false);
+                    BasicCache.HeadBlood.Play(true);
+                }
+
                 return;
             }
             if (settings.TitanArmorEnabled.Value && (!IsCrawler || settings.TitanArmorCrawlerEnabled.Value))
@@ -1357,6 +1412,11 @@ namespace Characters
             }
             else
                 base.CheckGround();
+        }
+
+        private bool IsLethalPart(string collider)
+        {
+            return collider == "head" || collider == "neck";
         }
     }
 }

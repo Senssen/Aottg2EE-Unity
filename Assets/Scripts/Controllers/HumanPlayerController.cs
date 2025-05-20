@@ -12,12 +12,15 @@ namespace Controllers
     class HumanPlayerController : BasePlayerController
     {
         protected Human _human;
+        private Veteran _veteran;
+        private Cannoneer _cannoneer;
         protected float _reelOutScrollTimeLeft;
         protected float _reelInScrollCooldownLeft = 0f;
         protected float _reelInScrollCooldown = 0.2f;
         protected HumanInputSettings _humanInput;
         protected Dictionary<HumanDashDirection, KeybindSetting> _dashKeys;
         protected Dictionary<HumanDashDirection, float> _dashTimes;
+        private float _dashUpwardsTime = -1f;
         protected static LayerMask HookMask = PhysicsLayer.GetMask(PhysicsLayer.TitanMovebox, PhysicsLayer.TitanPushbox,
             PhysicsLayer.MapObjectEntities, PhysicsLayer.MapObjectProjectiles, PhysicsLayer.MapObjectAll);
 
@@ -25,6 +28,8 @@ namespace Controllers
         {
             base.Awake();
             _human = GetComponent<Human>();
+            _veteran = GetComponent<Veteran>();
+            _cannoneer = GetComponent<Cannoneer>();
             _humanInput = SettingsManager.InputSettings.Human;
             SetupDash();
         }
@@ -73,8 +78,15 @@ namespace Controllers
             }
             int forward = 0;
             int right = 0;
-            if (_generalInput.Autorun.GetKeyDown())
+            if (_generalInput.Autorun.GetKeyDown()) {
                 _autorun = !_autorun;
+
+                if (_human.MountState == HumanMountState.Horse) {
+                    GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHorseAutorun(_autorun);
+                } else if (_human.MountState == HumanMountState.None) {
+                    GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHumanAutorun(_autorun);
+                }
+            }
             if (_generalInput.Forward.GetKey())
                 forward = 1;
             else if (_generalInput.Back.GetKey())
@@ -83,23 +95,20 @@ namespace Controllers
                 right = -1;
             else if (_generalInput.Right.GetKey())
                 right = 1;
-            if (forward != 0 || right != 0)
-                _autorun = false;
-            if (_autorun)
-            {
-                forward = 1;
-                right = 0;
-            }
-            if (forward != 0 || right != 0)
-            {
+            if (_autorun && forward == 0 && right == 0) {
+                _character.HasDirection = true;
+                float magnitude;
+                Vector3 v = _character.transform.forward;
+                magnitude = (v.magnitude <= 0.95f) ? ((v.magnitude >= 0.25f) ? v.magnitude : 0f) : 1f;
+                _human.TargetMagnitude = magnitude;
+            } else if (forward != 0 || right != 0) {
                 _character.TargetAngle = GetTargetAngle(forward, right);
                 _character.HasDirection = true;
+                float magnitude;
                 Vector3 v = new Vector3(right, 0f, forward);
-                float magnitude = (v.magnitude <= 0.95f) ? ((v.magnitude >= 0.25f) ? v.magnitude : 0f) : 1f;
+                magnitude = (v.magnitude <= 0.95f) ? ((v.magnitude >= 0.25f) ? v.magnitude : 0f) : 1f;
                 _human.TargetMagnitude = magnitude;
-            }
-            else
-            {
+            } else {
                 _character.HasDirection = false;
                 _human.TargetMagnitude = 0f;
             }
@@ -263,6 +272,9 @@ namespace Controllers
             UpdateHookInput(inMenu);
             UpdateReelInput(inMenu);
             UpdateDashInput(inMenu);
+            UpdateVerticalDashInput(inMenu);
+            UpdateLoadoutSwap(inMenu);
+            UpdateCannoneer(inMenu);
             bool canWeapon = _human.MountState == HumanMountState.None && !_illegalWeaponStates.Contains(_human.State) && !inMenu && !_human.Dead;
             var attackInput = _humanInput.AttackDefault;
             var specialInput = _humanInput.AttackSpecial;
@@ -297,11 +309,11 @@ namespace Controllers
                         _human._gunArmAim = attackInput.GetKey() || _human.Weapon.IsActive;
                     }
                     else
-                        _human.Weapon.ReadInput(attackInput);
+                        _human.Weapon?.ReadInput(attackInput); // null check added by Ata 25 May 2024 because it broke loadout swapping //
                 }
             }
             else
-                _human.Weapon.SetInput(false);
+                _human.Weapon?.SetInput(false); // null check added by Ata 25 May 2024 because it broke loadout swapping //
             if (_human.Special != null)
             {
                 bool canSpecial = _human.MountState == HumanMountState.None &&
@@ -319,6 +331,12 @@ namespace Controllers
                 }
                 else
                     _human.Special.SetInput(false);
+
+                if (_human.Special_2 != null && _humanInput.TriggerAbility2.GetKeyDown() && !inMenu)
+                    _human.Special_2.ReadInput(_humanInput.TriggerAbility2);
+
+                if (_human.Special_3 != null && _humanInput.TriggerAbility3.GetKeyDown() && !inMenu)
+                    _human.Special_3.ReadInput(_humanInput.TriggerAbility3);
             }
             if (inMenu || _human.Dead || _human.State == HumanState.Stun)
                 return;
@@ -331,6 +349,8 @@ namespace Controllers
                     else if (_humanInput.HorseMount.GetKeyDown() && _human.Horse != null && _human.MountState == HumanMountState.None &&
                     Vector3.Distance(_human.Horse.Cache.Transform.position, _human.Cache.Transform.position) < 15f && !_human.HasDirection)
                         _human.MountHorse();
+                    else if (_humanInput.PassengerMount.GetKeyDown() && _human.MountState == HumanMountState.None)
+                        _human.StartMountingPassengerHorse();
                     else if (_humanInput.Dodge.GetKeyDown())
                     {
                         if (_human.HasDirection)
@@ -357,7 +377,37 @@ namespace Controllers
                 else if (_humanInput.HorseJump.GetKeyDown())
                     _human.Horse.Jump();
             }
+            else if (_human.MountState == HumanMountState.Passenger)
+            {
+                if (_humanInput.HorseMount.GetKeyDown() || _humanInput.PassengerMount.GetKeyDown())
+                    _human.Unmount(false);
+            }
         }
+
+        #region Veteran Loadout Swap
+
+        void UpdateLoadoutSwap(bool inMenu)
+        {
+            if (!inMenu && _human.Weapon != null && _human.Weapon_2 != null && PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Veteran")) 
+            {
+                if (_humanInput.LoadoutSwap.GetKeyDown())
+                    _veteran.SwitchVeteranLoadout();
+            }
+        }
+
+        #endregion
+
+        #region Cannonneer
+
+        void UpdateCannoneer(bool inMenu)
+        {
+            if (!inMenu && _human.Grounded && PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Cannoneer") && _humanInput.SpawnCannon.GetKeyDown()) 
+            {
+                _cannoneer.SpawnCannonController();
+            }
+        }
+
+        #endregion
 
         private void ToggleUI()
         {
@@ -432,7 +482,7 @@ namespace Controllers
                             break;
                         }
                     }
-                    if (currentDirection == HumanDashDirection.None)
+                    /* if (currentDirection == HumanDashDirection.None)
                     {
                         if (_human.Stats.Perks["OmniDash"].CurrPoints == 1)
                         {
@@ -452,7 +502,7 @@ namespace Controllers
                             else
                                 _human.DashVertical(GetTargetAngle(direction), Vector3.up);
                         }
-                    }
+                    } */
                 }
                 if (SettingsManager.InputSettings.Human.DashDoubleTap.Value)
                 {
@@ -474,7 +524,40 @@ namespace Controllers
                     }
                 }
                 if (currentDirection != HumanDashDirection.None)
-                    _human.Dash(GetDashAngle(currentDirection));
+                    _human.Dash(GetDashAngle(currentDirection), _humanInput.DashBurst.Value);
+            }
+        }
+
+        void UpdateVerticalDashInput(bool inMenu)
+        {
+            if (_human.State != HumanState.AirDodge && _human.MountState == HumanMountState.None && _human.State != HumanState.Grab && _human.CarryState != HumanCarryState.Carry
+                && _human.State != HumanState.Stun && _human.State != HumanState.EmoteAction && _human.State != HumanState.SpecialAction
+                && !inMenu && !_human.Dead)
+            {
+                if (_humanInput.DashUp.GetKeyDown())
+                {
+                    _human.DashVertical(Vector3.up);
+                }
+                if (SettingsManager.InputSettings.Human.DashUpDoubleTap.Value)
+                {
+                    if (_dashUpwardsTime >= 0f)
+                    {
+                        _dashUpwardsTime += Time.deltaTime;
+                        if (_dashUpwardsTime > 0.2f)
+                            _dashUpwardsTime = -1f;
+                    }
+                    if (_humanInput.Jump.GetKeyDown())
+                    {
+                        if (_dashUpwardsTime == -1f)
+                            _dashUpwardsTime = 0f;
+                        else if (_dashUpwardsTime > 0f)
+                            _human.DashVertical(Vector3.up);
+                    }
+                }
+                if (_humanInput.DashDown.GetKeyDown() && !_human.Grounded)
+                {
+                    _human.DashVertical(Vector3.down);
+                }
             }
         }
 
@@ -495,6 +578,11 @@ namespace Controllers
         bool IsSpin3Special()
         {
             return _human.State == HumanState.SpecialAttack && _human.Special is Spin3Special;
+        }
+
+        public bool GetAutorunState()
+        {
+            return _autorun;
         }
     }
 }

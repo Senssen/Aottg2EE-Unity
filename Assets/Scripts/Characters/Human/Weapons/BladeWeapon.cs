@@ -54,5 +54,12 @@ namespace Characters
         protected override void ActiveFixedUpdate()
         {
         }
+
+        public void FixedUpdateBladeToggle()
+        {
+            if (CurrentDurability <= 0 && ((Human)_owner).Setup._part_blade_l.activeSelf == true && ((Human)_owner).Setup._part_blade_r.activeSelf) {
+                ((Human)_owner).ToggleBlades(false);
+            }
+        }
     }
 }

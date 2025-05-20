@@ -7,6 +7,9 @@ using Utility;
 using UnityEngine.AI;
 using Map;
 using GameManagers;
+using Photon.Realtime;
+using Photon.Pun;
+using System.Linq;
 
 namespace Controllers
 {
@@ -29,6 +32,7 @@ namespace Controllers
         public bool IsRun;
         public bool IsTurn;
         public float TurnAngle;
+        private float initialDelay = 2f;
         protected Vector3 _moveToPosition;
         protected float _moveAngle;
         protected bool _moveToActive;
@@ -224,17 +228,34 @@ namespace Controllers
             }
             if (_focusTimeLeft <= 0f || _enemy == null)
             {
-                var enemy = FindNearestEnemy();
-                if (enemy != null)
-                    _enemy = enemy;
-                else if (_enemy != null)
-                {
-                    if (TeamInfo.SameTeam(_titan.Team, _enemy.GetTeam()) || Vector3.Distance(_titan.Cache.Transform.position, _enemy.GetPosition()) > FocusRange)
-                        _enemy = null;
+                if (_titan.Name.Contains("[S]")) {
+                    if (initialDelay > 0)
+                        initialDelay -= Time.fixedDeltaTime;
+
+                    if (_enemy == null && initialDelay <= 0) {
+                        int wagonRoll = Random.Range(0, 11);
+                        var enemy = FindRandomEnemy(wagonRoll);
+                        if (enemy != null) {
+                            _enemy = enemy;
+                        }
+
+                        if (_enemy != null && _enemy.ValidTarget() && _usePathfinding && _agent.isOnNavMesh && _agent.pathPending == false && !(_moveToActive && _moveToIgnoreEnemies))
+                            SetAgentDestination(_enemy.GetPosition());
+                        _focusTimeLeft = FocusTime;
+                    }
+                } else {
+                    var enemy = FindNearestEnemy();
+                    if (enemy != null)
+                        _enemy = enemy;
+                    else if (_enemy != null)
+                    {
+                        if (TeamInfo.SameTeam(_titan.Team, _enemy.GetTeam()) || Vector3.Distance(_titan.Cache.Transform.position, _enemy.GetPosition()) > FocusRange)
+                            _enemy = null;
+                    }
+                    if (_enemy != null && _enemy.ValidTarget() && _usePathfinding && _agent.isOnNavMesh && _agent.pathPending == false && !(_moveToActive && _moveToIgnoreEnemies))
+                        SetAgentDestination(_enemy.GetPosition());
+                    _focusTimeLeft = FocusTime;
                 }
-                if (_enemy != null && _enemy.ValidTarget() && _usePathfinding && _agent.isOnNavMesh && _agent.pathPending == false && !(_moveToActive && _moveToIgnoreEnemies))
-                    SetAgentDestination(_enemy.GetPosition());
-                _focusTimeLeft = FocusTime;
             }
             _titan.TargetEnemy = _enemy;
             if (_moveToActive && _moveToIgnoreEnemies)
@@ -644,6 +665,37 @@ namespace Controllers
                 }
             }
             return nearestCharacter;
+        }
+        
+        protected ITargetable FindRandomEnemy(int wagonRoll)
+        {
+            List<GameObject> players = GameObject.FindGameObjectsWithTag("Player").ToList().FindAll(player => player.GetComponent<Human>().Dead == false);
+            if (players.Count == 0)
+                return FindNearestEnemy();
+
+            List<GameObject> wagons = players.FindAll(player => player.GetComponent<PhotonView>().Owner.CustomProperties.ContainsKey("Wagon"));
+
+            bool shouldSelectWagon = false;
+            if (wagons.Count > 0 && wagonRoll <= 6)
+                shouldSelectWagon = true;
+
+            if (shouldSelectWagon) {
+                int idx = Random.Range(0, wagons.Count);
+                Human character = wagons[idx].GetComponent<Human>();
+                if (character != null && !character.Dead) {
+                    return character;
+                } else {
+                    return FindRandomEnemy(wagonRoll);
+                }
+            } else {
+                int idx = Random.Range(0, players.Count);
+                Human character = players[idx].GetComponent<Human>();
+                if (character != null && !character.Dead) {
+                    return character;
+                } else {
+                    return FindRandomEnemy(wagonRoll);
+                }
+            }
         }
 
         private string GetRandomAttack(List<string> validAttacks)

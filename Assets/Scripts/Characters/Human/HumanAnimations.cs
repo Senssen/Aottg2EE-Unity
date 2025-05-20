@@ -3,6 +3,7 @@
     class HumanAnimations
     {
         public static string HorseMount = "Armature|horse_geton";
+        public static string PassengerMount = "Armature|passenger_geton";
         public static string HorseDismount = "Armature|horse_getoff";
         public static string HorseIdle = "Armature|horse_idle";
         public static string HorseRun = "Armature|horse_run";

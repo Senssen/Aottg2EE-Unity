@@ -19,6 +19,7 @@ namespace Settings
         public BoolSetting SnapshotsShowInGame = new BoolSetting(false);
         public IntSetting SnapshotsMinimumDamage = new IntSetting(0, minValue: 0);
         public BoolSetting MinimapEnabled = new BoolSetting(true);
+        public BoolSetting FlareMarkers = new BoolSetting(true); // added by Ata 31 Mar 2025 for Flare Markers //
         public FloatSetting MinimapCameraHeight = new FloatSetting(1000, minValue: 100);
         public IntSetting CameraMode = new IntSetting((int)CameraInputMode.TPS);
         public BoolSetting SkipCutscenes = new BoolSetting(false);
