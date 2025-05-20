@@ -16,6 +16,11 @@ namespace GameManagers
     {
         public static PhotonView PhotonView;
 
+        void Awake()
+        {
+            PhotonView = GetComponent<PhotonView>();
+        }
+
         [PunRPC]
         public void TransferLogicRPC(byte[][] strArray, int msgNumber, int msgTotal, PhotonMessageInfo info)
         {
@@ -334,11 +339,6 @@ namespace GameManagers
         }
 
         #endregion
-
-        void Awake()
-        {
-            PhotonView = GetComponent<PhotonView>();
-        }
 
         #region Expedition RPCs
  
