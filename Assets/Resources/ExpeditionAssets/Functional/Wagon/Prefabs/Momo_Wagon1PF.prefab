@@ -622,7 +622,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1174710376674131410}
-  - component: {fileID: -6455897233756059302}
+  - component: {fileID: 2813673872677019734}
   m_Layer: 24
   m_Name: Momo_Wagon1PF
   m_TagString: Untagged
@@ -648,7 +648,7 @@ Transform:
   - {fileID: 140352060377523200}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6455897233756059302
+--- !u!114 &2813673872677019734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -881,7 +881,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.98, z: 0.25}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.0007200688, y: 0.19481967, z: 0.013892114}
+  m_ConnectedAnchor: {x: -0.0007200688, y: 0.1948198, z: 0.013892055}
   serializedVersion: 2
   m_UseSpring: 1
   m_Spring:

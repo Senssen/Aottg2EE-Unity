@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MomoWagon : MonoBehaviour
+public class PhysicsWagon : MonoBehaviour
 {
     [SerializeField] private Transform Wagon_Body;
     [SerializeField] private Transform Wagon_Saddle;

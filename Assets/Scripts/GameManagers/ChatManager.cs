@@ -322,43 +322,43 @@ namespace GameManagers
             InGameManager.LeaveRoom();
         }
 
-        #region Wagon Command
+        #region Wagoneer
 
-        [CommandAttribute("unmountwag", "/mountwag: Mount Nearest Wagon To Horse.")]
-        private static void Unmountwag(string[] args)
+        [CommandAttribute("unmountwagon", "/unmountwagon: Detach the wagon from the horse.")]
+        private static void UnmountWagon(string[] args)
         {
             //check if player has Wagoneer
-            //if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
-            //return;
+            if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
+                return;
 
             GameObject myplayer = MyPlayer().gameObject;
-            GameObject wag = NearestWagon(myplayer);
+            GameObject wag = FindNearestWagon(myplayer);
 
             RPCManager.PhotonView.RPC(nameof(RPCManager.UnmountWagon), RpcTarget.AllBuffered, new object[] { wag });
         }
 
-        [CommandAttribute("removewag", "/mountwag: Mount Nearest Wagon To Horse.")]
-        private static void Removewag(string[] args)
+        [CommandAttribute("despawnwagon", "/despawnwagon: Despawn the wagon.")]
+        private static void DespawnWagon(string[] args)
         {
             //check if player has Wagoneer
-            //if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
-            //return;
+            if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
+                return;
 
             GameObject myplayer = MyPlayer().gameObject;
-            GameObject wag = NearestWagon(myplayer);
+            GameObject wag = FindNearestWagon(myplayer);
 
             if (Vector3.Distance(myplayer.transform.position, wag.transform.position) > 20 ) //destroy range
                 return;
 
-            RPCManager.PhotonView.RPC(nameof(RPCManager.DeSpawnWagon), RpcTarget.AllBuffered, new object[] { wag });
+            RPCManager.PhotonView.RPC(nameof(RPCManager.DespawnWagon), RpcTarget.AllBuffered, new object[] { wag });
         }
 
-        [CommandAttribute("spawnwag", "/mountwag: Mount Nearest Wagon To Horse.")]
-        private static void Spawnwag(string[] args)
+        [CommandAttribute("spawnwagon", "/spawnwagon: Spawn a wagon.")]
+        private static void SpawnWagon(string[] args)
         {
             //check if player has Wagoneer
-            //if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
-            //return;
+            if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
+                return;
 
             Transform playerTransform = MyPlayer();
 
@@ -373,30 +373,30 @@ namespace GameManagers
             RPCManager.PhotonView.RPC(nameof(RPCManager.SpawnWagon), RpcTarget.AllBuffered, new object[] { pos, rot });
         }
 
-        [CommandAttribute("mountwag", "/mountwag: Mount Nearest Wagon To Horse.")]
-        private static void Mountwag(string[] args)
+        [CommandAttribute("mountwagon", "/mountwagon: Mount the nearest wagon to the horse.")]
+        private static void MountWagon(string[] args)
         {
             //check if player has Wagoneer
-            //if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
-                //return;
+            if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagonneer"))
+                return;
 
             RPCManager.PhotonView.RPC(nameof(RPCManager.AttachWagonHindge), RpcTarget.AllBuffered, new object[] { FindMyHorse() });
         }
 
         public static Transform FindMyHorse()
         {
-            GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>(); // Get all objects in the scene
+            GameObject[] allObjects = FindObjectsByType<GameObject>(sortMode: FindObjectsSortMode.None);
             Transform myHorse = null;
 
             foreach (GameObject obj in allObjects)
             {
-                if (obj.name.Contains("Horse")) // Check if the object has "Horse(Clone)" in its name
+                if (obj.name.Contains("Horse"))
                 {
                     PhotonView pv = obj.GetComponent<PhotonView>();
-                    if (pv != null && pv.IsMine) // Check if the object has a PhotonView and belongs to me
+                    if (pv != null && pv.IsMine)
                     {
                         myHorse = obj.transform;
-                        break; // Stop searching once we find the correct horse
+                        break;
                     }
                 }
             }
@@ -405,13 +405,13 @@ namespace GameManagers
             {
                 //Debug.Log("Found my horse: " + myHorse.name);
                 AddLine($"Found my horse: {myHorse.name}", ChatTextColor.Error);
-                return myHorse; // Return the found horse
+                return myHorse;
             }
             else
             {
                 //Debug.LogWarning("No horse found with my PhotonView!");
                 AddLine($"No horse found with my PhotonView!", ChatTextColor.Error);
-                return null; // Return null if no matching horse is found
+                return null;
             }
         }
 
@@ -419,7 +419,7 @@ namespace GameManagers
         {
             Transform playerTransform = null;
 
-            PhotonView[] allPlayers = FindObjectsOfType<PhotonView>();
+            PhotonView[] allPlayers = FindObjectsByType<PhotonView>(sortMode: FindObjectsSortMode.None);
 
             foreach (PhotonView pv in allPlayers)
             {
@@ -432,15 +432,15 @@ namespace GameManagers
             return playerTransform;
         }
 
-        private static GameObject NearestWagon(GameObject Wagoneer)
+        private static GameObject FindNearestWagon(GameObject Wagoneer)
         {
-            GameObject[] wagons = UnityEngine.Object.FindObjectsByType<GameObject>(FindObjectsSortMode.InstanceID); // Get all objects in the scene
+            GameObject[] wagons = FindObjectsByType<GameObject>(FindObjectsSortMode.InstanceID);
             GameObject nearestWagon = null;
             float nearestDistance = 1500f; //max range to look for wagons
 
             foreach (GameObject obj in wagons)
             {
-                if (obj.name.Contains("Momo_Wagon")) // Check if the object is a "Wagon"
+                if (obj.name.Contains("Momo_Wagon"))
                 {
                     float distance = Vector3.Distance(Wagoneer.transform.position, obj.transform.position);
                     if (distance < nearestDistance)
@@ -453,7 +453,7 @@ namespace GameManagers
             return nearestWagon;
         }
 
-#endregion
+        #endregion
 
         [CommandAttribute("clear", "/clear: Clears the chat window.", Alias = "c")]
         private static void Clear(string[] args)

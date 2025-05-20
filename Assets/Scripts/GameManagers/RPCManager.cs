@@ -273,7 +273,7 @@ namespace GameManagers
         }
 
         [PunRPC]
-        public void DeSpawnWagon(GameObject Wagon, PhotonMessageInfo Sender)
+        public void DespawnWagon(GameObject Wagon, PhotonMessageInfo Sender)
         {
             //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 
             //return; 
@@ -297,7 +297,7 @@ namespace GameManagers
             //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 
                 //return; 
 
-            GameObject wagon = NearestWagon(Sender.photonView.gameObject);
+            GameObject wagon = FindNearestWagon(Sender.photonView.gameObject);
 
             if (Vector3.Distance(wagon.transform.position, HorseToMount.position) > 20) //mount range
                 return;
@@ -313,7 +313,7 @@ namespace GameManagers
                     harnessObj.position = horseRigidbody.position - horseRigidbody.transform.forward * 2.3f + Vector3.up * 0.6f; //adjust
                     harnessObj.rotation = horseRigidbody.gameObject.transform.rotation * Quaternion.Euler(90, 0, 0); //adjust
 
-                    wagon.GetComponent<MomoWagon>().HarnessJoint.connectedBody = horseRigidbody;
+                    wagon.GetComponent<PhysicsWagon>().HarnessJoint.connectedBody = horseRigidbody;
                 }
             }
             else
@@ -322,7 +322,7 @@ namespace GameManagers
             }
         }
 
-        private GameObject NearestWagon(GameObject Wagoneer)
+        private GameObject FindNearestWagon(GameObject Wagoneer)
         {
             GameObject[] wagons = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.InstanceID); // Get all objects in the scene
             GameObject nearestWagon = null;
