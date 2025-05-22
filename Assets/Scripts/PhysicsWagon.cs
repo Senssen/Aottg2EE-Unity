@@ -10,7 +10,6 @@ public class PhysicsWagon : MonoBehaviour
     private Rigidbody wagonRigidbody;
     private float wheelCircumference;
 
-    // Start is called before the first frame update
     void Start()
     {
         wagonRigidbody = Body.GetComponent<Rigidbody>();
