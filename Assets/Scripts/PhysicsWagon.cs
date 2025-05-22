@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class PhysicsWagon : MonoBehaviour
 {
-    [SerializeField] private Transform Wagon_Body;
-    [SerializeField] private Transform Wagon_Saddle;
-    [SerializeField] private Transform Front_Wheels;
-    [SerializeField] private Transform Back_Wheels;
-    [SerializeField] public HingeJoint HarnessJoint;
+    [SerializeField] private Transform Body;
+    [SerializeField] private Transform WheelsFront;
+    [SerializeField] private Transform WheelsBack;
+    [SerializeField] public HingeJoint HorseHinge;
 
     private Rigidbody wagonRigidbody;
     private float wheelCircumference;
@@ -16,7 +15,7 @@ public class PhysicsWagon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        wagonRigidbody = Wagon_Body.GetComponent<Rigidbody>();
+        wagonRigidbody = Body.GetComponent<Rigidbody>();
         float wheelRadius = 0.7f;
         wheelCircumference = 2 * Mathf.PI * wheelRadius;
     }
@@ -35,7 +34,7 @@ public class PhysicsWagon : MonoBehaviour
         float rotationAngle = (speed / wheelCircumference) * 360f * Time.fixedDeltaTime;
 
         // Apply the rotation to the wheels
-        Front_Wheels.Rotate(Vector3.right, rotationAngle);
-        Back_Wheels.Rotate(Vector3.right, rotationAngle);
+        WheelsFront.Rotate(Vector3.right, rotationAngle);
+        WheelsBack.Rotate(Vector3.right, rotationAngle);
     }
 }

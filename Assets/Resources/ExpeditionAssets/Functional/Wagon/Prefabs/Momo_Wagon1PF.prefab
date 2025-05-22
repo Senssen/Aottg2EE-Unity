@@ -661,11 +661,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595493d2677d99748b49074045aa667a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Wagon_Body: {fileID: 140352060377523200}
-  Wagon_Saddle: {fileID: 5944290402801993074}
-  Front_Wheels: {fileID: 44652267614804764}
-  Back_Wheels: {fileID: 6621474944936643806}
-  HarnessJoint: {fileID: 1077665487770394360}
+  Body: {fileID: 140352060377523200}
+  WheelsFront: {fileID: 44652267614804764}
+  WheelsBack: {fileID: 6621474944936643806}
+  HorseHinge: {fileID: 1077665487770394360}
 --- !u!114 &4769701251419597703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -684,7 +683,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -755,7 +755,7 @@ GameObject:
   - component: {fileID: 2760454515782563788}
   - component: {fileID: 3735475271438792217}
   m_Layer: 24
-  m_Name: WagonBody
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1558,7 +1558,7 @@ GameObject:
   - component: {fileID: 6478689501505336154}
   - component: {fileID: 1077665487770394360}
   m_Layer: 24
-  m_Name: WagonHorseAttachment
+  m_Name: Horse Hinge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1706,7 +1706,7 @@ GameObject:
   - component: {fileID: 7552909885743641721}
   - component: {fileID: 1072468187333107329}
   m_Layer: 0
-  m_Name: Temp Hindge Mount
+  m_Name: Temporary Hinge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

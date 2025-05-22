@@ -69,12 +69,12 @@ public class Wagoneer : MonoBehaviour
             Rigidbody horseRigidbody = horse.GetComponent<Rigidbody>();
             if (horseRigidbody != null)
             {
-                Transform harnessObj = wagon.transform.Find("WagonHorseAttachment");
+                Transform harnessObj = wagon.transform.Find("Horse Hinge");
 
                 harnessObj.position = horseRigidbody.position - horseRigidbody.transform.forward * 2.3f + Vector3.up * 0.6f; //adjust
                 harnessObj.rotation = horseRigidbody.gameObject.transform.rotation * Quaternion.Euler(90, 0, 0); //adjust
 
-                wagon.GetComponent<PhysicsWagon>().HarnessJoint.connectedBody = horseRigidbody;
+                wagon.GetComponent<PhysicsWagon>().HorseHinge.connectedBody = horseRigidbody;
                 _mountedWagon = wagon;
 
                 ChatManager.AddLine("Mounted the wagon.");
@@ -99,8 +99,8 @@ public class Wagoneer : MonoBehaviour
             return;
         }
 
-        HingeJoint MountHinge = _mountedWagon.transform.Find("WagonHorseAttachment").gameObject.GetComponent<HingeJoint>();
-        Rigidbody TempHingeMount = _mountedWagon.transform.Find("Temp Hindge Mount").gameObject.GetComponent<Rigidbody>();
+        HingeJoint MountHinge = _mountedWagon.transform.Find("Horse Hinge").gameObject.GetComponent<HingeJoint>();
+        Rigidbody TempHingeMount = _mountedWagon.transform.Find("Temporary Hinge").gameObject.GetComponent<Rigidbody>();
 
         MountHinge.connectedBody = TempHingeMount;
 
