@@ -1,4 +1,5 @@
 using UnityEngine;
+using Characters;
 
 public class PhysicsWagon : MonoBehaviour
 {
@@ -6,9 +7,9 @@ public class PhysicsWagon : MonoBehaviour
     [SerializeField] private Transform WheelsFront;
     [SerializeField] private Transform WheelsBack;
     [SerializeField] public HingeJoint HorseHinge;
-
     private Rigidbody wagonRigidbody;
     private float wheelCircumference;
+    public bool isMounted = false;
 
     void Start()
     {
@@ -20,6 +21,7 @@ public class PhysicsWagon : MonoBehaviour
     void FixedUpdate()
     {
         RotateWheels();
+        FollowHorse();
     }
 
     void RotateWheels()
@@ -28,5 +30,17 @@ public class PhysicsWagon : MonoBehaviour
         float rotationAngle = speed / wheelCircumference * 360f * Time.fixedDeltaTime;
         WheelsFront.Rotate(Vector3.right, rotationAngle);
         WheelsBack.Rotate(Vector3.right, rotationAngle);
+    }
+
+    void FollowHorse()
+    {
+        if (isMounted == false)
+            return;
+
+        Horse horse = HorseHinge.connectedBody.gameObject.GetComponent<Horse>();
+        if (horse == null)
+            return;
+        
+        HorseHinge.gameObject.transform.position = horse.Cache.Transform.position - horse.Cache.Transform.forward * 2.3f + Vector3.up * 0.6f;
     }
 }
