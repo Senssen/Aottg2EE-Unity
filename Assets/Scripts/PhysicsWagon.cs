@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PhysicsWagon : MonoBehaviour
@@ -27,13 +25,8 @@ public class PhysicsWagon : MonoBehaviour
 
     void RotateWheels()
     {
-        // Calculate the speed of the wagon body
         float speed = wagonRigidbody.velocity.magnitude;
-
-        // Calculate the rotation angle for the wheels
-        float rotationAngle = (speed / wheelCircumference) * 360f * Time.fixedDeltaTime;
-
-        // Apply the rotation to the wheels
+        float rotationAngle = speed / wheelCircumference * 360f * Time.fixedDeltaTime;
         WheelsFront.Rotate(Vector3.right, rotationAngle);
         WheelsBack.Rotate(Vector3.right, rotationAngle);
     }
