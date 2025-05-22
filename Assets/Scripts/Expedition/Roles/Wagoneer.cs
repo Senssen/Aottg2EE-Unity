@@ -43,9 +43,10 @@ public class Wagoneer : MonoBehaviour
 
         GameObject wagon = FindNearestWagon();
 
-        if (wagon != null && Vector3.Distance(transform.position, wagon.transform.position) <= 20)
-            Destroy(wagon);
+        if (wagon == null || Vector3.Distance(transform.position, wagon.transform.position) > 20)
+            return;
 
+        Destroy(wagon);
         ChatManager.AddLine("Destroyed a wagon.");
     }
 
@@ -73,6 +74,7 @@ public class Wagoneer : MonoBehaviour
 
                 wagon.HorseHinge.transform.SetPositionAndRotation(horse.position - horse.transform.forward * 2.3f + Vector3.up * 0.6f, horse.gameObject.transform.rotation * Quaternion.Euler(90, 0, 0));
                 wagon.HorseHinge.connectedBody = horseRigidbody;
+                wagon.SetKinematic(false);
                 wagon.isMounted = true;
                 _mountedWagon = wagonObject;
 
@@ -98,11 +100,14 @@ public class Wagoneer : MonoBehaviour
             return;
         }
 
-        HingeJoint MountHinge = _mountedWagon.transform.Find("Horse Hinge").gameObject.GetComponent<HingeJoint>();
-        Rigidbody TempHingeMount = _mountedWagon.transform.Find("Temporary Hinge").gameObject.GetComponent<Rigidbody>();
+        PhysicsWagon wagon = _mountedWagon.GetComponent<PhysicsWagon>();
 
-        MountHinge.connectedBody = TempHingeMount;
-        _mountedWagon.GetComponent<PhysicsWagon>().isMounted = false;
+        if (wagon == null)
+            return;
+
+        wagon.HorseHinge.connectedBody = wagon.TemporaryHinge;
+        wagon.isMounted = false;
+        wagon.SetKinematic(true);
 
         ChatManager.AddLine("Unmounted the wagon.");
     }

@@ -665,6 +665,7 @@ MonoBehaviour:
   WheelsFront: {fileID: 44652267614804764}
   WheelsBack: {fileID: 6621474944936643806}
   HorseHinge: {fileID: 1077665487770394360}
+  TemporaryHinge: {fileID: 1072468187333107329}
   isMounted: 0
 --- !u!114 &4769701251419597703
 MonoBehaviour:
