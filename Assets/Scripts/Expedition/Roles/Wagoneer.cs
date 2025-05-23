@@ -137,7 +137,7 @@ public class Wagoneer : MonoBehaviour
             return null;
     }
 
-    public static Transform FindMyHorse()
+    public Transform FindMyHorse()
     {
         GameObject[] allObjects = FindObjectsByType<GameObject>(sortMode: FindObjectsSortMode.None);
         Transform myHorse = null;
@@ -161,5 +161,10 @@ public class Wagoneer : MonoBehaviour
             ChatManager.AddLine($"No horse found with my PhotonView!", ChatTextColor.Error);
             return null;
         }
+    }
+
+    public bool CheckIsMounted()
+    {
+        return _mountedWagon != null;
     }
 }
