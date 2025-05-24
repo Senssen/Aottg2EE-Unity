@@ -120,4 +120,17 @@ public class WagoneerMenuManager : MonoBehaviour
 
         SupplyStationText.gameObject.SetActive(open);
     }
+
+    public void DespawnAllObjectsByName(string name)
+    {
+        GameObject[] station = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
+
+        foreach (GameObject go in station)
+        {
+            if (go.name.Contains(name))
+            {
+                Destroy(go);
+            }
+        }
+    }
 }
