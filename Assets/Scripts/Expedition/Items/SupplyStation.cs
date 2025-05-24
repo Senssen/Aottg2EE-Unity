@@ -1,33 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
 using Characters;
-using Photon.Pun.UtilityScripts;
+using Settings;
+using UI;
 using UnityEngine;
 
 public class SupplyStation : MonoBehaviour
 {
-    private float timer = 0f;
-    private readonly float TIMER_MAX = 1f;
+    private HumanInputSettings _humanInput;
+    private InteractionInputSettings _interactionInput;
+    private WagoneerMenuManager _wagoneerMenu;
+
+    void Start()
+    {
+        _humanInput = SettingsManager.InputSettings.Human;
+        _interactionInput = SettingsManager.InputSettings.Interaction;
+        GameObject _expeditionUi = GameObject.Find("Expedition UI(Clone)");
+        if (_expeditionUi) {
+            _wagoneerMenu = _expeditionUi.GetComponent<WagoneerMenuManager>();
+        }
+    }
     void OnTriggerStay(Collider other)
     {
-        if (other.TryGetComponent(out Human _human)) {
-            if (_human.NeedRefill(true) && Mathf.Abs(_human.GetVelocity().magnitude) < 0.1f) {
-                timer += Time.deltaTime;
-
-                if (timer >= TIMER_MAX) {
+        if (other.TryGetComponent(out Human _human) && _human.photonView.IsMine) {
+            if (_human.NeedRefill(true)) {
+                if (_humanInput.AutoRefillGas.Value == true) {
                     _human.Refill();
-                    timer = 0f;
+                } else if (_interactionInput.Interact.GetKeyDown()) {
+                    _human.Refill();
                 }
-            } else {
-                timer = 0f;
             }
+
+            if (_interactionInput.Interact2.GetKeyDown()) {
+                ((InGameMenu)UIManager.CurrentMenu).ShowCharacterChangeMenu();
+            }
+
+            SetSupplyStationText(true);
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out Human _)) {
-            timer = 0f;
-        } 
+        if (other.TryGetComponent(out Human _human) && _human.photonView.IsMine) {
+            SetSupplyStationText(false);
+        }
+    }
+
+    private void SetSupplyStationText(bool open)
+    {
+        if (_wagoneerMenu != null) {
+            _wagoneerMenu.SetSupplyStationText(open);
+        }
     }
 }
