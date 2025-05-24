@@ -112,6 +112,38 @@ public class Wagoneer : MonoBehaviour
         ChatManager.AddLine("Unmounted the wagon.");
     }
 
+    [PunRPC]
+    public void SpawnStation(PhotonMessageInfo Sender)
+    {
+        if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagoneer")) {
+            ChatManager.AddLine("You must be a wagoneer to use this option!", ChatTextColor.Error);
+            return;
+        }
+
+        Vector3 position = transform.position + transform.forward * 12f;
+        Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
+
+        PhotonNetwork.Instantiate(ResourcePaths.Wagoneer + "/SupplyStation", position, rotation, 0);
+        ChatManager.AddLine("Spawned a station.");
+    }
+
+    [PunRPC]
+    public void DespawnStation(PhotonMessageInfo Sender)
+    {
+        if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagoneer")) {
+            ChatManager.AddLine("You must be a wagoneer to use this option!", ChatTextColor.Error);
+            return;
+        }
+
+        GameObject station = FindNearestStation();
+
+        if (station == null || Vector3.Distance(transform.position, station.transform.position) > 20)
+            return;
+
+        Destroy(station);
+        ChatManager.AddLine("Destroyed a station.");
+    }
+
     public GameObject FindNearestWagon()
     {
         GameObject[] wagons = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.InstanceID); // Get all objects in the scene
@@ -121,6 +153,31 @@ public class Wagoneer : MonoBehaviour
         foreach (GameObject obj in wagons)
         {
             if (obj.name.Contains("Momo_Wagon")) // Check if the object is a "Wagon"
+            {
+                float distance = Vector3.Distance(transform.position, obj.transform.position);
+                if (distance < nearestDistance)
+                {
+                    nearestDistance = distance;
+                    nearestWagon = obj;
+                }
+            }
+        }
+
+        if (nearestWagon != null)
+            return nearestWagon;
+        else
+            return null;
+    }
+
+    public GameObject FindNearestStation()
+    {
+        GameObject[] wagons = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.InstanceID); // Get all objects in the scene
+        GameObject nearestWagon = null;
+        float nearestDistance = 1500f; //max range to look for wagons
+
+        foreach (GameObject obj in wagons)
+        {
+            if (obj.name.Contains("SupplyStation")) // Check if the object is a "Wagon"
             {
                 float distance = Vector3.Distance(transform.position, obj.transform.position);
                 if (distance < nearestDistance)

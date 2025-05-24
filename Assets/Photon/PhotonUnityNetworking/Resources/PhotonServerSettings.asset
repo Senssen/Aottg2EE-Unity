@@ -152,6 +152,8 @@ MonoBehaviour:
   - UnmountWagon
   - DespawnWagon
   - MountWagon
+  - DespawnStation
+  - SpawnStation
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -43,16 +43,14 @@ public class WagoneerMenuManager : MonoBehaviour
             wagoneer.SendRPC("SpawnWagon");
         } else if (action == 1) {
             wagoneer.SendRPC("DespawnWagon");
-        } else if (action == 2) {
-            if (wagoneer.CheckIsMounted()) {
-                wagoneer.SendRPC("UnmountWagon");
-            } else {
-                wagoneer.SendRPC("MountWagon");
-            }
+        } else if (action == 2 && wagoneer.CheckIsMounted() == true) {
+            wagoneer.SendRPC("UnmountWagon");
+        } else if (action == 2 && wagoneer.CheckIsMounted() == false) {
+            wagoneer.SendRPC("MountWagon");
         } else if (action == 3) {
-            // Spawn Supply Station
+            wagoneer.SendRPC("SpawnStation");
         } else if (action == 4) {
-            // Despawn Supply Station
+            wagoneer.SendRPC("DespawnStation");
         }
     }
 

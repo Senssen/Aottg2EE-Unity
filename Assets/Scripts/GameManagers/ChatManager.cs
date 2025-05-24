@@ -456,7 +456,7 @@ namespace GameManagers
 
         #region Wagoneer
 
-        [CommandAttribute("wagon", "/wagon [COMMAND]: Runs wagon commands. Allowed arguements: spawn, despawn, mount, unmount.")]
+        [CommandAttribute("wagon", "/wagon [COMMAND]: Runs wagon commands. Allowed arguments: spawn, despawn, mount, unmount")]
         private static void ControlWagon(string[] args)
         {
             GameObject go = GetMyPlayer();
@@ -475,7 +475,26 @@ namespace GameManagers
             } else if (args[1] == "unmount") {
                 wagoneer.SendRPC("UnmountWagon");
             } else {
-                AddLine($"There is not definition for arguement {args[1]}");
+                AddLine($"There is not definition for argument {args[1]}");
+            }
+        }
+
+        [CommandAttribute("station", "/station [COMMAND]: Runs station commands. Allowed arguments: spawn, despawn")]
+        private static void ControlStation(string[] args)
+        {
+            GameObject go = GetMyPlayer();
+            Wagoneer wagoneer = null;
+            if (go != null)
+                wagoneer = go.GetComponent<Wagoneer>();
+
+            if (args.Length == 1) {
+                AddLine("You need to pass one of the following arguments to use this command: spawn, despawn");
+            } else if (args[1] == "spawn") {
+                wagoneer.SendRPC("SpawnStation");
+            } else if (args[1] == "despawn") {
+                wagoneer.SendRPC("DespawnStation");
+            } else {
+                AddLine($"There is not definition for argument {args[1]}");
             }
         }
 
