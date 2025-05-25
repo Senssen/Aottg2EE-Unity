@@ -8,7 +8,7 @@ public class PhysicsWagon : MonoBehaviour
     [SerializeField] private Transform WheelsBack;
     [SerializeField] public HingeJoint HorseHinge;
     [SerializeField] public Rigidbody TemporaryHinge;
-    private Rigidbody wagonRigidbody;
+    public Rigidbody wagonRigidbody;
     private float wheelCircumference;
     public bool isMounted = false;
 
@@ -21,9 +21,6 @@ public class PhysicsWagon : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (wagonRigidbody.velocity.magnitude < 0.1f && isMounted == false)
-            SetKinematic(true);
-
         RotateWheels();
         FollowHorse();
     }
@@ -46,12 +43,5 @@ public class PhysicsWagon : MonoBehaviour
             return;
         
         HorseHinge.gameObject.transform.position = horse.Cache.Transform.position - horse.Cache.Transform.forward * 2.3f + Vector3.up * 0.6f;
-    }
-
-    public void SetKinematic(bool _isKinematic)
-    {
-        Body.gameObject.GetComponent<Rigidbody>().isKinematic = _isKinematic;
-        HorseHinge.gameObject.GetComponent<Rigidbody>().isKinematic = _isKinematic;
-        TemporaryHinge.gameObject.GetComponent<Rigidbody>().isKinematic = _isKinematic;
     }
 }
