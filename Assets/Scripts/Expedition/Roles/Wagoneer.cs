@@ -104,6 +104,8 @@ public class Wagoneer : MonoBehaviour
         if (wagon == null)
             return;
 
+        _mountedWagon = null;
+
         wagon.HorseHinge.connectedBody = wagon.TemporaryHinge;
         wagon.isMounted = false;
         wagon.SetKinematic(true);

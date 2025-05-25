@@ -12,9 +12,6 @@ public class PhysicsWagon : MonoBehaviour
     private float wheelCircumference;
     public bool isMounted = false;
 
-    private float _setKinematicTimer = 3f;
-    private bool _isInitialKinematicSet = false;
-
     void Start()
     {
         wagonRigidbody = Body.GetComponent<Rigidbody>();
@@ -22,21 +19,11 @@ public class PhysicsWagon : MonoBehaviour
         wheelCircumference = 2 * Mathf.PI * wheelRadius;
     }
 
-    void Update()
-    {
-        if (_isInitialKinematicSet == true)
-            return;
-
-        if (_setKinematicTimer > 0) {
-            _setKinematicTimer -= Time.deltaTime;
-        } else {
-            SetKinematic(true);
-            _isInitialKinematicSet = true;
-        }
-    }
-
     void FixedUpdate()
     {
+        if (wagonRigidbody.velocity.magnitude < 0.1f && isMounted == false)
+            SetKinematic(true);
+
         RotateWheels();
         FollowHorse();
     }
