@@ -4,7 +4,6 @@ using Photon.Pun;
 using Settings;
 using TMPro;
 using UI;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WagoneerMenuManager : MonoBehaviour
@@ -15,6 +14,8 @@ public class WagoneerMenuManager : MonoBehaviour
     private TMP_Text AttachWagonButtonText;
     [SerializeField]
     private TMP_Text SupplyStationText;
+    [SerializeField]
+    private GameObject WagonText;
     [SerializeField]
     private float AnimationDuration = 0.5f;
     private readonly Vector3 FULL_SCALE = new Vector3(0.6f, 1f, 0f);
@@ -132,5 +133,37 @@ public class WagoneerMenuManager : MonoBehaviour
                 Destroy(go);
             }
         }
+    }
+
+    public void ShowWagonText()
+    {
+        WagonText.SetActive(true);
+        StartCoroutine(AnimateWagonText());
+    }
+
+    System.Collections.IEnumerator AnimateWagonText()
+    {
+        RectTransform rt = WagonText.GetComponent<RectTransform>();
+        
+        float time = 0f;
+        while (time < 0.2f)
+        {
+            rt.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, time / 0.2f);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        rt.localScale = Vector3.one;
+
+        yield return new WaitForSeconds(2f);
+        
+        time = 0f;
+        while (time < 0.2f)
+        {
+            rt.localScale = Vector3.Lerp(Vector3.one, Vector3.zero, time / 0.2f);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        rt.localScale = Vector3.zero;
+        WagonText.SetActive(false);
     }
 }

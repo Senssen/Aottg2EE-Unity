@@ -1,5 +1,6 @@
 using UnityEngine;
 using Characters;
+using Photon.Pun;
 
 public class PhysicsWagon : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class PhysicsWagon : MonoBehaviour
         if (isMounted == false)
             return;
 
-        Horse horse = HorseHinge.connectedBody.gameObject.GetComponent<Horse>();
+        Horse horse = HorseHinge.connectedBody?.gameObject.GetComponent<Horse>();
         if (horse == null)
             return;
         

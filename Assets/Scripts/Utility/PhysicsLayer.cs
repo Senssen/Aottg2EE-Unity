@@ -27,16 +27,17 @@ namespace Utility
         public static int Background = 28;
         public static int MapObjectTitans = 29;
         public static int MapObjectHumans = 30;
+        public static int PhysicsWagon = 31;
         private static Dictionary<int, LayerMask> _masks = new Dictionary<int, LayerMask>();
 
         public static void Init()
         {
             SetLayerCollisions(NoCollision, new int[0]);
-            SetLayerCollisions(Hitbox, new int[] { Human, TitanPushbox, Hurtbox });
+            SetLayerCollisions(Hitbox, new int[] { Human, TitanPushbox, Hurtbox, PhysicsWagon });
             SetLayerCollisions(Human, new int[] { Hitbox, TitanPushbox, Projectile, CharacterDetection, 
                 MapObjectAll, MapObjectEntities, MapObjectCharacters, MapObjectHumans});
-            SetLayerCollisions(TitanMovebox, new int[] { TitanMovebox, CharacterDetection, MapObjectAll, MapObjectEntities, MapObjectCharacters, MapObjectTitans });
-            SetLayerCollisions(TitanPushbox, new int[] { Hitbox, Human, Projectile, NPC });
+            SetLayerCollisions(TitanMovebox, new int[] { TitanMovebox, CharacterDetection, MapObjectAll, MapObjectEntities, MapObjectCharacters, MapObjectTitans, PhysicsWagon });
+            SetLayerCollisions(TitanPushbox, new int[] { Hitbox, Human, Projectile, NPC, PhysicsWagon });
             SetLayerCollisions(Projectile, new int[] { Human, TitanPushbox, ProjectileDetection, MapObjectEntities, MapObjectAll, MapObjectProjectiles });
             SetLayerCollisions(ProjectileDetection, new int[] { Projectile });
             SetLayerCollisions(CharacterDetection, new int[] { Human, TitanMovebox });

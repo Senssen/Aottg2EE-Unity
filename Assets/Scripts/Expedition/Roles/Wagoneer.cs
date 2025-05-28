@@ -184,4 +184,12 @@ public class Wagoneer : MonoBehaviour
     {
         return _mountedWagon != null;
     }
+
+    // this is shown to all players on wagon destroy. Since the wagon is destroyed, putting this method here makes more sense.
+
+    [PunRPC]
+    public void ShowWagonTextRPC(PhotonMessageInfo sender)
+    {
+        GameObject.Find("Expedition UI(Clone)").GetComponent<WagoneerMenuManager>().ShowWagonText();
+    }
 }
