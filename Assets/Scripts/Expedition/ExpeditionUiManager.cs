@@ -224,7 +224,7 @@ public class ExpeditionUiManager : MonoBehaviour
                 Debug.LogWarning("The MC may only set the logistician value to numbers greater than or equal to -1. -1 means infinite supply.");
             }
 
-            PhotonExtensions.GetMyHuman().GetComponent<Logistician>().SetSupplies(value);
+            RPCManager.PhotonView.RPC("SetSuppliesRPC", RpcTarget.AllBuffered, value);
         } else {
             Debug.LogError($"The value set was not an integer: {LogisticianMaxSupplyInput.text}");
         }

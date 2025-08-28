@@ -9,6 +9,7 @@ using ApplicationManagers;
 using Photon.Pun;
 using Spawnables;
 using UnityEngine.SceneManagement;
+using Characters;
 
 namespace GameManagers
 {
@@ -276,11 +277,49 @@ namespace GameManagers
                 ChatManager.AddLine("City Diorama is a visual test and thus not a map ideal for gameplay purposes.", ChatTextColor.System);
             }
         }
-        
+
         [PunRPC]
         public void SetNonLethalCannonsRPC(bool _isNonLethal, PhotonMessageInfo info)
         {
             EmVariables.NonLethalCannons = _isNonLethal;
+        }
+        
+        [PunRPC]
+        public void SetSuppliesRPC(int maxSupply, PhotonMessageInfo info)
+        {
+            LogisticianUiManager uiManager = GameObject.Find("Expedition UI(Clone)").GetComponent<LogisticianUiManager>();
+            GameObject humanObject = PhotonExtensions.GetMyHuman();                
+
+            if (humanObject != null) // there is no necessity to set supply texts if the player is non existent on the scene
+            {
+                Logistician logistician = humanObject.GetComponent<Logistician>();
+                if (maxSupply == -1)
+                {
+                    uiManager.GasText.text = "∞";
+                    uiManager.GasText.color = uiManager.GetColorForItemCount(maxSupply);
+                    uiManager.WeaponText.text = "∞";
+                    uiManager.WeaponText.color = uiManager.GetColorForItemCount(maxSupply);
+                }
+                else
+                {
+                    if (logistician.GasSupply > maxSupply || logistician.GasSupply == EmVariables.LogisticianMaxSupply || EmVariables.LogisticianMaxSupply == -1)
+                    {
+                        logistician.GasSupply = maxSupply;
+                    }
+
+                    if (logistician.WeaponSupply > maxSupply || logistician.WeaponSupply == EmVariables.LogisticianMaxSupply || EmVariables.LogisticianMaxSupply == -1)
+                    {
+                        logistician.WeaponSupply = maxSupply;
+                    }
+
+                    uiManager.GasText.text = $"{logistician.GasSupply}";
+                    uiManager.GasText.color = uiManager.GetColorForItemCount(logistician.GasSupply);
+                    uiManager.WeaponText.text = $"{logistician.WeaponSupply}";
+                    uiManager.WeaponText.color = uiManager.GetColorForItemCount(logistician.WeaponSupply);
+                }
+            }
+
+            EmVariables.LogisticianMaxSupply = maxSupply;
         }
 
         #endregion
