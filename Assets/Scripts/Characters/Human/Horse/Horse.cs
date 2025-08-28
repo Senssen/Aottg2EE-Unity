@@ -155,7 +155,7 @@ namespace Characters
                     else
                         State = HorseState.ControlledIdle;
                 }
-                else
+                else if (_wagoneer.CheckIsMounted() == false)
                 {
                     _teleportTimeLeft -= Time.deltaTime;
                     float distance = Vector3.Distance(_owner.Cache.Transform.position, Cache.Transform.position);
