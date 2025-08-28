@@ -29,7 +29,7 @@ public class ExpeditionUiManager : MonoBehaviour
     private GameObject HorseAutorun;
     [SerializeField]
     private GameObject HumanAutorun;
-    
+
     private GeneralInputSettings _generalInputSettings;
 
     [SerializeField]
@@ -50,13 +50,16 @@ public class ExpeditionUiManager : MonoBehaviour
     public void ControlMenu(bool _open)
     {
         EmVariables.SetActive(_open);
-        if (_open == true) {
+        if (_open == true)
+        {
             CanvasObj.SetActive(true);
             InvokeNameRefresh();
             PlayerListTab.SetActive(true);
             SetNonLethalCannonsText();
             StartCoroutine(AnimateUI(true));
-        } else {
+        }
+        else
+        {
             StartCoroutine(AnimateUI(false));
             GetComponent<PlayerListManager>().ResetSelectedButton();
         }
@@ -68,19 +71,25 @@ public class ExpeditionUiManager : MonoBehaviour
         RectTransform rt = TabsParent.GetComponent<RectTransform>();
         while (time < AnimationDuration)
         {
-            if (isOpening) {
+            if (isOpening)
+            {
                 rt.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, time / AnimationDuration);
-            } else {
+            }
+            else
+            {
                 rt.localScale = Vector3.Lerp(Vector3.one, Vector3.zero, time / AnimationDuration);
             }
             time += Time.deltaTime;
             yield return null;
         }
 
-        if (isOpening) {
+        if (isOpening)
+        {
             rt.localScale = Vector3.one;
             PlayerListScrollArea.verticalNormalizedPosition = 1f; // added this line because otherwise the player list might scroll randomly on first open
-        } else {
+        }
+        else
+        {
             rt.localScale = Vector3.zero;
             CanvasObj.SetActive(false); // carried these canvas active settings here because otherwise they will be inactive before the coroutine ends
             PlayerListTab.SetActive(false);
@@ -105,7 +114,7 @@ public class ExpeditionUiManager : MonoBehaviour
     {
         if (HumanAutorun.activeSelf != _open)
             HumanAutorun.SetActive(_open);
-        
+
         if (_open)
             HorseAutorun.SetActive(false);
     }
@@ -171,11 +180,14 @@ public class ExpeditionUiManager : MonoBehaviour
 
         if (RoleName == string.Empty) return;
 
-        if (EmVariables.SelectedPlayer.CustomProperties.ContainsKey(RoleName)) {
+        if (EmVariables.SelectedPlayer.CustomProperties.ContainsKey(RoleName))
+        {
             Hashtable props = new Hashtable();
             props[RoleName] = null;
             EmVariables.SelectedPlayer.SetCustomProperties(props);
-        } else {
+        }
+        else
+        {
             Hashtable props = new Hashtable();
             props[RoleName] = true;
             EmVariables.SelectedPlayer.SetCustomProperties(props);
@@ -203,29 +215,40 @@ public class ExpeditionUiManager : MonoBehaviour
 
     public void ControlTabButton(int option)
     {
-        if (option == 0) {
+        if (option == 0)
+        {
             ControlMenu(false);
-        } else if (option == 1) {
+        }
+        else if (option == 1)
+        {
             PlayerListTab.SetActive(true);
             SettingsTab.SetActive(false);
-        } else if (option == 2) {
+        }
+        else if (option == 2)
+        {
             SettingsTab.SetActive(true);
             LogisticianMaxSupplyInput.text = EmVariables.LogisticianMaxSupply.ToString();
             PlayerListTab.SetActive(false);
-        } else {
+        }
+        else
+        {
             Debug.Log($"No action specified for option {option}");
         }
     }
 
     public void SetLogisticianMaxSupply()
     {
-        if (int.TryParse(LogisticianMaxSupplyInput.text, out int value)) {
-            if (value < -1) {
+        if (int.TryParse(LogisticianMaxSupplyInput.text, out int value))
+        {
+            if (value < -1)
+            {
                 Debug.LogWarning("The MC may only set the logistician value to numbers greater than or equal to -1. -1 means infinite supply.");
             }
 
             RPCManager.PhotonView.RPC("SetSuppliesRPC", RpcTarget.AllBuffered, value);
-        } else {
+        }
+        else
+        {
             Debug.LogError($"The value set was not an integer: {LogisticianMaxSupplyInput.text}");
         }
     }
@@ -244,5 +267,13 @@ public class ExpeditionUiManager : MonoBehaviour
     private void SetNonLethalCannonsText()
     {
         NonLethalCannonText.text = $"Non-lethal Cannons: {EmVariables.NonLethalCannons}";
+    }
+    
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (!hasFocus)
+        {
+            ControlMenu(false);
+        }
     }
 }
