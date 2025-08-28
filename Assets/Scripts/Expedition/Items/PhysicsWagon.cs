@@ -29,6 +29,8 @@ public class PhysicsWagon : MonoBehaviour
     void RotateWheels()
     {
         float speed = wagonRigidbody.velocity.magnitude;
+        if (speed < 1f) return;
+
         float rotationAngle = speed / wheelCircumference * 360f * Time.fixedDeltaTime;
         WheelsFront.Rotate(Vector3.right, rotationAngle);
         WheelsBack.Rotate(Vector3.right, rotationAngle);
