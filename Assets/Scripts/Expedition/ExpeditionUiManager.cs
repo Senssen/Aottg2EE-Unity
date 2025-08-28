@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using ExitGames.Client.Photon;
 using TMPro;
+using GameManagers;
 public class ExpeditionUiManager : MonoBehaviour
 {
     [SerializeField]
@@ -231,8 +232,13 @@ public class ExpeditionUiManager : MonoBehaviour
 
     public void HandleSetNonLethalCannons()
     {
-        PhotonExtensions.GetMyHuman().GetComponent<Cannoneer>().SetNonLethalCannons(!EmVariables.NonLethalCannons);
+        SetNonLethalCannons(!EmVariables.NonLethalCannons);
         SetNonLethalCannonsText();
+    }
+
+    public void SetNonLethalCannons(bool _isNonLethal)
+    {
+        RPCManager.PhotonView.RPC("SetNonLethalCannonsRPC", RpcTarget.AllBuffered, _isNonLethal);
     }
 
     private void SetNonLethalCannonsText()

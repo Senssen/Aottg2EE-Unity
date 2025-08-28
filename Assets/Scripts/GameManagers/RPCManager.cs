@@ -145,7 +145,7 @@ namespace GameManagers
         }
 
         [PunRPC]
-        public void StopVoiceRPC(PhotonMessageInfo Info) 
+        public void StopVoiceRPC(PhotonMessageInfo Info)
         {
             EmoteHandler.OnStopVoiceRPC(Info);
         }
@@ -261,7 +261,7 @@ namespace GameManagers
         }
 
         #region Expedition RPCs
- 
+
         [PunRPC]
         public void LoadSceneRPC(string SceneName, PhotonMessageInfo info)
         {
@@ -271,12 +271,18 @@ namespace GameManagers
             SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
 
             ChatManager.AddLine($"Scene {SceneName} Loaded!");
-            if(SceneName == "CityDiorama")
+            if (SceneName == "CityDiorama")
             {
                 ChatManager.AddLine("City Diorama is a visual test and thus not a map ideal for gameplay purposes.", ChatTextColor.System);
             }
         }
- 
+        
+        [PunRPC]
+        public void SetNonLethalCannonsRPC(bool _isNonLethal, PhotonMessageInfo info)
+        {
+            EmVariables.NonLethalCannons = _isNonLethal;
+        }
+
         #endregion
     }
 }
