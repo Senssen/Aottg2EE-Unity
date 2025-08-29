@@ -51,14 +51,11 @@ public class Wagoneer : MonoBehaviour
 
         GameObject wagon = FindNearestObjectByName(wagoneerViewId, "Momo_Wagon");
 
-        if (wagon != null)
+        if (wagon != null && wagon.TryGetComponent(out PhysicsWagon _physicsWagon) && _physicsWagon.GetDistance(transform) < 20f)
         {
-            if (wagon.TryGetComponent(out PhysicsWagon _physicsWagon) && _physicsWagon.GetDistance(transform) < 20f)
-            {
-                PhotonNetwork.Destroy(wagon);
-                if (Sender.photonView.IsMine)
-                    ChatManager.AddLine("Destroyed a wagon.");       
-            }
+            PhotonNetwork.Destroy(wagon);
+            if (Sender.photonView.IsMine)
+                ChatManager.AddLine("Destroyed a wagon.");
         }
     }
 
@@ -74,15 +71,11 @@ public class Wagoneer : MonoBehaviour
         GameObject wagonObject = FindNearestObjectByName(wagoneerViewId, "Momo_Wagon");
         Transform horse = FindHorseOfViewId(wagoneerViewId);
 
-        if (Vector3.Distance(wagonObject.transform.position, horse.position) > 20 || wagonObject == null || horse == null) //mount range
-            return;
-
-        if (horse != null)
+        if (horse != null && wagonObject != null && wagonObject.TryGetComponent(out PhysicsWagon wagon) && wagon.GetDistance(transform) < 20)
         {
             Rigidbody horseRigidbody = horse.GetComponent<Rigidbody>();
             if (horseRigidbody != null)
             {
-                PhysicsWagon wagon = wagonObject.GetComponent<PhysicsWagon>();
                 if (wagon.isMounted) {
                     if (Sender.photonView.IsMine)
                         ChatManager.AddLine("The wagon is already mounted by another wagoneer!");
