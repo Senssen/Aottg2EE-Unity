@@ -34,7 +34,9 @@ public class Wagoneer : MonoBehaviour
         Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
 
         PhotonNetwork.Instantiate(ResourcePaths.Wagoneer + "/Momo_Wagon1PF", position, rotation, 0);
-        ChatManager.AddLine("Spawned a wagon.");
+
+        if (Sender.photonView.IsMine)
+            ChatManager.AddLine("Spawned a wagon.");
     }
 
     [PunRPC]
@@ -49,7 +51,9 @@ public class Wagoneer : MonoBehaviour
             return;
 
         PhotonNetwork.Destroy(wagon);
-        ChatManager.AddLine("Destroyed a wagon.");
+
+        if (Sender.photonView.IsMine)
+            ChatManager.AddLine("Destroyed a wagon.");
     }
 
     [PunRPC]
@@ -79,7 +83,9 @@ public class Wagoneer : MonoBehaviour
                 wagon.isMounted = true;
                 _mountedWagon = wagonObject;
 
-                ChatManager.AddLine("Mounted the wagon.");
+
+                if (Sender.photonView.IsMine)
+                    ChatManager.AddLine("Mounted the wagon.");
             }
         }
         else
@@ -121,7 +127,9 @@ public class Wagoneer : MonoBehaviour
         Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
 
         PhotonNetwork.Instantiate(ResourcePaths.Wagoneer + "/SupplyStation", position, rotation, 0);
-        ChatManager.AddLine("Spawned a station.");
+
+        if (Sender.photonView.IsMine)
+            ChatManager.AddLine("Spawned a station.");
     }
 
     [PunRPC]
@@ -136,7 +144,9 @@ public class Wagoneer : MonoBehaviour
             return;
 
         PhotonNetwork.Destroy(station);
-        ChatManager.AddLine("Destroyed a station.");
+
+        if (Sender.photonView.IsMine)
+            ChatManager.AddLine("Destroyed a station.");
     }
 
     public GameObject FindNearestObjectByName(int senderViewId, string name)
