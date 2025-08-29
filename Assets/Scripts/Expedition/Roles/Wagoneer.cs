@@ -82,8 +82,10 @@ public class Wagoneer : MonoBehaviour
             if (horseRigidbody != null)
             {
                 PhysicsWagon wagon = wagonObject.GetComponent<PhysicsWagon>();
-                if (wagon.isMounted && Sender.photonView.IsMine) {
-                    ChatManager.AddLine("The wagon is already mounted by another wagoneer!");
+                if (wagon.isMounted) {
+                    if (Sender.photonView.IsMine)
+                        ChatManager.AddLine("The wagon is already mounted by another wagoneer!");
+                        
                     return;
                 }
 
