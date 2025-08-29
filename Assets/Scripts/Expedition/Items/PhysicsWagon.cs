@@ -44,7 +44,12 @@ public class PhysicsWagon : MonoBehaviour
         Horse horse = HorseHinge.connectedBody?.gameObject.GetComponent<Horse>();
         if (horse == null)
             return;
-        
+
         HorseHinge.gameObject.transform.position = horse.Cache.Transform.position - horse.Cache.Transform.forward * 2.3f + Vector3.up * 0.6f;
+    }
+
+    public float GetDistance(Transform entity)
+    {
+        return Vector3.Distance(entity.position, Body.position);
     }
 }

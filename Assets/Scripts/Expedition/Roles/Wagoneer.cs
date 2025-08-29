@@ -50,15 +50,16 @@ public class Wagoneer : MonoBehaviour
             return;
 
         GameObject wagon = FindNearestObjectByName(wagoneerViewId, "Momo_Wagon");
-        Debug.Log("Wagon: " + wagon);
 
-        if (wagon == null || Vector3.Distance(transform.position, wagon.transform.position) > 20)
-            return;
-
-        PhotonNetwork.Destroy(wagon);
-
-        if (Sender.photonView.IsMine)
-            ChatManager.AddLine("Destroyed a wagon.");
+        if (wagon != null)
+        {
+            if (wagon.TryGetComponent(out PhysicsWagon _physicsWagon) && _physicsWagon.GetDistance(transform) < 20f)
+            {
+                PhotonNetwork.Destroy(wagon);
+                if (Sender.photonView.IsMine)
+                    ChatManager.AddLine("Destroyed a wagon.");       
+            }
+        }
     }
 
     [PunRPC]
@@ -73,7 +74,7 @@ public class Wagoneer : MonoBehaviour
         GameObject wagonObject = FindNearestObjectByName(wagoneerViewId, "Momo_Wagon");
         Transform horse = FindHorseOfViewId(wagoneerViewId);
 
-        if (Vector3.Distance(wagonObject.transform.position, horse.position) > 20) //mount range
+        if (Vector3.Distance(wagonObject.transform.position, horse.position) > 20 || wagonObject == null || horse == null) //mount range
             return;
 
         if (horse != null)
@@ -85,7 +86,7 @@ public class Wagoneer : MonoBehaviour
                 if (wagon.isMounted) {
                     if (Sender.photonView.IsMine)
                         ChatManager.AddLine("The wagon is already mounted by another wagoneer!");
-                        
+
                     return;
                 }
 
@@ -115,10 +116,9 @@ public class Wagoneer : MonoBehaviour
             }
 
             if (wagoneer._mountedWagon.TryGetComponent(out PhysicsWagon wagon)) {
-                wagoneer._mountedWagon = null;
-
                 wagon.HorseHinge.connectedBody = wagon.TemporaryHinge;
                 wagon.isMounted = false;
+                wagoneer._mountedWagon = null;
 
                 if (Sender.photonView.IsMine)
                     ChatManager.AddLine("Unmounted the wagon.");
