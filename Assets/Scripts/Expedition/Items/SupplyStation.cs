@@ -21,10 +21,14 @@ public class SupplyStation : MonoBehaviour
     void OnTriggerStay(Collider other)
     {
         if (other.TryGetComponent(out Human _human) && _human.photonView.IsMine) {
-            if (_human.NeedRefill(true)) {
-                if (_humanInput.AutoRefillGas.Value == true) {
+            if (_human.NeedRefill(true))
+            {
+                if (_humanInput.AutoRefillGas.Value == true)
+                {
                     _human.Refill();
-                } else if (_interactionInput.Interact.GetKeyDown()) {
+                }
+                else if (_interactionInput.Interact.GetKeyDown())
+                {
                     _human.Refill();
                 }
             }

@@ -16659,6 +16659,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212cbedddfa3f654f8c1a03a2a63e5d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WeaponSupply: 0
+  GasSupply: 0
   SupplyPack: {fileID: 3237855180948449536}
   GasCollectSound: {fileID: -5908581430658734527}
   BladeCollectSound: {fileID: 463812257126063507}
