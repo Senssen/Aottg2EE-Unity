@@ -25,7 +25,7 @@ public class Wagoneer : MonoBehaviour
     }
 
     [PunRPC]
-    public void SpawnWagon(int _, PhotonMessageInfo Sender) // the view ID does not matter when spawning the wagon
+    public void SpawnWagon(int wagoneerViewId, PhotonMessageInfo Sender) // the view ID does not matter when spawning the wagon
     {
         if (!Sender.photonView.IsMine)
             return;
@@ -33,10 +33,14 @@ public class Wagoneer : MonoBehaviour
         Vector3 position = transform.position + transform.forward * 12f;
         Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
 
-        PhotonNetwork.Instantiate(ResourcePaths.Wagoneer + "/Momo_Wagon1PF", position, rotation, 0);
-
-        if (Sender.photonView.IsMine)
-            ChatManager.AddLine("Spawned a wagon.");
+        GameObject wagon = FindNearestObjectByName(wagoneerViewId, "Momo_Wagon");
+        if (wagon == null || Vector3.Distance(wagon.transform.position, position) > 10f) {
+            PhotonNetwork.Instantiate(ResourcePaths.Wagoneer + "/Momo_Wagon1PF", position, rotation, 0);
+            if (Sender.photonView.IsMine)
+                ChatManager.AddLine("Spawned a wagon.");
+        } else if (Sender.photonView.IsMine) {
+            ChatManager.AddLine("A wagon already exists in close proximity.");
+        }
     }
 
     [PunRPC]
@@ -46,6 +50,7 @@ public class Wagoneer : MonoBehaviour
             return;
 
         GameObject wagon = FindNearestObjectByName(wagoneerViewId, "Momo_Wagon");
+        Debug.Log("Wagon: " + wagon);
 
         if (wagon == null || Vector3.Distance(transform.position, wagon.transform.position) > 20)
             return;
@@ -77,6 +82,10 @@ public class Wagoneer : MonoBehaviour
             if (horseRigidbody != null)
             {
                 PhysicsWagon wagon = wagonObject.GetComponent<PhysicsWagon>();
+                if (wagon.isMounted && Sender.photonView.IsMine) {
+                    ChatManager.AddLine("The wagon is already mounted by another wagoneer!");
+                    return;
+                }
 
                 wagon.HorseHinge.transform.SetPositionAndRotation(horse.position - horse.transform.forward * 2.3f + Vector3.up * 0.6f, horse.gameObject.transform.rotation * Quaternion.Euler(90, 0, 0));
                 wagon.HorseHinge.connectedBody = horseRigidbody;
@@ -112,9 +121,7 @@ public class Wagoneer : MonoBehaviour
                 if (Sender.photonView.IsMine)
                     ChatManager.AddLine("Unmounted the wagon.");
             }
-
         }
-
     }
 
     [PunRPC]
@@ -155,7 +162,7 @@ public class Wagoneer : MonoBehaviour
         GameObject nearestObject = null;
         float nearestDistance = 1500f;
 
-        Transform senderTransform =  PhotonNetwork.GetPhotonView(senderViewId).GetComponent<Transform>();
+        Transform senderTransform = PhotonNetwork.GetPhotonView(senderViewId).GetComponent<Transform>();
         if (senderTransform == null)
             return null;
 

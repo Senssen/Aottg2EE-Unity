@@ -51,8 +51,10 @@ public class WagoneerMenuManager : MonoBehaviour
             wagoneer.SendRPC("DespawnWagon");
         } else if (action == 2 && wagoneer.CheckIsMounted() == true) {
             wagoneer.SendRPC("UnmountWagon");
+            SetAttachWagonText();
         } else if (action == 2 && wagoneer.CheckIsMounted() == false) {
             wagoneer.SendRPC("MountWagon");
+            SetAttachWagonText();
         } else if (action == 3) {
             wagoneer.SendRPC("SpawnStation");
         } else if (action == 4) {
@@ -65,15 +67,23 @@ public class WagoneerMenuManager : MonoBehaviour
             WagoneerCanvas.SetActive(true);
             EmVariables.IsOpen = true;
 
-            if (wagoneer.CheckIsMounted()) {
-                AttachWagonButtonText.text = "Detach Wagon";
-            } else {
-                AttachWagonButtonText.text = "Attach Nearby Wagon";
-            }
+            SetAttachWagonText();
 
             StartCoroutine(AnimateUI(true));
         } else {
             StartCoroutine(AnimateUI(false));
+        }
+    }
+
+    private void SetAttachWagonText()
+    {
+        if (wagoneer.CheckIsMounted())
+        {
+            AttachWagonButtonText.text = "Detach Wagon";
+        }
+        else
+        {
+            AttachWagonButtonText.text = "Attach Nearby Wagon";
         }
     }
 
