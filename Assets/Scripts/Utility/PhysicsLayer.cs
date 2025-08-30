@@ -72,6 +72,7 @@ namespace Utility
             return _masks[originLayer];
         }
 
+        // This method sets the layer on "layer" parameter to ignore collisiosn with every available layer expect for the layers inside the "others" array
         private static void SetLayerCollisions(int layer, int[] others)
         {
             for (int i = 0; i < 32; i++)

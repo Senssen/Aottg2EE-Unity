@@ -76,18 +76,21 @@ public class Wagoneer : MonoBehaviour
             Rigidbody horseRigidbody = horse.GetComponent<Rigidbody>();
             if (horseRigidbody != null)
             {
-                if (wagon.isMounted) {
+                if (wagon.GetIsMounted()) {
                     if (Sender.photonView.IsMine)
                         ChatManager.AddLine("The wagon is already mounted by another wagoneer!");
 
                     return;
                 }
 
+                wagon.HandleCollisionIgnore(horse, true);
+
                 wagon.HorseHinge.transform.SetPositionAndRotation(horse.position - horse.transform.forward * 2.3f + Vector3.up * 0.6f, horse.gameObject.transform.rotation * Quaternion.Euler(90, 0, 0));
                 wagon.HorseHinge.connectedBody = horseRigidbody;
-                wagon.isMounted = true;
+                wagon.SetIsMounted(true);
                 _mountedWagon = wagonObject;
 
+                wagon.HandleCollisionIgnore(horse, false);
 
                 if (Sender.photonView.IsMine)
                     ChatManager.AddLine("Mounted the wagon.");
@@ -110,7 +113,7 @@ public class Wagoneer : MonoBehaviour
 
             if (wagoneer._mountedWagon.TryGetComponent(out PhysicsWagon wagon)) {
                 wagon.HorseHinge.connectedBody = wagon.TemporaryHinge;
-                wagon.isMounted = false;
+                wagon.SetIsMounted(false);
                 wagoneer._mountedWagon = null;
 
                 if (Sender.photonView.IsMine)

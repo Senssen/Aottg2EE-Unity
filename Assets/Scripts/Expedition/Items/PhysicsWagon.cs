@@ -11,7 +11,7 @@ public class PhysicsWagon : MonoBehaviour
     [SerializeField] public Rigidbody TemporaryHinge;
     public Rigidbody wagonRigidbody;
     private float wheelCircumference;
-    public bool isMounted = false;
+    private bool isMounted = false;
 
     void Start()
     {
@@ -51,5 +51,37 @@ public class PhysicsWagon : MonoBehaviour
     public float GetDistance(Transform entity)
     {
         return Vector3.Distance(entity.position, Body.position);
+    }
+
+    public void SetIsMounted(bool _isMounted)
+    {
+        isMounted = _isMounted;
+        SetKinematics(!_isMounted);
+    }
+
+    public bool GetIsMounted()
+    {
+        return isMounted;
+    }
+
+    public void SetKinematics(bool _isKinematic)
+    {
+        Rigidbody hingeRb = HorseHinge.gameObject.GetComponent<Rigidbody>();
+        if (hingeRb != null) hingeRb.isKinematic = _isKinematic;
+        TemporaryHinge.isKinematic = _isKinematic;
+        wagonRigidbody.isKinematic = _isKinematic;
+    }
+
+    public void HandleCollisionIgnore(Transform horse, bool setIgnore)
+    {
+        Collider[] wagonColliders = Body.gameObject.GetComponentsInChildren<Collider>();
+        foreach (Collider wagonCollider in wagonColliders)
+        {
+            Collider[] horseColliders = horse.gameObject.GetComponentsInChildren<Collider>();
+            foreach (Collider horseCollider in horseColliders)
+            {
+                Physics.IgnoreCollision(wagonCollider, horseCollider, setIgnore);
+            }
+        }
     }
 }
