@@ -83,14 +83,10 @@ public class Wagoneer : MonoBehaviour
                     return;
                 }
 
-                wagon.HandleCollisionIgnore(horse, true);
-
                 wagon.HorseHinge.transform.SetPositionAndRotation(horse.position - horse.transform.forward * 2.3f + Vector3.up * 0.6f, horse.gameObject.transform.rotation * Quaternion.Euler(90, 0, 0));
                 wagon.HorseHinge.connectedBody = horseRigidbody;
                 wagon.SetIsMounted(true);
                 _mountedWagon = wagonObject;
-
-                wagon.HandleCollisionIgnore(horse, false);
 
                 if (Sender.photonView.IsMine)
                     ChatManager.AddLine("Mounted the wagon.");

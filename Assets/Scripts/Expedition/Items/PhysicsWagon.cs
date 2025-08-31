@@ -71,17 +71,4 @@ public class PhysicsWagon : MonoBehaviour
         TemporaryHinge.isKinematic = _isKinematic;
         wagonRigidbody.isKinematic = _isKinematic;
     }
-
-    public void HandleCollisionIgnore(Transform horse, bool setIgnore)
-    {
-        Collider[] wagonColliders = Body.gameObject.GetComponentsInChildren<Collider>();
-        foreach (Collider wagonCollider in wagonColliders)
-        {
-            Collider[] horseColliders = horse.gameObject.GetComponentsInChildren<Collider>();
-            foreach (Collider horseCollider in horseColliders)
-            {
-                Physics.IgnoreCollision(wagonCollider, horseCollider, setIgnore);
-            }
-        }
-    }
 }
