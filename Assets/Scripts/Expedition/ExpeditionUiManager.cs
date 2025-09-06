@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using ExitGames.Client.Photon;
 using TMPro;
 using GameManagers;
+using System.Text.RegularExpressions;
 public class ExpeditionUiManager : MonoBehaviour
 {
     [SerializeField]
@@ -185,15 +186,24 @@ public class ExpeditionUiManager : MonoBehaviour
             Hashtable props = new Hashtable();
             props[RoleName] = null;
             EmVariables.SelectedPlayer.SetCustomProperties(props);
+
+            ChatManager.AddLine($"{SanitizeText(EmVariables.SelectedPlayer.GetStringProperty(PlayerProperty.Name))} is no longer a {RoleName}");
         }
         else
         {
             Hashtable props = new Hashtable();
             props[RoleName] = true;
             EmVariables.SelectedPlayer.SetCustomProperties(props);
+
+            ChatManager.AddLine($"{SanitizeText(EmVariables.SelectedPlayer.GetStringProperty(PlayerProperty.Name))} is now a {RoleName}");
         }
 
         InvokeNameRefresh(EmVariables.SelectedPlayer.ActorNumber);
+    }
+
+    private string SanitizeText(string text)
+    {
+        return Regex.Replace(text, "<.*?>", string.Empty);
     }
 
     public void InvokeNameRefresh(int actorNumber)
