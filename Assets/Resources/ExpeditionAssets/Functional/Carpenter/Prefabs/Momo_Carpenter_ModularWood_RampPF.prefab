@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3195051699840143912
+--- !u!1 &1269223801086749096
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,37 +8,79 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6048426422009801632}
-  - component: {fileID: 8749393649123914173}
+  - component: {fileID: 9177948474632543690}
   m_Layer: 23
-  m_Name: Collider
+  m_Name: Momo_Carpenter_ModularWood_RampPF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!4 &6048426422009801632
+--- !u!4 &9177948474632543690
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3195051699840143912}
+  m_GameObject: {fileID: 1269223801086749096}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0013776188, y: -0, z: -0, w: 0.9999991}
-  m_LocalPosition: {x: -0, y: -0.01, z: 0.04}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.6257268, y: 0, z: -44.72823}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4865579735127586442}
+  - {fileID: 6506978481744684872}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4188496253754215441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6506978481744684872}
+  - component: {fileID: 1992576105696524680}
+  - component: {fileID: 465858462399414956}
+  m_Layer: 23
+  m_Name: Momo_Carpenter_ModularWood_RampCollision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &6506978481744684872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4188496253754215441}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.000000015045531, y: 0.70710677, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 441994432750772033}
-  m_LocalEulerAnglesHint: {x: 0.158, y: 0, z: 0}
---- !u!64 &8749393649123914173
+  m_Father: {fileID: 9177948474632543690}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 180}
+--- !u!33 &1992576105696524680
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4188496253754215441}
+  m_Mesh: {fileID: 808808646210922729, guid: 846785b6d3d3e0548a3a73aa7739a7f8, type: 3}
+--- !u!64 &465858462399414956
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3195051699840143912}
+  m_GameObject: {fileID: 4188496253754215441}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -53,8 +95,8 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: -5495902117074765545, guid: 846785b6d3d3e0548a3a73aa7739a7f8, type: 3}
---- !u!1 &3826843015945612078
+  m_Mesh: {fileID: 808808646210922729, guid: 846785b6d3d3e0548a3a73aa7739a7f8, type: 3}
+--- !u!1 &4406836633185236725
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,42 +104,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 441994432750772033}
-  m_Layer: 23
-  m_Name: Momo_Carpenter_ModularWood_RampPF
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!4 &441994432750772033
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3826843015945612078}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.1119378, y: 0, z: -47.55999}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6048426422009801632}
-  - {fileID: 1510825803568580650}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4118983195267632074
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1510825803568580650}
-  - component: {fileID: 4495738780318481348}
-  - component: {fileID: 4885026423991581613}
+  - component: {fileID: 4865579735127586442}
+  - component: {fileID: 476880158363951426}
+  - component: {fileID: 4959972421067491477}
   m_Layer: 23
   m_Name: Momo_Carpenter_ModularWood_Ramp
   m_TagString: Untagged
@@ -105,36 +114,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!4 &1510825803568580650
+--- !u!4 &4865579735127586442
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4118983195267632074}
+  m_GameObject: {fileID: 4406836633185236725}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.842171e-14, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 441994432750772033}
+  m_Father: {fileID: 9177948474632543690}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4495738780318481348
+--- !u!33 &476880158363951426
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4118983195267632074}
+  m_GameObject: {fileID: 4406836633185236725}
   m_Mesh: {fileID: -8003294612308984399, guid: 846785b6d3d3e0548a3a73aa7739a7f8, type: 3}
---- !u!23 &4885026423991581613
+--- !u!23 &4959972421067491477
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4118983195267632074}
+  m_GameObject: {fileID: 4406836633185236725}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
