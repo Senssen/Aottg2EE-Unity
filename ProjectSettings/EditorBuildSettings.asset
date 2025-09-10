@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/ExpeditionAssets/Maps/Momo_FallOfShiganshina.unity
     guid: 8708a07265c5c2d45bb467326615ad30
+  - enabled: 1
+    path: Assets/Resources/ExpeditionAssets/Maps/Momo_ForestOfGiantTrees.unity
+    guid: f1ff9003b8f0b1246b08478d7155eb8c
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
