@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FxTemporaire
   - Speaker
+  - Expedition Menu Player Button
   layers:
   - Default
   - TransparentFX
