@@ -87,7 +87,6 @@ Material:
     - _StochasticContrast: 0.2
     - _StochasticScale: 1
     - _TriplanarContrast: 4
-    - _TriplanarFaceBlend: 0
     m_Colors:
     - _DistanceNoiseScaleStrengthFade: {r: 0.82, g: 0.4, b: 100, a: 250}
     - _DistanceResampleNoiseParams: {r: 0.5, g: 0.5, b: 0, a: 0}
