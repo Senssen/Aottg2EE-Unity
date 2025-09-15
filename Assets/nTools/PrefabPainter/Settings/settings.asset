@@ -327,7 +327,7 @@ MonoBehaviour:
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
       selectedSlot: 0
-      selected: 1
+      selected: 0
       colorTag: 0
       customPreviewImage: {fileID: 0}
     - name: Momo_Tree_GiantTree1PF
@@ -957,12 +957,12 @@ MonoBehaviour:
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
       selectedSlot: 0
-      selected: 0
+      selected: 1
       colorTag: 0
       customPreviewImage: {fileID: 0}
     - name: Momo_Tree_Oak1_CV_WaveyPF
       settings:
-        brushRadius: 1
+        brushRadius: 4.3
         brushSpacing: 4.94
         brushOverlapCheckMode: 1
         brushOverlapDistance: 45
@@ -1295,8 +1295,8 @@ MonoBehaviour:
         randomizeOrientationZ: 0
         scaleTransformMode: 0
         scaleMode: 0
-        scaleUniformMin: 2
-        scaleUniformMax: 3
+        scaleUniformMin: 5
+        scaleUniformMax: 6
         scalePerAxisMin: {x: 1, y: 1, z: 1}
         scalePerAxisMax: {x: 1, y: 1, z: 1}
         pinFixedRotation: 0
