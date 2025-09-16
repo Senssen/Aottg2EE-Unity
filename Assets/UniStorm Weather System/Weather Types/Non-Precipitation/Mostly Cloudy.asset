@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Mostly Cloudy
   m_EditorClassIdentifier: 
   WeatherTypeName: Mostly Cloudy
-  CloudProfileComponent: {fileID: 11400000, guid: 2abfa647742d6174bacc9b765f51f9c3,
-    type: 2}
+  CloudProfileComponent: {fileID: 11400000, guid: 2abfa647742d6174bacc9b765f51f9c3, type: 2}
   SunIntensity: 1
   CloudShadowIntensity: 0.75
   MoonIntensity: 0.75
@@ -24,7 +23,7 @@ MonoBehaviour:
   AuroraInnerColor: {r: 0, g: 1, b: 0, a: 1}
   MinimumFogLevel: 300
   MaximumFogLevel: 600
-  FogDensity: 0.0014
+  FogDensity: 0.0003
   FogLightFalloff: 0.65
   FogHeight: 0.75
   CameraFogHeight: 0.85
@@ -57,6 +56,7 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
+    m_ColorSpace: -1
     m_NumColorKeys: 8
     m_NumAlphaKeys: 2
   WindSpeedLevel: 0.85
@@ -108,6 +108,7 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
+    m_ColorSpace: -1
     m_NumColorKeys: 8
     m_NumAlphaKeys: 2
   UseLightning: 1
