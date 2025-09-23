@@ -86,15 +86,15 @@ Material:
     - _VisibleDistance: -39.6
     - _WetnessStrength: 0
     - _WorldPosGlobal: 0
-    - _uAttenuation: 1.500763
+    - _uAttenuation: -0.014562286
     - _uCloudAlpha: 1
     - _uCloudHeight: 1
     - _uCloudsBackwardScatteringG: -0.2
     - _uCloudsBaseEdgeSoftness: 0.025
     - _uCloudsBaseScale: 1.72
     - _uCloudsBottom: 800
-    - _uCloudsBottomSoftness: 0.4
-    - _uCloudsCoverage: 0.516
+    - _uCloudsBottomSoftness: 0.1
+    - _uCloudsCoverage: 0.511
     - _uCloudsCoverageBias: 0.02
     - _uCloudsDensity: 1
     - _uCloudsDetailScale: 1000
@@ -139,15 +139,15 @@ Material:
     - _SunDir: {r: 0.2784009, g: 0.9581905, b: 0.0660601, a: 0}
     - _SunVector: {r: 0.34202018, g: 0.9387983, b: -0.04098891, a: 0}
     - _uCloudColor: {r: 1, g: 1, b: 1, a: 1}
-    - _uCloudsAmbientColorBottom: {r: 0.87549037, g: 0.8935636, b: 0.91449857, a: 1}
-    - _uCloudsAmbientColorTop: {r: 0.7549395, g: 0.79037845, b: 0.8207547, a: 1}
+    - _uCloudsAmbientColorBottom: {r: 0.116546035, g: 0.15746702, b: 0.19766207, a: 1}
+    - _uCloudsAmbientColorTop: {r: 0.30892515, g: 0.34535414, b: 0.37789434, a: 1}
     - _uCloudsColor: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
     - _uCloudsHorizonColor: {r: 0, g: 0, b: 0, a: 1}
-    - _uFogColor: {r: 0.6156863, g: 0.69803923, b: 0.78431374, a: 0.00015}
+    - _uFogColor: {r: 0.1738163, g: 0.28502133, b: 0.3962264, a: 0.00015}
     - _uHorizonColor: {r: 1, g: 1, b: 1, a: 1}
     - _uLightningColor: {r: 0.7647059, g: 0.8352941, b: 0.8862745, a: 1}
     - _uMoonColor: {r: 0.33023313, g: 0.36793935, b: 0.38679242, a: 1}
-    - _uMoonDir: {r: 0.5735764, g: 0.8067073, b: -0.14224437, a: 0}
-    - _uSunColor: {r: 0.8865623, g: 0.886175, b: 0.88249546, a: 1}
-    - _uSunDir: {r: -0.34202024, g: -0.9254167, b: 0.1631758, a: 0}
+    - _uMoonDir: {r: -7.1054274e-15, g: -0.9063079, b: 0.4226181, a: 0}
+    - _uSunColor: {r: 0.17646986, g: 0.121028095, b: 0.07843174, a: 1}
+    - _uSunDir: {r: 0, g: 0.9063078, b: -0.42261815, a: 0}
   m_BuildTextureStacks: []
