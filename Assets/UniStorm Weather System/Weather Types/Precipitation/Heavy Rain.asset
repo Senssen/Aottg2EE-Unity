@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Heavy Rain
   m_EditorClassIdentifier: 
   WeatherTypeName: Heavy Rain
-  CloudProfileComponent: {fileID: 11400000, guid: 8af8e06821542df46bd3ee0b1093a6ff,
-    type: 2}
+  CloudProfileComponent: {fileID: 11400000, guid: 8af8e06821542df46bd3ee0b1093a6ff, type: 2}
   SunIntensity: 0.6
   CloudShadowIntensity: 0
   MoonIntensity: 0.5
@@ -57,17 +56,16 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
+    m_ColorSpace: -1
     m_NumColorKeys: 8
     m_NumAlphaKeys: 2
   WindSpeedLevel: 0.85
   WindBendingLevel: 0.2
   WindIntensity: 0.6
-  WeatherEffect: {fileID: 198882807848139052, guid: 516fd25c12e04ba46bce3ce4bab8f8e1,
-    type: 3}
+  WeatherEffect: {fileID: 0}
   ParticleEffectAmount: 1000
   ParticleEffectVector: {x: 0, y: 28, z: 20}
-  AdditionalWeatherEffect: {fileID: 198814685187613174, guid: 872b852f5cbd3d54dbfd29aec77b4965,
-    type: 3}
+  AdditionalWeatherEffect: {fileID: 198814685187613174, guid: 872b852f5cbd3d54dbfd29aec77b4965, type: 3}
   AdditionalParticleEffectAmount: 50
   AdditionalParticleEffectVector: {x: 0, y: 0, z: 3}
   WeatherVolume: 1
@@ -110,6 +108,7 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
+    m_ColorSpace: -1
     m_NumColorKeys: 8
     m_NumAlphaKeys: 2
   UseLightning: 1
