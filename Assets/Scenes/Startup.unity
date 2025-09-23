@@ -2862,35 +2862,35 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  StarSpeed: 0.25
+  StarSpeed: 1
   SunAngle: 20
   MoonAngle: 35
   SunShaftsEffect: 0
-  MoonShaftsEffect: 1
+  MoonShaftsEffect: 0
   SunObject: {fileID: 0}
   SunObjectMaterial: {fileID: 0}
   Hemisphere: 0
-  SunShadowType: 2
-  MoonShadowType: 2
+  SunShadowType: 1
+  MoonShadowType: 0
   LightningShadowType: 2
   SunShadowResolution: 2
   MoonShadowResolution: 1
   LightningShadowResolution: 1
-  SunShadowStrength: 0.9
+  SunShadowStrength: 0.8
   MoonShadowStrength: 0.75
   LightningShadowStrength: 0.75
   MoonPhaseList:
   - MoonPhaseTexture: {fileID: 2800000, guid: 66ee46d4b256926458d55b5731431510, type: 3}
     MoonPhaseIntensity: 1
   m_AuroraParent: {fileID: 0}
-  StarmapType: 2
+  StarmapType: 1
   CloudRenderType: 1
   SunLightShaftIntensity:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 2.4972544
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2899,7 +2899,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 24
-      value: 1
+      value: 2.4972544
       inSlope: 0
       outSlope: 0
       tangentMode: 0
