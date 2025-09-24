@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FxTemporaire
   - Speaker
+  - Expedition Menu Player Button
   layers:
   - Default
   - TransparentFX
@@ -38,7 +39,7 @@ TagManager:
   - Background
   - MapObjectTitans
   - MapObjectHumans
-  - 
+  - PhysicsWagon
   m_SortingLayers:
   - name: Default
     uniqueID: 0

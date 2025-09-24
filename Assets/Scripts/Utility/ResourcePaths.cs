@@ -19,5 +19,6 @@ namespace Utility
         public static string Weather = "Weather";
         public static string Expedition = "GamePfs";
         public static string Logistician = "ExpeditionAssets/Functional/Logistician/Prefabs";
+        public static string Wagoneer = "ExpeditionAssets/Functional/Wagon/Prefabs";
     }
 }

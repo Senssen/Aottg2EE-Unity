@@ -107,6 +107,8 @@ namespace UI
                 last.CustomSet.Value = current.CustomSet.Value;
                 last.Loadout.Value = current.Loadout.Value;
                 last.Special.Value = current.Special.Value;
+                last.Special_2.Value = current.Special_2.Value;
+                last.Special_3.Value = current.Special_3.Value;
                 SettingsManager.InGameSettings.Save();
             }
         }

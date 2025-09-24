@@ -1,16 +1,15 @@
-using Characters;
 using UnityEngine;
 using Photon.Pun;
 using Utility;
 using Settings;
 using Cameras;
 using ApplicationManagers;
+using GameManagers;
 
 public class Logistician : MonoBehaviour
 {
-    public readonly int MaxItemSupply = 4;
-    public int WeaponSupply { get; private set; }
-    public int GasSupply { get; private set; }
+    public int WeaponSupply;
+    public int GasSupply;
     private LogisticianUiManager uiManager;
     [SerializeField]
     private GameObject SupplyPack;
@@ -23,8 +22,8 @@ public class Logistician : MonoBehaviour
 
     public void Start()
     {
-        WeaponSupply = MaxItemSupply;
-        GasSupply = MaxItemSupply;
+        WeaponSupply = EmVariables.LogisticianMaxSupply;
+        GasSupply = EmVariables.LogisticianMaxSupply;
         uiManager = GameObject.Find("Expedition UI(Clone)").GetComponent<LogisticianUiManager>();
 
         uiManager.WeaponText.text = $"{WeaponSupply}";
@@ -42,10 +41,10 @@ public class Logistician : MonoBehaviour
     public void DropItem(RoleItems.SupplyItem _itemType)
     {
         Vector3 position = transform.position + (transform.forward * 4f) + new Vector3(0,1.5f,0);
-        if (_itemType == RoleItems.SupplyItem.Gas && GasSupply > 0) {
+        if (_itemType == RoleItems.SupplyItem.Gas && (GasSupply > 0 || EmVariables.LogisticianMaxSupply == -1)) {
             PhotonNetwork.Instantiate(ResourcePaths.Logistician + "/SpinningSupplyGasPrefab", position, transform.rotation, 0);
             UseSupply(_itemType);
-        } else if (_itemType == RoleItems.SupplyItem.Weapon && WeaponSupply > 0) {
+        } else if (_itemType == RoleItems.SupplyItem.Weapon && (WeaponSupply > 0 || EmVariables.LogisticianMaxSupply == -1)) {
             PhotonNetwork.Instantiate(ResourcePaths.Logistician + "/SpinningSupplyBladePrefab", position, transform.rotation, 0);
             UseSupply(_itemType);
         }
@@ -53,37 +52,42 @@ public class Logistician : MonoBehaviour
 
     public void ResetSupplies()
     {
-        WeaponSupply = MaxItemSupply;
-        GasSupply = MaxItemSupply;
+        if (HasInfinite())
+            return;
 
-        uiManager.WeaponText.text = $"{WeaponSupply}";
+        WeaponSupply = EmVariables.LogisticianMaxSupply;
+        GasSupply = EmVariables.LogisticianMaxSupply;
+
         uiManager.GasText.text = $"{GasSupply}";
-        uiManager.GasText.color = GetColorForItemCount(GasSupply);
-        uiManager.WeaponText.color = GetColorForItemCount(WeaponSupply);
+        uiManager.GasText.color = uiManager.GetColorForItemCount(GasSupply);
+        uiManager.WeaponText.text = $"{WeaponSupply}";
+        uiManager.WeaponText.color = uiManager.GetColorForItemCount(WeaponSupply);
     }
 
     private void UseSupply(RoleItems.SupplyItem _itemType)
     {
+        if (HasInfinite())
+            return;
+
         if (_itemType == RoleItems.SupplyItem.Gas) {
             GasSupply--;
             uiManager.GasText.text = $"{GasSupply}";
-            uiManager.GasText.color = GetColorForItemCount(GasSupply);
+            uiManager.GasText.color = uiManager.GetColorForItemCount(GasSupply);
         } else if (_itemType == RoleItems.SupplyItem.Weapon) {
             WeaponSupply--;
             uiManager.WeaponText.text = $"{WeaponSupply}";
-            uiManager.WeaponText.color = GetColorForItemCount(WeaponSupply);
+            uiManager.WeaponText.color = uiManager.GetColorForItemCount(WeaponSupply);
         }
     }
 
-    private Color GetColorForItemCount(int count)
+    private bool HasInfinite()
     {
-        if (count <= 0) {
-            return new Color(0.514f, 0.231f, 0.267f);
-        } else if (count > 0 && count <= 2) {
-            return new Color(0.8f, 0.608f, 0.278f);
-        } else {
-            return new Color(0.475f, 0.592f, 0.318f);
-        }
+        return EmVariables.LogisticianMaxSupply == -1;
+    }
+
+    public void SetSupplies(int maxSupply)
+    {
+        RPCManager.PhotonView.RPC("SetSuppliesRPC", RpcTarget.AllBuffered, maxSupply);
     }
 
 }

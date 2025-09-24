@@ -14,9 +14,7 @@ using Photon.Pun;
 using System;
 using System.Reflection;
 using System.Linq;
-using Map;
 using System.Collections;
-using NUnit.Framework.Constraints;
 
 
 namespace GameManagers
@@ -455,6 +453,73 @@ namespace GameManagers
             yield return new WaitForSeconds(2f);
             InGameManager.LeaveRoom();
         }
+
+        #region Wagoneer
+
+        [CommandAttribute("wagon", "/wagon [COMMAND]: Runs wagon commands. Allowed arguments: spawn, despawn, mount, unmount")]
+        private static void ControlWagon(string[] args)
+        {
+            GameObject go = GetMyPlayer();
+            Wagoneer wagoneer = null;
+            if (go != null)
+                wagoneer = go.GetComponent<Wagoneer>();
+
+            if (args.Length == 1) {
+                AddLine("You need to pass one of the following arguments to use this command: spawn, despawn, mount, unmount");
+            } else if (args[1] == "spawn") {
+                wagoneer.SendRPC("SpawnWagon");
+            } else if (args[1] == "despawn") {
+                wagoneer.SendRPC("DespawnWagon");
+            } else if (args[1] == "mount") {
+                wagoneer.SendRPC("MountWagon");
+            } else if (args[1] == "unmount") {
+                wagoneer.SendRPC("UnmountWagon");
+            } else {
+                AddLine($"There is not definition for argument {args[1]}");
+            }
+        }
+
+        [CommandAttribute("station", "/station [COMMAND]: Runs station commands. Allowed arguments: spawn, despawn")]
+        private static void ControlStation(string[] args)
+        {
+            GameObject go = GetMyPlayer();
+            Wagoneer wagoneer = null;
+            if (go != null)
+                wagoneer = go.GetComponent<Wagoneer>();
+
+            if (args.Length == 1) {
+                AddLine("You need to pass one of the following arguments to use this command: spawn, despawn");
+            } else if (args[1] == "spawn") {
+                wagoneer.SendRPC("SpawnStation");
+            } else if (args[1] == "despawn") {
+                wagoneer.SendRPC("DespawnStation");
+            } else {
+                AddLine($"There is not definition for argument {args[1]}");
+            }
+        }
+
+        private static GameObject GetMyPlayer()
+        {
+            GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
+
+            GameObject myGo = null;
+            for (int i = 0; i < allPlayers.Length; i++)
+            {
+                GameObject go = allPlayers[i];
+                PhotonView pv = go.GetComponent<PhotonView>();
+                if (pv != null && pv.IsMine) {
+                    myGo = go;
+                    break;
+                }
+            }
+
+            if (myGo == null)
+                UnityEngine.Debug.LogWarning("A player game object could not be found!");
+
+            return myGo;
+        }
+
+        #endregion
 
         [CommandAttribute("clear", "/clear: Clears the chat window.", Alias = "c")]
         private static void Clear(string[] args)

@@ -700,7 +700,7 @@ namespace Characters
         /// <returns>Human carry option or null if none exists.</returns>
         public Human GetCarryOption(float distance)
         {
-            RaycastHit hit;
+            /* RaycastHit hit; */
             Human target = GetHumanAlongRay(GetAimRayAfterHumanCheap(), distance);
             if (IsValidCarryTarget(target, distance))
             {
@@ -779,17 +779,24 @@ namespace Characters
             var character = (BaseShifter)_inGameManager.CurrentCharacter;
             character.PreviousHumanGas = Stats.CurrentGas;
             character.PreviousHumanWeapon = Weapon;
+            character.PreviousAbilityCooldowns = GetComponent<Veteran>().AbilityCooldowns;
             PhotonNetwork.LocalPlayer.SetCustomProperty(PlayerProperty.CharacterViewId, character.Cache.PhotonView.ViewID);
             PhotonNetwork.Destroy(gameObject);
         }
 
-        public IEnumerator WaitAndTransformFromShifter(float previousHumanGas, BaseUseable previousHumanWeapon)
+        public IEnumerator WaitAndTransformFromShifter(float previousHumanGas, BaseUseable previousHumanWeapon, Dictionary<string, float> previousAbilityCooldowns)
         {
             while (!FinishSetup)
             {
                 yield return null;
             }
             Stats.CurrentGas = previousHumanGas;
+
+            Veteran veteran = GetComponent<Veteran>();
+            InGameCharacterSettings _s = SettingsManager.InGameCharacterSettings;
+            veteran.AbilityCooldowns = previousAbilityCooldowns;
+            veteran.SetAllSpecials(_s.Special.Value, _s.Special_2.Value, _s.Special_3.Value, true);
+
             if (previousHumanWeapon is BladeWeapon)
             {
                 BladeWeapon previousBlade = (BladeWeapon)previousHumanWeapon;
@@ -928,7 +935,7 @@ namespace Characters
                 return true;
             }
             Logistician logistician = GetComponent<Logistician>();
-            if (logistician.WeaponSupply < logistician.MaxItemSupply || logistician.GasSupply < logistician.MaxItemSupply)
+            if (EmVariables.LogisticianMaxSupply != -1 && (logistician.WeaponSupply < EmVariables.LogisticianMaxSupply || logistician.GasSupply < EmVariables.LogisticianMaxSupply))
             {
                 return true;
             }
@@ -2646,7 +2653,7 @@ namespace Characters
         private void GunHeadMovement()
         {
             return;
-            Vector3 _gunTarget = GetAimPoint();
+            /* Vector3 _gunTarget = GetAimPoint();
             Vector3 position = Cache.Transform.position;
             float x = Mathf.Sqrt(Mathf.Pow(_gunTarget.x - position.x, 2f) + Mathf.Pow(_gunTarget.z - position.z, 2f));
             var originalRotation = Cache.Transform.rotation;
@@ -2659,7 +2666,7 @@ namespace Characters
             float deltaX = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
             deltaX = Mathf.Clamp(deltaX, -40f, 30f);
             var targetRotation = Quaternion.Euler(euler.x + deltaX, euler.y + deltaY, euler.z);
-            _targetRotation = Quaternion.Lerp(_targetRotation, targetRotation, Time.deltaTime * 100f);
+            _targetRotation = Quaternion.Lerp(_targetRotation, targetRotation, Time.deltaTime * 100f); */
         }
 
         private void LeftArmAim(Vector3 target)
@@ -3015,7 +3022,7 @@ namespace Characters
         #region MC Teleport
 
         [PunRPC]
-        public void moveToRPC(float x, float y, float z, PhotonMessageInfo info)
+        public void MoveToRPC(float x, float y, float z, PhotonMessageInfo info)
         {
             if (info.Sender.IsMasterClient)
             {

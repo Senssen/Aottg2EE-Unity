@@ -13,6 +13,7 @@ namespace Controllers
     {
         protected Human _human;
         private Veteran _veteran;
+        private Cannoneer _cannoneer;
         protected float _reelOutScrollTimeLeft;
         protected float _reelInScrollCooldownLeft = 0f;
         protected float _reelInScrollCooldown = 0.2f;
@@ -28,6 +29,7 @@ namespace Controllers
             base.Awake();
             _human = GetComponent<Human>();
             _veteran = GetComponent<Veteran>();
+            _cannoneer = GetComponent<Cannoneer>();
             _humanInput = SettingsManager.InputSettings.Human;
             SetupDash();
         }
@@ -272,6 +274,7 @@ namespace Controllers
             UpdateDashInput(inMenu);
             UpdateVerticalDashInput(inMenu);
             UpdateLoadoutSwap(inMenu);
+            UpdateCannoneer(inMenu);
             bool canWeapon = _human.MountState == HumanMountState.None && !_illegalWeaponStates.Contains(_human.State) && !inMenu && !_human.Dead;
             var attackInput = _humanInput.AttackDefault;
             var specialInput = _humanInput.AttackSpecial;
@@ -389,6 +392,18 @@ namespace Controllers
             {
                 if (_humanInput.LoadoutSwap.GetKeyDown())
                     _veteran.SwitchVeteranLoadout();
+            }
+        }
+
+        #endregion
+
+        #region Cannonneer
+
+        void UpdateCannoneer(bool inMenu)
+        {
+            if (!inMenu && _human.Grounded && PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Cannoneer") && _humanInput.SpawnCannon.GetKeyDown()) 
+            {
+                _cannoneer.SpawnCannonController();
             }
         }
 

@@ -78,7 +78,7 @@ public class FlareWheelManager : MonoBehaviour
 
     void OnApplicationFocus(bool hasFocus)
     {
-        if (!hasFocus) {
+        if (!hasFocus && FlareWheelCanvas.activeSelf) {
             ControlFlareWheel(false);
         }
     }

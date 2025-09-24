@@ -42,6 +42,9 @@ namespace Characters
         public override List<string> EmoteActions => new List<string>() { "Laugh", "Nod", "Shake", "Roar" };
         private TitanCustomSet _customSet;
 
+        [SerializeField]
+        private GameObject HeadComponent;
+
         public void Init(bool ai, string team, JSONNode data, TitanCustomSet customSet)
         {
             _customSet = customSet;
@@ -67,35 +70,30 @@ namespace Characters
                     _runAnimation = BasicAnimations.Runs[runAnimationType - 1];
             }
 
-            #region Faker Titan added by Snake on 1 June 24
+            #region Faker and Stalker Titan added by Snake on 1 June 24
 
-            if (data != null && data.HasKey("WalkAnimation"))
-            {
+            if (data != null && data.HasKey("WalkAnimation")) {
                 _walkAnimation = data["WalkAnimation"];
-            }
-            else
-            {
-                // Default walk animation
+            } else {
                 _walkAnimation = BasicAnimations.Walk;
             }
 
-            if (Random.value * 100f  <= SettingsManager.InGameCurrent.Titan.TitanChanceFaker.Value)
-            {
-                if (Name == "Punk" || Name == "Thrower")
-                {
+            bool _isFaker = Random.value * 100f  <= SettingsManager.InGameCurrent.Titan.TitanChanceFaker.Value; 
+            bool _isStalker = Random.value *100f  <= SettingsManager.InGameCurrent.Titan.TitanChanceStalker.Value;
+            if (_isFaker) {
+                if (Name == "Punk" || Name == "Thrower") {
                     _runAnimation = Random.value > 0.5f ? BasicAnimations.Walk : BasicAnimations.Runs[0];
-                }
-                else if (Name == "Abnormal" || Name == "Jumper")
-                {
+                } else if (Name == "Abnormal" || Name == "Jumper") {
                     _runAnimation = Random.value > 0.5f ? BasicAnimations.Walk : BasicAnimations.Runs[1];
-                }
-                else if (Name == "Titan")
-                {
+                } else if (Name == "Titan") {
                     _walkAnimation = Random.value > 0.5f ? BasicAnimations.Runs[0] : BasicAnimations.Runs[1];
                 }
 
                 Name += "<color=#772732> [F]</color>";
             }
+
+            if (_isStalker)
+                Name += "<color=#274D77> [S]</color>";
 
             #endregion
 
@@ -538,7 +536,15 @@ namespace Characters
             var settings = SettingsManager.InGameCurrent.Titan;
             if (type == "CannonBall" || type == "Rock")
             {
-                base.GetHitRPC(viewId, name, damage, type, collider);
+                if (EmVariables.NonLethalCannons == true || IsLethalPart(collider) == false) {
+                    Cripple(2f);
+                } else {
+                    base.GetHitRPC(viewId, name, damage, type, collider);
+                    HeadComponent.SetActive(false);
+                    BasicCache.Head.gameObject.SetActive(false);
+                    BasicCache.HeadBlood.Play(true);
+                }
+
                 return;
             }
             if (settings.TitanArmorEnabled.Value && (!IsCrawler || settings.TitanArmorCrawlerEnabled.Value))
@@ -1405,6 +1411,11 @@ namespace Characters
             }
             else
                 base.CheckGround();
+        }
+
+        private bool IsLethalPart(string collider)
+        {
+            return collider == "head" || collider == "neck";
         }
     }
 }

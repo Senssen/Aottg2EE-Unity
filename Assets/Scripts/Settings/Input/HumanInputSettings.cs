@@ -32,12 +32,14 @@
         public KeybindSetting LogisticianMenu = new KeybindSetting(new string[] { "N", "None" }); // Added by Ata 2 May 24 //
         public KeybindSetting FlareWheelMenu = new KeybindSetting(new string[] { "V", "None" }); // Added by Ata 31 Mar 25 for Ability Wheel
         public KeybindSetting AbilityWheelMenu = new KeybindSetting(new string[] { "B", "None" }); // Added by Ata 12 May 24 for Ability Wheel
+        public KeybindSetting WagoneerMenu = new KeybindSetting(new string[] { "L", "None" }); // Added by Ata 12 May 24 for Ability Wheel
         public KeybindSetting TriggerAbility2 = new KeybindSetting(new string[] { "Alpha2", "None" }); // Added by Ata 20 May 24 for Ability Wheel
         public KeybindSetting TriggerAbility3 = new KeybindSetting(new string[] { "Alpha3", "None" }); // Added by Ata 20 May 24 for Ability Wheel
         public KeybindSetting LoadoutSwap = new KeybindSetting(new string[] { "None", "None" }); // Added by Ata 25 May 24 for Veteran Role //
         public BoolSetting DashDoubleTap = new BoolSetting(true); // Dash Variants by Ata
         public BoolSetting DashUpDoubleTap = new BoolSetting(true); // Dash Variants by Ata
         public BoolSetting DashBurst = new BoolSetting(true); // Dash Variants by Ata
+        public KeybindSetting SpawnCannon = new KeybindSetting(new string[] { "RightShift", "None" });
         #endregion
     }
 }
