@@ -1163,7 +1163,7 @@ MonoBehaviour:
   UniStormMenuKey: 27
   UniStormCanvas: {fileID: 0}
   m_MenuToggle: 0
-  TabNumber: 3
+  TabNumber: 2
   TimeTabNumbers: 0
   WeatherTabNumbers: 1
   CelestialTabNumbers: 0
@@ -1203,8 +1203,8 @@ MonoBehaviour:
   Day: 25
   Month: 6
   Year: 2020
-  DayLength: 20
-  NightLength: 10
+  DayLength: 10
+  NightLength: 5
   TimeOfDayUpdateSeconds: 5
   UseTimeOfDayUpdateControl: 1
   m_TimeFloat: 0
@@ -1970,8 +1970,8 @@ MonoBehaviour:
   m_CloudShadows: {fileID: 0}
   m_CurrentCloudHeight: 0
   CloudShadowResolution: 1
-  CloudSpeed: 5
-  CloudTurbulence: 5
+  CloudSpeed: 10
+  CloudTurbulence: 1
   DetectionLayerMask:
     serializedVersion: 2
     m_Bits: 8193
