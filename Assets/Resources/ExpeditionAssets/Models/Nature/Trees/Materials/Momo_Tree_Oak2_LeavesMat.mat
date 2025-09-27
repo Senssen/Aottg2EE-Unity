@@ -135,7 +135,7 @@ Material:
     - _TransShadow: 0.9
     - _Translucency: 1
     - _UVSec: 0
-    - _WindDensity: 0.48
+    - _WindDensity: 0.27
     - _WindMovement: 0.5
     - _WindStrength: 0.027
     - _Wind_Intensity: 0.2
