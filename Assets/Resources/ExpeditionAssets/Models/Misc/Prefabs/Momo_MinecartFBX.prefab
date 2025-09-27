@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5650211947490824110}
   - component: {fileID: 6053418424463665603}
   - component: {fileID: 1203544655481328251}
+  - component: {fileID: 8318783244662332960}
   m_Layer: 23
   m_Name: Momo_MinecartFBX
   m_TagString: Untagged
@@ -106,3 +107,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.2878692, y: 2.4929295, z: 3.4071622}
   m_Center: {x: 0, y: 1.2150342, z: 0}
+--- !u!205 &8318783244662332960
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8802793942989923339}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 1.3573215, z: 0}
+  m_Size: 3.4071622
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.050341256
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 6053418424463665603}
+  m_Enabled: 1

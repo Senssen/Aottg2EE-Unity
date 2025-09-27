@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5787383309936631006}
   - component: {fileID: 3967350293744388925}
+  - component: {fileID: 2602821081127945498}
   m_Layer: 23
   m_Name: Momo_Crystal2
   m_TagString: Untagged
@@ -57,6 +58,26 @@ CapsuleCollider:
   m_Height: 6.75
   m_Direction: 1
   m_Center: {x: 0, y: 2.35, z: 0}
+--- !u!205 &2602821081127945498
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884274430108304357}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.084139585, y: 2.820448, z: 0.0051534176}
+  m_Size: 5.842454
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.050341256
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 6774201121343078051}
+    - renderer: {fileID: 2180959098295732601}
+  m_Enabled: 1
 --- !u!1 &2170794141169630047
 GameObject:
   m_ObjectHideFlags: 0
