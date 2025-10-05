@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Momo_ShiganshinaFloorTriplanar
+  m_Name: Momo_StohessFloorTriplanar
   m_Shader: {fileID: -6465566751694194690, guid: b096123b5b3cc1447807653c84b9d5f4, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -53,7 +53,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: e7398e62b2367b84b8e4f452eb20e6b3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4e762a547155944448130526ebd39cf9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -65,7 +65,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture:
-        m_Texture: {fileID: 2800000, guid: 8a395f2f6a289ad4182dcb789db91fa4, type: 3}
+        m_Texture: {fileID: 2800000, guid: f3740af9f2c090d41a5e3b68445213ac, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Triplanar_b46f71d0113c421bbbb8dd4b84163610_Texture_1_Texture2D:
@@ -91,7 +91,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Tiling: -0.2
+    - _Tiling: 0.2
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
