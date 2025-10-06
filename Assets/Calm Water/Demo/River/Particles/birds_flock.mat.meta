@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d9c4d57ba29de3b4d8b02de1bba307e1
+timeCreated: 1435060225
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Demo/River/Particles/birds_flock.mat
+  uploadId: 466250

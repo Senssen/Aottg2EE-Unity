@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 72035d3210ebb944198c25ea15eb4f25
+timeCreated: 1453221339
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Demo/Pond/Materials/Green.mat
+  uploadId: 466250

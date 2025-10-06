@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 91afe6a7a41620642befc3e9e700a43d
+timeCreated: 1523731907
+licenseType: Store
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Demo/River/Textures/T_Terrain_H.r16
+  uploadId: 466250

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 64cc94e88500a904084a18cf5fcb2991
+timeCreated: 1456694188
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Shaders/CalmWater - DoubleSided.shader
+  uploadId: 466250

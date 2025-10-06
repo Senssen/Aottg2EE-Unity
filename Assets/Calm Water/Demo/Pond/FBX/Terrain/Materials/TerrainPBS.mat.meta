@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 950b7dcab7f17ae4ba38b9ca37dcfb72
+timeCreated: 1435418890
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Demo/Pond/FBX/Terrain/Materials/TerrainPBS.mat
+  uploadId: 466250

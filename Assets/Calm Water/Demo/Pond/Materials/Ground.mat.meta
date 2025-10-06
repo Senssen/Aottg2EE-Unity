@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7ead041ae25c1504ab2d9b60bf51c664
+timeCreated: 1450889114
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Demo/Pond/Materials/Ground.mat
+  uploadId: 466250

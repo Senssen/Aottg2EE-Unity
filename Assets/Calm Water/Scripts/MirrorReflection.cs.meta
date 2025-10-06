@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d68db923f95adea46bcea255ebacf5f8
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Scripts/MirrorReflection.cs
+  uploadId: 466250

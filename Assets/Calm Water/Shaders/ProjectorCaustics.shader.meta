@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 28260a8d98706fe40a3c99f2f781b3cb
+timeCreated: 1443534909
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Shaders/ProjectorCaustics.shader
+  uploadId: 466250

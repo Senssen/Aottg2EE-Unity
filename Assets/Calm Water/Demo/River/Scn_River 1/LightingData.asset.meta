@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: df491fb2bc3aada4c88c661abbdafdd2
+timeCreated: 1539296218
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 25800000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Demo/River/Scn_River 1/LightingData.asset
+  uploadId: 466250

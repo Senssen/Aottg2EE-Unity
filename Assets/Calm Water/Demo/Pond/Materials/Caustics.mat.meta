@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6a139bb74b7d459448375b01d92cbc4d
+timeCreated: 1443534900
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Demo/Pond/Materials/Caustics.mat
+  uploadId: 466250

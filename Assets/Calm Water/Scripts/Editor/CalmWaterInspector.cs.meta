@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: a73e00b99d0b16a4d895790ee78fed80
+timeCreated: 1448566272
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Scripts/Editor/CalmWaterInspector.cs
+  uploadId: 466250

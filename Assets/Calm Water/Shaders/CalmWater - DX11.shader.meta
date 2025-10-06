@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2e5d60e33aa6da447bb69ec37053c5ba
+timeCreated: 1452891323
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Shaders/CalmWater - DX11.shader
+  uploadId: 466250

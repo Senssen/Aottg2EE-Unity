@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5d72ef9cce6df0540ac0c024391f90cb
+timeCreated: 1453221603
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Demo/Pond/Materials/Blue.mat
+  uploadId: 466250
