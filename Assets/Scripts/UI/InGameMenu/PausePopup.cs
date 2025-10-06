@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Photon.Pun;
 
 namespace UI
 {
-    class PausePopup: BasePopup
+    class PausePopup : BasePopup
     {
         protected override string Title => UIManager.GetLocale("SettingsPopup", "Keybinds.General", "Pause");
         protected override float Width => 220f;
-        protected override float Height => 280f;
+        protected override float Height => 340f;
         protected override float VerticalSpacing => 20f;
         protected override int VerticalPadding => 20;
 
@@ -26,6 +27,7 @@ namespace UI
             ElementFactory.CreateTextButton(BottomBar, style, UIManager.GetLocaleCommon("Back"), onClick: () => OnButtonClick("Back"));
             ElementFactory.CreateDefaultButton(SinglePanel, style, UIManager.GetLocaleCommon("Settings"), width, onClick: () => OnButtonClick("Settings"));
             ElementFactory.CreateDefaultButton(SinglePanel, style, UIManager.GetLocaleCommon("Game"), width, onClick: () => OnButtonClick("Game"));
+            ElementFactory.CreateDefaultButton(SinglePanel, style, UIManager.GetLocaleCommon("Expedition"), width, onClick: () => OnButtonClick("Expedition"));
         }
 
         protected void OnButtonClick(string name)
@@ -41,10 +43,21 @@ namespace UI
                 menu._settingsPopup.Show();
                 Hide();
             }
+            else if (name == "Expedition")
+            {
+                if (!PhotonNetwork.IsMasterClient)
+                {
+                    UIManager.CurrentMenu.MessagePopup.Show("This is for MasterClient only.");
+                    return;
+                }
+                
+                GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlMenu(true);
+                Hide();
+            }
             else if (name == "Back")
             {
                 menu.SetPauseMenu(false);
-            }    
+            }
             else if (name == "Quit")
             {
                 InGameManager.LeaveRoom();

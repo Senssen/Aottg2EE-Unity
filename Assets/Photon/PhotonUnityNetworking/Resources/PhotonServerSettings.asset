@@ -139,6 +139,24 @@ MonoBehaviour:
   - SetOwnerRPC
   - SetPassengerHorseRPC
   - UnmountHorseAsPassengerRPC
+  - moveToRPC
+  - SetSuppliesRPC
+  - UnMountCannoneer
+  - MoveToRPC
+  - SetNonLethalCannonsRPC
+  - RequestAttachWagon
+  - AttachWagon
+  - AttachWagonHindge
+  - SpawnWagon
+  - DeSpawnWagon
+  - UnmountWagon
+  - DespawnWagon
+  - MountWagon
+  - DespawnStation
+  - SpawnStation
+  - ShowWagonTextRPC
+  - TeleportWithHorse
+  - SetKinematicsOnHorseUnmount
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 733773a4dc7b81542b6d4333806b0973
+timeCreated: 1443536387
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Demo/Pond/Prefabs/CausticsProjector.prefab
+  uploadId: 466250

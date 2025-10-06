@@ -6,18 +6,21 @@ using Map;
 using Effects;
 using CustomLogic;
 using ApplicationManagers;
-using Characters;
 using Photon.Pun;
 using Spawnables;
-using System.Collections;
-using Utility;
 using UnityEngine.SceneManagement;
+using Characters;
 
 namespace GameManagers
 {
     class RPCManager : Photon.Pun.MonoBehaviourPun
     {
         public static PhotonView PhotonView;
+
+        void Awake()
+        {
+            PhotonView = GetComponent<PhotonView>();
+        }
 
         [PunRPC]
         public void TransferLogicRPC(byte[][] strArray, int msgNumber, int msgTotal, PhotonMessageInfo info)
@@ -143,7 +146,7 @@ namespace GameManagers
         }
 
         [PunRPC]
-        public void StopVoiceRPC(PhotonMessageInfo Info) 
+        public void StopVoiceRPC(PhotonMessageInfo Info)
         {
             EmoteHandler.OnStopVoiceRPC(Info);
         }
@@ -258,13 +261,8 @@ namespace GameManagers
             Debug.Log(c);
         }
 
-        void Awake()
-        {
-            PhotonView = GetComponent<PhotonView>();
-        }
-
         #region Expedition RPCs
- 
+
         [PunRPC]
         public void LoadSceneRPC(string SceneName, PhotonMessageInfo info)
         {
@@ -273,9 +271,57 @@ namespace GameManagers
             SceneLoader.CustomSceneLoad = true;
             SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
 
-            ChatManager.AddLine($"Scene {SceneName} Loaded!\nSent By {info.Sender.NickName.StripHex()}");
+            ChatManager.AddLine($"Scene {SceneName} Loaded!");
+            if (SceneName == "CityDiorama")
+            {
+                ChatManager.AddLine("City Diorama is a visual test and thus not a map ideal for gameplay purposes.", ChatTextColor.System);
+            }
         }
- 
+
+        [PunRPC]
+        public void SetNonLethalCannonsRPC(bool _isNonLethal, PhotonMessageInfo info)
+        {
+            EmVariables.NonLethalCannons = _isNonLethal;
+        }
+        
+        [PunRPC]
+        public void SetSuppliesRPC(int maxSupply, PhotonMessageInfo info)
+        {
+            LogisticianUiManager uiManager = GameObject.Find("Expedition UI(Clone)").GetComponent<LogisticianUiManager>();
+            GameObject humanObject = PhotonExtensions.GetMyHuman();                
+
+            if (humanObject != null) // there is no necessity to set supply texts if the player is non existent on the scene
+            {
+                Logistician logistician = humanObject.GetComponent<Logistician>();
+                if (maxSupply == -1)
+                {
+                    uiManager.GasText.text = "∞";
+                    uiManager.GasText.color = uiManager.GetColorForItemCount(maxSupply);
+                    uiManager.WeaponText.text = "∞";
+                    uiManager.WeaponText.color = uiManager.GetColorForItemCount(maxSupply);
+                }
+                else
+                {
+                    if (logistician.GasSupply > maxSupply || logistician.GasSupply == EmVariables.LogisticianMaxSupply || EmVariables.LogisticianMaxSupply == -1)
+                    {
+                        logistician.GasSupply = maxSupply;
+                    }
+
+                    if (logistician.WeaponSupply > maxSupply || logistician.WeaponSupply == EmVariables.LogisticianMaxSupply || EmVariables.LogisticianMaxSupply == -1)
+                    {
+                        logistician.WeaponSupply = maxSupply;
+                    }
+
+                    uiManager.GasText.text = $"{logistician.GasSupply}";
+                    uiManager.GasText.color = uiManager.GetColorForItemCount(logistician.GasSupply);
+                    uiManager.WeaponText.text = $"{logistician.WeaponSupply}";
+                    uiManager.WeaponText.color = uiManager.GetColorForItemCount(logistician.WeaponSupply);
+                }
+            }
+
+            EmVariables.LogisticianMaxSupply = maxSupply;
+        }
+
         #endregion
     }
 }

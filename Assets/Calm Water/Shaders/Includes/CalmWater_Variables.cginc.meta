@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 98df3cc5a80cd9349a0b788519eb3745
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Shaders/Includes/CalmWater_Variables.cginc
+  uploadId: 466250

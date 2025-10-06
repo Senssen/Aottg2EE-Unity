@@ -1,4 +1,4 @@
-﻿using Projectiles;
+﻿    using Projectiles;
 using System.Collections;
 using UnityEngine;
 
@@ -23,9 +23,16 @@ namespace Characters
             Vector3 target = human.GetAimPoint();
             Vector3 start = human.Cache.Transform.position + human.Cache.Transform.up * 2f;
             Vector3 direction = (target - start).normalized;
-            ProjectileSpawner.Spawn(ProjectilePrefabs.Flare, start, Quaternion.identity, direction * Speed, Gravity, 6.5f, _owner.Cache.PhotonView.ViewID,
-                "", new object[] { _color });
-            human.PlaySound(HumanSounds.FlareLaunch);
+
+            if (Name == "Flash") {
+                ProjectileSpawner.Spawn(ProjectilePrefabs.Flash, start, Quaternion.identity, direction * Speed, Gravity, 6.5f, _owner.Cache.PhotonView.ViewID, "", new object[] { _color });    
+                human.PlaySound(HumanSounds.FlareLaunch);
+            } else if (Name == "Acoustic") {
+                AcousticFlareController.FireAcousticFlare(start, Quaternion.identity);
+            } else {
+                ProjectileSpawner.Spawn(ProjectilePrefabs.Flare, start, Quaternion.identity, direction * Speed, Gravity, 6.5f, _owner.Cache.PhotonView.ViewID, "", new object[] { _color });    
+                human.PlaySound(HumanSounds.FlareLaunch);
+            }
         }
     }
 }

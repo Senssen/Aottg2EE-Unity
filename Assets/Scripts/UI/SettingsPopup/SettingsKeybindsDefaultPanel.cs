@@ -25,10 +25,15 @@ namespace UI
             {
                 ElementFactory.CreateToggleSetting(DoublePanelRight, style, SettingsManager.InputSettings.Human.DashDoubleTap,
                 UIManager.GetLocale(cat, "Keybinds.Human", "DashDoubleTap"));
+                
+                ElementFactory.CreateToggleSetting(DoublePanelRight, style, SettingsManager.InputSettings.Human.DashUpDoubleTap,
+                UIManager.GetLocale(cat, "Keybinds.Human", "DashUpDoubleTap"), tooltip: UIManager.GetLocale(cat, "Keybinds.Human", "DashUpDoubleTapTooltip"));
+                
+                ElementFactory.CreateToggleSetting(DoublePanelRight, style, SettingsManager.InputSettings.Human.DashBurst,
+                UIManager.GetLocale(cat, "Keybinds.Human", "DashBurst"), tooltip: UIManager.GetLocale(cat, "Keybinds.Human", "DashBurstTooltip"));
 
                 ElementFactory.CreateToggleSetting(DoublePanelRight, style, SettingsManager.InputSettings.Human.WallSlideDash,
                 UIManager.GetLocale(cat, "Keybinds.Human", "WallSlideDash"), tooltip: UIManager.GetLocale(cat, "Keybinds.Human", "WallSlideDashTooltip"));
-
 
                 ElementFactory.CreateToggleSetting(DoublePanelRight, style, SettingsManager.InputSettings.Human.AutoUseGas,
                 UIManager.GetLocale(cat, "Keybinds.Human", "AutoUseGas"), tooltip: UIManager.GetLocale(cat, "Keybinds.Human", "AutoUseGasTooltip"));
@@ -38,11 +43,12 @@ namespace UI
 
                 ElementFactory.CreateToggleSetting(DoublePanelRight, style, SettingsManager.InputSettings.Human.SwapTSAttackSpecial,
                 UIManager.GetLocale(cat, "Keybinds.Human", "SwapTSAttackSpecial"), tooltip: UIManager.GetLocale(cat, "Keybinds.Human", "SwapTSAttackSpecialTooltip"));
+
                 ElementFactory.CreateToggleSetting(DoublePanelRight, style, SettingsManager.InputSettings.Human.ReelInHolding,
                 UIManager.GetLocale(cat, "Keybinds.Human", "ReelInHolding"), tooltip: UIManager.GetLocale(cat, "Keybinds.Human", "ReelInHoldingTooltip"));
+
                 ElementFactory.CreateSliderSetting(DoublePanelRight, style, SettingsManager.InputSettings.Human.ReelOutScrollSmoothing,
-                    UIManager.GetLocale(cat, "Keybinds.Human", "ReelOutScrollSmoothing"), elementWidth: 130f,
-                    tooltip: UIManager.GetLocale(cat, "Keybinds.Human", "ReelOutScrollSmoothingTooltip"));
+                UIManager.GetLocale(cat, "Keybinds.Human", "ReelOutScrollSmoothing"), elementWidth: 130f, tooltip: UIManager.GetLocale(cat, "Keybinds.Human", "ReelOutScrollSmoothingTooltip"));
             }
             else if (sub == "General")
             {

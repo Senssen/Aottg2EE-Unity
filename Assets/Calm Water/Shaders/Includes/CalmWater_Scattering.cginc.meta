@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3470889bfe1e559448d6b661757457a3
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Shaders/Includes/CalmWater_Scattering.cginc
+  uploadId: 466250

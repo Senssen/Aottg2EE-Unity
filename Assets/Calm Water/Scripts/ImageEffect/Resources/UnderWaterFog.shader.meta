@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 472da7a0e387cf14abf12a99c96998fd
+timeCreated: 1453232256
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Scripts/ImageEffect/Resources/UnderWaterFog.shader
+  uploadId: 466250

@@ -13,6 +13,7 @@ using System.Collections;
 using CustomLogic;
 using CustomSkins;
 using Photon.Pun;
+using System.Collections.Generic;
 
 namespace Characters
 {
@@ -30,6 +31,7 @@ namespace Characters
         public bool TransformingToHuman;
         public float PreviousHumanGas;
         public BaseUseable PreviousHumanWeapon;
+        public Dictionary<string, float> PreviousAbilityCooldowns;
         public float DeathAnimationLength = 2f;
         protected BaseCustomSkinLoader _customSkinLoader;
 
@@ -90,7 +92,7 @@ namespace Characters
             yield return new WaitForSeconds(2f);
             _inGameManager.SpawnPlayerAt(false, BaseTitanCache.Neck.position, BaseTitanCache.Neck.rotation.eulerAngles.y);
             Human currentCharacter = ((Human)_inGameManager.CurrentCharacter);
-            currentCharacter.StartCoroutine(currentCharacter.WaitAndTransformFromShifter(PreviousHumanGas, PreviousHumanWeapon));
+            currentCharacter.StartCoroutine(currentCharacter.WaitAndTransformFromShifter(PreviousHumanGas, PreviousHumanWeapon, PreviousAbilityCooldowns));
         }
 
         protected override IEnumerator WaitAndDie()

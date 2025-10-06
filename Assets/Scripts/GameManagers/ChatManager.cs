@@ -14,7 +14,6 @@ using Photon.Pun;
 using System;
 using System.Reflection;
 using System.Linq;
-using Map;
 using System.Collections;
 
 
@@ -293,6 +292,8 @@ namespace GameManagers
             }
         }
 
+        #region Expedition Mod Commands
+
         [CommandAttribute("load", "/load [SCENE NAME]: Loads a custom scene for expeditions")]
         private static void LoadScene(string[] args)
         {
@@ -310,6 +311,119 @@ namespace GameManagers
                 }
             }
         }
+
+        [CommandAttribute("spawn", "/spawn [PrefabName][Tag][Position][Rotation][Scale]: Spawns a custom prefab into the map with the given attributes.")]
+        private static void SpawnCustomPrefab(string[] args)
+        {
+            if (CheckMC())
+            {
+                if (args.Length != 6)
+                {
+                    AddLine("Invalid arguments passed! Correct usage: /spawn [PrefabName][Tag][Position][Rotation][Scale]", ChatTextColor.Error);
+                    AddLine("Example usage: /spawn Test test_prefab_1 (-16,2,-500) (0,0,0,1) (1,1,1)", ChatTextColor.Error);
+                    return;
+                }
+
+                string prefab_name = $"{ResourcePaths.Expedition}/{args[1]}";
+                string prefab_tag = $"gpf_{args[2]}";
+
+                if (!TryParseVector3(args[3], out Vector3 prefab_position))
+                    return;
+
+                if (!TryParseQuaternion(args[4], out Quaternion prefab_rotation))
+                    return;
+                
+                if (!TryParseVector3(args[5], out Vector3 prefab_scale))
+                    return;
+                
+                GameObject go = PhotonNetwork.Instantiate(prefab_name, prefab_position, prefab_rotation);
+
+                if (!go)
+                {
+                    AddLine("Instantiation of the prefab failed! Check if it's included in the 'Resources' folder and that it has a PhotonView component attached to it.", ChatTextColor.Error);
+                    return;
+                }
+
+                go.name = prefab_tag;
+                go.transform.localScale = prefab_scale;
+            }
+        }
+
+        [CommandAttribute("kill", "/kill [Tag]: Despawns all prefabs with the given tag.")]
+        private static void KillCustomPrefab(string[] args)
+        {
+            if (CheckMC())
+            {
+                if (args.Length != 2)
+                {
+                    AddLine("Invalid argument passed!", ChatTextColor.Error);
+                    AddLine("Example usage: /kill test_prefab");
+                    return;
+                }
+
+                GameObject[] objects = FindObjectsByType<GameObject>(FindObjectsSortMode.None)
+                    .Where(t => t.name == $"gpf_{args[1]}")
+                    .Select(t => t)
+                    .ToArray();
+                
+                for (int i = 0; i < objects.Length; ++i)
+                {
+                    PhotonNetwork.Destroy(objects[i]);
+                }
+            }
+        }
+
+        private static bool TryParseVector3(string input, out Vector3 result)
+        {
+            try 
+            {
+                string[] splitInput = input.Trim('(', ')').Split(',');
+                if (splitInput.Length != 3)
+                {
+                    AddLine($"Vector3 argument has invalid format: {input}", ChatTextColor.Error);
+                    AddLine("Example valid format: (1,1,1)");
+                    result = Vector3.zero;
+                    return false;
+                }
+
+                float[] values = splitInput.Select(float.Parse).ToArray();
+                result = new Vector3(values[0], values[1], values[2]);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                AddLine($"Failed to parse position: {ex.Message}", ChatTextColor.Error);
+                result = Vector3.zero;
+                return false;
+            }
+        }
+
+        private static bool TryParseQuaternion(string input, out Quaternion result)
+        {
+            try
+            {
+                string[] splitInput = input.Trim('(', ')').Split(',');
+                if (splitInput.Length != 4)
+                {
+                    AddLine($"Quaternion argument has invalid format: ${input}", ChatTextColor.Error);
+                    AddLine("Example valid format: (1,1,1,1)");
+                    result = Quaternion.identity;
+                    return false;
+                }
+
+                float[] values = splitInput.Select(float.Parse).ToArray();
+                result = new Quaternion(values[0], values[1], values[2], values[3]);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                AddLine($"Failed to parse position: {ex.Message}", ChatTextColor.Error);
+                result = Quaternion.identity;
+                return false;
+            }
+        }
+
+        #endregion Expedition Mod Commands
 
         [CommandAttribute("restart", "/restart: Restarts the game.", Alias = "r")]
         private static void Restart(string[] args)
@@ -339,6 +453,73 @@ namespace GameManagers
             yield return new WaitForSeconds(2f);
             InGameManager.LeaveRoom();
         }
+
+        #region Wagoneer
+
+        [CommandAttribute("wagon", "/wagon [COMMAND]: Runs wagon commands. Allowed arguments: spawn, despawn, mount, unmount")]
+        private static void ControlWagon(string[] args)
+        {
+            GameObject go = GetMyPlayer();
+            Wagoneer wagoneer = null;
+            if (go != null)
+                wagoneer = go.GetComponent<Wagoneer>();
+
+            if (args.Length == 1) {
+                AddLine("You need to pass one of the following arguments to use this command: spawn, despawn, mount, unmount");
+            } else if (args[1] == "spawn") {
+                wagoneer.SendRPC("SpawnWagon");
+            } else if (args[1] == "despawn") {
+                wagoneer.SendRPC("DespawnWagon");
+            } else if (args[1] == "mount") {
+                wagoneer.SendRPC("MountWagon");
+            } else if (args[1] == "unmount") {
+                wagoneer.SendRPC("UnmountWagon");
+            } else {
+                AddLine($"There is not definition for argument {args[1]}");
+            }
+        }
+
+        [CommandAttribute("station", "/station [COMMAND]: Runs station commands. Allowed arguments: spawn, despawn")]
+        private static void ControlStation(string[] args)
+        {
+            GameObject go = GetMyPlayer();
+            Wagoneer wagoneer = null;
+            if (go != null)
+                wagoneer = go.GetComponent<Wagoneer>();
+
+            if (args.Length == 1) {
+                AddLine("You need to pass one of the following arguments to use this command: spawn, despawn");
+            } else if (args[1] == "spawn") {
+                wagoneer.SendRPC("SpawnStation");
+            } else if (args[1] == "despawn") {
+                wagoneer.SendRPC("DespawnStation");
+            } else {
+                AddLine($"There is not definition for argument {args[1]}");
+            }
+        }
+
+        private static GameObject GetMyPlayer()
+        {
+            GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
+
+            GameObject myGo = null;
+            for (int i = 0; i < allPlayers.Length; i++)
+            {
+                GameObject go = allPlayers[i];
+                PhotonView pv = go.GetComponent<PhotonView>();
+                if (pv != null && pv.IsMine) {
+                    myGo = go;
+                    break;
+                }
+            }
+
+            if (myGo == null)
+                UnityEngine.Debug.LogWarning("A player game object could not be found!");
+
+            return myGo;
+        }
+
+        #endregion
 
         [CommandAttribute("clear", "/clear: Clears the chat window.", Alias = "c")]
         private static void Clear(string[] args)

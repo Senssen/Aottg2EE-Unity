@@ -17,6 +17,11 @@ namespace UI
 
         private readonly string LocaleCategory = "CharacterPopup";
 
+        /* expedition */
+        GameObject AbilitySelection1;
+        GameObject AbilitySelection2;
+        GameObject AbilitySelection3;
+
         public override void Setup(BasePanel parent = null)
         {
             base.Setup(parent);
@@ -40,6 +45,9 @@ namespace UI
             if (lastCharSettings.CharacterType.Value == PlayerCharacter.Human)
             {
                 charSettings.Special.Value = lastCharSettings.Special.Value;
+                charSettings.Special_2.Value = lastCharSettings.Special_2.Value;
+                charSettings.Special_3.Value = lastCharSettings.Special_3.Value;
+
                 charSettings.Costume.Value = lastCharSettings.Costume.Value;
                 charSettings.CustomSet.Value = lastCharSettings.CustomSet.Value;
                 charSettings.Loadout.Value = lastCharSettings.Loadout.Value;
@@ -47,8 +55,13 @@ namespace UI
             if (!loadouts.Contains(charSettings.Loadout.Value))
                 charSettings.Loadout.Value = loadouts[0];
             var specials = HumanSpecials.GetSpecialNames(charSettings.Loadout.Value, miscSettings.AllowShifterSpecials.Value);
-            if (!specials.Contains(charSettings.Special.Value))
+            if (!specials.Contains(charSettings.Special.Value) || !specials.Contains(charSettings.Special_2.Value) || !specials.Contains(charSettings.Special_3.Value))
+            {
                 charSettings.Special.Value = HumanSpecials.DefaultSpecial;
+                charSettings.Special_2.Value = specials[1];
+                charSettings.Special_3.Value = specials[2];
+            }
+
             string[] options = GetCharOptions();
             if (charSettings.CustomSet.Value >= options.Length)
             {
@@ -62,8 +75,8 @@ namespace UI
                 loadouts.ToArray(), elementWidth: 180f, optionsWidth: 180f, onDropdownOptionSelect: () => OnLoadoutClick());
             options = specials.ToArray();
             var maybeTooltip = UIManager.CurrentMenu is InGameMenu menu ? menu.SkillTooltipPopup : null;
-            ElementFactory.CreateIconPickSetting(DoublePanelLeft, dropdownStyle, charSettings.Special, UIManager.GetLocale(LocaleCategory, sub, "Special"),
-                options, GetSpecialIcons(options), UIManager.CurrentMenu.IconPickPopup, tooltips: GetSpecialTooltips(options), elementWidth: 180f, elementHeight: 40f, tooltipPopup: maybeTooltip);
+            
+            CreateSpecialAbilitySelections(DoublePanelLeft, dropdownStyle);
 
             if (miscSettings.PVP.Value == (int)PVPMode.Team)
             {
@@ -73,11 +86,80 @@ namespace UI
             SyncStatBars();
         }
 
+        #region Special Ability Filter
+
+        private void CreateSpecialAbilitySelections(Transform _doublePanel, ElementStyle _dropdownStyle)
+        {
+            Destroy(AbilitySelection1);
+            Destroy(AbilitySelection2);
+            Destroy(AbilitySelection3);
+
+            InGameCharacterSettings charSettings = SettingsManager.InGameCharacterSettings;
+            InGameMiscSettings miscSettings = SettingsManager.InGameCurrent.Misc;
+
+            var specials = HumanSpecials.GetSpecialNames(charSettings.Loadout.Value, miscSettings.AllowShifterSpecials.Value);
+            if (charSettings.Loadout.Value == "Blades") // added by Ata 17 May 2024 
+                specials.Remove("Stock");
+            
+            string[] options = FilterAbilities(specials, charSettings).ToArray();
+
+            var maybeTooltip = UIManager.CurrentMenu is InGameMenu menu ? menu.SkillTooltipPopup : null;
+            AbilitySelection1 = ElementFactory.CreateIconPickSetting(_doublePanel, _dropdownStyle, charSettings.Special, UIManager.GetLocale(LocaleCategory, "General", "Special"),
+                options, GetSpecialIcons(options), UIManager.CurrentMenu.IconPickPopup, tooltips: GetSpecialTooltips(options), elementWidth: 180f, elementHeight: 40f, tooltipPopup: maybeTooltip,
+                    onSelect: () => CreateSpecialAbilitySelections(_doublePanel, _dropdownStyle)
+                );
+            
+            AbilitySelection2 = ElementFactory.CreateIconPickSetting(_doublePanel, _dropdownStyle, charSettings.Special_2, UIManager.GetLocale(LocaleCategory, "General", "Special") + 2,
+                options, GetSpecialIcons(options), UIManager.CurrentMenu.IconPickPopup, tooltips: GetSpecialTooltips(options), elementWidth: 180f, elementHeight: 40f, tooltipPopup: maybeTooltip,
+                    onSelect: () => CreateSpecialAbilitySelections(_doublePanel, _dropdownStyle)
+                );
+            
+            AbilitySelection3 = ElementFactory.CreateIconPickSetting(_doublePanel, _dropdownStyle, charSettings.Special_3, UIManager.GetLocale(LocaleCategory, "General", "Special") + 3,
+                options, GetSpecialIcons(options), UIManager.CurrentMenu.IconPickPopup, tooltips: GetSpecialTooltips(options), elementWidth: 180f, elementHeight: 40f, tooltipPopup: maybeTooltip,
+                    onSelect: () => CreateSpecialAbilitySelections(_doublePanel, _dropdownStyle)
+                );
+
+            if (((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler) {
+                ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.SetSpecialIcon_2(HumanSpecials.GetSpecialIcon(charSettings.Special.Value));
+                ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.SetSpecialIcon_2(HumanSpecials.GetSpecialIcon(charSettings.Special_2.Value));
+                ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.SetSpecialIcon_3(HumanSpecials.GetSpecialIcon(charSettings.Special_3.Value));
+            }
+        }
+
+        private List<string> FilterAbilities(List<string> specials, InGameCharacterSettings charSettings)
+        {
+            if (specials.Contains(charSettings.Special.Value) && charSettings.Special.Value != "None") 
+                specials.Remove(charSettings.Special.Value);
+
+            if (specials.Contains(charSettings.Special_2.Value) && charSettings.Special_2.Value != "None") 
+                specials.Remove(charSettings.Special_2.Value);
+
+            if (specials.Contains(charSettings.Special_3.Value) && charSettings.Special_3.Value != "None") 
+                specials.Remove(charSettings.Special_3.Value);
+
+            foreach (var item in HumanSpecials.ShifterSpecials)
+            {
+                if (charSettings.Special.Value == item || charSettings.Special_2.Value == item || charSettings.Special_3.Value == item)
+                {
+                    foreach (var _item in HumanSpecials.ShifterSpecials)
+                    {
+                        specials.Remove(_item);
+                    }
+                }
+            }
+
+            return specials;
+        }
+        #endregion
+
         protected void OnLoadoutClick()
         {
             InGameCharacterSettings charSettings = SettingsManager.InGameCharacterSettings;
             InGameCharacterSettings lastCharSettings = SettingsManager.InGameSettings.LastCharacter;
             lastCharSettings.Special.Value = charSettings.Special.Value;
+            lastCharSettings.Special_2.Value = charSettings.Special_2.Value;
+            lastCharSettings.Special_3.Value = charSettings.Special_3.Value;
+
             lastCharSettings.Costume.Value = charSettings.Costume.Value;
             lastCharSettings.CustomSet.Value = charSettings.CustomSet.Value;
             lastCharSettings.Loadout.Value = charSettings.Loadout.Value;

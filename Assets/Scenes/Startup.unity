@@ -874,6 +874,51 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &978379025
+GameObject:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 978379027}
+  - component: {fileID: 978379026}
+  m_Layer: 0
+  m_Name: PrefabPainterSceneSettings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &978379026
+MonoBehaviour:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978379025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d0d71238b38a4a38b35b955fbf5c019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentForPrefabs: {fileID: 0}
+--- !u!4 &978379027
+Transform:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978379025}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1178044042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,6 +1057,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1406771704}
   - component: {fileID: 1406771705}
+  - component: {fileID: 1406771706}
   m_Layer: 0
   m_Name: ApplicationStart
   m_TagString: Untagged
@@ -1046,6 +1092,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f1bc5d0a13fb0e438b1cb11054cda62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1406771706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406771702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d3d8cf606c6cd418e0bba22b147fd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EMUIPrefab: {fileID: 5546037500275061286, guid: c82bfe2d955a68347b6a538b1fc26b89, type: 3}
 --- !u!1 &1697943752
 GameObject:
   m_ObjectHideFlags: 0
@@ -2123,3 +2182,4 @@ SceneRoots:
   - {fileID: 818529553}
   - {fileID: 79530972}
   - {fileID: 777016476849459419}
+  - {fileID: 978379027}

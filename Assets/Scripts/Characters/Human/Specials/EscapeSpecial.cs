@@ -4,13 +4,12 @@ using UnityEngine;
 
 namespace Characters
 {
-    class EscapeSpecial : ExtendedUseable
+    class EscapeSpecial : ResetSpecial
     {
         protected override float ActiveTime => 0.64f;
 
-        public EscapeSpecial(BaseCharacter owner) : base(owner)
+        public EscapeSpecial(BaseCharacter owner) : base(owner, "Escape", 1800f)
         {
-            Cooldown = 1800f; // changed by Ata, 5 Mar 25
         }
 
         public override bool CanUse()
@@ -34,6 +33,11 @@ namespace Characters
                 human.SpecialActionState(0.5f);
                 human.Cache.Rigidbody.velocity = Vector3.up * 30f;
             }
+        }
+
+        public override void SetInitialCooldown()
+        {
+            _lastUseTime = Time.time - Cooldown;
         }
     }
 }

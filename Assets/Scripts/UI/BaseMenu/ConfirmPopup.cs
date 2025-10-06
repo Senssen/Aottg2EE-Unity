@@ -50,6 +50,8 @@ namespace UI
             if (name == "Confirm")
                 _onConfirm.Invoke();
             Hide();
+
+            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlMenu(false);
         }
     }
 }

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a702389672da35944a1926cfdb2aeadf
+timeCreated: 1523742423
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Demo/River/RiverPostProcess.asset
+  uploadId: 466250

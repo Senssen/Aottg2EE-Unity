@@ -10,6 +10,7 @@ namespace Characters
     internal partial class Horse: BaseCharacter     //changed by Sysyfus Oct 6 2025 to add "internal partial" for water physics
     {
         public Human _owner;
+        private Wagoneer _wagoneer;
         public int OwnerNetworkID;
         HorseComponentCache HorseCache;
         public HorseState State;
@@ -30,6 +31,7 @@ namespace Characters
         {
             base.Init(true, human.Team);
             _owner = human;
+            _wagoneer = _owner.GetComponent<Wagoneer>();
             photonView.RPC(nameof(SetOwnerRPC), RpcTarget.AllBuffered, human.photonView.ViewID);
 
         }
@@ -153,7 +155,7 @@ namespace Characters
                     else
                         State = HorseState.ControlledIdle;
                 }
-                else
+                else if (_wagoneer.CheckIsMounted() == false)
                 {
                     _teleportTimeLeft -= Time.deltaTime;
                     float distance = Vector3.Distance(_owner.Cache.Transform.position, Cache.Transform.position);
@@ -202,15 +204,16 @@ namespace Characters
                                 ForceMode.Acceleration);
                         }
                     }
-                    else if (State == HorseState.WalkToPoint || State == HorseState.RunToPoint  || 
-                        State == HorseState.ControlledWalk || State == HorseState.ControlledRun)
+                    else if (State == HorseState.WalkToPoint || State == HorseState.RunToPoint  || State == HorseState.ControlledWalk || State == HorseState.ControlledRun)
                     {
+                        /* If the owner is a wagoneer mounting a wagon, this multiplier sets to 1.5 to help compensate for the wagon weight being carried */
+                        float wagoneerMultipler = _owner.photonView.Owner.CustomProperties.ContainsKey("Wagoneer") && _wagoneer.CheckIsMounted() == true ? 1.5f : 1f;
                         float speed = _owner.Stats.HorseSpeed;
                         if (State == HorseState.ControlledWalk)
                             speed = WalkSpeed;
                         else if (State == HorseState.WalkToPoint)
                             speed = RunCloseSpeed;
-                        Cache.Rigidbody.AddForce(Cache.Transform.forward * _owner.Stats.HorseSpeed, ForceMode.Acceleration);
+                        Cache.Rigidbody.AddForce(Cache.Transform.forward * _owner.Stats.HorseSpeed * wagoneerMultipler, ForceMode.Acceleration);
                         if (Cache.Rigidbody.velocity.magnitude >= speed)
                         {
                             if (speed == _owner.Stats.HorseSpeed)

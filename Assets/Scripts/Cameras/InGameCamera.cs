@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using CustomLogic;
 using UnityStandardAssets.ImageEffects;
 using Photon.Pun;
+using NUnit.Framework.Internal.Commands;
 
 namespace Cameras
 {
@@ -67,6 +68,11 @@ namespace Cameras
 
         public void ApplyGraphicsSettings()
         {
+            SceneSettingsManager.SetTerrainDetails(
+                SettingsManager.GraphicsSettings.DetailDistance.Value, 
+                SettingsManager.GraphicsSettings.DetailDensity.Value, 
+                SettingsManager.GraphicsSettings.TreeDistance.Value
+            );
             Camera.farClipPlane = SettingsManager.GraphicsSettings.RenderDistance.Value;
             var antiAliasing = Camera.GetComponent<Antialiasing>();
             antiAliasing.enabled = SettingsManager.GraphicsSettings.AntiAliasing.Value > 0;

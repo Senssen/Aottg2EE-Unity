@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 5a34e3feb07e91a41b951fab4c2dd4ba
+timeCreated: 1537827095
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Demo/River/Prefabs/Prefab_Tree_Cedar_01.prefab
+  uploadId: 466250

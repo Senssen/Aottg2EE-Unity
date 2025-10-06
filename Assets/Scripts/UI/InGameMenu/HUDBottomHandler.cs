@@ -24,14 +24,32 @@ namespace UI
         private Color StaminaFillNormalColor = new Color(0.77f, 0.77f, 0.77f, 1f);
         private Color StaminaFillLowColor = new Color(0.77f, 0.5f, 0.5f, 1f);
         private GameObject _hudBottom;
+
         private Image _specialFill;
         private Image _specialIconBackground;
         private Image _specialIconFill;
+
+        private Image _specialFill_2; // added by ata 20 May 2024 for Ability Wheel //
+        private Image _specialIconBackground_2; // added by ata 20 May 2024 for Ability Wheel //
+        private Image _specialIconFill_2; // added by ata 20 May 2024 for Ability Wheel //
+
+        private Image _specialFill_3; // added by ata 20 May 2024 for Ability Wheel //
+        private Image _specialIconBackground_3; // added by ata 20 May 2024 for Ability Wheel //
+        private Image _specialIconFill_3; // added by ata 20 May 2024 for Ability Wheel //
+
         private Image _gasFillLeft;
         private Image _gasFillRight;
         private Image _gasBackground;
+
         private string _currentSpecialIcon = "";
         private string _newSpecialIcon = "";
+
+        private string _currentSpecialIcon_2 = ""; // added by ata 20 May 2024 for Ability Wheel //
+        private string _newSpecialIcon_2 = ""; // added by ata 20 May 2024 for Ability Wheel //
+
+        private string _currentSpecialIcon_3 = ""; // added by ata 20 May 2024 for Ability Wheel //
+        private string _newSpecialIcon_3 = ""; // added by ata 20 May 2024 for Ability Wheel //
+
         private Human _human;
         private BaseCharacter _character;
         private BasicTitan _playerTitan;
@@ -178,13 +196,26 @@ namespace UI
                 }
                 _hudBottom.AddComponent<HUDScaler>();
                 ElementFactory.SetAnchor(_hudBottom, TextAnchor.LowerCenter, TextAnchor.LowerCenter, Vector3.up * 10f);
+
                 _specialFill = _hudBottom.transform.Find("SpecialFill").GetComponent<Image>();
                 _specialIconBackground = _hudBottom.transform.Find("SpecialIconBackground").GetComponent<Image>();
                 _specialIconFill = _hudBottom.transform.Find("SpecialIconFill").GetComponent<Image>();
+
+                _specialFill_2 = _hudBottom.transform.Find("SpecialFill_2").GetComponent<Image>(); // added by ata 20 May 2024 for Ability Wheel //
+                _specialIconBackground_2 = _hudBottom.transform.Find("SpecialIconBackground_2").GetComponent<Image>(); // added by ata 20 May 2024 for Ability Wheel //
+                _specialIconFill_2 = _hudBottom.transform.Find("SpecialIconFill_2").GetComponent<Image>(); // added by ata 20 May 2024 for Ability Wheel //
+
+                _specialFill_3 = _hudBottom.transform.Find("SpecialFill_3").GetComponent<Image>(); // added by ata 20 May 2024 for Ability Wheel //
+                _specialIconBackground_3 = _hudBottom.transform.Find("SpecialIconBackground_3").GetComponent<Image>(); // added by ata 20 May 2024 for Ability Wheel //
+                _specialIconFill_3 = _hudBottom.transform.Find("SpecialIconFill_3").GetComponent<Image>(); // added by ata 20 May 2024 for Ability Wheel //
+
                 _gasFillLeft = _hudBottom.transform.Find("GasFillLeft").GetComponent<Image>();
                 _gasFillRight = _hudBottom.transform.Find("GasFillRight").GetComponent<Image>();
                 _gasBackground = _hudBottom.transform.Find("GasBackground").GetComponent<Image>();
+
                 _currentSpecialIcon = "";
+                _currentSpecialIcon_2 = ""; // added by ata 20 May 2024 for Ability Wheel //
+                _currentSpecialIcon_3 = ""; // added by ata 20 May 2024 for Ability Wheel //
             }
             else if (_character is BasicTitan)
             {
@@ -200,6 +231,14 @@ namespace UI
         public void SetSpecialIcon(string icon)
         {
             _newSpecialIcon = icon;
+        }
+        public void SetSpecialIcon_2(string icon) // added by ata 20 May 2024 for Ability Wheel //
+        {
+            _newSpecialIcon_2 = icon;
+        }
+        public void SetSpecialIcon_3(string icon) // added by ata 20 May 2024 for Ability Wheel //
+        {
+            _newSpecialIcon_3 = icon;
         }
 
         public void ShakeGas()
@@ -324,8 +363,11 @@ namespace UI
                 _gasAnimationTimeLeft -= Time.deltaTime;
                 _shootAnimationTimeLeft -= Time.deltaTime;
                 UpdateHumanSpecial();
+                UpdateHumanSpecial_2();
+                UpdateHumanSpecial_3();
                 UpdateGas();
-                if (_human.Weapon is BladeWeapon)
+                bool isExist = _bladeFillLeft != null && _bladeFillRight != null && _bladeBackground != null && _bladeReload != null && _bladeOut != null;
+                if (_human.Weapon is BladeWeapon && isExist) // exists check added by Ata 25 May 2024 because it broke loadout swapping //
                     UpdateBlade();
                 else if (_human.Weapon is APGWeapon)
                     UpdateAPG();
@@ -404,6 +446,61 @@ namespace UI
             }
             _specialIconBackground.gameObject.SetActive(_human.Special != null && _currentSpecialIcon != "");
             _specialIconFill.gameObject.SetActive(_human.Special != null && _currentSpecialIcon != "");
+        }
+
+        private void UpdateHumanSpecial_2() // added by ata 20 May 2024 for Ability Wheel // 
+        {
+            if (_human.Special_2 == null)
+            {
+                _specialFill_2.fillAmount = 0f;
+                _specialIconFill_2.fillAmount = 0f;
+            }
+            else
+            {
+                var ratio = _human.Special_2.GetCooldownRatio();
+                _specialFill_2.fillAmount = ratio;
+                _specialIconFill_2.fillAmount = ratio;
+                if (_currentSpecialIcon_2 != _newSpecialIcon_2)
+                {
+                    _currentSpecialIcon_2 = _newSpecialIcon_2;
+                    if (_currentSpecialIcon_2 != "")
+                    {
+                        var icon = (Texture2D)ResourceManager.LoadAsset(ResourcePaths.UI, "Icons/Specials/" + _currentSpecialIcon_2, true);
+                        var sprite = UnityEngine.Sprite.Create(icon, new Rect(0f, 0f, icon.width, icon.height), new Vector2(0.5f, 0.5f));
+                        _specialIconBackground_2.sprite = sprite;
+                        _specialIconFill_2.sprite = sprite;
+                    }
+                }
+            }
+            _specialIconBackground_2.gameObject.SetActive(_human.Special_2 != null && _currentSpecialIcon_2 != "");
+            _specialIconFill_2.gameObject.SetActive(_human.Special_2 != null && _currentSpecialIcon_2 != "");
+        }
+        private void UpdateHumanSpecial_3() // added by ata 20 May 2024 for Ability Wheel //
+        {
+            if (_human.Special_3 == null)
+            {
+                _specialFill_3.fillAmount = 0f;
+                _specialIconFill_3.fillAmount = 0f;
+            }
+            else
+            {
+                var ratio = _human.Special_3.GetCooldownRatio();
+                _specialFill_3.fillAmount = ratio;
+                _specialIconFill_3.fillAmount = ratio;
+                if (_currentSpecialIcon_3 != _newSpecialIcon_3)
+                {
+                    _currentSpecialIcon_3 = _newSpecialIcon_3;
+                    if (_currentSpecialIcon_3 != "")
+                    {
+                        var icon = (Texture2D)ResourceManager.LoadAsset(ResourcePaths.UI, "Icons/Specials/" + _currentSpecialIcon_3, true);
+                        var sprite = UnityEngine.Sprite.Create(icon, new Rect(0f, 0f, icon.width, icon.height), new Vector2(0.5f, 0.5f));
+                        _specialIconBackground_3.sprite = sprite;
+                        _specialIconFill_3.sprite = sprite;
+                    }
+                }
+            }
+            _specialIconBackground_3.gameObject.SetActive(_human.Special_3 != null && _currentSpecialIcon_3 != "");
+            _specialIconFill_3.gameObject.SetActive(_human.Special_3 != null && _currentSpecialIcon_3 != "");
         }
 
         private void UpdateGas()

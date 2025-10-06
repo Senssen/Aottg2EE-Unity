@@ -15,7 +15,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UI;
-using Unity.VisualScripting;
 using UnityEngine;
 using Utility;
 using Weather;
@@ -27,7 +26,11 @@ namespace Characters
         // setup
         public HumanComponentCache HumanCache;
         public BaseUseable Special;
+        public BaseUseable Special_2; // added by Ata 12 May 2024 for Ability Wheel //
+        public BaseUseable Special_3; // added by Ata 12 May 2024 for Ability Wheel //
+        public BaseUseable[] SpecialsArray;
         public BaseUseable Weapon;
+        public BaseUseable Weapon_2;
         public HookUseable HookLeft;
         public HookUseable HookRight;
         public HumanMountState MountState = HumanMountState.None;
@@ -47,6 +50,8 @@ namespace Characters
         // state
         private HumanState _state = HumanState.Idle;
         public string CurrentSpecial;
+        public string SideSpecial_1;
+        public string SideSpecial_2;
         public BaseTitan Grabber;
         public Transform GrabHand;
         public Human Carrier;
@@ -165,6 +170,8 @@ namespace Characters
             GetComponent<CapsuleCollider>().enabled = false;
             if (IsMine())
             {
+                GetComponent<Logistician>().ResetSupplies(); // Added by Ata for Logistician
+
                 FalseAttack();
                 SetCarrierTriggerCollider(false);
             }
@@ -368,6 +375,7 @@ namespace Characters
             }
             _lastMountMessage = null;
             Cache.PhotonView.RPC("UnmountRPC", RpcTarget.All, new object[0]);
+            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHumanAutorun(GetComponent<HumanPlayerController>().GetAutorunState());
         }
 
         [PunRPC]
@@ -411,14 +419,18 @@ namespace Characters
             ToggleSparks(false);
         }
 
-        public void Dash(float targetAngle)
+        public void Dash(float targetAngle, bool _canBurst)
         {
             if (_dashTimeLeft <= 0f && Stats.CurrentGas > 0 && MountState == HumanMountState.None &&
                 State != HumanState.Grab && CarryState != HumanCarryState.Carry && _dashCooldownLeft <= 0f)
             {
-                Stats.UseDashGas();
                 TargetAngle = targetAngle;
                 Vector3 direction = GetTargetDirection();
+                Vector3 moveDirection = GetComponent<Rigidbody>().velocity;
+                float angle = Vector3.Angle(new Vector3(direction.x, 0, direction.z).normalized, new Vector3(moveDirection.x, 0, moveDirection.z).normalized);
+                bool _empowered = angle <= 10f && _canBurst;
+                Stats.UseDashGas(_empowered);
+
                 _originalDashSpeed = Cache.Rigidbody.velocity.magnitude;
                 _targetRotation = GetTargetRotation();
                 if (!_wallSlide)
@@ -437,18 +449,24 @@ namespace Characters
 
                 State = HumanState.AirDodge;
                 FalseAttack();
-                Cache.Rigidbody.AddForce(direction * 40f, ForceMode.VelocityChange);
+
+                if (_empowered)
+                    Cache.Rigidbody.AddForce(direction * 80f, ForceMode.VelocityChange);
+                else
+                    Cache.Rigidbody.AddForce(direction * 40f, ForceMode.VelocityChange);
+
                 _dashCooldownLeft = 0.2f;
                 ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.ShakeGas();
             }
         }
 
-        public void DashVertical(float targetAngle, Vector3 direction)
+        // Removed by Ata for Perks being Unnecessary to the mod.
+        /* public void DashVertical(float targetAngle, Vector3 direction)
         {
             if (_dashTimeLeft <= 0f && Stats.CurrentGas > 0 && MountState == HumanMountState.None &&
                 State != HumanState.Grab && CarryState != HumanCarryState.Carry && _dashCooldownLeft <= 0f)
             {
-                Stats.UseDashGas();
+                Stats.UseVerticalDashGas();
                 TargetAngle = targetAngle;
                 _originalDashSpeed = Cache.Rigidbody.velocity.magnitude;
                 _targetRotation = Quaternion.LookRotation(direction);
@@ -460,6 +478,28 @@ namespace Characters
                 State = HumanState.AirDodge;
                 FalseAttack();
                 Cache.Rigidbody.AddForce(direction * 40f, ForceMode.VelocityChange);
+                _dashCooldownLeft = 0.2f;
+                ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.ShakeGas();
+            }
+        } */
+
+        // Now we have this name for us to use :)
+        public void DashVertical(Vector3 direction)
+        {
+            if (_dashTimeLeft <= 0f && Stats.CurrentGas > 0 && MountState == HumanMountState.None &&
+                State != HumanState.Grab && CarryState != HumanCarryState.Carry && _dashCooldownLeft <= 0f)
+            {
+                Stats.UseVerticalDashGas();
+                _originalDashSpeed = Cache.Rigidbody.velocity.magnitude;
+                _targetRotation = Quaternion.LookRotation(direction);
+                Cache.Rigidbody.rotation = _targetRotation;
+                EffectSpawner.Spawn(EffectPrefabs.GasBurst, Cache.Transform.position, Cache.Transform.rotation);
+                PlaySound(HumanSounds.GasBurst);
+                _dashTimeLeft = 0.5f;
+                CrossFade(HumanAnimations.Dash, 0.1f, 0.1f);
+                State = HumanState.AirDodge;
+                FalseAttack();
+                Cache.Rigidbody.AddForce(direction * 60f, ForceMode.VelocityChange);
                 _dashCooldownLeft = 0.2f;
                 ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.ShakeGas();
             }
@@ -660,7 +700,7 @@ namespace Characters
         /// <returns>Human carry option or null if none exists.</returns>
         public Human GetCarryOption(float distance)
         {
-            RaycastHit hit;
+            /* RaycastHit hit; */
             Human target = GetHumanAlongRay(GetAimRayAfterHumanCheap(), distance);
             if (IsValidCarryTarget(target, distance))
             {
@@ -739,17 +779,24 @@ namespace Characters
             var character = (BaseShifter)_inGameManager.CurrentCharacter;
             character.PreviousHumanGas = Stats.CurrentGas;
             character.PreviousHumanWeapon = Weapon;
+            character.PreviousAbilityCooldowns = GetComponent<Veteran>().AbilityCooldowns;
             PhotonNetwork.LocalPlayer.SetCustomProperty(PlayerProperty.CharacterViewId, character.Cache.PhotonView.ViewID);
             PhotonNetwork.Destroy(gameObject);
         }
 
-        public IEnumerator WaitAndTransformFromShifter(float previousHumanGas, BaseUseable previousHumanWeapon)
+        public IEnumerator WaitAndTransformFromShifter(float previousHumanGas, BaseUseable previousHumanWeapon, Dictionary<string, float> previousAbilityCooldowns)
         {
             while (!FinishSetup)
             {
                 yield return null;
             }
             Stats.CurrentGas = previousHumanGas;
+
+            Veteran veteran = GetComponent<Veteran>();
+            InGameCharacterSettings _s = SettingsManager.InGameCharacterSettings;
+            veteran.AbilityCooldowns = previousAbilityCooldowns;
+            veteran.SetAllSpecials(_s.Special.Value, _s.Special_2.Value, _s.Special_3.Value, true);
+
             if (previousHumanWeapon is BladeWeapon)
             {
                 BladeWeapon previousBlade = (BladeWeapon)previousHumanWeapon;
@@ -826,13 +873,19 @@ namespace Characters
                 else
                     _reloadAnimation = HumanAnimations.ChangeBladeAir;
             }
-            CrossFade(_reloadAnimation, 0.1f, 0f);
+            
+            PlayReloadAnimation(_reloadAnimation);
+            ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.Reload();
+        }
+
+        public void PlayReloadAnimation(string anim)
+        {
+            CrossFade(anim, 0.1f, 0f);
             State = HumanState.Reload;
-            _stateTimeLeft = Animation.GetTotalTime(_reloadAnimation);
+            _stateTimeLeft = Animation.GetTotalTime(anim);
             _needFinishReload = true;
             _reloadTimeLeft = _stateTimeLeft;
             _reloadCooldownLeft = _reloadTimeLeft + 0.5f;
-            ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.Reload();
         }
 
         protected void FinishReload()
@@ -881,6 +934,11 @@ namespace Characters
             {
                 return true;
             }
+            Logistician logistician = GetComponent<Logistician>();
+            if (EmVariables.LogisticianMaxSupply != -1 && (logistician.WeaponSupply < EmVariables.LogisticianMaxSupply || logistician.GasSupply < EmVariables.LogisticianMaxSupply))
+            {
+                return true;
+            }
             if (isGasTank && Special is SupplySpecial && Special.UsesLeft <= 0)
             {
                 return true;
@@ -888,12 +946,32 @@ namespace Characters
             if (Weapon is BladeWeapon)
             {
                 var weapon = (BladeWeapon)Weapon;
-                return weapon.BladesLeft < weapon.MaxBlades || weapon.CurrentDurability < weapon.MaxDurability;
+                ThunderspearWeapon weapon2;
+
+                if (Weapon_2 != null) // conditions added by Ata 23 May 2024 for Veteran Role //
+                {
+                    weapon2 = (ThunderspearWeapon)Weapon_2; ;
+                    return weapon.BladesLeft < weapon.MaxBlades || weapon.CurrentDurability < weapon.MaxDurability || weapon2.NeedRefill();
+                } 
+                else
+                {
+                    return weapon.BladesLeft < weapon.MaxBlades || weapon.CurrentDurability < weapon.MaxDurability;
+                }
             }
             else if (Weapon is AmmoWeapon)
             {
                 var weapon = (AmmoWeapon)Weapon;
-                return weapon.NeedRefill();
+                BladeWeapon weapon2; // the object class cannot be fixed to BladeWeapon only since APG and AHHS could be Veterans as well. Doesn't break the game but creates some avoidable console errors //
+
+                if (Weapon_2 != null) // conditions added by Ata 23 May 2024 for Veteran Role //
+                {
+                    weapon2 = (BladeWeapon)Weapon_2;
+                    return weapon.NeedRefill() || weapon2.BladesLeft < weapon2.MaxBlades || weapon2.CurrentDurability < weapon2.MaxDurability;
+                }
+                else
+                {
+                    return weapon.NeedRefill();
+                }
             }
             return false;
         }
@@ -907,7 +985,13 @@ namespace Characters
                 ToggleBlades(true);
             }
             Weapon.Reset();
+
+            if (Weapon_2 != null)
+                Weapon_2.Reset(); // conditions added by Ata 23 May 2024 for Veteran Role //
+
             Stats.CurrentGas = Stats.MaxGas;
+
+            GetComponent<Logistician>().ResetSupplies(); // Added by Ata for Logistician
         }
 
         public override void Emote(string emote)
@@ -1048,6 +1132,9 @@ namespace Characters
                 }
                 LoadSkin();
             }
+
+            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHorseAutorun(false);
+            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHumanAutorun(false);
         }
 
         public override void OnPlayerEnteredRoom(Player player)
@@ -1123,13 +1210,14 @@ namespace Characters
                 else
                     PlaySound(HumanSounds.BladeHit);
                 var weapon = (BladeWeapon)Weapon;
-                if (Stats.Perks["AdvancedAlloy"].CurrPoints == 1)
+                // Removed by Ata for Perks being Unnecessary to the mod.
+                /* if (Stats.Perks["AdvancedAlloy"].CurrPoints == 1)
                 {
                     if (damage < 500)
                         weapon.UseDurability(weapon.CurrentDurability);
                 }
-                else
-                    weapon.UseDurability(2f);
+                else */
+                weapon.UseDurability(2f);
                 if (weapon.CurrentDurability == 0f)
                 {
                     ToggleBlades(false);
@@ -1442,6 +1530,10 @@ namespace Characters
                 Cache.Transform.position = GrabHand.transform.position;
                 Cache.Transform.rotation = GrabHand.transform.rotation;
             }
+            if (Dead)
+            {
+                GetComponent<Veteran>().isVeteranSet = false;
+            }
         }
 
         protected override void FixedUpdate()
@@ -1623,6 +1715,7 @@ namespace Characters
                         Cache.Transform.position = Horse.Cache.Transform.position + Vector3.up * 1.95f;
                         Cache.Transform.rotation = Horse.Cache.Transform.rotation;
                         MountState = HumanMountState.Horse;
+                        GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHorseAutorun(GetComponent<HumanPlayerController>().GetAutorunState());
                         SetInterpolation(false);
                         if (!Animation.IsPlaying(HumanAnimations.HorseIdle))
                             CrossFade(HumanAnimations.HorseIdle, 0.1f);
@@ -2414,11 +2507,18 @@ namespace Characters
         {
             if (FinishSetup)
             {
-                Weapon.OnFixedUpdate();
+                Weapon?.OnFixedUpdate();
+                Weapon_2?.OnFixedUpdate();
                 HookLeft.OnFixedUpdate();
                 HookRight.OnFixedUpdate();
-                if (Special != null)
-                    Special.OnFixedUpdate();
+
+                Special?.OnFixedUpdate();
+                Special_2?.OnFixedUpdate();
+                Special_3?.OnFixedUpdate();
+
+                if (Weapon is BladeWeapon) {
+                    ((BladeWeapon)Weapon).FixedUpdateBladeToggle();
+                }
             }
         }
 
@@ -2573,7 +2673,7 @@ namespace Characters
         private void GunHeadMovement()
         {
             return;
-            Vector3 _gunTarget = GetAimPoint();
+            /* Vector3 _gunTarget = GetAimPoint();
             Vector3 position = Cache.Transform.position;
             float x = Mathf.Sqrt(Mathf.Pow(_gunTarget.x - position.x, 2f) + Mathf.Pow(_gunTarget.z - position.z, 2f));
             var originalRotation = Cache.Transform.rotation;
@@ -2586,7 +2686,7 @@ namespace Characters
             float deltaX = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
             deltaX = Mathf.Clamp(deltaX, -40f, 30f);
             var targetRotation = Quaternion.Euler(euler.x + deltaX, euler.y + deltaY, euler.z);
-            _targetRotation = Quaternion.Lerp(_targetRotation, targetRotation, Time.deltaTime * 100f);
+            _targetRotation = Quaternion.Lerp(_targetRotation, targetRotation, Time.deltaTime * 100f); */
         }
 
         private void LeftArmAim(Vector3 target)
@@ -2667,7 +2767,20 @@ namespace Characters
             {
                 SetupWeapon(humanWeapon);
                 SetupItems();
-                SetSpecial(SettingsManager.InGameCharacterSettings.Special.Value);
+                
+                /* SetSpecial(SettingsManager.InGameCharacterSettings.Special.Value); */
+
+                Veteran veteran = GetComponent<Veteran>();
+                veteran.SetMyHuman(this);
+
+                veteran.SetAllSpecials(SettingsManager.InGameCharacterSettings.Special.Value,
+                               SettingsManager.InGameCharacterSettings.Special_2.Value,
+                               SettingsManager.InGameCharacterSettings.Special_3.Value); // added by Ata 12 May 2024 for Ability Wheel //
+                veteran.SwitchCurrentSpecial(SettingsManager.InGameCharacterSettings.Special.Value, 1);
+
+                GetComponent<Veteran>().isVeteranSet = false;
+                if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Veteran"))
+                    veteran.SetupVeteran();
             }
             FinishSetup = true;
             // ignore if name contains char_eyes, char_face, char_glasses
@@ -2686,11 +2799,12 @@ namespace Characters
                 var bladeInfo = CharacterData.HumanWeaponInfo["Blade"];
                 float durability = Stats.Ammunition * 3f - 140f;
                 int bladeCount = bladeInfo["Blades"].AsInt;
-                if (Stats.Perks["DurableBlades"].CurrPoints > 0)
+                // Removed by Ata for Perks being Unnecessary to the mod.
+                /* if (Stats.Perks["DurableBlades"].CurrPoints > 0)
                 {
                     durability *= 2f;
                     bladeCount = Mathf.FloorToInt(bladeCount * 0.5f);
-                }
+                } */
                 Weapon = new BladeWeapon(this, durability, bladeCount);
             }
             else if (humanWeapon == (int)HumanWeapon.AHSS)
@@ -2745,12 +2859,14 @@ namespace Characters
         {
             float cooldown = 30f;
             Items.Clear();
-            Items.Add(new FlareItem(this, "Green", new Color(0f, 1f, 0f, 0.7f), cooldown));
-            Items.Add(new FlareItem(this, "Red", new Color(1f, 0f, 0f, 0.7f), cooldown));
-            Items.Add(new FlareItem(this, "Black", new Color(0f, 0f, 0f, 0.7f), cooldown));
-            Items.Add(new FlareItem(this, "Purple", new Color(153f / 255, 0f, 204f / 255, 0.7f), cooldown));
-            Items.Add(new FlareItem(this, "Blue", new Color(0f, 102f / 255, 204f / 255, 0.7f), cooldown));
-            Items.Add(new FlareItem(this, "Yellow", new Color(1f, 1f, 0f, 0.7f), cooldown));
+            Items.Add(new FlareItem(this, "Green", new Color(118f / 255f, 182 / 255f, 31 / 255f, 0.7f), cooldown));
+            Items.Add(new FlareItem(this, "Red", new Color(246 / 255f, 24 / 255f, 12 / 255f, 0.7f), cooldown));
+            Items.Add(new FlareItem(this, "Black", new Color(6f / 255f, 9f / 255f, 17f / 255f, 0.7f), cooldown));
+            Items.Add(new FlareItem(this, "Purple", new Color(195f / 255f, 69f / 255f, 1f, 0.7f), cooldown));
+            Items.Add(new FlareItem(this, "Blue", new Color(27 / 255f, 96 / 255f, 1f, 0.7f), cooldown));
+            Items.Add(new FlareItem(this, "Yellow", new Color(1f, 158 / 255f, 23 / 255f, 0.7f), cooldown));
+            Items.Add(new FlareItem(this, "Flash", new Color(255f, 255f, 255f, 0.7f), cooldown)); // added by ata 31 Mar 2025
+            Items.Add(new FlareItem(this, "Acoustic", new Color(255f, 255f, 255f, 0f), 120f)); // added by ata 31 Mar 2025
         }
 
         public void SetSpecial(string special)
@@ -2918,6 +3034,20 @@ namespace Characters
                 Human _targetHuman = _targetHumanPV.GetComponent<Human>();
                 Horse _targetHorse = _targetHorsePV.GetComponent<Horse>();
                 _targetHuman.PassengerHorse = _targetHorse;
+            }
+        }
+
+        #endregion
+
+        #region MC Teleport
+
+        [PunRPC]
+        public void MoveToRPC(float x, float y, float z, PhotonMessageInfo info)
+        {
+            if (info.Sender.IsMasterClient)
+            {
+                if (MountState == HumanMountState.Horse) Horse.transform.position = new Vector3(x, y, z);
+                else transform.position = new Vector3(x, y, z);
             }
         }
 
@@ -3448,8 +3578,9 @@ namespace Characters
                 Animation.SetSpeed(HumanAnimations.AHSSGunReloadBoth, 0.76f);
                 Animation.SetSpeed(HumanAnimations.AHSSGunReloadBothAir, 1f);
             }
-            int refillPoints = Stats.Perks["RefillTime"].CurrPoints;
-            Animation.SetSpeed(HumanAnimations.Refill, refillPoints + 1);
+            // Removed by Ata for Perks being Unnecessary to the mod.
+            /* int refillPoints = Stats.Perks["RefillTime"].CurrPoints; */
+            Animation.SetSpeed(HumanAnimations.Refill, /* refillPoints +  */1);
         }
 
         private bool HasHook()

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 579b01eb8558bde4bbdbaa49f07d57fb
+timeCreated: 1537233155
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Demo/River/Materials/MAT_Tree_Birch_Leaf_01.mat
+  uploadId: 466250
