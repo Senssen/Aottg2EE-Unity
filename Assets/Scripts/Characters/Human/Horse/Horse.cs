@@ -7,7 +7,7 @@ using Photon.Pun;
 
 namespace Characters
 {
-    class Horse: BaseCharacter
+    internal partial class Horse: BaseCharacter     //changed by Sysyfus Oct 6 2025 to add "internal partial" for water physics
     {
         public Human _owner;
         public int OwnerNetworkID;
@@ -190,7 +190,7 @@ namespace Characters
                 if (_owner == null || _owner.Dead)
                     return;
                 CheckGround();
-                if (Grounded)
+                if (Grounded || isInWater)  //Changed by Sysyfus Jan 19 2024 to enable horse swimming
                 {
                     if (State == HorseState.ControlledIdle || State == HorseState.Idle)
                     {
@@ -220,6 +220,21 @@ namespace Characters
                         }
                     }
                 }
+                else //block added by Sysyfus May 14 2024 because no horse control in air feels bad, so get ~1/3 strength control
+                {
+                    if (State == HorseState.WalkToPoint || State == HorseState.RunToPoint ||
+                        State == HorseState.ControlledWalk || State == HorseState.ControlledRun)
+                    {
+                        float speed = _owner.Stats.HorseSpeed;
+                        if (State == HorseState.ControlledWalk)
+                            speed = WalkSpeed;
+                        else if (State == HorseState.WalkToPoint)
+                            speed = RunCloseSpeed;
+                        if (Cache.Rigidbody.velocity.x * Cache.Rigidbody.velocity.x + Cache.Rigidbody.velocity.z * Cache.Rigidbody.velocity.z < _owner.Stats.HorseSpeed * _owner.Stats.HorseSpeed)
+                            Cache.Rigidbody.AddForce(Cache.Transform.forward * _owner.Stats.HorseSpeed * 0.333f, ForceMode.Acceleration);
+                    }
+                }
+                FixedUpdateInWater(); //added by Sysyfus
                 Cache.Rigidbody.AddForce(Gravity, ForceMode.Acceleration);
             }
         }
@@ -244,6 +259,10 @@ namespace Characters
                     if (_owner.MountState == HumanMountState.Horse)
                         _owner.CrossFadeIfNotPlaying(HumanAnimations.HorseIdle, 0.1f);
                     _idleTimeLeft = 0f;
+                }
+                else if (isInWater) //block added by Sysyfus Jan 19 2024 so horse looks like it is paddling to stay afloat
+                {
+                    CrossFadeIfNotPlaying(HorseAnimations.Walk, 0.1f);
                 }
                 else
                 {

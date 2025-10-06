@@ -14,7 +14,7 @@ using System;
 
 namespace Characters
 {
-    class BaseCharacter: Photon.Pun.MonoBehaviourPunCallbacks, ITargetable
+    partial class BaseCharacter: Photon.Pun.MonoBehaviourPunCallbacks, ITargetable      //changed by Sysyfus Oct 6 2025 to add "internal partial" for water physics
     {
         protected virtual int DefaultMaxHealth => 1;
         protected virtual Vector3 Gravity => Vector3.down * 20f;

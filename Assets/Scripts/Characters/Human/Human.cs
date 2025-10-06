@@ -22,7 +22,7 @@ using Weather;
 
 namespace Characters
 {
-    class Human : BaseCharacter
+    internal partial class Human : BaseCharacter    //changed by Sysyfus Oct 6 2025 to add "internal partial" for water physics
     {
         // setup
         public HumanComponentCache HumanCache;
@@ -1281,7 +1281,7 @@ namespace Characters
                         Unmount(true);
                     else
                     {
-                        Cache.Transform.position = Horse.Cache.Transform.position + Vector3.up * 1.95f;
+                        Cache.Transform.position = Horse.Cache.Transform.TransformPoint(Vector3.up * 1.95f); //changed by Sysyfus May 14 2024 so player stays in saddle when horse is tilted //Cache.Transform.position = Horse.Cache.Transform.position + Vector3.up * 1.95f;
                         Cache.Transform.rotation = Horse.Cache.Transform.rotation;
                     }
                 }
@@ -1881,6 +1881,10 @@ namespace Characters
 
                 }
 
+                FixedUpdateCheckWaterClip(); //added by Sysyfus Oct 6 2025
+                FixedUpdateInWater(); //added by Sysyfus May 14 2024
+                FixedUpdateStandStill(gravity); //added by Sysyfus May 14 2024
+
                 ReelInAxis = 0f;
             }
             EnableSmartTitans();
@@ -2478,6 +2482,22 @@ namespace Characters
             }
             _lastPosition = finalPosition;
             _lastVelocity = _currentVelocity;
+        }
+
+        public void FixedUpdateStandStill(Vector3 gravity) //Added by Sysyfus May 14 2024 created Jan 19 2024 so characters can stand still and not slide down slopes they can stand on
+        {
+            if (CanJump() && Animation.IsPlaying(StandAnimation) && Cache.Rigidbody.velocity.magnitude < 1f && Cache.Rigidbody.velocity.y < 0f) //added check for negative y velocity May 14 2024
+            {
+                Vector3 inverseGravity = -gravity * Mathf.Clamp(((Cache.Rigidbody.velocity.magnitude - 0.8f) / -0.55f), 0f, 1f);
+                Cache.Rigidbody.AddForce(inverseGravity);
+            }
+
+            if (Grounded && !Animation.IsPlaying(HumanAnimations.Jump) && !Animation.IsPlaying(HumanAnimations.ToRoof) && !IsHookedAny() && !HasDirection) //block added by Sysyfus July 19 2024 to eliminate mini jump after stopping while walking uphill
+            {
+                Vector3 horiVel = Vector3.ProjectOnPlane(_currentVelocity, Vector3.up);
+                if (_currentVelocity.y > 0f && horiVel.magnitude < 0.25f * Stats.RunSpeed)
+                    Cache.Rigidbody.AddForce(0f, -80f, 0f);
+            }
         }
 
         private void LateUpdateTilt()
