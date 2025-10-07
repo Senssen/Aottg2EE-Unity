@@ -873,16 +873,14 @@ namespace Characters
                         }
                     }
                 }
-                if (State != TitanState.WallClimb)
+                FixedUpdateInWater(); //added by Sysyfus May 14 2024
+                if (State != TitanState.WallClimb && !shoulderIsInWater) //shoulder check added by Sysyfus May 14 2024 created Jan 26 2024
                     Cache.Rigidbody.AddForce(Gravity, ForceMode.Acceleration);
                 if (ConfusedTime > 0)
                     ConfusedTime -= Time.fixedDeltaTime;
                 else
                     ResetAttackSpeed();
 
-                FixedUpdateInWater(); //added by Sysyfus May 14 2024
-                if (State != TitanState.WallClimb && !shoulderIsInWater) //shoulder check added by Sysyfus May 14 2024 created Jan 26 2024
-                    Cache.Rigidbody.AddForce(Gravity, ForceMode.Acceleration);
                 CheckUnderTerrain(); //added by Sysyfus Dec 27 2023
             }
         }

@@ -5,6 +5,7 @@ namespace Utility
 {
     class PhysicsLayer
     {
+        public static int Water = 4; //added by Sysyfus Oct 6 2025
         public static int UI = 5;
         public static int NoCollision = 8;
         public static int Hitbox = 9;
@@ -55,6 +56,7 @@ namespace Utility
             SetLayerCollisions(MapEditorGizmo, new int[0]);
             SetLayerCollisions(MinimapIcon, new int[0]);
             SetLayerCollisions(Background, new int[0]);
+            SetLayerCollisions(Water, new int[] { Human, TitanPushbox, Projectile, NPC, PhysicsWagon, MapObjectCharacters }); //added by Sysyfus Oct 6 2025
         }
 
         public static LayerMask GetMask(params int[] layers)

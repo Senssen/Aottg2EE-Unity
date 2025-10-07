@@ -1974,7 +1974,7 @@ namespace Characters
 
                 }
 
-                FixedUpdateCheckWaterClip(); //added by Sysyfus Oct 6 2025
+                //FixedUpdateCheckWaterClip(); //added by Sysyfus Oct 6 2025
                 FixedUpdateInWater(); //added by Sysyfus May 14 2024
                 FixedUpdateStandStill(gravity); //added by Sysyfus May 14 2024
 
@@ -2212,6 +2212,31 @@ namespace Characters
                     Cache.Rigidbody.velocity += titanVel;
                 }
             }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            //GetHit("TriggerEnter", 100, "Owie1", "");
+            #region Bounce on water surface
+            //Added by Sysyfus Jan 11 2024
+            if (photonView.IsMine && other.gameObject.layer == LayerMask.NameToLayer("Water"))
+            {
+                //GetHit("Water", 100, "Owie2", "");
+                if (Cache.Rigidbody.velocity.magnitude > 35f && timeSinceLastBounce > 0.25f)
+                {
+                    float horiSpeed = Mathf.Pow((Cache.Rigidbody.velocity.x * Cache.Rigidbody.velocity.x) + (Cache.Rigidbody.velocity.z * Cache.Rigidbody.velocity.z), 0.5f);
+                    float vertSpeed = Mathf.Abs(Cache.Rigidbody.velocity.y);
+
+                    //  check for 'shallow' angle of impact      check if falling
+                    if (horiSpeed > vertSpeed && Cache.Rigidbody.velocity.y < 0f)
+                    {
+                        Cache.Rigidbody.velocity = new Vector3(Cache.Rigidbody.velocity.x * 0.6f, (vertSpeed * 0.08f) + horiSpeed * 0.05f + 2f, Cache.Rigidbody.velocity.z * 0.6f);
+                        timeSinceLastBounce = 0f;
+                    }
+                }
+            }
+
+            #endregion
         }
 
         protected void OnCollisionStay(Collision collision)
