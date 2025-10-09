@@ -1370,7 +1370,9 @@ namespace Characters
                     else
                     {
                         Cache.Transform.position = Horse.Cache.Transform.TransformPoint(Vector3.up * 1.95f); //changed by Sysyfus May 14 2024 so player stays in saddle when horse is tilted //Cache.Transform.position = Horse.Cache.Transform.position + Vector3.up * 1.95f;
-                        Cache.Transform.rotation = Horse.Cache.Transform.rotation;
+                        //Cache.Transform.rotation = Horse.Cache.Transform.rotation; //removed by Sysyfus Oct 8 2026 to be replaced with next two lines so player adjusts themselves to remain upright when horse tilts
+                        Cache.Transform.rotation = Quaternion.Euler(Cache.Transform.rotation.eulerAngles.x, Horse.Cache.Transform.rotation.eulerAngles.y, 0f); //snaps to horse's y rotation to avoid leg clipping and spinning in saddle
+                        Cache.Transform.rotation = Quaternion.Lerp(Cache.Transform.rotation, Quaternion.Euler(0f, Cache.Transform.rotation.eulerAngles.y, 0f), Time.deltaTime * 6f); //animates player adjusting their position to remain upright, hopefully speed is such that when horse tilt changes the player character appears to be reacting to it
                     }
                 }
                 else if (MountState == HumanMountState.Passenger)
@@ -2214,7 +2216,7 @@ namespace Characters
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other) //added by Sysyfus Oct 6 2025 for water bounce
         {
             //GetHit("TriggerEnter", 100, "Owie1", "");
             #region Bounce on water surface
