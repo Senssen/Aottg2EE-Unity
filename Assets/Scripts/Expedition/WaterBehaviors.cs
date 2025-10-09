@@ -313,17 +313,20 @@ namespace Characters
             base.FixedUpdateInWater();
             if (isInWater)
             {
-                //Cache.Rigidbody.velocity = new Vector3(Cache.Rigidbody.velocity.x * 0.5f, Cache.Rigidbody.velocity.y * 0.99f, Cache.Rigidbody.velocity.z * 0.5f);
-                //Cache.Rigidbody.velocity += Vector3.up * 1.9f;
-                //Cache.Rigidbody.velocity += Vector3.up * 30f;
-
                 #region Floating
                 if (this.State != TitanState.Jump)
                 {
                     shoulderIsInWater = false;
-                    Transform shoulderpos = this.BaseTitanCache.NapeHurtbox.transform;
+                    Transform shoulderpos = this.BaseTitanCache.Head.transform;
+                    if (this.State != TitanState.Dead)
+                    {
+                        shoulderpos = this.BaseTitanCache.NapeHurtbox.transform;
+                        numWaterColliders = Physics.OverlapSphereNonAlloc(shoulderpos.position + (Vector3.down * this.Size * 0.5f), 1f, waterColliders, (1 << 4));
+                    }
+                    else
+                        numWaterColliders = Physics.OverlapSphereNonAlloc(shoulderpos.position + (Vector3.up * this.Size * 2f), 1f, waterColliders, (1 << 4));
+                    ChatManager.AddLine(shoulderpos.position.ToString());
 
-                    numWaterColliders = Physics.OverlapSphereNonAlloc(shoulderpos.position, 1f, waterColliders, (1 << 4));
                     if (numWaterColliders > 0)
                     {
                         shoulderIsInWater = true;
@@ -331,14 +334,6 @@ namespace Characters
 
                     if (shoulderIsInWater)
                         Cache.Rigidbody.AddForce(-1.1f * Gravity, ForceMode.Acceleration);
-                    //if (shoulderIsInWater)
-                    //{
-                    //Cache.Rigidbody.AddForce(Vector3.up * 210f, ForceMode.Acceleration);
-                    //Cache.Rigidbody.velocity += Vector3.up * 110f;
-                    //ChatManager.AddLine("shoulderinwater");
-                    //}
-                    //else
-                    //ChatManager.AddLine("shouldernotinwater");
                 }
                 #endregion
             }

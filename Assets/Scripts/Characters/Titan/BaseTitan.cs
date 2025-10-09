@@ -740,6 +740,7 @@ namespace Characters
                     if (isKinematic)
                         SetKinematic(false);
                 }
+
                 if (Cache.Rigidbody.velocity.y >= 0f)
                     _currentFallTotalTime = 0f;
                 else
@@ -748,13 +749,19 @@ namespace Characters
                 {
                     GetKilledRPC("Gravity");
                 }
-                if ((_checkGroundTimeLeft <= 0f || !AI || State == TitanState.Fall || State == TitanState.StartJump) && !isInWater) //changed by Sysyfus Oct 6 2025 to add check for water
+
+                if ((_checkGroundTimeLeft <= 0f || !AI || State == TitanState.Fall || State == TitanState.StartJump)) //changed by Sysyfus Oct 6 2025 to add check for water
                 {
-                    CheckGround();
+                    if (isInWater)
+                        Grounded = false;
+                    else
+                        CheckGround();
                     _checkGroundTimeLeft = CheckGroundTime;
                 }
+
                 if (State != TitanState.Fall)
                     _currentFallStuckTime = 0f;
+                
                 if (!AI && (State == TitanState.PreJump || State == TitanState.CoverNape || State == TitanState.SitDown || State == TitanState.Dead))
                 {
                     SetDefaultVelocityLerp();
@@ -829,22 +836,25 @@ namespace Characters
                 {
                     if (State != TitanState.Jump)
                     {
-                        Cache.Rigidbody.velocity = Vector3.down * 100f;
+                        Cache.Rigidbody.velocity = new Vector3(0f, Cache.Rigidbody.velocity.y - 2f, 0f);
                     }
                     LastTargetDirection = Vector3.zero;
                     if (Cache.Rigidbody.velocity.y >= 0f && State == TitanState.Fall)
                     {
                         LandNoVFX();
                     }
-                    else if (HasDirection && (State == TitanState.Run || State == TitanState.Walk))
+                    else if (HasDirection && (State == TitanState.Run || State == TitanState.Walk || State == TitanState.Sprint))
                     {
                         LastTargetDirection = GetTargetDirection();
                         if (State == TitanState.Run)
-                            Cache.Rigidbody.velocity += Cache.Transform.forward * RunSpeedPerLevel * Size * 0.5f;
+                            Cache.Rigidbody.velocity += Cache.Transform.forward * RunSpeedPerLevel * Size * 0.67f;
+                        else if (State == TitanState.Sprint)
+                            Cache.Rigidbody.velocity += Cache.Transform.forward * (RunSpeedBase + RunSpeedPerLevel * Size) * 1f;
                         else if (State == TitanState.Walk)
-                            Cache.Rigidbody.velocity += Cache.Transform.forward * WalkSpeedPerLevel * Size * 0.5f;
+                            Cache.Rigidbody.velocity += Cache.Transform.forward * WalkSpeedPerLevel * Size * 0.67f;
                     }
                 }
+
                 if (_needFreshCore)
                 {
                     _furthestCoreLocalPosition = BaseTitanCache.Core.position - BaseTitanCache.Transform.position;
@@ -873,9 +883,11 @@ namespace Characters
                         }
                     }
                 }
+                
                 FixedUpdateInWater(); //added by Sysyfus May 14 2024
-                if (State != TitanState.WallClimb && !shoulderIsInWater) //shoulder check added by Sysyfus May 14 2024 created Jan 26 2024
+                if (State != TitanState.WallClimb && (!shoulderIsInWater || State == TitanState.Dead)) //shoulder check added by Sysyfus May 14 2024 created Jan 26 2024
                     Cache.Rigidbody.AddForce(Gravity, ForceMode.Acceleration);
+
                 if (ConfusedTime > 0)
                     ConfusedTime -= Time.fixedDeltaTime;
                 else
