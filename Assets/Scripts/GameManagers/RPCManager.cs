@@ -6,21 +6,18 @@ using Map;
 using Effects;
 using CustomLogic;
 using ApplicationManagers;
+using Characters;
 using Photon.Pun;
 using Spawnables;
-using UnityEngine.SceneManagement;
-using Characters;
+using System.Collections;
+using Utility;
+using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 
 namespace GameManagers
 {
     class RPCManager : Photon.Pun.MonoBehaviourPun
     {
         public static PhotonView PhotonView;
-
-        void Awake()
-        {
-            PhotonView = GetComponent<PhotonView>();
-        }
 
         [PunRPC]
         public void TransferLogicRPC(byte[][] strArray, int msgNumber, int msgTotal, PhotonMessageInfo info)
@@ -146,7 +143,7 @@ namespace GameManagers
         }
 
         [PunRPC]
-        public void StopVoiceRPC(PhotonMessageInfo Info)
+        public void StopVoiceRPC(PhotonMessageInfo Info) 
         {
             EmoteHandler.OnStopVoiceRPC(Info);
         }
@@ -261,67 +258,113 @@ namespace GameManagers
             Debug.Log(c);
         }
 
-        #region Expedition RPCs
+        #region Wagon RPCs
 
         [PunRPC]
-        public void LoadSceneRPC(string SceneName, PhotonMessageInfo info)
+        public void UnmountWagon(GameObject Wagon, PhotonMessageInfo Sender)
         {
-            if (!info.Sender.IsMasterClient) return;
+            //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 
+            //return; 
 
-            SceneLoader.CustomSceneLoad = true;
-            SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
 
-            ChatManager.AddLine($"Scene {SceneName} Loaded!");
-            if (SceneName == "CityDiorama")
-            {
-                ChatManager.AddLine("City Diorama is a visual test and thus not a map ideal for gameplay purposes.", ChatTextColor.System);
-            }
+            /// redo this to make it un parent \\\
+
+            /*HingeJoint MountHinge = Wagon.transform.Find("WagonHorseAttachment").gameObject.GetComponent<HingeJoint>();
+            Rigidbody TempHingeMount = Wagon.transform.Find("Temp Hindge Mount").gameObject.GetComponent<Rigidbody>();
+
+            MountHinge.connectedBody = TempHingeMount;*/
         }
 
         [PunRPC]
-        public void SetNonLethalCannonsRPC(bool _isNonLethal, PhotonMessageInfo info)
+        public void DeSpawnWagon(GameObject Wagon, PhotonMessageInfo Sender)
         {
-            EmVariables.NonLethalCannons = _isNonLethal;
+            //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 
+            //return; 
+
+            Destroy(Wagon);
         }
-        
+
         [PunRPC]
-        public void SetSuppliesRPC(int maxSupply, PhotonMessageInfo info)
+        public void SpawnWagon(Vector3 pos, Quaternion rot, PhotonMessageInfo Sender)
         {
-            LogisticianUiManager uiManager = GameObject.Find("Expedition UI(Clone)").GetComponent<LogisticianUiManager>();
-            GameObject humanObject = PhotonExtensions.GetMyHuman();                
+            //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 
+            //return; 
 
-            if (humanObject != null) // there is no necessity to set supply texts if the player is non existent on the scene
+            GameObject wagonPrefab = Resources.Load<GameObject>("ExpeditionAssets/Functional/Wagon/Prefabs/Momo_Wagon1PF");
+            Instantiate(wagonPrefab, pos, rot);
+        }
+
+        [PunRPC]
+        public void AttachWagonHindge(Transform HorseToMount, PhotonMessageInfo Sender)
+        {
+            //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 
+                //return; 
+
+
+            /// redo to make it parent rather than joint \\\
+                //Parent temp joint mount to horse so it keeps joint roation
+
+            /*GameObject wagon = NearestWagon(Sender.photonView.gameObject);
+
+            if (Vector3.Distance(wagon.transform.position, HorseToMount.position) > 20) //mount range
+                return;
+
+            if (HorseToMount != null)
             {
-                Logistician logistician = humanObject.GetComponent<Logistician>();
-                if (maxSupply == -1)
+                //set the connected body if the horse is a Rigidbody
+                Rigidbody horseRigidbody = HorseToMount.GetComponent<Rigidbody>();
+                if (horseRigidbody != null)
                 {
-                    uiManager.GasText.text = "∞";
-                    uiManager.GasText.color = uiManager.GetColorForItemCount(maxSupply);
-                    uiManager.WeaponText.text = "∞";
-                    uiManager.WeaponText.color = uiManager.GetColorForItemCount(maxSupply);
+                    Transform harnessObj = wagon.transform.Find("WagonHorseAttachment");
+                    
+                    harnessObj.position = horseRigidbody.position - horseRigidbody.transform.forward * 2.3f + Vector3.up * 0.6f; //adjust
+                    harnessObj.rotation = horseRigidbody.gameObject.transform.rotation * Quaternion.Euler(90, 0, 0); //adjust
+
+                    wagon.GetComponent<MomoWagon>().HarnessJoint.connectedBody = horseRigidbody;
                 }
-                else
+            }
+            else
+            {
+                Debug.LogWarning("Parent or Child is not assigned!");
+            }*/
+        }
+
+        private GameObject NearestWagon(GameObject Wagoneer)
+        {
+            GameObject[] wagons = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.InstanceID); // Get all objects in the scene
+            GameObject nearestWagon = null;
+            float nearestDistance = 1500f; //max range to look for wagons
+
+            foreach (GameObject obj in wagons)
+            {
+                if (obj.name.Contains("Momo_Wagon")) // Check if the object is a "Wagon"
                 {
-                    if (logistician.GasSupply > maxSupply || logistician.GasSupply == EmVariables.LogisticianMaxSupply || EmVariables.LogisticianMaxSupply == -1)
+                    float distance = Vector3.Distance(Wagoneer.transform.position, obj.transform.position);
+                    if (distance < nearestDistance)
                     {
-                        logistician.GasSupply = maxSupply;
+                        nearestDistance = distance;
+                        nearestWagon = obj;
                     }
-
-                    if (logistician.WeaponSupply > maxSupply || logistician.WeaponSupply == EmVariables.LogisticianMaxSupply || EmVariables.LogisticianMaxSupply == -1)
-                    {
-                        logistician.WeaponSupply = maxSupply;
-                    }
-
-                    uiManager.GasText.text = $"{logistician.GasSupply}";
-                    uiManager.GasText.color = uiManager.GetColorForItemCount(logistician.GasSupply);
-                    uiManager.WeaponText.text = $"{logistician.WeaponSupply}";
-                    uiManager.WeaponText.color = uiManager.GetColorForItemCount(logistician.WeaponSupply);
                 }
             }
 
-            EmVariables.LogisticianMaxSupply = maxSupply;
+            if (nearestWagon != null)
+            {
+                Debug.Log("Found Wagon: " + nearestWagon.name);
+                return nearestWagon;
+            }
+            else
+            {
+                Debug.LogWarning("No wagon found!");
+                return null;
+            }
         }
 
         #endregion
+
+        void Awake()
+        {
+            PhotonView = GetComponent<PhotonView>();
+        }
     }
 }
