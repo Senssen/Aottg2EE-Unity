@@ -266,10 +266,13 @@ namespace GameManagers
             //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 
             //return; 
 
-            HingeJoint MountHinge = Wagon.transform.Find("WagonHorseAttachment").gameObject.GetComponent<HingeJoint>();
+
+            /// redo this to make it un parent \\\
+
+            /*HingeJoint MountHinge = Wagon.transform.Find("WagonHorseAttachment").gameObject.GetComponent<HingeJoint>();
             Rigidbody TempHingeMount = Wagon.transform.Find("Temp Hindge Mount").gameObject.GetComponent<Rigidbody>();
 
-            MountHinge.connectedBody = TempHingeMount;
+            MountHinge.connectedBody = TempHingeMount;*/
         }
 
         [PunRPC]
@@ -297,7 +300,11 @@ namespace GameManagers
             //if (!Sender.photonView.Owner.CustomProperties.ContainsKey("Wagonneer")) //check if player have wagon role 
                 //return; 
 
-            GameObject wagon = NearestWagon(Sender.photonView.gameObject);
+
+            /// redo to make it parent rather than joint \\\
+                //Parent temp joint mount to horse so it keeps joint roation
+
+            /*GameObject wagon = NearestWagon(Sender.photonView.gameObject);
 
             if (Vector3.Distance(wagon.transform.position, HorseToMount.position) > 20) //mount range
                 return;
@@ -319,7 +326,7 @@ namespace GameManagers
             else
             {
                 Debug.LogWarning("Parent or Child is not assigned!");
-            }
+            }*/
         }
 
         private GameObject NearestWagon(GameObject Wagoneer)

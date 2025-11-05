@@ -8,7 +8,7 @@ public class MomoWagon : MonoBehaviour
     [SerializeField] private Transform Wagon_Saddle;
     [SerializeField] private Transform Front_Wheels;
     [SerializeField] private Transform Back_Wheels;
-    [SerializeField] public HingeJoint HarnessJoint;
+    [SerializeField] public HingeJoint HarnessJoint; // remove this because it wont be used later
 
     private Rigidbody wagonRigidbody;
     private float wheelCircumference;
