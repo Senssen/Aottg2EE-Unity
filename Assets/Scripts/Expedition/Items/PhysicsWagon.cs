@@ -7,7 +7,6 @@ public class PhysicsWagon : MonoBehaviour
     [SerializeField] private Transform Body;
     [SerializeField] private Transform WheelsFront;
     [SerializeField] private Transform WheelsBack;
-    [SerializeField] public GameObject MainObj;
     [SerializeField] public GameObject WoodSaddleBeams;
     [SerializeField] public ConfigurableJoint HorseHinge;
     public Rigidbody wagonRigidbody;

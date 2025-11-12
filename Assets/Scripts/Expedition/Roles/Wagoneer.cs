@@ -117,7 +117,6 @@ public class Wagoneer : MonoBehaviour
                 //    v OLD STUFF v    \\ idk why im keeping it here, probably if we ever need to revert but there is github log so idk
                 //wagon.HorseHinge.connectedBody = wagon.TemporaryHinge;
 
-                //ParentWithOffset(wagon.WoodSaddleBeams, wagon.MainObj, new Vector3(0, 0, 0), new Vector3(0, 0, 0));
                 wagon.WoodSaddleBeams.transform.parent = null;
 
                 wagon.SetIsMounted(false);
