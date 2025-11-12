@@ -1,8 +1,9 @@
-using UnityEngine;
-using Photon.Pun;
-using GameManagers;
-using Utility;
 using Characters;
+using GameManagers;
+using Photon.Pun;
+using Unity.Mathematics;
+using UnityEngine;
+using Utility;
 
 public class Wagoneer : MonoBehaviour
 {
@@ -83,8 +84,12 @@ public class Wagoneer : MonoBehaviour
                     return;
                 }
 
-                wagon.HorseHinge.transform.SetPositionAndRotation(horse.position - horse.transform.forward * 2.3f + Vector3.up * 0.6f, horse.gameObject.transform.rotation * Quaternion.Euler(90, 0, 0));
-                wagon.HorseHinge.connectedBody = horseRigidbody;
+                //    v OLD STUFF v    \\ idk why im keeping it here, probably if we ever need to revert but there is github log so idk
+                //wagon.HorseHinge.transform.SetPositionAndRotation(horse.position - horse.transform.forward * 2.3f + Vector3.up * 0.6f, horse.gameObject.transform.rotation * Quaternion.Euler(90, 0, 0));
+                //wagon.HorseHinge.connectedBody = horseRigidbody;
+
+                ParentWithOffset(wagon.WoodSaddleBeams, horse.gameObject, new Vector3(0, 0.53f, -2.3f), new Vector3(90f, 0, 0));
+
                 wagon.SetIsMounted(true);
                 _mountedWagon = wagonObject;
 
@@ -108,7 +113,13 @@ public class Wagoneer : MonoBehaviour
             }
 
             if (wagoneer._mountedWagon.TryGetComponent(out PhysicsWagon wagon)) {
-                wagon.HorseHinge.connectedBody = wagon.TemporaryHinge;
+
+                //    v OLD STUFF v    \\ idk why im keeping it here, probably if we ever need to revert but there is github log so idk
+                //wagon.HorseHinge.connectedBody = wagon.TemporaryHinge;
+
+                //ParentWithOffset(wagon.WoodSaddleBeams, wagon.MainObj, new Vector3(0, 0, 0), new Vector3(0, 0, 0));
+                wagon.WoodSaddleBeams.transform.parent = null;
+
                 wagon.SetIsMounted(false);
                 wagoneer._mountedWagon = null;
 
@@ -202,5 +213,21 @@ public class Wagoneer : MonoBehaviour
     public void ShowWagonTextRPC(PhotonMessageInfo sender)
     {
         GameObject.Find("Expedition UI(Clone)").GetComponent<WagoneerMenuManager>().ShowWagonText();
+    }
+
+    public static void ParentWithOffset(GameObject child, GameObject parent, Vector3 positionOffset, Vector3 rotationOffset)
+    {
+        if (child == null || parent == null)
+        {
+            Debug.LogWarning("failed: child or parent is null.");
+            return;
+        }
+
+        // Parent the object
+        child.transform.SetParent(parent.transform);
+
+        // Apply offsets
+        child.transform.localPosition = positionOffset;
+        child.transform.localEulerAngles = rotationOffset;
     }
 }

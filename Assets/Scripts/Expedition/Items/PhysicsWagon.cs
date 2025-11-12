@@ -7,8 +7,9 @@ public class PhysicsWagon : MonoBehaviour
     [SerializeField] private Transform Body;
     [SerializeField] private Transform WheelsFront;
     [SerializeField] private Transform WheelsBack;
-    [SerializeField] public HingeJoint HorseHinge;
-    [SerializeField] public Rigidbody TemporaryHinge;
+    [SerializeField] public GameObject MainObj;
+    [SerializeField] public GameObject WoodSaddleBeams;
+    [SerializeField] public ConfigurableJoint HorseHinge;
     public Rigidbody wagonRigidbody;
     private float wheelCircumference;
     private bool isMounted = false;
@@ -68,7 +69,7 @@ public class PhysicsWagon : MonoBehaviour
     {
         Rigidbody hingeRb = HorseHinge.gameObject.GetComponent<Rigidbody>();
         if (hingeRb != null) hingeRb.isKinematic = _isKinematic;
-        TemporaryHinge.isKinematic = _isKinematic;
+        //TemporaryHinge.isKinematic = _isKinematic;
         wagonRigidbody.isKinematic = _isKinematic;
     }
 }
