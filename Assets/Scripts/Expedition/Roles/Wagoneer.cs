@@ -54,6 +54,7 @@ public class Wagoneer : MonoBehaviour
 
         if (wagon != null && wagon.TryGetComponent(out PhysicsWagon _physicsWagon) && _physicsWagon.GetDistance(transform) < 20f)
         {
+            _physicsWagon.WoodSaddleBeams.transform.parent = wagon.transform;
             PhotonNetwork.Destroy(wagon);
             if (Sender.photonView.IsMine)
                 ChatManager.AddLine("Destroyed a wagon.");
@@ -117,7 +118,7 @@ public class Wagoneer : MonoBehaviour
                 //    v OLD STUFF v    \\ idk why im keeping it here, probably if we ever need to revert but there is github log so idk
                 //wagon.HorseHinge.connectedBody = wagon.TemporaryHinge;
 
-                wagon.WoodSaddleBeams.transform.parent = null;
+                wagon.WoodSaddleBeams.transform.parent = wagon.transform;
 
                 wagon.SetIsMounted(false);
                 wagoneer._mountedWagon = null;
