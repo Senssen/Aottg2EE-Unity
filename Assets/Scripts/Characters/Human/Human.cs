@@ -700,7 +700,7 @@ namespace Characters
         /// <returns>Human carry option or null if none exists.</returns>
         public Human GetCarryOption(float distance)
         {
-            RaycastHit hit;
+            /* RaycastHit hit; */
             Human target = GetHumanAlongRay(GetAimRayAfterHumanCheap(), distance);
             if (IsValidCarryTarget(target, distance))
             {
@@ -2653,7 +2653,7 @@ namespace Characters
         private void GunHeadMovement()
         {
             return;
-            Vector3 _gunTarget = GetAimPoint();
+            /* Vector3 _gunTarget = GetAimPoint();
             Vector3 position = Cache.Transform.position;
             float x = Mathf.Sqrt(Mathf.Pow(_gunTarget.x - position.x, 2f) + Mathf.Pow(_gunTarget.z - position.z, 2f));
             var originalRotation = Cache.Transform.rotation;
@@ -2666,7 +2666,7 @@ namespace Characters
             float deltaX = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
             deltaX = Mathf.Clamp(deltaX, -40f, 30f);
             var targetRotation = Quaternion.Euler(euler.x + deltaX, euler.y + deltaY, euler.z);
-            _targetRotation = Quaternion.Lerp(_targetRotation, targetRotation, Time.deltaTime * 100f);
+            _targetRotation = Quaternion.Lerp(_targetRotation, targetRotation, Time.deltaTime * 100f); */
         }
 
         private void LeftArmAim(Vector3 target)

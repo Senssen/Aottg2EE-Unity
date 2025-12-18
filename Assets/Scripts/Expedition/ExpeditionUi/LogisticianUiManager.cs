@@ -18,7 +18,7 @@ public class LogisticianUiManager : MonoBehaviour
     private HumanInputSettings _humanInput;
 
     private RoleItems.SupplyItem selectedItem = RoleItems.SupplyItem.None;
-    
+
     [SerializeField]
     RawImage WeaponImage;
     [SerializeField]
@@ -42,15 +42,21 @@ public class LogisticianUiManager : MonoBehaviour
         if (!PhotonExtensions.GetMyHuman())
             return;
 
-        if (PhotonExtensions.GetMyHuman().GetPhotonView().Owner.CustomProperties.ContainsKey("Logistician") && CanvasObj.activeSelf == false) {
+        if (PhotonExtensions.GetMyHuman().GetPhotonView().Owner.CustomProperties.ContainsKey("Logistician") && CanvasObj.activeSelf == false)
+        {
             CanvasObj.SetActive(true);
-        } else if (!PhotonExtensions.GetMyHuman().GetPhotonView().Owner.CustomProperties.ContainsKey("Logistician") && CanvasObj.activeSelf == true) {
+        }
+        else if (!PhotonExtensions.GetMyHuman().GetPhotonView().Owner.CustomProperties.ContainsKey("Logistician") && CanvasObj.activeSelf == true)
+        {
             CanvasObj.SetActive(false);
         }
 
-        if (_humanInput.LogisticianMenu.GetKey() && SelectScreen.activeSelf == false && !InGameMenu.InMenu() && !ChatManager.IsChatActive() && !CustomLogicManager.Cutscene) {
+        if (_humanInput.LogisticianMenu.GetKey() && SelectScreen.activeSelf == false && !InGameMenu.InMenu() && !ChatManager.IsChatActive() && !CustomLogicManager.Cutscene)
+        {
             OpenSelectScreen();
-        } else if (!_humanInput.LogisticianMenu.GetKey() && SelectScreen.activeSelf == true) {
+        }
+        else if (!_humanInput.LogisticianMenu.GetKey() && SelectScreen.activeSelf == true)
+        {
             CloseSelectScreen();
         }
     }
@@ -83,10 +89,13 @@ public class LogisticianUiManager : MonoBehaviour
 
     public void OnHoverSupplyItem(string _itemType)
     {
-        if (_itemType == "Gas") {
+        if (_itemType == "Gas")
+        {
             SelectItem(RoleItems.SupplyItem.Gas);
             GasImage.color = _selectColor;
-        } else if (_itemType == "Weapon") {
+        }
+        else if (_itemType == "Weapon")
+        {
             SelectItem(RoleItems.SupplyItem.Weapon);
             WeaponImage.color = _selectColor;
         }
@@ -96,9 +105,12 @@ public class LogisticianUiManager : MonoBehaviour
 
     public void OnExitSupplyItem(string _itemType)
     {
-        if (_itemType == "Gas") {
+        if (_itemType == "Gas")
+        {
             GasImage.color = Color.white;
-        } else if (_itemType == "Weapon") {
+        }
+        else if (_itemType == "Weapon")
+        {
             WeaponImage.color = Color.white;
         }
         SelectItem(RoleItems.SupplyItem.None);
@@ -106,8 +118,23 @@ public class LogisticianUiManager : MonoBehaviour
 
     void OnApplicationFocus(bool hasFocus)
     {
-        if (!hasFocus && SelectScreen.activeSelf) {
+        if (!hasFocus && SelectScreen.activeSelf)
+        {
             CloseSelectScreen();
+        }
+    }
+    
+    public Color GetColorForItemCount(int count)
+    {
+        if (count == -1)
+            return new Color(0.475f, 0.592f, 0.318f);
+
+        if (count == 0) {
+            return new Color(0.514f, 0.231f, 0.267f);
+        } else if ((count / EmVariables.LogisticianMaxSupply > 0f && count / EmVariables.LogisticianMaxSupply < .3f) || (count > 0 && count <= 2)) {
+            return new Color(0.8f, 0.608f, 0.278f);
+        } else {
+            return new Color(0.475f, 0.592f, 0.318f);
         }
     }
 }

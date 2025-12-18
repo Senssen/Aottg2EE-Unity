@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5929b23b993798c4db687da58b3d6986
+timeCreated: 1552238031
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Demo/FlowMap/FlowMap.unity
+  uploadId: 466250

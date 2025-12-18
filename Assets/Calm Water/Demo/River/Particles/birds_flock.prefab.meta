@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7c7de392b90d94b4fadf7ebaa57fd438
+timeCreated: 1435062150
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Demo/River/Particles/birds_flock.prefab
+  uploadId: 466250

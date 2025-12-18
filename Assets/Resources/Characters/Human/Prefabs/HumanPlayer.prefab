@@ -16340,6 +16340,7 @@ GameObject:
   - component: {fileID: -2740983298278804056}
   - component: {fileID: 2108806767743279884}
   - component: {fileID: 4446591297591524324}
+  - component: {fileID: -5505890519390852461}
   - component: {fileID: -5908581430658734527}
   - component: {fileID: 463812257126063507}
   - component: {fileID: -6152092597729673020}
@@ -16658,6 +16659,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212cbedddfa3f654f8c1a03a2a63e5d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WeaponSupply: 0
+  GasSupply: 0
   SupplyPack: {fileID: 3237855180948449536}
   GasCollectSound: {fileID: -5908581430658734527}
   BladeCollectSound: {fileID: 463812257126063507}
@@ -16685,6 +16688,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50bc28b9049031b40b3c43a549d4cd22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5505890519390852461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed17a387cb9f5ff4ab5f47c107ba0eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!82 &-5908581430658734527

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 367ce3cf5eb9948419c7cfe09556c3c8
+timeCreated: 1437273775
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Demo/Pond/Skyboxes/Sunny3/Sunny3.cubemap
+  uploadId: 466250

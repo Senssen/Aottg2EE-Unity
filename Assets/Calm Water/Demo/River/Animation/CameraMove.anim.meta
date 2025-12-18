@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: ac67cbaa7918dde4dba4317c51e81b89
+timeCreated: 1538248070
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Demo/River/Animation/CameraMove.anim
+  uploadId: 466250

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f0506e7e9be413b42b2527ad4124e6e0
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Shaders/Includes/CalmWater_Reflections.cginc
+  uploadId: 466250

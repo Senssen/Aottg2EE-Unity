@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 48dff320570733449917e2b1a3748030
+timeCreated: 1517621095
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 25800000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Demo/Pond/Scenes/Pond/LightingData.asset
+  uploadId: 466250

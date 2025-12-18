@@ -13,16 +13,4 @@ public class Cannoneer : MonoBehaviour
             Cannon.GetComponent<CannoneerCannon>().UnMount();
         }
     }
-
-    public void SetNonLethalCannons(bool _isNonLethal)
-    {
-        PhotonView photonView = GetComponent<PhotonView>();
-        photonView.RPC("SetNonLethalCannonsRPC", RpcTarget.AllBuffered, _isNonLethal);
-    }
-
-    [PunRPC]
-    public void SetNonLethalCannonsRPC(bool _isNonLethal, PhotonMessageInfo info)
-    {
-        EmVariables.NonLethalCannons = _isNonLethal;
-    }
 }

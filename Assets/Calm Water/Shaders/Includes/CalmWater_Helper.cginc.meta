@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 56ef0377be057654281de14ac3cbddc8
+timeCreated: 1452543370
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50834
+  packageName: Calm Water
+  packageVersion: 1.10.0
+  assetPath: Assets/Calm Water/Shaders/Includes/CalmWater_Helper.cginc
+  uploadId: 466250

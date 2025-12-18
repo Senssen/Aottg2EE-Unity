@@ -4,11 +4,12 @@ using Utility;
 using Settings;
 using Cameras;
 using ApplicationManagers;
+using GameManagers;
 
 public class Logistician : MonoBehaviour
 {
-    public int WeaponSupply { get; private set; }
-    public int GasSupply { get; private set; }
+    public int WeaponSupply;
+    public int GasSupply;
     private LogisticianUiManager uiManager;
     [SerializeField]
     private GameObject SupplyPack;
@@ -58,9 +59,9 @@ public class Logistician : MonoBehaviour
         GasSupply = EmVariables.LogisticianMaxSupply;
 
         uiManager.GasText.text = $"{GasSupply}";
-        uiManager.GasText.color = GetColorForItemCount(GasSupply);
+        uiManager.GasText.color = uiManager.GetColorForItemCount(GasSupply);
         uiManager.WeaponText.text = $"{WeaponSupply}";
-        uiManager.WeaponText.color = GetColorForItemCount(WeaponSupply);
+        uiManager.WeaponText.color = uiManager.GetColorForItemCount(WeaponSupply);
     }
 
     private void UseSupply(RoleItems.SupplyItem _itemType)
@@ -71,25 +72,11 @@ public class Logistician : MonoBehaviour
         if (_itemType == RoleItems.SupplyItem.Gas) {
             GasSupply--;
             uiManager.GasText.text = $"{GasSupply}";
-            uiManager.GasText.color = GetColorForItemCount(GasSupply);
+            uiManager.GasText.color = uiManager.GetColorForItemCount(GasSupply);
         } else if (_itemType == RoleItems.SupplyItem.Weapon) {
             WeaponSupply--;
             uiManager.WeaponText.text = $"{WeaponSupply}";
-            uiManager.WeaponText.color = GetColorForItemCount(WeaponSupply);
-        }
-    }
-
-    private Color GetColorForItemCount(int count)
-    {
-        if (count == -1)
-            return new Color(0.475f, 0.592f, 0.318f);
-
-        if (count == 0) {
-            return new Color(0.514f, 0.231f, 0.267f);
-        } else if ((count / EmVariables.LogisticianMaxSupply > 0f && count / EmVariables.LogisticianMaxSupply < .3f) || (count > 0 && count <= 2)) {
-            return new Color(0.8f, 0.608f, 0.278f);
-        } else {
-            return new Color(0.475f, 0.592f, 0.318f);
+            uiManager.WeaponText.color = uiManager.GetColorForItemCount(WeaponSupply);
         }
     }
 
@@ -100,34 +87,7 @@ public class Logistician : MonoBehaviour
 
     public void SetSupplies(int maxSupply)
     {
-        PhotonView photonView = GetComponent<PhotonView>();
-        photonView.RPC("SetSuppliesRPC", RpcTarget.AllBuffered, maxSupply);
-    }
-
-    [PunRPC]
-    public void SetSuppliesRPC(int maxSupply, PhotonMessageInfo info)
-    {
-        if (maxSupply == -1) {
-            uiManager.GasText.text = "∞";
-            uiManager.GasText.color = GetColorForItemCount(maxSupply);
-            uiManager.WeaponText.text = "∞";
-            uiManager.WeaponText.color = GetColorForItemCount(maxSupply);
-        } else {
-            if (GasSupply > maxSupply || GasSupply == EmVariables.LogisticianMaxSupply || EmVariables.LogisticianMaxSupply == -1) {
-                GasSupply = maxSupply;
-            }
-
-            if (WeaponSupply > maxSupply || WeaponSupply == EmVariables.LogisticianMaxSupply || EmVariables.LogisticianMaxSupply == -1) {
-                WeaponSupply = maxSupply;
-            }
-
-            uiManager.GasText.text = $"{GasSupply}";
-            uiManager.GasText.color = GetColorForItemCount(GasSupply);
-            uiManager.WeaponText.text = $"{WeaponSupply}";
-            uiManager.WeaponText.color = GetColorForItemCount(WeaponSupply);
-        }
-        
-        EmVariables.LogisticianMaxSupply = maxSupply;
+        RPCManager.PhotonView.RPC("SetSuppliesRPC", RpcTarget.AllBuffered, maxSupply);
     }
 
 }

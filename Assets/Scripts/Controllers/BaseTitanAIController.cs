@@ -673,7 +673,7 @@ namespace Controllers
             if (players.Count == 0)
                 return FindNearestEnemy();
 
-            List<GameObject> wagons = players.FindAll(player => player.GetComponent<PhotonView>().Owner.CustomProperties.ContainsKey("Wagon"));
+            List<GameObject> wagons = players.FindAll(player => player.GetComponent<PhotonView>().Owner.CustomProperties.ContainsKey("Wagoneer"));
 
             bool shouldSelectWagon = false;
             if (wagons.Count > 0 && wagonRoll <= 6)
