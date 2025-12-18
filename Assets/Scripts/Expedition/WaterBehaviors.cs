@@ -325,7 +325,7 @@ namespace Characters
                     }
                     else
                         numWaterColliders = Physics.OverlapSphereNonAlloc(shoulderpos.position + (Vector3.up * this.Size * 2f), 1f, waterColliders, (1 << 4));
-                    ChatManager.AddLine(shoulderpos.position.ToString());
+                    //ChatManager.AddLine(shoulderpos.position.ToString());
 
                     if (numWaterColliders > 0)
                     {
