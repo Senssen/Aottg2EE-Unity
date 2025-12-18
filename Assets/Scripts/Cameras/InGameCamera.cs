@@ -19,7 +19,7 @@ using NUnit.Framework.Internal.Commands;
 
 namespace Cameras
 {
-    class InGameCamera : BaseCamera
+    partial class InGameCamera : BaseCamera     //changed by Sysyfus Oct 6 2025 to add "partial" for water
     {
         public enum SpecateMode
         {
@@ -408,6 +408,7 @@ namespace Cameras
             }
             Cache.Transform.position += Cache.Transform.right * (SettingsManager.GeneralSettings.CameraSide.Value - 1f);
             UpdateShake();
+            //UpdateWater(); //added by Sysyfus Jan 27 2024
         }
 
         private void UpdateSpectate()

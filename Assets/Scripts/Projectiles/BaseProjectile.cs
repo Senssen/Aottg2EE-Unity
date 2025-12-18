@@ -9,7 +9,7 @@ using Photon.Pun;
 
 namespace Projectiles
 {
-    class BaseProjectile: BaseMovementSync
+    internal partial class BaseProjectile: BaseMovementSync     //changed by Sysyfus Oct 6 2025 to add "internal partial" for water physics
     {
         protected BaseCharacter _owner;
         protected float _timeLeft;

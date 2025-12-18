@@ -13,7 +13,7 @@ using UI;
 
 namespace Characters
 {
-    class Hook : MonoBehaviour
+    partial class Hook : MonoBehaviour      //changed by Sysyfus Oct 6 2025 to add "partial" for water physics
     {
         public HookState State = HookState.Disabled;
         public Transform Anchor;
@@ -309,6 +309,7 @@ namespace Characters
             if (_owner.IsMine())
             {
                 HasOffset = false;
+                FixedUpdateInWater(); //added by Sysyfus May 14 2024
                 _hookPosition += _baseVelocity * Time.deltaTime * 50f + _relativeVelocity * Time.deltaTime;
                 Vector3 start = _nodes[_nodes.Count - 1];
                 if (_nodes.Count > 1)

@@ -17,7 +17,7 @@ using Cameras;
 
 namespace Characters
 {
-    abstract class BaseTitan : BaseCharacter
+    abstract partial class BaseTitan : BaseCharacter //changed by Sysyfus Oct 6 2025 to add "partial" for water physics
     {
         public TitanState State;
         public BaseTitanComponentCache BaseTitanCache;
@@ -740,6 +740,7 @@ namespace Characters
                     if (isKinematic)
                         SetKinematic(false);
                 }
+
                 if (Cache.Rigidbody.velocity.y >= 0f)
                     _currentFallTotalTime = 0f;
                 else
@@ -748,13 +749,19 @@ namespace Characters
                 {
                     GetKilledRPC("Gravity");
                 }
-                if (_checkGroundTimeLeft <= 0f || !AI || State == TitanState.Fall || State == TitanState.StartJump)
+
+                if ((_checkGroundTimeLeft <= 0f || !AI || State == TitanState.Fall || State == TitanState.StartJump)) //changed by Sysyfus Oct 6 2025 to add check for water
                 {
-                    CheckGround();
+                    if (isInWater)
+                        Grounded = false;
+                    else
+                        CheckGround();
                     _checkGroundTimeLeft = CheckGroundTime;
                 }
+
                 if (State != TitanState.Fall)
                     _currentFallStuckTime = 0f;
+                
                 if (!AI && (State == TitanState.PreJump || State == TitanState.CoverNape || State == TitanState.SitDown || State == TitanState.Dead))
                 {
                     SetDefaultVelocityLerp();
@@ -825,6 +832,29 @@ namespace Characters
                         }
                     }
                 }
+                else if (isInWater) //block added by Sysyfus Jan 26 2024
+                {
+                    if (State != TitanState.Jump)
+                    {
+                        Cache.Rigidbody.velocity = new Vector3(0f, Cache.Rigidbody.velocity.y - 2f, 0f);
+                    }
+                    LastTargetDirection = Vector3.zero;
+                    if (Cache.Rigidbody.velocity.y >= 0f && State == TitanState.Fall)
+                    {
+                        LandNoVFX();
+                    }
+                    else if (HasDirection && (State == TitanState.Run || State == TitanState.Walk || State == TitanState.Sprint))
+                    {
+                        LastTargetDirection = GetTargetDirection();
+                        if (State == TitanState.Run)
+                            Cache.Rigidbody.velocity += Cache.Transform.forward * RunSpeedPerLevel * Size * 0.67f;
+                        else if (State == TitanState.Sprint)
+                            Cache.Rigidbody.velocity += Cache.Transform.forward * (RunSpeedBase + RunSpeedPerLevel * Size) * 1f;
+                        else if (State == TitanState.Walk)
+                            Cache.Rigidbody.velocity += Cache.Transform.forward * WalkSpeedPerLevel * Size * 0.67f;
+                    }
+                }
+
                 if (_needFreshCore)
                 {
                     _furthestCoreLocalPosition = BaseTitanCache.Core.position - BaseTitanCache.Transform.position;
@@ -853,12 +883,17 @@ namespace Characters
                         }
                     }
                 }
-                if (State != TitanState.WallClimb)
+                
+                FixedUpdateInWater(); //added by Sysyfus May 14 2024
+                if (State != TitanState.WallClimb && (!shoulderIsInWater || State == TitanState.Dead)) //shoulder check added by Sysyfus May 14 2024 created Jan 26 2024
                     Cache.Rigidbody.AddForce(Gravity, ForceMode.Acceleration);
+
                 if (ConfusedTime > 0)
                     ConfusedTime -= Time.fixedDeltaTime;
                 else
                     ResetAttackSpeed();
+
+                CheckUnderTerrain(); //added by Sysyfus Dec 27 2023
             }
         }
 
@@ -907,6 +942,40 @@ namespace Characters
             {
                 Grounded = false;
                 _currentGroundDistance = GroundDistance;
+            }
+        }
+
+        //CheckUnderTerrain and associated variables added by Sysyfus Dec 27 2023, updated by Sysyfus Feb 1 2024 to 
+        private float terrainchecktime = 0f;
+        private RaycastHit[] groundCheckArray; //added by Sysyfus Feb 1 2024
+        private float height;
+        private void CheckUnderTerrain()
+        {
+            terrainchecktime -= Time.deltaTime;
+            if (terrainchecktime <= 0)
+            {
+                //groundCheckArray = Physics.RaycastAll(Cache.Transform.position + (Vector3.up * 50f), Vector3.down, 49f, PhysicsLayer.GetMask(23), QueryTriggerInteraction.Ignore);
+                groundCheckArray = Physics.RaycastAll(Cache.Transform.position + Vector3.up * height, Vector3.down, height - 1f, PhysicsLayer.GetMask(23), QueryTriggerInteraction.Ignore);
+                //RaycastHit hit1;
+                if (groundCheckArray.Length > 0)
+                //if(Physics.Raycast(Cache.Transform.position + Vector3.up * 50f, Vector3.down, out hit1, 49f, PhysicsLayer.GetMask(23), QueryTriggerInteraction.Ignore))
+                {
+                    foreach (RaycastHit hit in groundCheckArray)
+                    {
+                        if (hit.collider.GetComponent<TerrainCollider>() != null)
+                        {
+                            Vector3 newpos = hit.point + new Vector3(0f, 2f, 0f);
+                            //ChatManager.SendChatAll("NP: " + newpos.ToString());
+                            if (newpos.ToString().Contains("NaN") == false && (newpos - Cache.Transform.position).magnitude < 50f)
+                            {
+                                Cache.Transform.position = newpos;
+                            }
+
+                            break;
+                        }
+                    }
+                }
+                terrainchecktime = 0.5f;
             }
         }
 
