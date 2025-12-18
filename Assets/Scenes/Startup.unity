@@ -1108,7 +1108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1106936472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1159,11 +1159,11 @@ MonoBehaviour:
   WeatherButtonGameObject: {fileID: 0}
   TimeSliderGameObject: {fileID: 0}
   WeatherDropdown: {fileID: 0}
-  UseUniStormMenu: 0
+  UseUniStormMenu: 1
   UniStormMenuKey: 27
   UniStormCanvas: {fileID: 0}
   m_MenuToggle: 0
-  TabNumber: 2
+  TabNumber: 0
   TimeTabNumbers: 0
   WeatherTabNumbers: 1
   CelestialTabNumbers: 0
