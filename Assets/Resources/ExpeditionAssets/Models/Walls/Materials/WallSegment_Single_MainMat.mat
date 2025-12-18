@@ -89,6 +89,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 811c9d6e987d1e047aa7ddee978194a9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _WallSegment_Single_MainTexNormal:
+        m_Texture: {fileID: 2800000, guid: 811f263c2f7d7954aa38f972ea75b74a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BUILTIN_QueueControl: 0
@@ -102,6 +106,7 @@ Material:
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
+    - _NormalStrength: 10
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SPECULARHIGHLIGHTS_OFF: 1
