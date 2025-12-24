@@ -9,6 +9,7 @@ public class Wagoneer : MonoBehaviour
 {
     private GameObject _mountedWagon;
     private PhotonView photonView;
+    private readonly float SPEED_OVERRIDE = 15f;
 
     void Start()
     {
@@ -54,7 +55,10 @@ public class Wagoneer : MonoBehaviour
 
         if (wagon != null && wagon.TryGetComponent(out PhysicsWagon _physicsWagon) && _physicsWagon.GetDistance(transform) < 20f)
         {
-            _physicsWagon.WoodSaddleBeams.transform.parent = wagon.transform;
+            FixedJoint joint = _physicsWagon.GetJoint();
+            if (joint && joint.connectedBody.TryGetComponent(out Horse horse))
+                horse.SetSpeedOverride(1f);
+
             PhotonNetwork.Destroy(wagon);
             if (Sender.photonView.IsMine)
                 ChatManager.AddLine("Destroyed a wagon.");
@@ -73,7 +77,7 @@ public class Wagoneer : MonoBehaviour
         GameObject wagonObject = FindNearestObjectByName(wagoneerViewId, "Momo_Wagon");
         Transform horse = FindHorseOfViewId(wagoneerViewId);
 
-        if (horse != null && wagonObject != null && wagonObject.TryGetComponent(out PhysicsWagon wagon) && wagon.GetDistance(transform) < 20)
+        if (horse != null && horse.TryGetComponent(out Horse horseScript) && wagonObject != null && wagonObject.TryGetComponent(out PhysicsWagon wagon) && wagon.GetDistance(transform) < 20)
         {
             Rigidbody horseRigidbody = horse.GetComponent<Rigidbody>();
             if (horseRigidbody != null)
@@ -85,11 +89,9 @@ public class Wagoneer : MonoBehaviour
                     return;
                 }
 
-                //    v OLD STUFF v    \\ idk why im keeping it here, probably if we ever need to revert but there is github log so idk
-                //wagon.HorseHinge.transform.SetPositionAndRotation(horse.position - horse.transform.forward * 2.3f + Vector3.up * 0.6f, horse.gameObject.transform.rotation * Quaternion.Euler(90, 0, 0));
-                //wagon.HorseHinge.connectedBody = horseRigidbody;
-
-                ParentWithOffset(wagon.WoodSaddleBeams, horse.gameObject, new Vector3(0, 0.53f, -2.3f), new Vector3(90f, 0, 0));
+                horse.transform.SetPositionAndRotation(wagon.HorseSpot.transform.position, wagon.transform.rotation);
+                wagon.CreateJoint(horseRigidbody);
+                horseScript.SetSpeedOverride(SPEED_OVERRIDE);
 
                 wagon.SetIsMounted(true);
                 _mountedWagon = wagonObject;
@@ -113,13 +115,9 @@ public class Wagoneer : MonoBehaviour
                 return;
             }
 
-            if (wagoneer._mountedWagon.TryGetComponent(out PhysicsWagon wagon)) {
-
-                //    v OLD STUFF v    \\ idk why im keeping it here, probably if we ever need to revert but there is github log so idk
-                //wagon.HorseHinge.connectedBody = wagon.TemporaryHinge;
-
-                wagon.WoodSaddleBeams.transform.parent = wagon.transform;
-
+        if (wagoneer._mountedWagon.TryGetComponent(out PhysicsWagon wagon) && wagon.GetJoint().connectedBody.TryGetComponent(out Horse horse)) {
+                horse.SetSpeedOverride(1f);
+                wagon.DestroyJoint();
                 wagon.SetIsMounted(false);
                 wagoneer._mountedWagon = null;
 
@@ -213,21 +211,5 @@ public class Wagoneer : MonoBehaviour
     public void ShowWagonTextRPC(PhotonMessageInfo sender)
     {
         GameObject.Find("Expedition UI(Clone)").GetComponent<WagoneerMenuManager>().ShowWagonText();
-    }
-
-    public static void ParentWithOffset(GameObject child, GameObject parent, Vector3 positionOffset, Vector3 rotationOffset)
-    {
-        if (child == null || parent == null)
-        {
-            Debug.LogWarning("failed: child or parent is null.");
-            return;
-        }
-
-        // Parent the object
-        child.transform.SetParent(parent.transform);
-
-        // Apply offsets
-        child.transform.localPosition = positionOffset;
-        child.transform.localEulerAngles = rotationOffset;
     }
 }

@@ -7,10 +7,11 @@ using Photon.Pun;
 
 namespace Characters
 {
-    class Horse: BaseCharacter
+    class Horse : BaseCharacter
     {
         public Human _owner;
         private Wagoneer _wagoneer;
+        private float SpeedOverride = 1f; // this should give wagoneers some more force when pulling the wagon
         public int OwnerNetworkID;
         HorseComponentCache HorseCache;
         public HorseState State;
@@ -22,11 +23,11 @@ namespace Characters
         private float _idleTimeLeft;
         private float _teleportTimeLeft;
         private float _jumpCooldownLeft;
-        
+
         [SerializeField]
         public Transform PassengerSeat;
         public bool _hasPassenger = false;
-        
+
         public void Init(Human human)
         {
             base.Init(true, human.Team);
@@ -200,26 +201,24 @@ namespace Characters
                             Cache.Rigidbody.velocity = Vector3.up * Cache.Rigidbody.velocity.y;
                         else
                         {
-                            Cache.Rigidbody.AddForce(-Cache.Rigidbody.velocity.normalized * Mathf.Min(_owner.Stats.HorseSpeed, Cache.Rigidbody.velocity.magnitude * 0.5f),
+                            Cache.Rigidbody.AddForce(-Cache.Rigidbody.velocity.normalized * Mathf.Min(_owner.Stats.HorseSpeed, Cache.Rigidbody.velocity.magnitude * 0.5f * SpeedOverride),
                                 ForceMode.Acceleration);
                         }
                     }
-                    else if (State == HorseState.WalkToPoint || State == HorseState.RunToPoint  || State == HorseState.ControlledWalk || State == HorseState.ControlledRun)
+                    else if (State == HorseState.WalkToPoint || State == HorseState.RunToPoint || State == HorseState.ControlledWalk || State == HorseState.ControlledRun)
                     {
-                        /* If the owner is a wagoneer mounting a wagon, this multiplier sets to 1.5 to help compensate for the wagon weight being carried */
-                        float wagoneerMultipler = _owner.photonView.Owner.CustomProperties.ContainsKey("Wagoneer") && _wagoneer.CheckIsMounted() == true ? 1.5f : 1f;
                         float speed = _owner.Stats.HorseSpeed;
                         if (State == HorseState.ControlledWalk)
                             speed = WalkSpeed;
                         else if (State == HorseState.WalkToPoint)
                             speed = RunCloseSpeed;
-                        Cache.Rigidbody.AddForce(Cache.Transform.forward * _owner.Stats.HorseSpeed * wagoneerMultipler, ForceMode.Acceleration);
+                        Cache.Rigidbody.AddForce(Cache.Transform.forward * _owner.Stats.HorseSpeed * SpeedOverride, ForceMode.Acceleration);
                         if (Cache.Rigidbody.velocity.magnitude >= speed)
                         {
                             if (speed == _owner.Stats.HorseSpeed)
-                                Cache.Rigidbody.AddForce((speed - Cache.Rigidbody.velocity.magnitude) * Cache.Rigidbody.velocity.normalized, ForceMode.VelocityChange);
+                                Cache.Rigidbody.AddForce((speed - Cache.Rigidbody.velocity.magnitude) * Cache.Rigidbody.velocity.normalized * SpeedOverride, ForceMode.VelocityChange);
                             else
-                                Cache.Rigidbody.AddForce((Mathf.Max(speed - Cache.Rigidbody.velocity.magnitude, -1f)) * Cache.Rigidbody.velocity.normalized, ForceMode.VelocityChange);
+                                Cache.Rigidbody.AddForce((Mathf.Max(speed - Cache.Rigidbody.velocity.magnitude, -1f)) * Cache.Rigidbody.velocity.normalized * SpeedOverride, ForceMode.VelocityChange);
                         }
                     }
                 }
@@ -282,6 +281,15 @@ namespace Characters
             else
                 Grounded = false;
         }
+
+        #region Expedition
+
+        public void SetSpeedOverride(float speed)
+        {
+            SpeedOverride = speed;
+        }
+
+        #endregion Expedition
     }
 
     enum HorseState
