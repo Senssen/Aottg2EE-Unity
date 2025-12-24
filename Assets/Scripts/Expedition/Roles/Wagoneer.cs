@@ -9,7 +9,7 @@ public class Wagoneer : MonoBehaviour
 {
     private GameObject _mountedWagon;
     private PhotonView photonView;
-    private readonly float SPEED_OVERRIDE = 15f;
+    [SerializeField] private float SPEED_OVERRIDE = 15f;
 
     void Start()
     {
@@ -89,7 +89,7 @@ public class Wagoneer : MonoBehaviour
                     return;
                 }
 
-                horse.transform.SetPositionAndRotation(wagon.HorseSpot.transform.position, wagon.transform.rotation);
+                horse.transform.SetPositionAndRotation(wagon.HorseSpot.transform.position, wagon.HorseSpot.rotation);
                 wagon.CreateJoint(horseRigidbody);
                 horseScript.SetSpeedOverride(SPEED_OVERRIDE);
 

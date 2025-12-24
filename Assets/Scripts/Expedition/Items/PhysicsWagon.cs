@@ -22,7 +22,7 @@ public class PhysicsWagon : MonoBehaviour
     void FixedUpdate()
     {
         RotateWheels();
-        // FollowHorse();
+        FollowHorse();
     }
 
     void RotateWheels()
@@ -37,14 +37,12 @@ public class PhysicsWagon : MonoBehaviour
 
     void FollowHorse()
     {
-        if (isMounted == false)
-            return;
+        if (isMounted == false) return;
 
-        Horse horse = Joint.connectedBody?.gameObject.GetComponent<Horse>();
-        if (horse == null)
-            return;
+        Horse horse = Joint?.connectedBody?.gameObject.GetComponent<Horse>();
+        if (horse == null) return;
 
-        Joint.gameObject.transform.position = horse.Cache.Transform.position - horse.Cache.Transform.forward * 2.3f + Vector3.up * 0.6f;
+        HorseSpot.position = horse.Cache.Transform.position/*  - horse.Cache.Transform.forward * 2.3f + Vector3.up * 0.6f */;
     }
 
     public void CreateJoint(Rigidbody rb)

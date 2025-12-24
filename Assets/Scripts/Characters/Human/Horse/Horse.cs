@@ -53,7 +53,7 @@ namespace Characters
         {
             if (_jumpCooldownLeft > 0f || !Grounded)
                 return;
-            Cache.Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);
+            Cache.Rigidbody.AddForce(Vector3.up * JumpForce * (SpeedOverride / 2), ForceMode.VelocityChange);
             _jumpCooldownLeft = 0f;
         }
 
@@ -222,7 +222,7 @@ namespace Characters
                         }
                     }
                 }
-                Cache.Rigidbody.AddForce(Gravity, ForceMode.Acceleration);
+                Cache.Rigidbody.AddForce(Gravity * SpeedOverride, ForceMode.Acceleration);
             }
         }
 

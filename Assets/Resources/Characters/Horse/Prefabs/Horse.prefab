@@ -79,7 +79,6 @@ MonoBehaviour:
   TargetAngle: 0
   HasDirection: 0
   _owner: {fileID: 0}
-  SpeedOverride: 0
   OwnerNetworkID: 0
   State: 0
   PassengerSeat: {fileID: 1375381907186359515}
