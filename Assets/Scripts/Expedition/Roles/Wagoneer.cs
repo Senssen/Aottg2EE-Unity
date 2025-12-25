@@ -26,32 +26,23 @@ public class Wagoneer : MonoBehaviour
         photonView.RPC(method, RpcTarget.AllBuffered, photonView.ViewID);
     }
 
-    [PunRPC]
-    public void SpawnWagon(int wagoneerViewId, PhotonMessageInfo Sender) // the view ID does not matter when spawning the wagon
+    public void SpawnWagon() // the view ID does not matter when spawning the wagon
     {
-        if (!Sender.photonView.IsMine)
-            return;
-
         Vector3 position = transform.position + transform.forward * 12f;
         Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
 
-        GameObject wagon = FindNearestObjectByName(wagoneerViewId, "Momo_Wagon");
+        GameObject wagon = FindNearestObjectByName("Momo_Wagon");
         if (wagon == null || Vector3.Distance(wagon.transform.position, position) > 10f) {
             PhotonNetwork.Instantiate(ResourcePaths.Wagoneer + "/Momo_Wagon1PF", position, rotation, 0);
-            if (Sender.photonView.IsMine)
-                ChatManager.AddLine("Spawned a wagon.");
-        } else if (Sender.photonView.IsMine) {
+            ChatManager.AddLine("Spawned a wagon.");
+        } else {
             ChatManager.AddLine("A wagon already exists in close proximity.");
         }
     }
 
-    [PunRPC]
-    public void DespawnWagon(int wagoneerViewId, PhotonMessageInfo Sender)
+    public void DespawnWagon()
     {
-        if (!Sender.photonView.IsMine)
-            return;
-
-        GameObject wagon = FindNearestObjectByName(wagoneerViewId, "Momo_Wagon");
+        GameObject wagon = FindNearestObjectByName("Momo_Wagon");
 
         if (wagon != null && wagon.TryGetComponent(out PhysicsWagon _physicsWagon) && _physicsWagon.GetDistance(transform) < 20f)
         {
@@ -60,8 +51,7 @@ public class Wagoneer : MonoBehaviour
                 horse.SetSpeedOverride(1f);
 
             PhotonNetwork.Destroy(wagon);
-            if (Sender.photonView.IsMine)
-                ChatManager.AddLine("Destroyed a wagon.");
+            ChatManager.AddLine("Destroyed a wagon.");
         }
     }
 
@@ -176,6 +166,30 @@ public class Wagoneer : MonoBehaviour
             if (go.name.Contains(name))
             {
                 float distance = Vector3.Distance(senderTransform.position, go.transform.position);
+                if (distance < nearestDistance)
+                {
+                    nearestDistance = distance;
+                    nearestObject = go;
+                }
+            }
+        }
+
+        if (nearestObject != null)
+            return nearestObject;
+        else
+            return null;
+    }
+
+    public GameObject FindNearestObjectByName(string name)
+    {
+        GameObject[] objects = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
+        GameObject nearestObject = null;
+        float nearestDistance = 1500f;
+        foreach (GameObject go in objects)
+        {
+            if (go.name.Contains(name))
+            {
+                float distance = Vector3.Distance(transform.position, go.transform.position);
                 if (distance < nearestDistance)
                 {
                     nearestDistance = distance;

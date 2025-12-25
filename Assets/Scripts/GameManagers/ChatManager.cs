@@ -467,9 +467,9 @@ namespace GameManagers
             if (args.Length == 1) {
                 AddLine("You need to pass one of the following arguments to use this command: spawn, despawn, mount, unmount");
             } else if (args[1] == "spawn") {
-                wagoneer.SendRPC("SpawnWagon");
+                wagoneer.SpawnWagon();
             } else if (args[1] == "despawn") {
-                wagoneer.SendRPC("DespawnWagon");
+                wagoneer.DespawnWagon();
             } else if (args[1] == "mount") {
                 wagoneer.SendRPC("MountWagon");
             } else if (args[1] == "unmount") {

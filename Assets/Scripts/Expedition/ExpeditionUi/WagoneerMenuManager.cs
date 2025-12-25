@@ -46,9 +46,9 @@ public class WagoneerMenuManager : MonoBehaviour
         if (action == -1) {
             SetWagoneerMenuActive(false);
         } else if (action == 0) {
-            wagoneer.SendRPC("SpawnWagon");
+            wagoneer.SpawnWagon();
         } else if (action == 1) {
-            wagoneer.SendRPC("DespawnWagon");
+            wagoneer.DespawnWagon();
         } else if (action == 2 && wagoneer.CheckIsMounted() == true) {
             wagoneer.SendRPC("UnmountWagon");
             SetAttachWagonText();

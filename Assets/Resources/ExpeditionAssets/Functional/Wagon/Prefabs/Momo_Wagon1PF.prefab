@@ -750,11 +750,11 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 0
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: 5720806820955850232}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -770,7 +770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19732f987bbe17e49839f0c686f56e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _correctVelocity: {x: 0, y: 0, z: 0}
+  _correctWagonVelocity: {x: 0, y: 0, z: 0}
 --- !u!54 &4179639204024027185
 Rigidbody:
   m_ObjectHideFlags: 0
