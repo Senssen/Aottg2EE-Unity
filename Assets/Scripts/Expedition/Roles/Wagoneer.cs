@@ -28,6 +28,13 @@ public class Wagoneer : MonoBehaviour
 
     public void SpawnWagon() // the view ID does not matter when spawning the wagon
     {
+        Human human = GetComponent<Human>();
+        if (human.State != HumanState.Idle)
+        {
+            ChatManager.AddLine("A wagon can't be spawned when not idle.", ChatTextColor.Error);
+            return;
+        }
+
         Vector3 position = transform.position + transform.forward * 12f;
         Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
 
@@ -36,7 +43,7 @@ public class Wagoneer : MonoBehaviour
             PhotonNetwork.Instantiate(ResourcePaths.Wagoneer + "/Momo_Wagon1PF", position, rotation, 0);
             ChatManager.AddLine("Spawned a wagon.");
         } else {
-            ChatManager.AddLine("A wagon already exists in close proximity.");
+            ChatManager.AddLine("A wagon already exists in close proximity.", ChatTextColor.Error);
         }
     }
 
@@ -60,7 +67,7 @@ public class Wagoneer : MonoBehaviour
     {
         if (PhotonNetwork.GetPhotonView(wagoneerViewId).TryGetComponent(out Wagoneer wagoneer) && wagoneer.CheckIsMounted() == true) {
             if (Sender.photonView.IsMine)
-                ChatManager.AddLine("You are already mounting a wagon!");
+                ChatManager.AddLine("You are already mounting a wagon!", ChatTextColor.Error);
             return;
         }
 
@@ -74,7 +81,7 @@ public class Wagoneer : MonoBehaviour
             {
                 if (wagon.GetIsMounted()) {
                     if (Sender.photonView.IsMine)
-                        ChatManager.AddLine("The wagon is already mounted by another wagoneer!");
+                        ChatManager.AddLine("The wagon is already mounted by another wagoneer!", ChatTextColor.Error);
 
                     return;
                 }
@@ -121,6 +128,13 @@ public class Wagoneer : MonoBehaviour
 
     public void SpawnStation()
     {
+        Human human = GetComponent<Human>();
+        if (human.MountState != HumanMountState.None || human.State != HumanState.Idle)
+        {
+            ChatManager.AddLine("A supply station can't be spawned when not idle on the ground.", ChatTextColor.Error);
+            return;
+        }
+
         Vector3 position = transform.position + transform.forward * 12f;
         Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
 
