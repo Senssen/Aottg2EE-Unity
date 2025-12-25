@@ -12,6 +12,7 @@ namespace Characters
         public Human _owner;
         private Wagoneer _wagoneer;
         private float SpeedOverride = 1f; // this should give wagoneers some more force when pulling the wagon
+        public Transform WagonHarness;
         public int OwnerNetworkID;
         HorseComponentCache HorseCache;
         public HorseState State;

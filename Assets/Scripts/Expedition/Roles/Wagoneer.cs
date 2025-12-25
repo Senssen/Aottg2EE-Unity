@@ -89,7 +89,8 @@ public class Wagoneer : MonoBehaviour
                     return;
                 }
 
-                horse.transform.SetPositionAndRotation(wagon.HorseSpot.transform.position, wagon.HorseSpot.rotation);
+                wagon.transform.SetPositionAndRotation(horseScript.WagonHarness.position, horseScript.WagonHarness.rotation);
+
                 wagon.CreateJoint(horseRigidbody);
                 horseScript.SetSpeedOverride(SPEED_OVERRIDE);
 
@@ -116,6 +117,7 @@ public class Wagoneer : MonoBehaviour
             }
 
         if (wagoneer._mountedWagon.TryGetComponent(out PhysicsWagon wagon) && wagon.GetJoint().connectedBody.TryGetComponent(out Horse horse)) {
+                wagon.Beams.transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
                 horse.SetSpeedOverride(1f);
                 wagon.DestroyJoint();
                 wagon.SetIsMounted(false);

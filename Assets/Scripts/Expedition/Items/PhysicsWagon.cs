@@ -22,7 +22,7 @@ public class PhysicsWagon : MonoBehaviour
     void FixedUpdate()
     {
         RotateWheels();
-        FollowHorse();
+        //FollowHorse();
     }
 
     void RotateWheels()
@@ -63,7 +63,7 @@ public class PhysicsWagon : MonoBehaviour
 
     public float GetDistance(Transform entity)
     {
-        return Vector3.Distance(entity.position, HorseSpot.position);
+        return Vector3.Distance(entity.position, wagonRigidbody.transform.position);
     }
 
     public void SetIsMounted(bool _isMounted)
