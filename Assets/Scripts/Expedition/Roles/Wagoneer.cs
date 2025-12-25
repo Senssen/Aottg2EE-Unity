@@ -119,36 +119,23 @@ public class Wagoneer : MonoBehaviour
         }
     }
 
-    [PunRPC]
-    public void SpawnStation(int wagoneerViewId, PhotonMessageInfo Sender)
+    public void SpawnStation()
     {
-        if (!Sender.photonView.IsMine)
-            return;
-
         Vector3 position = transform.position + transform.forward * 12f;
         Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
 
         PhotonNetwork.Instantiate(ResourcePaths.Wagoneer + "/SupplyStation", position, rotation, 0);
-
-        if (Sender.photonView.IsMine)
-            ChatManager.AddLine("Spawned a station.");
+        ChatManager.AddLine("Spawned a station.");
     }
 
-    [PunRPC]
-    public void DespawnStation(int wagoneerViewId, PhotonMessageInfo Sender)
+    public void DespawnStation()
     {
-        if (!Sender.photonView.IsMine)
-            return;
-
-        GameObject station = FindNearestObjectByName(wagoneerViewId, "SupplyStation");
-
+        GameObject station = FindNearestObjectByName("SupplyStation");
         if (station == null || Vector3.Distance(transform.position, station.transform.position) > 20)
             return;
 
         PhotonNetwork.Destroy(station);
-
-        if (Sender.photonView.IsMine)
-            ChatManager.AddLine("Destroyed a station.");
+        ChatManager.AddLine("Destroyed a station.");
     }
 
     public GameObject FindNearestObjectByName(int senderViewId, string name)

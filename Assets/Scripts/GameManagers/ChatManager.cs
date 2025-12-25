@@ -490,9 +490,9 @@ namespace GameManagers
             if (args.Length == 1) {
                 AddLine("You need to pass one of the following arguments to use this command: spawn, despawn");
             } else if (args[1] == "spawn") {
-                wagoneer.SendRPC("SpawnStation");
+                wagoneer.SpawnStation();
             } else if (args[1] == "despawn") {
-                wagoneer.SendRPC("DespawnStation");
+                wagoneer.DespawnStation();
             } else {
                 AddLine($"There is not definition for argument {args[1]}");
             }
