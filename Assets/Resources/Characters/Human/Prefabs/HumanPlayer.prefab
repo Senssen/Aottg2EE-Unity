@@ -16707,6 +16707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed17a387cb9f5ff4ab5f47c107ba0eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SPEED_OVERRIDE: 15
 --- !u!82 &-5908581430658734527
 AudioSource:
   m_ObjectHideFlags: 0

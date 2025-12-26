@@ -1,13 +1,15 @@
-using UnityEngine;
-using Photon.Pun;
-using GameManagers;
-using Utility;
 using Characters;
+using GameManagers;
+using Photon.Pun;
+using Unity.Mathematics;
+using UnityEngine;
+using Utility;
 
 public class Wagoneer : MonoBehaviour
 {
     private GameObject _mountedWagon;
     private PhotonView photonView;
+    [SerializeField] private float SPEED_OVERRIDE = 15f;
 
     void Start()
     {
@@ -24,38 +26,39 @@ public class Wagoneer : MonoBehaviour
         photonView.RPC(method, RpcTarget.AllBuffered, photonView.ViewID);
     }
 
-    [PunRPC]
-    public void SpawnWagon(int wagoneerViewId, PhotonMessageInfo Sender) // the view ID does not matter when spawning the wagon
+    public void SpawnWagon() // the view ID does not matter when spawning the wagon
     {
-        if (!Sender.photonView.IsMine)
+        Human human = GetComponent<Human>();
+        if (human.State != HumanState.Idle)
+        {
+            ChatManager.AddLine("A wagon can't be spawned when not idle.", ChatTextColor.Error);
             return;
+        }
 
         Vector3 position = transform.position + transform.forward * 12f;
         Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
 
-        GameObject wagon = FindNearestObjectByName(wagoneerViewId, "Momo_Wagon");
+        GameObject wagon = FindNearestObjectByName("Momo_Wagon");
         if (wagon == null || Vector3.Distance(wagon.transform.position, position) > 10f) {
             PhotonNetwork.Instantiate(ResourcePaths.Wagoneer + "/Momo_Wagon1PF", position, rotation, 0);
-            if (Sender.photonView.IsMine)
-                ChatManager.AddLine("Spawned a wagon.");
-        } else if (Sender.photonView.IsMine) {
-            ChatManager.AddLine("A wagon already exists in close proximity.");
+            ChatManager.AddLine("Spawned a wagon.");
+        } else {
+            ChatManager.AddLine("A wagon already exists in close proximity.", ChatTextColor.Error);
         }
     }
 
-    [PunRPC]
-    public void DespawnWagon(int wagoneerViewId, PhotonMessageInfo Sender)
+    public void DespawnWagon()
     {
-        if (!Sender.photonView.IsMine)
-            return;
-
-        GameObject wagon = FindNearestObjectByName(wagoneerViewId, "Momo_Wagon");
+        GameObject wagon = FindNearestObjectByName("Momo_Wagon");
 
         if (wagon != null && wagon.TryGetComponent(out PhysicsWagon _physicsWagon) && _physicsWagon.GetDistance(transform) < 20f)
         {
+            FixedJoint joint = _physicsWagon.GetJoint();
+            if (joint && joint.connectedBody.TryGetComponent(out Horse horse))
+                horse.SetSpeedOverride(1f);
+
             PhotonNetwork.Destroy(wagon);
-            if (Sender.photonView.IsMine)
-                ChatManager.AddLine("Destroyed a wagon.");
+            ChatManager.AddLine("Destroyed a wagon.");
         }
     }
 
@@ -64,27 +67,36 @@ public class Wagoneer : MonoBehaviour
     {
         if (PhotonNetwork.GetPhotonView(wagoneerViewId).TryGetComponent(out Wagoneer wagoneer) && wagoneer.CheckIsMounted() == true) {
             if (Sender.photonView.IsMine)
-                ChatManager.AddLine("You are already mounting a wagon!");
+                ChatManager.AddLine("You are already mounting a wagon!", ChatTextColor.Error);
             return;
         }
 
         GameObject wagonObject = FindNearestObjectByName(wagoneerViewId, "Momo_Wagon");
         Transform horse = FindHorseOfViewId(wagoneerViewId);
 
-        if (horse != null && wagonObject != null && wagonObject.TryGetComponent(out PhysicsWagon wagon) && wagon.GetDistance(transform) < 20)
+        if (horse != null && horse.TryGetComponent(out Horse horseScript) && wagonObject != null && wagonObject.TryGetComponent(out PhysicsWagon wagon))
         {
+            if (wagon.GetDistance(horse.transform) > 2f)
+            {
+                ChatManager.AddLine("You need to be closer to the center of the wagon beams to mount the wagon.", ChatTextColor.Error);
+                return;
+            }
+
             Rigidbody horseRigidbody = horse.GetComponent<Rigidbody>();
             if (horseRigidbody != null)
             {
                 if (wagon.GetIsMounted()) {
                     if (Sender.photonView.IsMine)
-                        ChatManager.AddLine("The wagon is already mounted by another wagoneer!");
+                        ChatManager.AddLine("The wagon is already mounted by another wagoneer!", ChatTextColor.Error);
 
                     return;
                 }
 
-                wagon.HorseHinge.transform.SetPositionAndRotation(horse.position - horse.transform.forward * 2.3f + Vector3.up * 0.6f, horse.gameObject.transform.rotation * Quaternion.Euler(90, 0, 0));
-                wagon.HorseHinge.connectedBody = horseRigidbody;
+                horse.transform.SetPositionAndRotation(wagon.HorseSpot.position, wagon.HorseSpot.rotation);
+
+                wagon.CreateJoint(horseRigidbody);
+                horseScript.SetSpeedOverride(SPEED_OVERRIDE);
+
                 wagon.SetIsMounted(true);
                 _mountedWagon = wagonObject;
 
@@ -107,8 +119,10 @@ public class Wagoneer : MonoBehaviour
                 return;
             }
 
-            if (wagoneer._mountedWagon.TryGetComponent(out PhysicsWagon wagon)) {
-                wagon.HorseHinge.connectedBody = wagon.TemporaryHinge;
+        if (wagoneer._mountedWagon.TryGetComponent(out PhysicsWagon wagon) && wagon.GetJoint().connectedBody.TryGetComponent(out Horse horse)) {
+                wagon.Beams.transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
+                horse.SetSpeedOverride(1f);
+                wagon.DestroyJoint();
                 wagon.SetIsMounted(false);
                 wagoneer._mountedWagon = null;
 
@@ -118,36 +132,30 @@ public class Wagoneer : MonoBehaviour
         }
     }
 
-    [PunRPC]
-    public void SpawnStation(int wagoneerViewId, PhotonMessageInfo Sender)
+    public void SpawnStation()
     {
-        if (!Sender.photonView.IsMine)
+        Human human = GetComponent<Human>();
+        if (human.MountState != HumanMountState.None || human.State != HumanState.Idle)
+        {
+            ChatManager.AddLine("A supply station can't be spawned when not idle on the ground.", ChatTextColor.Error);
             return;
+        }
 
         Vector3 position = transform.position + transform.forward * 12f;
         Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
 
         PhotonNetwork.Instantiate(ResourcePaths.Wagoneer + "/SupplyStation", position, rotation, 0);
-
-        if (Sender.photonView.IsMine)
-            ChatManager.AddLine("Spawned a station.");
+        ChatManager.AddLine("Spawned a station.");
     }
 
-    [PunRPC]
-    public void DespawnStation(int wagoneerViewId, PhotonMessageInfo Sender)
+    public void DespawnStation()
     {
-        if (!Sender.photonView.IsMine)
-            return;
-
-        GameObject station = FindNearestObjectByName(wagoneerViewId, "SupplyStation");
-
+        GameObject station = FindNearestObjectByName("SupplyStation");
         if (station == null || Vector3.Distance(transform.position, station.transform.position) > 20)
             return;
 
         PhotonNetwork.Destroy(station);
-
-        if (Sender.photonView.IsMine)
-            ChatManager.AddLine("Destroyed a station.");
+        ChatManager.AddLine("Destroyed a station.");
     }
 
     public GameObject FindNearestObjectByName(int senderViewId, string name)
@@ -165,6 +173,30 @@ public class Wagoneer : MonoBehaviour
             if (go.name.Contains(name))
             {
                 float distance = Vector3.Distance(senderTransform.position, go.transform.position);
+                if (distance < nearestDistance)
+                {
+                    nearestDistance = distance;
+                    nearestObject = go;
+                }
+            }
+        }
+
+        if (nearestObject != null)
+            return nearestObject;
+        else
+            return null;
+    }
+
+    public GameObject FindNearestObjectByName(string name)
+    {
+        GameObject[] objects = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
+        GameObject nearestObject = null;
+        float nearestDistance = 1500f;
+        foreach (GameObject go in objects)
+        {
+            if (go.name.Contains(name))
+            {
+                float distance = Vector3.Distance(transform.position, go.transform.position);
                 if (distance < nearestDistance)
                 {
                     nearestDistance = distance;

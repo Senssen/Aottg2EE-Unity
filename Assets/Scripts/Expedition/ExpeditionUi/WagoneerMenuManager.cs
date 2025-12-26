@@ -31,13 +31,17 @@ public class WagoneerMenuManager : MonoBehaviour
 
     void Update()
     {
-        if (_humanInput.WagoneerMenu.GetKeyDown() && !InGameMenu.InMenu() && !ChatManager.IsChatActive() && !CustomLogicManager.Cutscene) {
+        if (wagoneer == null && SupplyStationText.enabled)
+            SetSupplyStationText(false);
+
+        if (_humanInput.WagoneerMenu.GetKeyDown() && !InGameMenu.InMenu() && !ChatManager.IsChatActive() && !CustomLogicManager.Cutscene)
+        {
             if (wagoneer == null)
                 wagoneer = PhotonExtensions.GetMyHuman().GetComponent<Wagoneer>();
 
             if (wagoneer.gameObject.GetComponent<PhotonView>().Owner.CustomProperties.ContainsKey("Wagoneer") == false)
                 return;
-            
+
             SetWagoneerMenuActive(true);
         }   
     }
@@ -46,9 +50,9 @@ public class WagoneerMenuManager : MonoBehaviour
         if (action == -1) {
             SetWagoneerMenuActive(false);
         } else if (action == 0) {
-            wagoneer.SendRPC("SpawnWagon");
+            wagoneer.SpawnWagon();
         } else if (action == 1) {
-            wagoneer.SendRPC("DespawnWagon");
+            wagoneer.DespawnWagon();
         } else if (action == 2 && wagoneer.CheckIsMounted() == true) {
             wagoneer.SendRPC("UnmountWagon");
             SetAttachWagonText();
@@ -56,9 +60,9 @@ public class WagoneerMenuManager : MonoBehaviour
             wagoneer.SendRPC("MountWagon");
             SetAttachWagonText();
         } else if (action == 3) {
-            wagoneer.SendRPC("SpawnStation");
+            wagoneer.SpawnStation();
         } else if (action == 4) {
-            wagoneer.SendRPC("DespawnStation");
+            wagoneer.DespawnStation();
         }
     }
 

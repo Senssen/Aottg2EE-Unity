@@ -4,18 +4,17 @@ using Photon.Pun;
 
 public class PhysicsWagon : MonoBehaviour
 {
-    [SerializeField] private Transform Body;
+    [SerializeField] public Transform HorseSpot;
     [SerializeField] private Transform WheelsFront;
     [SerializeField] private Transform WheelsBack;
-    [SerializeField] public HingeJoint HorseHinge;
-    [SerializeField] public Rigidbody TemporaryHinge;
+    [SerializeField] public GameObject Beams;
     public Rigidbody wagonRigidbody;
+    private FixedJoint Joint;
     private float wheelCircumference;
     private bool isMounted = false;
 
     void Start()
     {
-        wagonRigidbody = Body.GetComponent<Rigidbody>();
         float wheelRadius = 0.7f;
         wheelCircumference = 2 * Mathf.PI * wheelRadius;
     }
@@ -23,7 +22,6 @@ public class PhysicsWagon : MonoBehaviour
     void FixedUpdate()
     {
         RotateWheels();
-        FollowHorse();
     }
 
     void RotateWheels()
@@ -36,21 +34,25 @@ public class PhysicsWagon : MonoBehaviour
         WheelsBack.Rotate(Vector3.right, rotationAngle);
     }
 
-    void FollowHorse()
+    public void CreateJoint(Rigidbody rb)
     {
-        if (isMounted == false)
-            return;
+        Joint = Beams.AddComponent<FixedJoint>();
+        Joint.connectedBody = rb;
+    }
 
-        Horse horse = HorseHinge.connectedBody?.gameObject.GetComponent<Horse>();
-        if (horse == null)
-            return;
+    public void DestroyJoint()
+    {
+        Destroy(Joint);
+    }
 
-        HorseHinge.gameObject.transform.position = horse.Cache.Transform.position - horse.Cache.Transform.forward * 2.3f + Vector3.up * 0.6f;
+    public FixedJoint GetJoint()
+    {
+        return Joint;
     }
 
     public float GetDistance(Transform entity)
     {
-        return Vector3.Distance(entity.position, Body.position);
+        return Vector3.Distance(entity.position, HorseSpot.position);
     }
 
     public void SetIsMounted(bool _isMounted)
@@ -66,9 +68,8 @@ public class PhysicsWagon : MonoBehaviour
 
     public void SetKinematics(bool _isKinematic)
     {
-        Rigidbody hingeRb = HorseHinge.gameObject.GetComponent<Rigidbody>();
+        Rigidbody hingeRb = Joint.gameObject.GetComponent<Rigidbody>();
         if (hingeRb != null) hingeRb.isKinematic = _isKinematic;
-        TemporaryHinge.isKinematic = _isKinematic;
         wagonRigidbody.isKinematic = _isKinematic;
     }
 }

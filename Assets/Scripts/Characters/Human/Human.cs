@@ -3080,6 +3080,12 @@ namespace Characters
 
         #endregion
 
+        public override void Die()
+        {
+            base.Die();
+            GameObject.Find("Expedition UI(Clone)").GetComponent<WagoneerMenuManager>().SetSupplyStationText(false);
+        }
+
         protected void LoadSkin(Player player = null)
         {
             if (IsMine())
