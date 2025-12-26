@@ -1159,8 +1159,8 @@ MonoBehaviour:
   WeatherButtonGameObject: {fileID: 0}
   TimeSliderGameObject: {fileID: 0}
   WeatherDropdown: {fileID: 0}
-  UseUniStormMenu: 1
-  UniStormMenuKey: 27
+  UseUniStormMenu: 0
+  UniStormMenuKey: 277
   UniStormCanvas: {fileID: 0}
   m_MenuToggle: 0
   TabNumber: 0
@@ -1192,7 +1192,7 @@ MonoBehaviour:
   GetPlayerAtRuntime: 0
   UseRuntimeDelay: 0
   GetPlayerMethod: 0
-  PlayerTag: Player
+  PlayerTag: MainCamera
   PlayerName: FPS Player
   CameraTag: MainCamera
   CameraName: Main Camera
@@ -2224,7 +2224,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: -0.09125475
-      value: 0.06971873
+      value: 0.067056075
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2233,7 +2233,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 6.6303854
-      value: 0.059748717
+      value: 0.057086058
       inSlope: 0.0012840834
       outSlope: 0.0012840834
       tangentMode: 0
@@ -2241,8 +2241,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 9.060358
-      value: 1.3463869
+      time: 8.759493
+      value: 0.99923277
       inSlope: 0.00529797
       outSlope: 0.00529797
       tangentMode: 0
@@ -2250,8 +2250,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 12.775253
-      value: 1.3463869
+      time: 12.474388
+      value: 1.00123
       inSlope: -0.0005448237
       outSlope: -0.0005448237
       tangentMode: 0
@@ -2259,8 +2259,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 16.451809
-      value: 1.3463869
+      time: 16.150944
+      value: 0.99923277
       inSlope: -0.0053261714
       outSlope: -0.0053261714
       tangentMode: 0
@@ -2269,7 +2269,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 18.898924
-      value: 0.056707617
+      value: 0.05404496
       inSlope: -0.0023423703
       outSlope: -0.0023423703
       tangentMode: 0
@@ -2278,7 +2278,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 23.977945
-      value: 0.061007928
+      value: 0.05834527
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2890,7 +2890,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 2.4972544
+      value: 1.0023234
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2899,7 +2899,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 24
-      value: 2.4972544
+      value: 1.0023234
       inSlope: 0
       outSlope: 0
       tangentMode: 0
