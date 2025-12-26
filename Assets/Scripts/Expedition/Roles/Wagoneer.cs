@@ -74,8 +74,14 @@ public class Wagoneer : MonoBehaviour
         GameObject wagonObject = FindNearestObjectByName(wagoneerViewId, "Momo_Wagon");
         Transform horse = FindHorseOfViewId(wagoneerViewId);
 
-        if (horse != null && horse.TryGetComponent(out Horse horseScript) && wagonObject != null && wagonObject.TryGetComponent(out PhysicsWagon wagon) && wagon.GetDistance(transform) < 20)
+        if (horse != null && horse.TryGetComponent(out Horse horseScript) && wagonObject != null && wagonObject.TryGetComponent(out PhysicsWagon wagon))
         {
+            if (wagon.GetDistance(horse.transform) > 2f)
+            {
+                ChatManager.AddLine("You need to be closer to the center of the wagon beams to mount the wagon.", ChatTextColor.Error);
+                return;
+            }
+
             Rigidbody horseRigidbody = horse.GetComponent<Rigidbody>();
             if (horseRigidbody != null)
             {
@@ -86,7 +92,7 @@ public class Wagoneer : MonoBehaviour
                     return;
                 }
 
-                wagon.transform.SetPositionAndRotation(horseScript.WagonHarness.position, horseScript.WagonHarness.rotation);
+                horse.transform.SetPositionAndRotation(wagon.HorseSpot.position, wagon.HorseSpot.rotation);
 
                 wagon.CreateJoint(horseRigidbody);
                 horseScript.SetSpeedOverride(SPEED_OVERRIDE);

@@ -52,7 +52,7 @@ public class PhysicsWagon : MonoBehaviour
 
     public float GetDistance(Transform entity)
     {
-        return Vector3.Distance(entity.position, wagonRigidbody.transform.position);
+        return Vector3.Distance(entity.position, HorseSpot.position);
     }
 
     public void SetIsMounted(bool _isMounted)

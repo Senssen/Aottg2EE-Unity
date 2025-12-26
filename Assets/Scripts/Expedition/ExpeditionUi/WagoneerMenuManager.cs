@@ -31,13 +31,17 @@ public class WagoneerMenuManager : MonoBehaviour
 
     void Update()
     {
-        if (_humanInput.WagoneerMenu.GetKeyDown() && !InGameMenu.InMenu() && !ChatManager.IsChatActive() && !CustomLogicManager.Cutscene) {
+        if (wagoneer == null && SupplyStationText.enabled)
+            SetSupplyStationText(false);
+
+        if (_humanInput.WagoneerMenu.GetKeyDown() && !InGameMenu.InMenu() && !ChatManager.IsChatActive() && !CustomLogicManager.Cutscene)
+        {
             if (wagoneer == null)
                 wagoneer = PhotonExtensions.GetMyHuman().GetComponent<Wagoneer>();
 
             if (wagoneer.gameObject.GetComponent<PhotonView>().Owner.CustomProperties.ContainsKey("Wagoneer") == false)
                 return;
-            
+
             SetWagoneerMenuActive(true);
         }   
     }

@@ -771,6 +771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _correctWagonVelocity: {x: 0, y: 0, z: 0}
+  _correctBeamsVelocity: {x: 0, y: 0, z: 0}
 --- !u!54 &4179639204024027185
 Rigidbody:
   m_ObjectHideFlags: 0
