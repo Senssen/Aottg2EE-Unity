@@ -20,21 +20,24 @@ public class Wagoneer : MonoBehaviour
 
     void FixedUpdate()
     {
-        bool isRidingWagon = _mountedWagon != null && human.MountState == HumanMountState.Horse;
-        float currentSpeedOverride = human.Horse.GetSpeedOverride();
-        if (isRidingWagon && human.TargetMagnitude != 0 && currentSpeedOverride < MAX_SPEED_OVERRIDE)
+        if (human.Horse)
         {
-            float s = currentSpeedOverride + (4f * Time.fixedDeltaTime);
-            human.Horse.SetSpeedOverride(s);
-        }
-        else if (isRidingWagon && human.TargetMagnitude == 0 && currentSpeedOverride > 1f && human.GetVelocity().magnitude > 0.25f)
-        {
-            float s = currentSpeedOverride - (2f * Time.fixedDeltaTime);
-            human.Horse.SetSpeedOverride(s);
-        }
-        else if (isRidingWagon && human.TargetMagnitude == 0 && currentSpeedOverride > 1f && human.GetVelocity().magnitude <= 0.25f)
-        {
-            human.Horse.SetSpeedOverride(1f);
+            bool isRidingWagon = _mountedWagon != null && human.MountState == HumanMountState.Horse;
+            float currentSpeedOverride = human.Horse.GetSpeedOverride();
+            if (isRidingWagon && human.TargetMagnitude != 0 && currentSpeedOverride < MAX_SPEED_OVERRIDE)
+            {
+                float s = currentSpeedOverride + (4f * Time.fixedDeltaTime);
+                human.Horse.SetSpeedOverride(s);
+            }
+            else if (isRidingWagon && human.TargetMagnitude == 0 && currentSpeedOverride > 1f && human.GetVelocity().magnitude > 0.25f)
+            {
+                float s = currentSpeedOverride - (2f * Time.fixedDeltaTime);
+                human.Horse.SetSpeedOverride(s);
+            }
+            else if (isRidingWagon && human.TargetMagnitude == 0 && currentSpeedOverride > 1f && human.GetVelocity().magnitude <= 0.25f)
+            {
+                human.Horse.SetSpeedOverride(1f);
+            }
         }
     }
 
