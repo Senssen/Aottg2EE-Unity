@@ -3083,7 +3083,8 @@ namespace Characters
         public override void Die()
         {
             base.Die();
-            GameObject.Find("Expedition UI(Clone)").GetComponent<WagoneerMenuManager>().SetSupplyStationText(false);
+            if (TryGetComponent(out Wagoneer wagoneer))
+                wagoneer.OnDeath();
         }
 
         protected void LoadSkin(Player player = null)

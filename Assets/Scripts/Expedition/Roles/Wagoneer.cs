@@ -8,17 +8,40 @@ using Utility;
 public class Wagoneer : MonoBehaviour
 {
     private GameObject _mountedWagon;
+    private Human human;
     private PhotonView photonView;
-    [SerializeField] private float SPEED_OVERRIDE = 15f;
+    [SerializeField] private float MAX_SPEED_OVERRIDE = 15f;
 
     void Start()
     {
+        human = GetComponent<Human>();
         photonView = GetComponent<PhotonView>();
+    }
+
+    void FixedUpdate()
+    {
+        bool isRidingWagon = _mountedWagon != null && human.MountState == HumanMountState.Horse;
+        float currentSpeedOverride = human.Horse.GetSpeedOverride();
+        if (isRidingWagon && human.TargetMagnitude != 0 && currentSpeedOverride < MAX_SPEED_OVERRIDE)
+        {
+            float s = currentSpeedOverride + (4f * Time.fixedDeltaTime);
+            human.Horse.SetSpeedOverride(s);
+        }
+        else if (isRidingWagon && human.TargetMagnitude == 0 && currentSpeedOverride > 1f && human.GetVelocity().magnitude > 0.25f)
+        {
+            float s = currentSpeedOverride - (2f * Time.fixedDeltaTime);
+            human.Horse.SetSpeedOverride(s);
+        }
+        else if (isRidingWagon && human.TargetMagnitude == 0 && currentSpeedOverride > 1f && human.GetVelocity().magnitude <= 0.25f)
+        {
+            human.Horse.SetSpeedOverride(1f);
+        }
     }
 
     public void SendRPC(string method)
     {
-        if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagoneer")) {
+        if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Wagoneer"))
+        {
             ChatManager.AddLine("You must be a wagoneer to use this option!", ChatTextColor.Error);
             return;
         }
@@ -39,10 +62,13 @@ public class Wagoneer : MonoBehaviour
         Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
 
         GameObject wagon = FindNearestObjectByName("Momo_Wagon");
-        if (wagon == null || Vector3.Distance(wagon.transform.position, position) > 10f) {
+        if (wagon == null || Vector3.Distance(wagon.transform.position, position) > 10f)
+        {
             PhotonNetwork.Instantiate(ResourcePaths.Wagoneer + "/Momo_Wagon1PF", position, rotation, 0);
             ChatManager.AddLine("Spawned a wagon.");
-        } else {
+        }
+        else
+        {
             ChatManager.AddLine("A wagon already exists in close proximity.", ChatTextColor.Error);
         }
     }
@@ -65,7 +91,8 @@ public class Wagoneer : MonoBehaviour
     [PunRPC]
     public void MountWagon(int wagoneerViewId, PhotonMessageInfo Sender)
     {
-        if (PhotonNetwork.GetPhotonView(wagoneerViewId).TryGetComponent(out Wagoneer wagoneer) && wagoneer.CheckIsMounted() == true) {
+        if (PhotonNetwork.GetPhotonView(wagoneerViewId).TryGetComponent(out Wagoneer wagoneer) && wagoneer.CheckIsMounted() == true)
+        {
             if (Sender.photonView.IsMine)
                 ChatManager.AddLine("You are already mounting a wagon!", ChatTextColor.Error);
             return;
@@ -85,7 +112,8 @@ public class Wagoneer : MonoBehaviour
             Rigidbody horseRigidbody = horse.GetComponent<Rigidbody>();
             if (horseRigidbody != null)
             {
-                if (wagon.GetIsMounted()) {
+                if (wagon.GetIsMounted())
+                {
                     if (Sender.photonView.IsMine)
                         ChatManager.AddLine("The wagon is already mounted by another wagoneer!", ChatTextColor.Error);
 
@@ -95,7 +123,7 @@ public class Wagoneer : MonoBehaviour
                 horse.transform.SetPositionAndRotation(wagon.HorseSpot.position, wagon.HorseSpot.rotation);
 
                 wagon.CreateJoint(horseRigidbody);
-                horseScript.SetSpeedOverride(SPEED_OVERRIDE);
+                horseScript.SetSpeedOverride(MAX_SPEED_OVERRIDE);
 
                 wagon.SetIsMounted(true);
                 _mountedWagon = wagonObject;
@@ -113,13 +141,16 @@ public class Wagoneer : MonoBehaviour
     [PunRPC]
     public void UnmountWagon(int wagoneerViewId, PhotonMessageInfo Sender)
     {
-        if (PhotonNetwork.GetPhotonView(wagoneerViewId).TryGetComponent(out Wagoneer wagoneer)) {
-            if (wagoneer._mountedWagon == null && Sender.photonView.IsMine) {
+        if (PhotonNetwork.GetPhotonView(wagoneerViewId).TryGetComponent(out Wagoneer wagoneer))
+        {
+            if (wagoneer._mountedWagon == null && Sender.photonView.IsMine)
+            {
                 ChatManager.AddLine("You're not mounted on a wagon!", ChatTextColor.Error);
                 return;
             }
 
-        if (wagoneer._mountedWagon.TryGetComponent(out PhysicsWagon wagon) && wagon.GetJoint().connectedBody.TryGetComponent(out Horse horse)) {
+            if (wagoneer._mountedWagon.TryGetComponent(out PhysicsWagon wagon) && wagon.GetJoint().connectedBody.TryGetComponent(out Horse horse))
+            {
                 wagon.Beams.transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
                 horse.SetSpeedOverride(1f);
                 wagon.DestroyJoint();
@@ -214,8 +245,10 @@ public class Wagoneer : MonoBehaviour
     public Transform FindHorseOfViewId(int senderViewId)
     {
         Horse[] horses = FindObjectsByType<Horse>(FindObjectsSortMode.None);
-        for (int idx = 0; idx < horses.Length; idx++) {
-            if (horses[idx].photonView.OwnerActorNr == PhotonNetwork.GetPhotonView(senderViewId).OwnerActorNr) {
+        for (int idx = 0; idx < horses.Length; idx++)
+        {
+            if (horses[idx].photonView.OwnerActorNr == PhotonNetwork.GetPhotonView(senderViewId).OwnerActorNr)
+            {
                 return horses[idx].Cache.Transform;
             }
         }
@@ -234,5 +267,14 @@ public class Wagoneer : MonoBehaviour
     public void ShowWagonTextRPC(PhotonMessageInfo sender)
     {
         GameObject.Find("Expedition UI(Clone)").GetComponent<WagoneerMenuManager>().ShowWagonText();
+    }
+    
+    public void OnDeath()
+    {
+        GameObject.Find("Expedition UI(Clone)").GetComponent<WagoneerMenuManager>().SetSupplyStationText(false);
+        if (_mountedWagon != null && _mountedWagon.TryGetComponent(out PhysicsWagon physicsWagon))
+        {
+            physicsWagon.SetIsMounted(false);
+        }
     }
 }

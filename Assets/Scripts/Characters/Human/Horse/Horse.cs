@@ -309,6 +309,11 @@ namespace Characters
             SpeedOverride = speed;
         }
 
+        public float GetSpeedOverride()
+        {
+            return SpeedOverride;
+        }
+
         #endregion Expedition
     }
 
