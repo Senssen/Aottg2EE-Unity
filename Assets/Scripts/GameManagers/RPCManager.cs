@@ -269,13 +269,13 @@ namespace GameManagers
             if (!info.Sender.IsMasterClient) return;
 
             SceneLoader.CustomSceneLoad = true;
-            SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
-
+            AsyncOperation async = SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
+            
             ChatManager.AddLine($"Scene {SceneName} Loaded!");
             if (SceneName == "CityDiorama")
-            {
                 ChatManager.AddLine("City Diorama is a visual test and thus not a map ideal for gameplay purposes.", ChatTextColor.System);
-            }
+
+            async.completed += _ => SceneLoader.HandleCustomSceneLoad();
         }
 
         [PunRPC]
