@@ -861,6 +861,13 @@ namespace Characters
                 else
                     PlaySound(HumanSounds.BladeReloadAir);
             }
+            
+            PlayReloadAnimation();
+            ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.Reload();
+        }
+
+        public void PlayReloadAnimation()
+        {
             if (Setup.Weapon == HumanWeapon.AHSS || Setup.Weapon == HumanWeapon.Thunderspear || Setup.Weapon == HumanWeapon.APG)
             {
                 if (Grounded)
@@ -875,16 +882,10 @@ namespace Characters
                 else
                     _reloadAnimation = HumanAnimations.ChangeBladeAir;
             }
-            
-            PlayReloadAnimation(_reloadAnimation);
-            ((InGameMenu)UIManager.CurrentMenu).HUDBottomHandler.Reload();
-        }
 
-        public void PlayReloadAnimation(string anim)
-        {
-            CrossFade(anim, 0.1f, 0f);
+            CrossFade(_reloadAnimation, 0.1f, 0f);
             State = HumanState.Reload;
-            _stateTimeLeft = Animation.GetTotalTime(anim);
+            _stateTimeLeft = Animation.GetTotalTime(_reloadAnimation);
             _needFinishReload = true;
             _reloadTimeLeft = _stateTimeLeft;
             _reloadCooldownLeft = _reloadTimeLeft + 0.5f;
@@ -1540,10 +1541,6 @@ namespace Characters
             {
                 Cache.Transform.position = GrabHand.transform.position;
                 Cache.Transform.rotation = GrabHand.transform.rotation;
-            }
-            if (Dead)
-            {
-                GetComponent<Veteran>().isVeteranSet = false;
             }
         }
 
@@ -2807,17 +2804,17 @@ namespace Characters
                 
                 /* SetSpecial(SettingsManager.InGameCharacterSettings.Special.Value); */
 
-                Veteran veteran = GetComponent<Veteran>();
-                veteran.SetMyHuman(this);
+                if (TryGetComponent(out Veteran veteran))
+                {
+                    veteran.SetMyHuman(this);
+                    veteran.SetAllSpecials(SettingsManager.InGameCharacterSettings.Special.Value,
+                                SettingsManager.InGameCharacterSettings.Special_2.Value,
+                                SettingsManager.InGameCharacterSettings.Special_3.Value); // added by Ata 12 May 2024 for Ability Wheel //
+                    veteran.SwitchCurrentSpecial(SettingsManager.InGameCharacterSettings.Special.Value, 1);
 
-                veteran.SetAllSpecials(SettingsManager.InGameCharacterSettings.Special.Value,
-                               SettingsManager.InGameCharacterSettings.Special_2.Value,
-                               SettingsManager.InGameCharacterSettings.Special_3.Value); // added by Ata 12 May 2024 for Ability Wheel //
-                veteran.SwitchCurrentSpecial(SettingsManager.InGameCharacterSettings.Special.Value, 1);
-
-                GetComponent<Veteran>().isVeteranSet = false;
-                if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Veteran"))
-                    veteran.SetupVeteran();
+                    if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Veteran"))
+                        veteran.SetupVeteran();
+                }
             }
             FinishSetup = true;
             // ignore if name contains char_eyes, char_face, char_glasses

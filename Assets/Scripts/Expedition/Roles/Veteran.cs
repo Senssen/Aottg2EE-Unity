@@ -10,7 +10,6 @@ class Veteran : MonoBehaviour
 {
     private Human human;
     private VeteranManager _veteranManager;
-    public bool isVeteranSet = false;
     public Dictionary<string, float> AbilityCooldowns = new Dictionary<string, float> {};
     void Start()
     {
@@ -25,8 +24,6 @@ class Veteran : MonoBehaviour
 
     void Update()
     {
-        SetupVeteran();
-
         foreach (var key in AbilityCooldowns.Keys.ToList())
         {
             AbilityCooldowns[key] -= Time.deltaTime;
@@ -113,21 +110,16 @@ class Veteran : MonoBehaviour
 
     public void SetupVeteran()
     {
-        if (!isVeteranSet)
+        if (human.Setup.Weapon == HumanWeapon.Blade || human.Setup.Weapon == HumanWeapon.AHSS || human.Setup.Weapon == HumanWeapon.APG)
         {
-            isVeteranSet = true; // for only setting up once
-
-            if (human.Setup.Weapon == HumanWeapon.Blade || human.Setup.Weapon == HumanWeapon.AHSS || human.Setup.Weapon == HumanWeapon.APG)
-            {
-                var tsInfo = CharacterData.HumanWeaponInfo["Thunderspear"];
-                human.Setup.Weapon_2 = HumanWeapon.Thunderspear;
-                human.Weapon_2 = new ThunderspearWeapon(human, 12, 2, 1.5f, 7f, 500f, 0.5f, 0.12f, tsInfo);
-            }
-            if (human.Setup.Weapon == HumanWeapon.Thunderspear)
-            {
-                human.Setup.Weapon_2 = HumanWeapon.Blade;
-                human.Weapon_2 = new BladeWeapon(human, 175f, 4); // give more if need be
-            }
+            var tsInfo = CharacterData.HumanWeaponInfo["Thunderspear"];
+            human.Setup.Weapon_2 = HumanWeapon.Thunderspear;
+            human.Weapon_2 = new ThunderspearWeapon(human, 12, 2, 1.5f, 7f, 500f, 0.5f, 0.12f, tsInfo);
+        }
+        else if (human.Setup.Weapon == HumanWeapon.Thunderspear)
+        {
+            human.Setup.Weapon_2 = HumanWeapon.Blade;
+            human.Weapon_2 = new BladeWeapon(human, 175f, 4); // give more if need be
         }
     }
 
@@ -146,10 +138,10 @@ class Veteran : MonoBehaviour
         if (human.Weapon is BladeWeapon)
         {
             if (human.Grounded) {
-                human.PlayReloadAnimation(HumanAnimations.ChangeBlade);
+                human.PlayReloadAnimation();
                 human.PlaySound(HumanSounds.BladeReloadGround);
             } else {
-                human.PlayReloadAnimation(HumanAnimations.ChangeBladeAir);
+                human.PlayReloadAnimation();
                 human.PlaySound(HumanSounds.BladeReloadAir);
             }
 
@@ -159,10 +151,10 @@ class Veteran : MonoBehaviour
         if (human.Weapon is ThunderspearWeapon)
         {
             if (human.Grounded) {
-                human.PlayReloadAnimation(HumanAnimations.AHSSGunReloadBoth);
+                human.PlayReloadAnimation();
                 human.PlaySound(HumanSounds.GunReload);
             } else {
-                human.PlayReloadAnimation(HumanAnimations.AHSSGunReloadBoth);
+                human.PlayReloadAnimation();
                 human.PlaySound(HumanSounds.GunReload);
             }
 

@@ -195,6 +195,13 @@ public class ExpeditionUiManager : MonoBehaviour
             props[RoleName] = true;
             EmVariables.SelectedPlayer.SetCustomProperties(props);
 
+            if (RoleName == "Veteran")
+            {
+                GameObject go = PhotonExtensions.GetPlayerFromID(EmVariables.SelectedPlayer.ActorNumber);
+                if (go && go.TryGetComponent(out Veteran veteran))
+                    veteran.SetupVeteran();
+            }
+
             ChatManager.AddLine($"{SanitizeText(EmVariables.SelectedPlayer.GetStringProperty(PlayerProperty.Name))} is now a {RoleName}");
         }
 
