@@ -78,6 +78,11 @@ MonoBehaviour:
   JustGrounded: 0
   TargetAngle: 0
   HasDirection: 0
+  isInWater: 0
+  waterColliders:
+  - {fileID: 0}
+  numWaterColliders: 0
+  shoulderIsInWater: 0
   _owner: {fileID: 0}
   WagonHarness: {fileID: 5146091707385072290}
   OwnerNetworkID: 0

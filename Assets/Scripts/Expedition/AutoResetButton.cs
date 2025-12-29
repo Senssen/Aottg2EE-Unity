@@ -6,7 +6,7 @@ public class AutoResetButton : MonoBehaviour
 {
     private Button button;
     [SerializeField]
-    AudioSource sound;
+    public AudioSource sound;
 
     void Awake()
     {

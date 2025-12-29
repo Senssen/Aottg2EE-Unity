@@ -54,6 +54,12 @@ public class Wagoneer : MonoBehaviour
 
     public void SpawnWagon() // the view ID does not matter when spawning the wagon
     {
+        if (photonView.Owner.CustomProperties.ContainsKey("Wagoneer") == false)
+        {
+            ChatManager.AddLine("Only a wagoneer can spawn a wagon.", ChatTextColor.Error);
+            return;
+        }
+
         Human human = GetComponent<Human>();
         if (human.State != HumanState.Idle)
         {
@@ -78,6 +84,12 @@ public class Wagoneer : MonoBehaviour
 
     public void DespawnWagon()
     {
+        if (photonView.Owner.CustomProperties.ContainsKey("Wagoneer") == false)
+        {
+            ChatManager.AddLine("Only a wagoneer can despawn a wagon.", ChatTextColor.Error);
+            return;
+        }
+
         GameObject wagon = FindNearestObjectByName("Momo_Wagon");
 
         if (wagon != null && wagon.TryGetComponent(out PhysicsWagon _physicsWagon) && _physicsWagon.GetDistance(transform) < 20f)
@@ -94,7 +106,16 @@ public class Wagoneer : MonoBehaviour
     [PunRPC]
     public void MountWagon(int wagoneerViewId, PhotonMessageInfo Sender)
     {
-        if (PhotonNetwork.GetPhotonView(wagoneerViewId).TryGetComponent(out Wagoneer wagoneer) && wagoneer.CheckIsMounted() == true)
+        PhotonView pv = PhotonNetwork.GetPhotonView(wagoneerViewId);
+        if (pv.Owner.CustomProperties.ContainsKey("Wagoneer") == false)
+        {
+            if (pv.IsMine)
+                ChatManager.AddLine("Only a wagoneer can mount a wagon.", ChatTextColor.Error);
+
+            return;
+        }
+
+        if (pv.TryGetComponent(out Wagoneer wagoneer) && wagoneer.CheckIsMounted() == true)
         {
             if (Sender.photonView.IsMine)
                 ChatManager.AddLine("You are already mounting a wagon!", ChatTextColor.Error);
@@ -168,6 +189,12 @@ public class Wagoneer : MonoBehaviour
 
     public void SpawnStation()
     {
+        if (photonView.Owner.CustomProperties.ContainsKey("Wagoneer") == false)
+        {
+            ChatManager.AddLine("Only a wagoneer can spawn a supply station.", ChatTextColor.Error);
+            return;
+        }
+
         Human human = GetComponent<Human>();
         if (human.MountState != HumanMountState.None || human.State != HumanState.Idle)
         {
@@ -184,6 +211,12 @@ public class Wagoneer : MonoBehaviour
 
     public void DespawnStation()
     {
+        if (photonView.Owner.CustomProperties.ContainsKey("Wagoneer") == false)
+        {
+            ChatManager.AddLine("Only a wagoneer can despawn a supply station.", ChatTextColor.Error);
+            return;
+        }
+
         GameObject station = FindNearestObjectByName("SupplyStation");
         if (station == null || Vector3.Distance(transform.position, station.transform.position) > 20)
             return;

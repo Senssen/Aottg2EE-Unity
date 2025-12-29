@@ -43,7 +43,7 @@ public class WagoneerMenuManager : MonoBehaviour
                 return;
 
             SetWagoneerMenuActive(true);
-        }   
+        }
     }
     public void HandleClickButton(int action)
     {
