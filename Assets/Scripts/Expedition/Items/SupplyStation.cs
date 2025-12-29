@@ -20,7 +20,7 @@ public class SupplyStation : MonoBehaviour
     }
     void OnTriggerStay(Collider other)
     {
-        if (other.TryGetComponent(out Human _human) && _human.photonView.IsMine) {
+        if (other.TryGetComponent(out Human _human) && _human.MountState == HumanMountState.None && _human.photonView.IsMine) {
             if (_human.NeedRefill(true))
             {
                 if (_humanInput.AutoRefillGas.Value == true)
@@ -37,18 +37,18 @@ public class SupplyStation : MonoBehaviour
                 ((InGameMenu)UIManager.CurrentMenu).ShowCharacterChangeMenu();
             }
 
-            SetSupplyStationText(true);
+            HandleText(true);
         }
     }
 
     void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent(out Human _human) && _human.photonView.IsMine) {
-            SetSupplyStationText(false);
+            HandleText(false);
         }
     }
 
-    private void SetSupplyStationText(bool open)
+    private void HandleText(bool open)
     {
         if (_wagoneerMenu != null) {
             _wagoneerMenu.SetSupplyStationText(open);

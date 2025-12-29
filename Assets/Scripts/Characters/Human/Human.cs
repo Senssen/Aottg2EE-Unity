@@ -135,6 +135,8 @@ namespace Characters
         private bool _isReelingOut;
         private Dictionary<BaseTitan, float> _lastNapeHitTimes = new Dictionary<BaseTitan, float>();
         public Horse PassengerHorse = null;
+        private ExpeditionUiManager expeditionUiManager;
+        private WagoneerMenuManager wagoneerMenuManager;
 
         protected override void CreateDetection()
         {
@@ -375,7 +377,7 @@ namespace Characters
             }
             _lastMountMessage = null;
             Cache.PhotonView.RPC("UnmountRPC", RpcTarget.All, new object[0]);
-            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHumanAutorun(GetComponent<HumanPlayerController>().GetAutorunState());
+            expeditionUiManager.ControlHumanAutorun(GetComponent<HumanPlayerController>().GetAutorunState());
         }
 
         [PunRPC]
@@ -1133,8 +1135,15 @@ namespace Characters
                 LoadSkin();
             }
 
-            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHorseAutorun(false);
-            GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHumanAutorun(false);
+            GameObject expeditionUi = GameObject.Find("Expedition UI(Clone)");
+            if (expeditionUi != null)
+            {
+                expeditionUiManager = expeditionUi.GetComponent<ExpeditionUiManager>();
+                wagoneerMenuManager = expeditionUi.GetComponent<WagoneerMenuManager>();
+
+                expeditionUiManager.ControlHorseAutorun(false);
+                expeditionUiManager.ControlHumanAutorun(false);
+            }
         }
 
         public override void OnPlayerEnteredRoom(Player player)
@@ -1717,7 +1726,8 @@ namespace Characters
                         Cache.Transform.position = Horse.Cache.Transform.position + Vector3.up * 1.95f;
                         Cache.Transform.rotation = Horse.Cache.Transform.rotation;
                         MountState = HumanMountState.Horse;
-                        GameObject.Find("Expedition UI(Clone)").GetComponent<ExpeditionUiManager>().ControlHorseAutorun(GetComponent<HumanPlayerController>().GetAutorunState());
+                        expeditionUiManager.ControlHorseAutorun(GetComponent<HumanPlayerController>().GetAutorunState());
+                        wagoneerMenuManager.SetSupplyStationText(false);
                         SetInterpolation(false);
                         if (!Animation.IsPlaying(HumanAnimations.HorseIdle))
                             CrossFade(HumanAnimations.HorseIdle, 0.1f);
