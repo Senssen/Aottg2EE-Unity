@@ -314,30 +314,11 @@ namespace Controllers
             }
             else
                 _human.Weapon?.SetInput(false); // null check added by Ata 25 May 2024 because it broke loadout swapping //
-            if (_human.Special != null)
-            {
-                bool canSpecial = _human.MountState == HumanMountState.None &&
-                    (_human.Special is EscapeSpecial || _human.Special is ShifterTransformSpecial || _human.State != HumanState.Grab) && _human.CarryState != HumanCarryState.Carry
-                    && _human.State != HumanState.EmoteAction && _human.State != HumanState.Attack && _human.State != HumanState.SpecialAttack && !inMenu && !_human.Dead;
-                bool canSpecialHold = _human.Special is BaseHoldAttackSpecial && _human.MountState == HumanMountState.None && _human.State != HumanState.Grab && (_human.State != HumanState.Attack || _human.Special is StockSpecial) &&
-                    _human.State != HumanState.EmoteAction && _human.State != HumanState.Grab && _human.CarryState != HumanCarryState.Carry && !inMenu && !_human.Dead;
-                if (canSpecial || canSpecialHold)
-                {
-                    // Makes AHSSTwinShot activate on key up instead of key down
-                    if (_human.Special is AHSSTwinShot)
-                        _human.Special.SetInput(specialInput.GetKeyUp());
-                    else
-                    _human.Special.ReadInput(specialInput);
-                }
-                else
-                    _human.Special.SetInput(false);
+            
+            UpdateSpecialAbility(_human.Special, specialInput, inMenu);
+            UpdateSpecialAbility(_human.Special_2, _humanInput.TriggerAbility2, inMenu);
+            UpdateSpecialAbility(_human.Special_3, _humanInput.TriggerAbility3, inMenu);
 
-                if (_human.Special_2 != null && _humanInput.TriggerAbility2.GetKeyDown() && !inMenu)
-                    _human.Special_2.ReadInput(_humanInput.TriggerAbility2);
-
-                if (_human.Special_3 != null && _humanInput.TriggerAbility3.GetKeyDown() && !inMenu)
-                    _human.Special_3.ReadInput(_humanInput.TriggerAbility3);
-            }
             if (inMenu || _human.Dead || _human.State == HumanState.Stun)
                 return;
             if (_human.MountState == HumanMountState.None)
@@ -383,6 +364,32 @@ namespace Controllers
                     _human.Unmount(false);
             }
         }
+
+        #region Special Ability
+
+        private void UpdateSpecialAbility(BaseUseable special, KeybindSetting specialInput, bool inMenu)
+        {
+            if (special != null)
+            {
+                bool canSpecial = _human.MountState == HumanMountState.None &&
+                    (special is EscapeSpecial || special is ShifterTransformSpecial || _human.State != HumanState.Grab) && _human.CarryState != HumanCarryState.Carry
+                    && _human.State != HumanState.EmoteAction && _human.State != HumanState.Attack && _human.State != HumanState.SpecialAttack && !inMenu && !_human.Dead;
+                bool canSpecialHold = special is BaseHoldAttackSpecial && _human.MountState == HumanMountState.None && _human.State != HumanState.Grab && (_human.State != HumanState.Attack || special is StockSpecial) &&
+                    _human.State != HumanState.EmoteAction && _human.State != HumanState.Grab && _human.CarryState != HumanCarryState.Carry && !inMenu && !_human.Dead;
+                if (canSpecial || canSpecialHold)
+                {
+                    // Makes AHSSTwinShot activate on key up instead of key down
+                    if (special is AHSSTwinShot)
+                        special.SetInput(specialInput.GetKeyUp());
+                    else
+                    special.ReadInput(specialInput);
+                }
+                else
+                    special.SetInput(false);
+            }
+        }
+
+        #endregion Special Ability
 
         #region Veteran Loadout Swap
 
