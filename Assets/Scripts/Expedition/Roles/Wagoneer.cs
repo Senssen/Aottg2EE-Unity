@@ -38,6 +38,10 @@ public class Wagoneer : MonoBehaviour
             {
                 human.Horse.SetSpeedOverride(1f);
             }
+            else
+            {
+                human.Horse.SetSpeedOverride(1f);
+            }
         }
     }
 
