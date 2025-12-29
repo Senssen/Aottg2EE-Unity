@@ -34,10 +34,6 @@ public class Wagoneer : MonoBehaviour
                 float s = currentSpeedOverride - (2f * Time.fixedDeltaTime);
                 human.Horse.SetSpeedOverride(s);
             }
-            else if (isRidingWagon && human.TargetMagnitude == 0 && currentSpeedOverride > 1f && human.GetVelocity().magnitude <= 0.25f)
-            {
-                human.Horse.SetSpeedOverride(1f);
-            }
             else
             {
                 human.Horse.SetSpeedOverride(1f);
