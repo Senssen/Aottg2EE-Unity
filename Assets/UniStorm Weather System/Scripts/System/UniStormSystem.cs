@@ -676,7 +676,7 @@ namespace UniStorm
 
             CalculatePrecipiation();
             CreateSun();
-            CreateMoon();            
+            CreateMoon();
 
             //Intialize the other components and set the proper settings from within the editor
             GameObject TempAudioSource = new GameObject("UniStorm Time of Day Sounds");
@@ -804,7 +804,7 @@ namespace UniStorm
             CalculateTimeOfDay();
             CalculateSeason();
             UpdateCelestialLightShafts();
-            StartCoroutine(InitializeCloudShadows());           
+            StartCoroutine(InitializeCloudShadows());
 
             if (CurrentWeatherType.UseAuroras == WeatherType.Yes_No.Yes)
             {
@@ -870,7 +870,17 @@ namespace UniStorm
             else if (!VRStateData.VREnabled || VRStateData.VREnabled && VRStateData.StereoRenderingMode == VRState.StereoRenderingModes.MultiPass)
                 m_CloudsMaterial.SetFloat("_VRSinglePassEnabled", 0);
 
+            InvokeDynamicWeather();
             UniStormInitialized = true;
+        }
+
+        void InvokeDynamicWeather()
+        {
+            GameObject applicationStart = GameObject.Find("ApplicationStart");
+            if (applicationStart != null && applicationStart.TryGetComponent(out LoadModEntities loadModEntities))
+            {
+                loadModEntities.HandleDynamicWeatherSettings(PlayerCamera);
+            }
         }
 
         IEnumerator InitializeCloudShadows ()

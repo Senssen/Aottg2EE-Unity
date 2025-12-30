@@ -1,0 +1,16 @@
+{
+    "name": "UniStormSystem",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ba2e0e45a0c24884f8b71ab0c2f90607"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

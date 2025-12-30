@@ -113,8 +113,8 @@ namespace ApplicationManagers
         {
             GameObject flareSetup = GameObject.Find("ProFlareBatch (MegaAtlas)");
             GameObject gameCamera = GameObject.FindWithTag("MainCamera");
-            if (flareSetup != null && flareSetup.TryGetComponent(out ProFlareBatch batch) && gameCamera != null)
-                batch.SwitchCamera(gameCamera.GetComponent<Camera>());
+            if (flareSetup != null && flareSetup.TryGetComponent(out ProFlareBatch batch) && gameCamera != null && gameCamera.TryGetComponent(out Camera camera))
+                batch.SwitchCamera(camera);
         }
     }
 
