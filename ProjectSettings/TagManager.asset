@@ -7,6 +7,7 @@ TagManager:
   - FxTemporaire
   - Speaker
   - Expedition Menu Player Button
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - CharacterDetection
   - NPC
   - Speakers
-  - 
+  - MapObjectIgnoreCamera
   - MapObjectMapObjects
   - MapObjectProjectiles
   - MapObjectCharacters
@@ -39,7 +40,7 @@ TagManager:
   - Background
   - MapObjectTitans
   - MapObjectHumans
-  - PhysicsWagon
+  - WagonHurtbox
   m_SortingLayers:
   - name: Default
     uniqueID: 0
