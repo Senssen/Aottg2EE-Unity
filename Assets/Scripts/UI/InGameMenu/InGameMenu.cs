@@ -251,14 +251,19 @@ namespace UI
         {
             if (EmVariables.IsOpen == true) // Added by Ata for menu control
                 return true;
-            
-            var menu = (InGameMenu)UIManager.CurrentMenu;
-            foreach (BasePopup popup in menu._popups)
+
+            if (UIManager.CurrentMenu is InGameMenu)
             {
-                if (popup.IsActive)
-                    return true;
+                var menu = (InGameMenu)UIManager.CurrentMenu;
+                foreach (BasePopup popup in menu._popups)
+                {
+                    if (popup.IsActive)
+                        return true;
+                }
+                return menu.EmoteHandler.IsActive || menu.ItemHandler.IsActive;
             }
-            return menu.EmoteHandler.IsActive || menu.ItemHandler.IsActive;
+
+            return false;
         }
 
         public void SetPauseMenu(bool enabled)
