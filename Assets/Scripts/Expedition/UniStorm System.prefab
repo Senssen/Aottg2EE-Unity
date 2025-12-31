@@ -90,7 +90,7 @@ MonoBehaviour:
   UniStormMenuKey: 277
   UniStormCanvas: {fileID: 0}
   m_MenuToggle: 0
-  TabNumber: 3
+  TabNumber: 2
   TimeTabNumbers: 0
   WeatherTabNumbers: 1
   CelestialTabNumbers: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
   LightningFoldout: 1
   CameraFoldout: 1
   SettingsFoldout: 1
-  CloudsFoldout: 1
+  CloudsFoldout: 0
   PlatformFoldout: 1
   m_UniStormProfile: {fileID: 11400000, guid: 03f36604be2f02e4596e50202aa97745, type: 2}
   FilePath: Assets/UniStorm Weather System/Resources/Components/Resources/UniStorm
@@ -911,7 +911,7 @@ MonoBehaviour:
   LightningDetectionDistance: 20
   m_CloudSeed: 0
   CurrentFogColor: {r: 0, g: 0, b: 0, a: 0}
-  FogType: 0
+  FogType: 1
   FogMode: 0
   m_UniStormAtmosphericFog: {fileID: 0}
   UseDithering: 0

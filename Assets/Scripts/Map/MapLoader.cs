@@ -838,7 +838,7 @@ namespace Map
                     }
                     else
                         _assetCache.Add(asset, ResourceManager.LoadAsset("Map", strArr[0] + "/Prefabs/" + strArr[1]));
-                    if (asset == "Arenas/CaveMap1")
+                    if (asset == "Arenas/CaveMap1") // Should we disable this for dynamic weathers?
                         WeatherManager.EnableCaveMap();
                 }
                 return (GameObject)Instantiate(_assetCache[asset]);

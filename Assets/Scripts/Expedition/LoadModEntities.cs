@@ -13,8 +13,8 @@ public class LoadModEntities : MonoBehaviour
 
     public void HandleDynamicWeatherSettings(Camera camera)
     {
-        InGameSet set = (InGameSet)SettingsManager.InGameSettings.InGameSets.GetSelectedSet();
-        bool enabled = set.Misc.DynamicWeatherEnabled.Value;
+        InGameMiscSettings inGameMisc = SettingsManager.InGameUI.Misc;
+        bool enabled = inGameMisc.DynamicWeatherEnabled.Value;
 
         GameObject unistorm = GameObject.Find("UniStorm System(Clone)");
         if (unistorm == null || camera == null)
