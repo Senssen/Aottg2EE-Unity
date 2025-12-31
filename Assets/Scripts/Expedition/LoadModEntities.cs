@@ -24,8 +24,13 @@ public class LoadModEntities : MonoBehaviour
         }
 
         Skybox skybox = camera.GetComponent<Skybox>();
+        GameObject daylight = GameObject.Find("Daylight");
 
         unistorm.SetActive(enabled);
         skybox.enabled = !enabled;
+        if (daylight != null)
+            daylight.SetActive(!enabled);
+        else
+            Debug.LogWarning("Could not find Daylight object to disable.");
     }
 }
