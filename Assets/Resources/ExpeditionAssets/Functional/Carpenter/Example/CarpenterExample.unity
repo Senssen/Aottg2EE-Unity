@@ -1,0 +1,3098 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!29 &1
+OcclusionCullingSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_OcclusionBakeSettings:
+    smallestOccluder: 5
+    smallestHole: 0.25
+    backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
+--- !u!104 &2
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 9
+  m_Fog: 0
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.01
+  m_LinearFogStart: 0
+  m_LinearFogEnd: 300
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_HaloStrength: 0.5
+  m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
+  m_HaloTexture: {fileID: 0}
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_UseRadianceAmbientProbe: 0
+--- !u!157 &3
+LightmapSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 12
+  m_GIWorkflowMode: 1
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 0
+  m_LightmapEditorSettings:
+    serializedVersion: 12
+    m_Resolution: 2
+    m_BakeResolution: 40
+    m_AtlasSize: 1024
+    m_AO: 0
+    m_AOMaxDistance: 1
+    m_CompAOExponent: 1
+    m_CompAOExponentDirect: 0
+    m_ExtractAmbientOcclusion: 0
+    m_Padding: 2
+    m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
+    m_TextureCompression: 1
+    m_ReflectionCompression: 2
+    m_MixedBakeMode: 2
+    m_BakeBackend: 1
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 512
+    m_PVRBounces: 2
+    m_PVREnvironmentSampleCount: 256
+    m_PVREnvironmentReferencePointCount: 2048
+    m_PVRFilteringMode: 1
+    m_PVRDenoiserTypeDirect: 1
+    m_PVRDenoiserTypeIndirect: 1
+    m_PVRDenoiserTypeAO: 1
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
+    m_PVREnvironmentMIS: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
+  m_LightingDataAsset: {fileID: 0}
+  m_LightingSettings: {fileID: 0}
+--- !u!196 &4
+NavMeshSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_BuildSettings:
+    serializedVersion: 3
+    agentTypeID: 0
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.4
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
+    buildHeightMesh: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
+    debug:
+      m_Flags: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1001 &105380502
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.9999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0000029504295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957825195576942037, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45RoofPF_1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+--- !u!1001 &133304828
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.9999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957825195576942037, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45RoofPF_5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+--- !u!1001 &292978288
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0000029504295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562827085231981788, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_HalfWallPF_4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+--- !u!1001 &358001074
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2322941264133557475, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_FloorPF_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+--- !u!1001 &392301713
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6739547607738376883, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45WallPF_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0000029504295
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+--- !u!1001 &420524218
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6739547607738376883, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45WallPF_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.00000058114523
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+--- !u!1001 &443787124
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2492243456583159919, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45RoofCapPF_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+--- !u!1001 &447682021
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1112321702492391390, guid: 793e0e58dae3931419d449957ec2f262, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_DoorwayPF
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156505184109606389, guid: 793e0e58dae3931419d449957ec2f262, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156505184109606389, guid: 793e0e58dae3931419d449957ec2f262, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156505184109606389, guid: 793e0e58dae3931419d449957ec2f262, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156505184109606389, guid: 793e0e58dae3931419d449957ec2f262, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156505184109606389, guid: 793e0e58dae3931419d449957ec2f262, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156505184109606389, guid: 793e0e58dae3931419d449957ec2f262, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156505184109606389, guid: 793e0e58dae3931419d449957ec2f262, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156505184109606389, guid: 793e0e58dae3931419d449957ec2f262, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156505184109606389, guid: 793e0e58dae3931419d449957ec2f262, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156505184109606389, guid: 793e0e58dae3931419d449957ec2f262, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 793e0e58dae3931419d449957ec2f262, type: 3}
+--- !u!1 &451695373
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 451695375}
+  - component: {fileID: 451695374}
+  m_Layer: 0
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &451695374
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451695373}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 1
+  m_Shape: 0
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &451695375
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451695373}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &570248151
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7834042955723644903, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_WallPF_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+--- !u!1001 &607021989
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7834042955723644903, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_WallPF_8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.00000035762784
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+--- !u!1001 &630793995
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7834042955723644903, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_WallPF_10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.70710605
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70710754
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -270
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+--- !u!1001 &649509096
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2990886986182001050, guid: 9a6672eaa02afad4f9750a8746d8bf1f, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_CubeFBX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438273048604765746, guid: 9a6672eaa02afad4f9750a8746d8bf1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20.80473
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438273048604765746, guid: 9a6672eaa02afad4f9750a8746d8bf1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438273048604765746, guid: 9a6672eaa02afad4f9750a8746d8bf1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.623162
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438273048604765746, guid: 9a6672eaa02afad4f9750a8746d8bf1f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -3.7493994e-33
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438273048604765746, guid: 9a6672eaa02afad4f9750a8746d8bf1f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -6.123234e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438273048604765746, guid: 9a6672eaa02afad4f9750a8746d8bf1f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438273048604765746, guid: 9a6672eaa02afad4f9750a8746d8bf1f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 6.123234e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438273048604765746, guid: 9a6672eaa02afad4f9750a8746d8bf1f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438273048604765746, guid: 9a6672eaa02afad4f9750a8746d8bf1f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438273048604765746, guid: 9a6672eaa02afad4f9750a8746d8bf1f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9a6672eaa02afad4f9750a8746d8bf1f, type: 3}
+--- !u!1 &708213960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 708213963}
+  - component: {fileID: 708213962}
+  - component: {fileID: 708213961}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!81 &708213961
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708213960}
+  m_Enabled: 1
+--- !u!20 &708213962
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708213960}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &708213963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708213960}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &767725448
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7834042955723644903, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_WallPF_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+--- !u!1001 &867824055
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2492243456583159919, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45RoofCapPF
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+--- !u!1001 &894332427
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7834042955723644903, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_WallPF_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.9999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+--- !u!1001 &927590777
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8755760138854227886, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45RoofInnerPF
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+--- !u!1001 &928700777
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562827085231981788, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_HalfWallPF
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+--- !u!1001 &964983496
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8526302851912258706, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_FloorLargePF_1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+--- !u!1001 &1038850181
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.9999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.707112
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071016
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 449.999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957825195576942037, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45RoofPF_4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+--- !u!1001 &1052822448
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2322941264133557475, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_FloorPF_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+--- !u!1001 &1133311466
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1269223801086749096, guid: 33385e875fc3beb4491cdce2f9373b67, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_RampPF
+      objectReference: {fileID: 0}
+    - target: {fileID: 9177948474632543690, guid: 33385e875fc3beb4491cdce2f9373b67, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9177948474632543690, guid: 33385e875fc3beb4491cdce2f9373b67, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9177948474632543690, guid: 33385e875fc3beb4491cdce2f9373b67, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9177948474632543690, guid: 33385e875fc3beb4491cdce2f9373b67, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9177948474632543690, guid: 33385e875fc3beb4491cdce2f9373b67, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9177948474632543690, guid: 33385e875fc3beb4491cdce2f9373b67, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9177948474632543690, guid: 33385e875fc3beb4491cdce2f9373b67, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9177948474632543690, guid: 33385e875fc3beb4491cdce2f9373b67, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9177948474632543690, guid: 33385e875fc3beb4491cdce2f9373b67, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9177948474632543690, guid: 33385e875fc3beb4491cdce2f9373b67, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 33385e875fc3beb4491cdce2f9373b67, type: 3}
+--- !u!1001 &1222126115
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7834042955723644903, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_WallPF_7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.00000035762784
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+--- !u!1001 &1272345410
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7834042955723644903, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_WallPF_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+--- !u!1001 &1303790118
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167325052350203803, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8526302851912258706, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_FloorLargePF
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bda5a706028ca5048861e9f28e75a73c, type: 3}
+--- !u!1001 &1347466784
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7834042955723644903, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_WallPF_9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.70710605
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70710754
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -270
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+--- !u!1001 &1425588545
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2322941264133557475, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_FloorPF
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+--- !u!1001 &1429428004
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2322941264133557475, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_FloorPF_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+--- !u!1001 &1509902845
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4016454516668004322, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45CapWallPF
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -3.7493994e-33
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -6.123234e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 6.123234e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+--- !u!1001 &1528369243
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7341421564336438929, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45RoofOuterPF
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+--- !u!1001 &1537646748
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715108193071866228, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7341421564336438929, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45RoofOuterPF_1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d1b5ce14b8f3bb64ea5f756cc3884e49, type: 3}
+--- !u!1001 &1573110568
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1313241666463042264, guid: d27201b442f46d442bd12534f0e6dc74, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -25.6843
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313241666463042264, guid: d27201b442f46d442bd12534f0e6dc74, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313241666463042264, guid: d27201b442f46d442bd12534f0e6dc74, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -15.634937
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313241666463042264, guid: d27201b442f46d442bd12534f0e6dc74, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -3.7493994e-33
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313241666463042264, guid: d27201b442f46d442bd12534f0e6dc74, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -6.123234e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313241666463042264, guid: d27201b442f46d442bd12534f0e6dc74, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313241666463042264, guid: d27201b442f46d442bd12534f0e6dc74, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 6.123234e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313241666463042264, guid: d27201b442f46d442bd12534f0e6dc74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313241666463042264, guid: d27201b442f46d442bd12534f0e6dc74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313241666463042264, guid: d27201b442f46d442bd12534f0e6dc74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675639766152057045, guid: d27201b442f46d442bd12534f0e6dc74, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_CylinderFBX
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d27201b442f46d442bd12534f0e6dc74, type: 3}
+--- !u!1001 &1612131712
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562827085231981788, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_HalfWallPF_1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+--- !u!1001 &1633401893
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7834042955723644903, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_WallPF_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+--- !u!1001 &1647090023
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6739547607738376883, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45WallPF
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+--- !u!1001 &1678677315
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.00000058114523
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562827085231981788, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_HalfWallPF_3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+--- !u!1001 &1682551511
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.00000058114523
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562827085231981788, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_HalfWallPF_2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+--- !u!1001 &1686954139
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4016454516668004322, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45CapWallPF_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 6.123217e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0000029504295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 6.1232515e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900252080685040131, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 29461a38a9cbdc5498ff5a1d3c4d2ed9, type: 3}
+--- !u!1001 &1720162298
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7834042955723644903, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_WallPF_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.00000035762784
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+--- !u!1001 &1733627338
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2182876835652932008, guid: d2a814d079c3ad54caeb769615158a69, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_SphereFBX
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533840490903165959, guid: d2a814d079c3ad54caeb769615158a69, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -14.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533840490903165959, guid: d2a814d079c3ad54caeb769615158a69, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533840490903165959, guid: d2a814d079c3ad54caeb769615158a69, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -24.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533840490903165959, guid: d2a814d079c3ad54caeb769615158a69, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -3.7493994e-33
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533840490903165959, guid: d2a814d079c3ad54caeb769615158a69, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -6.123234e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533840490903165959, guid: d2a814d079c3ad54caeb769615158a69, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533840490903165959, guid: d2a814d079c3ad54caeb769615158a69, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 6.123234e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533840490903165959, guid: d2a814d079c3ad54caeb769615158a69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533840490903165959, guid: d2a814d079c3ad54caeb769615158a69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533840490903165959, guid: d2a814d079c3ad54caeb769615158a69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d2a814d079c3ad54caeb769615158a69, type: 3}
+--- !u!1001 &1791521769
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.9999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0000029504295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957825195576942037, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45RoofPF
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+--- !u!1001 &1804582681
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.9999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0000059604645
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 359.999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957825195576942037, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45RoofPF_3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+--- !u!1001 &1827046130
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7834042955723644903, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_WallPF
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500440409544482153, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6fe3d1dc64c5fcd4fbb07a8ac00f85fd, type: 3}
+--- !u!1001 &1877476373
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2492243456583159919, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45RoofCapPF_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500583574388701319, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d956b109127f8074db6fe206a0ba3410, type: 3}
+--- !u!1001 &2012617632
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209334804222689573, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8755760138854227886, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45RoofInnerPF_1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 186de85b0bc6ac94a96d9dbd4bc1c6ee, type: 3}
+--- !u!1001 &2079549444
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70710784
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70710576
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140085032008029884, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562827085231981788, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_HalfWallPF_5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a0cb4b55f88fc4e46a1a9b137a1ff2f9, type: 3}
+--- !u!1001 &2090051420
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.9999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0000029504295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476382410561826744, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957825195576942037, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45RoofPF_2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 946def5ac6df4b64e88f3c1faa29d4e3, type: 3}
+--- !u!1001 &2096142889
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6739547607738376883, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_45WallPF_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.000003546476
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662462879712800396, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7a235d32967c4c34d92cf9c0d8c9936a, type: 3}
+--- !u!1001 &2129056246
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2322941264133557475, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_Name
+      value: Momo_Carpenter_ModularWood_FloorPF_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5905895078852367541, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5a972d9514fd19c4f92d8e7edbd0055f, type: 3}
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 708213963}
+  - {fileID: 451695375}
+  - {fileID: 447682021}
+  - {fileID: 1827046130}
+  - {fileID: 894332427}
+  - {fileID: 767725448}
+  - {fileID: 928700777}
+  - {fileID: 292978288}
+  - {fileID: 1612131712}
+  - {fileID: 1682551511}
+  - {fileID: 1678677315}
+  - {fileID: 1647090023}
+  - {fileID: 392301713}
+  - {fileID: 420524218}
+  - {fileID: 2096142889}
+  - {fileID: 1509902845}
+  - {fileID: 1686954139}
+  - {fileID: 1633401893}
+  - {fileID: 570248151}
+  - {fileID: 1272345410}
+  - {fileID: 1720162298}
+  - {fileID: 1222126115}
+  - {fileID: 607021989}
+  - {fileID: 1347466784}
+  - {fileID: 630793995}
+  - {fileID: 2079549444}
+  - {fileID: 1303790118}
+  - {fileID: 964983496}
+  - {fileID: 1425588545}
+  - {fileID: 358001074}
+  - {fileID: 1052822448}
+  - {fileID: 2129056246}
+  - {fileID: 1429428004}
+  - {fileID: 1133311466}
+  - {fileID: 1791521769}
+  - {fileID: 1804582681}
+  - {fileID: 1038850181}
+  - {fileID: 133304828}
+  - {fileID: 105380502}
+  - {fileID: 2090051420}
+  - {fileID: 867824055}
+  - {fileID: 443787124}
+  - {fileID: 1877476373}
+  - {fileID: 1528369243}
+  - {fileID: 1537646748}
+  - {fileID: 927590777}
+  - {fileID: 2012617632}
+  - {fileID: 649509096}
+  - {fileID: 1573110568}
+  - {fileID: 1733627338}
