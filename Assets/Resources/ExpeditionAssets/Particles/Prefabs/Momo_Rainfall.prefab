@@ -4839,6 +4839,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4330526204348165671}
     m_Modifications:
+    - target: {fileID: 1323913195522748877, guid: 0545f982de77d794bb35e212f34738ef, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1742279891949182343, guid: 0545f982de77d794bb35e212f34738ef, type: 3}
       propertyPath: m_Name
       value: Momo_Rainsplash
