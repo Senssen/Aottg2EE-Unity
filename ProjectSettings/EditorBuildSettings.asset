@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/ExpeditionAssets/Maps/Momo_FallOfShiganshina.unity
     guid: 8708a07265c5c2d45bb467326615ad30
+  - enabled: 1
+    path: Assets/Resources/ExpeditionAssets/Development/TrostHQTest/TrostHQTest.unity
+    guid: e335d5583013e2f429c8199a4faa7011
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
