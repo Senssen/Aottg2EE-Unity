@@ -29,6 +29,7 @@ namespace UniStorm
         UniStormClouds m_UniStormClouds;
 
         //Events
+        public UnityEvent OnTimeChangeEvent;
         public UnityEvent OnHourChangeEvent;
         public UnityEvent OnDayChangeEvent;
         public UnityEvent OnMonthChangeEvent;
@@ -1924,6 +1925,7 @@ namespace UniStorm
         {
             m_TimeFloat = TimeSlider.value;
             TimeOfDayUpdateTimer = TimeOfDayUpdateSeconds;
+            OnTimeChangeEvent.Invoke();
         }
 
         public void UpdateTimeSlider()
@@ -2216,6 +2218,35 @@ namespace UniStorm
                 m_UpdateBiomeTimeOfDayMusic = false;
             }
         }
+
+        #region AoTTG2:EE Additions
+
+        public void SetTime(int hour, int minute)
+        {
+            Hour = hour;
+            Minute = minute;
+        }
+
+        public void ChangeWeatherByName(string name, bool useTransition)
+        {
+            WeatherType weather = AllWeatherTypes.Find(item => item.WeatherTypeName == name);
+            if (weather == null)
+                throw new System.Exception($"Weather \"{name}\" does not exist in the list of weathers");
+
+            CurrentWeatherType = weather;
+            if (useTransition)
+                TransitionWeather();
+        }
+
+        public void CalculateHourAndMinute()
+        {
+            float m_HourFloat = m_TimeFloat * 24;
+            Hour = (int)m_HourFloat;
+            float m_MinuteFloat = m_HourFloat * 60;
+            Minute = (int)m_MinuteFloat % 60;
+        }
+
+        #endregion AoTTG2:EE Additions
 
         //Check our generated weather to see if it's time to update the weather.
         //If it is, slowly transition the weather according to the current weather type scriptable object

@@ -10,6 +10,8 @@ using Photon.Pun;
 using Spawnables;
 using UnityEngine.SceneManagement;
 using Characters;
+using Photon.Realtime;
+using Settings;
 
 namespace GameManagers
 {
@@ -270,7 +272,7 @@ namespace GameManagers
 
             SceneLoader.CustomSceneLoad = true;
             AsyncOperation async = SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
-            
+
             ChatManager.AddLine($"Scene {SceneName} Loaded!");
             if (SceneName == "CityDiorama")
                 ChatManager.AddLine("City Diorama is a visual test and thus not a map ideal for gameplay purposes.", ChatTextColor.System);
@@ -283,12 +285,12 @@ namespace GameManagers
         {
             EmVariables.NonLethalCannons = _isNonLethal;
         }
-        
+
         [PunRPC]
         public void SetSuppliesRPC(int maxSupply, PhotonMessageInfo info)
         {
             LogisticianUiManager uiManager = GameObject.Find("Expedition UI(Clone)").GetComponent<LogisticianUiManager>();
-            GameObject humanObject = PhotonExtensions.GetMyHuman();                
+            GameObject humanObject = PhotonExtensions.GetMyHuman();
 
             if (humanObject != null) // there is no necessity to set supply texts if the player is non existent on the scene
             {
@@ -320,6 +322,40 @@ namespace GameManagers
             }
 
             EmVariables.LogisticianMaxSupply = maxSupply;
+        }
+
+        [PunRPC]
+        public void RequestTimeAndWeatherRPC(PhotonMessageInfo info)
+        {
+            if (SettingsManager.InGameUI.Misc.DynamicWeatherEnabled.Value == false)
+                return;
+
+            int _hour = DynamicWeatherManager.uniStormSystem.Hour;
+            int _minute = DynamicWeatherManager.uniStormSystem.Minute;
+            string _weatherName = DynamicWeatherManager.uniStormSystem.CurrentWeatherType.WeatherTypeName;
+
+            PhotonView.RPC(nameof(ReceiveTimeAndWeatherRPC), info.Sender, new object[] { _hour, _minute, _weatherName });
+        }
+
+        [PunRPC]
+        public void ReceiveTimeAndWeatherRPC(int hour, int minute, string weatherName, PhotonMessageInfo info)
+        {
+            DynamicWeatherManager.SetupUniStorm(hour, minute, weatherName);
+        }
+
+        [PunRPC]
+        public void SetUniStormWeatherRPC(string weatherName, PhotonMessageInfo info)
+        {
+            ChatManager.AddLine($"<color=green>Master client has set the weather to {weatherName}.</color>");
+            DynamicWeatherManager.uniStormSystem.ChangeWeatherByName(weatherName, useTransition: true);
+        }
+
+        [PunRPC]
+        public void SetUniStormTimeRPC(int hour, int minute, PhotonMessageInfo info)
+        {
+            ChatManager.AddLine($"<color=green>Master client has set the time of day to {hour}:{minute}.</color>");
+            DynamicWeatherManager.uniStormSystem.Hour = hour;
+            DynamicWeatherManager.uniStormSystem.Minute = minute;
         }
 
         #endregion

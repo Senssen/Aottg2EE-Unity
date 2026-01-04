@@ -14,32 +14,50 @@ public class DynamicWeatherManager : MonoBehaviour
 
     public static void InitializeUniStorm()
     {
-        if (PhotonNetwork.IsMasterClient && SettingsManager.InGameUI.Misc.DynamicWeatherEnabled.Value)
+        if (PhotonNetwork.IsMasterClient)
         {
-            SetupUniStorm();
+            if (SettingsManager.InGameUI.Misc.DynamicWeatherEnabled.Value)
+            {
+                SetupUniStorm();
+                uniStormSystem.OnWeatherChangeEvent.AddListener(SetLobbyWeather);
+                uniStormSystem.OnTimeChangeEvent.AddListener(SetLobbyWeather);
+            }
         }
         else
         {
-            ChatManager.AddLine("implement multiplayer later");
+            RPCManager.PhotonView.RPC(nameof(RPCManager.RequestTimeAndWeatherRPC), RpcTarget.MasterClient);
         }
     }
 
-    private static void SetupUniStorm()
+    public static void SetupUniStorm(int hour = -1, int minute = -1, string weatherName = "")
     {
         if (uniStormSystem != null)
             Destroy(uniStormSystem.gameObject);
 
-        Camera camera = SceneLoader.CurrentCamera.Camera;
         GameObject uniStormGo = ResourceManager.InstantiateAsset<GameObject>(ResourcePaths.DynamicWeather, "UniStorm System");
         uniStormSystem = uniStormGo.GetComponent<UniStormSystem>();
 
-        if (camera == null)
+        if (weatherName.Length != 0)
+            uniStormSystem.ChangeWeatherByName(weatherName, useTransition: false);
+
+        if (hour >= 0 && minute >= 0)
+            uniStormSystem.SetTime(hour, minute);
+
+        if (!PhotonNetwork.IsMasterClient)
+            uniStormSystem.WeatherGeneration = UniStormSystem.EnableFeature.Disabled;
+
+        DisableCameraAndSkybox();
+    }
+
+    private static void DisableCameraAndSkybox()
+    {
+        if (SceneLoader.CurrentCamera.Camera == null)
         {
             ChatManager.AddLine("<color=red>Could not find game camera to disable for UniStorm!</color>");
             return;
         }
 
-        Skybox skybox = camera.GetComponent<Skybox>();
+        Skybox skybox = SceneLoader.CurrentCamera.Camera.GetComponent<Skybox>();
         GameObject daylight = GameObject.Find("Daylight");
 
         skybox.enabled = false;
@@ -47,5 +65,17 @@ public class DynamicWeatherManager : MonoBehaviour
             daylight.SetActive(false);
         else
             ChatManager.AddLine("<color=yellow>Could not find daylight on the scene!</color>");
+    }
+
+    private static void SetLobbyWeather()
+    {
+        string name = uniStormSystem.CurrentWeatherType.WeatherTypeName;
+        RPCManager.PhotonView.RPC(nameof(RPCManager.SetUniStormWeatherRPC), RpcTarget.Others, new object[] { name });
+    }
+
+    private static void SetLobbyTime()
+    {
+        uniStormSystem.CalculateHourAndMinute();
+        RPCManager.PhotonView.RPC(nameof(RPCManager.SetUniStormTimeRPC), RpcTarget.Others, new object[] { uniStormSystem.Hour, uniStormSystem.Minute });
     }
 }

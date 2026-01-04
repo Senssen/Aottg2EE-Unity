@@ -157,6 +157,10 @@ MonoBehaviour:
   - ShowWagonTextRPC
   - TeleportWithHorse
   - SetKinematicsOnHorseUnmount
+  - ReceiveTimeAndWeatherRPC
+  - RequestTimeAndWeatherRPC
+  - SetUniStormTimeRPC
+  - SetUniStormWeatherRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
