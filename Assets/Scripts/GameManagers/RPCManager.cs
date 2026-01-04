@@ -271,13 +271,11 @@ namespace GameManagers
             if (!info.Sender.IsMasterClient) return;
 
             SceneLoader.CustomSceneLoad = true;
-            AsyncOperation async = SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
+            SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
 
             ChatManager.AddLine($"Scene {SceneName} Loaded!");
             if (SceneName == "CityDiorama")
                 ChatManager.AddLine("City Diorama is a visual test and thus not a map ideal for gameplay purposes.", ChatTextColor.System);
-
-            async.completed += _ => SceneLoader.HandleCustomSceneLoad();
         }
 
         [PunRPC]
@@ -353,7 +351,7 @@ namespace GameManagers
         [PunRPC]
         public void SetUniStormTimeRPC(int hour, int minute, PhotonMessageInfo info)
         {
-            ChatManager.AddLine($"<color=green>Master Client has set the time of day to {hour}:{minute}.</color>");
+            ChatManager.AddLine($"<color=green>Master client has set the time of day to {hour}:{minute}.</color>");
             DynamicWeatherManager.uniStormSystem.Hour = hour;
             DynamicWeatherManager.uniStormSystem.Minute = minute;
         }

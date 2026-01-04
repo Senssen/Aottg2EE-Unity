@@ -7,13 +7,24 @@ using GameManagers;
 using ApplicationManagers;
 using Photon.Pun;
 using Utility;
+using Map;
 
 public class DynamicWeatherManager : MonoBehaviour
 {
+    private static DynamicWeatherManager _instance;
     public static UniStormSystem uniStormSystem;
+
+    void Awake()
+    {
+        _instance = this;
+    }
 
     public static void InitializeUniStorm()
     {
+        if (SceneLoader.SceneName != SceneName.InGame)
+            return;
+
+        Debug.Log("<color=green> INITIALIZE UNISTORM CALLED </color>");
         if (PhotonNetwork.IsMasterClient)
         {
             if (SettingsManager.InGameUI.Misc.DynamicWeatherEnabled.Value)
@@ -58,9 +69,17 @@ public class DynamicWeatherManager : MonoBehaviour
         }
 
         Skybox skybox = SceneLoader.CurrentCamera.Camera.GetComponent<Skybox>();
-        GameObject daylight = GameObject.Find("Daylight");
-
         skybox.enabled = false;
+
+        _instance.StartCoroutine(_instance.DisableDaylight());
+    }
+
+    private IEnumerator DisableDaylight()
+    {
+        if (MapManager.MapLoaded == false)
+            yield return null;
+
+        GameObject daylight = GameObject.Find("Daylight");
         if (daylight != null)
             daylight.SetActive(false);
         else

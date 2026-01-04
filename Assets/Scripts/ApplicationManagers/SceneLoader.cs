@@ -101,16 +101,20 @@ namespace ApplicationManagers
         {
             if (CustomSceneLoad)
             {
+                HandlePostSceneLoad();
                 CustomSceneLoad = false;
                 return;
             }
-            CreateGameManager();
-            CreateCamera();
-            EventManager.InvokeLoadScene(SceneName);
-            DynamicWeatherManager.InitializeUniStorm();
+            else
+            {
+                CreateGameManager();
+                CreateCamera();
+                EventManager.InvokeLoadScene(SceneName);
+                HandlePostSceneLoad();
+            }
         }
 
-        public static void HandleCustomSceneLoad()
+        public static void HandlePostSceneLoad()
         {
             GameObject flareSetup = GameObject.Find("ProFlareBatch (MegaAtlas)");
             GameObject gameCamera = GameObject.FindWithTag("MainCamera");
