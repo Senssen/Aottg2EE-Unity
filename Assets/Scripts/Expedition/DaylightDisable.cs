@@ -13,16 +13,7 @@ public class DaylightDisable : MonoBehaviour
     // (Fuck custom logic.)
     void Awake()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            if (SettingsManager.InGameUI.Misc.DynamicWeatherEnabled.Value)
-            {
-                gameObject.SetActive(false);
-            }
-        }
-        else
-        {
-            RPCManager.PhotonView.RPC("RequestDynamicWeatherRPC", RpcTarget.MasterClient);
-        }
+        if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("DynamicWeatherEnabled"))
+            gameObject.SetActive(false);
     }
 }

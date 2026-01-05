@@ -28,6 +28,7 @@ public class DynamicWeatherManager : MonoBehaviour
         {
             if (SettingsManager.InGameUI.Misc.DynamicWeatherEnabled.Value)
             {
+                PhotonNetwork.CurrentRoom.CustomProperties.Add("DynamicWeatherEnabled", true);
                 SetupUniStorm();
                 uniStormSystem.OnWeatherChangeEvent.AddListener(SetLobbyWeather);
                 uniStormSystem.OnSliderEndEvent.AddListener(SetLobbyTime);
