@@ -32,6 +32,8 @@ namespace Projectiles
         float _radius;
         public Vector3 InitialPlayerVelocity;
         [SerializeField] private AudioSource chargeAudio;
+        [SerializeField] private AudioSource fizzleAudio;
+        [SerializeField] private AudioSource critAudio;
         Vector3 _lastPosition;
         static LayerMask _collideMask = PhysicsLayer.GetMask(PhysicsLayer.MapObjectAll, PhysicsLayer.MapObjectEntities, PhysicsLayer.MapObjectProjectiles,
             PhysicsLayer.TitanPushbox);
@@ -46,7 +48,6 @@ namespace Projectiles
         bool _isAA = false;
         float _embedTime;
         bool _usesEmbed = false;
-        float falloff = 1f; //Added by Sysyfus for damage calculation
         public static Color CritColor = new Color(0.475f, 0.7f, 1f);
 
         protected override void SetupSettings(object[] settings)
@@ -89,7 +90,6 @@ namespace Projectiles
                 else
                 {
                     _isEmbed = true;
-                    chargeAudio.Play();
                     _embedTime = Time.fixedTime;
                     _velocity = (-collision.contacts[0].normal + _velocity.normalized).normalized;
                     _embedParent = collision.transform;
@@ -117,7 +117,10 @@ namespace Projectiles
         protected override void OnExceedLiveTime()
         {
             _wasMaxRange = true;
+            if(!_isEmbed)
             Explode();
+            else
+            DestroySelf();
         }
 
         public void Explode()
@@ -133,7 +136,6 @@ namespace Projectiles
                 {
                     if (_isEmbed)
                     {
-                        chargeAudio.Stop();
                         float timePassed = Time.fixedTime - _embedTime;
                         float embed1Time = GetStat("Embed1Time") + GetStat("Embed1TimeMultiplier") * InitialPlayerVelocity.magnitude;
                         embed1Time = Mathf.Min(embed1Time, GetStat("Embed1TimeMax"));
@@ -220,7 +222,7 @@ namespace Projectiles
                 var handler = collider.gameObject.GetComponent<CustomLogicCollisionHandler>();
                 if (handler != null)
                 {
-                    var damage = CalculateDamage4(titan, radius, collider);
+                    var damage = CalculateDamage();
                     handler.GetHit(_owner, _owner.Name, damage, "Thunderspear", transform.position);
                     continue;
                 }
@@ -242,7 +244,7 @@ namespace Projectiles
                         }
                         else if (angle)
                         {
-                            damage = CalculateDamage4(titan, radius, collider);
+                            damage = CalculateDamage();
                             ((InGameMenu)UIManager.CurrentMenu).ShowKillScore(damage);
                             ((InGameCamera)SceneLoader.CurrentCamera).TakeSnapshot(titan.BaseTitanCache.Neck.position, damage);
                             titan.GetHit(_owner, damage, "Thunderspear", collider.name);
@@ -316,26 +318,6 @@ namespace Projectiles
                 if (human.CustomDamageEnabled)
                     return human.CustomDamage;
             }
-            return damage;
-        }
-        //Add falloff calculation by Sysyfus for Thunderspear damage
-        int CalculateDamage4(BaseTitan titan, float radius, Collider collider)
-        {
-            float multiplier = CharacterData.HumanWeaponInfo["Thunderspear"]["DamageMultiplier"].AsFloat;
-            if (SettingsManager.InGameCurrent.Misc.ThunderspearPVP.Value)
-                multiplier = 1f;
-            int damage = Mathf.Max((int)(InitialPlayerVelocity.magnitude * 10f * multiplier), 10);
-            if (_owner != null && _owner is Human)
-            {
-                var human = (Human)_owner;
-                if (human.CustomDamageEnabled)
-                    return human.CustomDamage;
-            }
-            float distanceRatio = Vector3.Distance(this.transform.position, collider.transform.position) / radius; //how far hit point is from nape relative to explosion radius
-            falloff = Mathf.Clamp(-1f * Mathf.Pow(1.1f * distanceRatio, 2) + 2.0625f, 0.2f, 1.2f); //falloff should not exceed +-50%, +50% at 0.6 distance ratio and -50% at 1.0 distance ratio
-
-            damage = (int)((float)damage * falloff);
-
             return damage;
         }
 
