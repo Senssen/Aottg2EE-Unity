@@ -91,6 +91,7 @@ namespace UniStorm
         public EnableFeature GetPlayerAtRuntime = EnableFeature.Disabled;
         public EnableFeature UseRuntimeDelay = EnableFeature.Disabled;
         public GetPlayerMethodEnum GetPlayerMethod = GetPlayerMethodEnum.ByTag;
+        public bool IsMasterClient = true;
         public enum GetPlayerMethodEnum { ByTag, ByName };
         public string PlayerTag = "Player";
         public string PlayerName = "Player";
@@ -1732,7 +1733,7 @@ namespace UniStorm
                     //m_UniStormClouds.numRendersPerFrame = RendersPerFrame;
                 }
 
-                if (UseUniStormMenu == EnableFeature.Enabled)
+                if (IsMasterClient && UseUniStormMenu == EnableFeature.Enabled)
                 {
                     //Some versions of Unity cannot have the Canvas disabled without causing issues with dropdown menus.
                     //So, disable the button and slider gameobjects then move the dropdown menu up 300 units so it is no longer visible. 
@@ -2268,7 +2269,7 @@ namespace UniStorm
         //If it is, slowly transition the weather according to the current weather type scriptable object
         void CheckWeather()
         {
-            if (m_WeatherGenerated && WeatherGeneration == EnableFeature.Enabled)
+            if (IsMasterClient && m_WeatherGenerated && WeatherGeneration == EnableFeature.Enabled)
             {
                 if (Hour == HourToChangeWeather || WeatherGenerationMethod == WeatherGenerationMethodEnum.Hourly)
                 {

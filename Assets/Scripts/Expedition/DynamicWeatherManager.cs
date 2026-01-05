@@ -54,7 +54,7 @@ public class DynamicWeatherManager : MonoBehaviour
             uniStormSystem.SetTime(hour, minute);
 
         if (!PhotonNetwork.IsMasterClient)
-            uniStormSystem.WeatherGeneration = UniStormSystem.EnableFeature.Disabled;
+            uniStormSystem.IsMasterClient = false;
 
         DisableCameraAndSkybox();
     }
