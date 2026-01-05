@@ -45,6 +45,7 @@ namespace Projectiles
         bool _isAA = false;
         float _embedTime;
         bool _usesEmbed = false;
+        float falloff = 1f; //Added by Sysyfus for damage calculation
         public static Color CritColor = new Color(0.475f, 0.7f, 1f);
 
         protected override void SetupSettings(object[] settings)
@@ -166,6 +167,7 @@ namespace Projectiles
                     new object[] { color, soundPriority, _wasImpact }
                 );
                 StunMyHuman();
+                KillMyHuman(); //Added by Momo to kill human if too close to the TS (can still rocket jump using StunMyHuman if not too close)
                 DestroySelf();
             }
         }
@@ -183,6 +185,28 @@ namespace Projectiles
                 ((Human)_owner).GetStunnedByTS(transform.position);
             }
         }
+        //Added by Momo to kill human if too close to the TS
+        void KillMyHuman()
+        {
+            if (_owner == null || !(_owner is Human) || !_owner.IsMainCharacter())
+                return;
+            if (SettingsManager.InGameCurrent.Misc.ThunderspearPVP.Value)
+                return;
+            float radius = CharacterData.HumanWeaponInfo["Thunderspear"]["StunBlockRadius"].AsFloat / 1.6f;
+            float range = CharacterData.HumanWeaponInfo["Thunderspear"]["StunRange"].AsFloat / 1.6f;
+            Vector3 direction = _owner.Cache.Transform.position - transform.position;
+            RaycastHit hit;
+            if (Vector3.Distance(_owner.Cache.Transform.position, transform.position) < range)
+            {
+                if (Physics.SphereCast(transform.position, radius, direction.normalized, out hit, range, _blockMask))
+                {
+                    if (hit.collider.transform.root.gameObject == _owner.gameObject)
+                    {
+                        ((Human)_owner).DieToTS();
+                    }
+                }
+            }
+        }
 
         int KillTitansInRadius(float radius, float restrictAngle)
         {
@@ -196,7 +220,7 @@ namespace Projectiles
                 var handler = collider.gameObject.GetComponent<CustomLogicCollisionHandler>();
                 if (handler != null)
                 {
-                    var damage = CalculateDamage();
+                    var damage = CalculateDamage4(titan, radius, collider);
                     handler.GetHit(_owner, _owner.Name, damage, "Thunderspear", transform.position);
                     continue;
                 }
@@ -218,7 +242,7 @@ namespace Projectiles
                         }
                         else if (angle)
                         {
-                            damage = CalculateDamage();
+                            damage = CalculateDamage4(titan, radius, collider);
                             ((InGameMenu)UIManager.CurrentMenu).ShowKillScore(damage);
                             ((InGameCamera)SceneLoader.CurrentCamera).TakeSnapshot(titan.BaseTitanCache.Neck.position, damage);
                             titan.GetHit(_owner, damage, "Thunderspear", collider.name);
@@ -292,6 +316,26 @@ namespace Projectiles
                 if (human.CustomDamageEnabled)
                     return human.CustomDamage;
             }
+            return damage;
+        }
+        //Add falloff calculation by Sysyfus for Thunderspear damage
+        int CalculateDamage4(BaseTitan titan, float radius, Collider collider)
+        {
+            float multiplier = CharacterData.HumanWeaponInfo["Thunderspear"]["DamageMultiplier"].AsFloat;
+            if (SettingsManager.InGameCurrent.Misc.ThunderspearPVP.Value)
+                multiplier = 1f;
+            int damage = Mathf.Max((int)(InitialPlayerVelocity.magnitude * 10f * multiplier), 10);
+            if (_owner != null && _owner is Human)
+            {
+                var human = (Human)_owner;
+                if (human.CustomDamageEnabled)
+                    return human.CustomDamage;
+            }
+            float distanceRatio = Vector3.Distance(this.transform.position, collider.transform.position) / radius; //how far hit point is from nape relative to explosion radius
+            falloff = Mathf.Clamp(-1f * Mathf.Pow(1.1f * distanceRatio, 2) + 2.0625f, 0.2f, 1.2f); //falloff should not exceed +-50%, +50% at 0.6 distance ratio and -50% at 1.0 distance ratio
+
+            damage = (int)((float)damage * falloff);
+
             return damage;
         }
 
