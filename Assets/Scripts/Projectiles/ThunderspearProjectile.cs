@@ -31,6 +31,7 @@ namespace Projectiles
         Color _color;
         float _radius;
         public Vector3 InitialPlayerVelocity;
+        [SerializeField] private AudioSource chargeAudio;
         Vector3 _lastPosition;
         static LayerMask _collideMask = PhysicsLayer.GetMask(PhysicsLayer.MapObjectAll, PhysicsLayer.MapObjectEntities, PhysicsLayer.MapObjectProjectiles,
             PhysicsLayer.TitanPushbox);
@@ -88,6 +89,7 @@ namespace Projectiles
                 else
                 {
                     _isEmbed = true;
+                    chargeAudio.Play();
                     _embedTime = Time.fixedTime;
                     _velocity = (-collision.contacts[0].normal + _velocity.normalized).normalized;
                     _embedParent = collision.transform;
@@ -115,10 +117,7 @@ namespace Projectiles
         protected override void OnExceedLiveTime()
         {
             _wasMaxRange = true;
-            if (!_isEmbed)
-                Explode();
-            else
-                DestroySelf();
+            Explode();
         }
 
         public void Explode()
@@ -134,6 +133,7 @@ namespace Projectiles
                 {
                     if (_isEmbed)
                     {
+                        chargeAudio.Stop();
                         float timePassed = Time.fixedTime - _embedTime;
                         float embed1Time = GetStat("Embed1Time") + GetStat("Embed1TimeMultiplier") * InitialPlayerVelocity.magnitude;
                         embed1Time = Mathf.Min(embed1Time, GetStat("Embed1TimeMax"));

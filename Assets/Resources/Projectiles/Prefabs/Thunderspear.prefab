@@ -104,6 +104,7 @@ MonoBehaviour:
   _correctVelocity: {x: 0, y: 0, z: 0}
   _correctCamera: {x: 0, y: 0, z: 0, w: 1}
   InitialPlayerVelocity: {x: 0, y: 0, z: 0}
+  chargeAudio: {fileID: 9069619373323512373}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 0

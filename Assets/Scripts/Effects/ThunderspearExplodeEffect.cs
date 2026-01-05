@@ -41,7 +41,7 @@ namespace Effects
             {
                 impact = (bool)(settings[2]);
             }
-
+            transform.Find("ExplodeSound").GetComponent<AudioSource>().Play();
             switch (killType)
             {
                 case TSKillType.Air:
