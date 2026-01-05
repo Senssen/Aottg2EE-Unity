@@ -356,6 +356,23 @@ namespace GameManagers
             DynamicWeatherManager.uniStormSystem.m_TimeFloat = time;
         }
 
+        [PunRPC]
+        public void RequestDynamicWeatherRPC(PhotonMessageInfo info)
+        {
+            if (SettingsManager.InGameUI.Misc.DynamicWeatherEnabled.Value == false)
+                return;
+
+
+            PhotonView.RPC(nameof(DisableDaylightRPC), info.Sender);
+        }
+
+        [PunRPC]
+        public void DisableDaylightRPC(PhotonMessageInfo info)
+        {
+            GameObject daylight = GameObject.Find("Daylight");
+            daylight.SetActive(false);
+        }
+
         #endregion
     }
 }

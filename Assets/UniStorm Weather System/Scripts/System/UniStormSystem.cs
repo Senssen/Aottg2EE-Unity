@@ -2244,6 +2244,19 @@ namespace UniStorm
             Minute = minute;
         }
 
+        public void CalculateTimeFloat()
+        {
+            float StartingMinuteFloat = (int)Minute;
+            if (RealWorldTime == EnableFeature.Disabled)
+            {
+                m_TimeFloat = (float)Hour / 24 + StartingMinuteFloat / 1440;
+            }
+            else if (RealWorldTime == EnableFeature.Enabled)
+            {
+                m_TimeFloat = (float)System.DateTime.Now.Hour / 24 + (float)System.DateTime.Now.Minute / 1440;
+            }
+        }
+
         public void ChangeWeatherByName(string name, bool useTransition)
         {
             WeatherType weather = AllWeatherTypes.Find(item => item.WeatherTypeName == name);

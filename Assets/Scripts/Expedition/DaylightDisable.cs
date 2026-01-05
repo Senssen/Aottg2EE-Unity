@@ -1,3 +1,5 @@
+using GameManagers;
+using Photon.Pun;
 using Settings;
 using UnityEngine;
 
@@ -11,9 +13,16 @@ public class DaylightDisable : MonoBehaviour
     // (Fuck custom logic.)
     void Awake()
     {
-        if (SettingsManager.InGameUI.Misc.DynamicWeatherEnabled.Value)
+        if (PhotonNetwork.IsMasterClient)
         {
-            gameObject.SetActive(false);
+            if (SettingsManager.InGameUI.Misc.DynamicWeatherEnabled.Value)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            RPCManager.PhotonView.RPC("RequestDynamicWeatherRPC", RpcTarget.MasterClient);
         }
     }
 }

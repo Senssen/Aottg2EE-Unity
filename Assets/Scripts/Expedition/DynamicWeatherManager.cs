@@ -71,15 +71,28 @@ public class DynamicWeatherManager : MonoBehaviour
         skybox.enabled = false;
     }
 
+    private static void SetLobbyTime()
+    {
+        uniStormSystem.CalculateHourAndMinute();
+        RPCManager.PhotonView.RPC(nameof(RPCManager.SetUniStormTimeRPC), RpcTarget.Others, new object[] { uniStormSystem.Hour, uniStormSystem.Minute, uniStormSystem.m_TimeFloat });
+    }
+
     private static void SetLobbyWeather()
     {
         string name = uniStormSystem.CurrentWeatherType.WeatherTypeName;
         RPCManager.PhotonView.RPC(nameof(RPCManager.SetUniStormWeatherRPC), RpcTarget.Others, new object[] { name });
     }
 
-    private static void SetLobbyTime()
+    public static void SetLobbyTimeWithCommand(int hour, int minute)
     {
-        uniStormSystem.CalculateHourAndMinute();
+        uniStormSystem.SetTime(hour, minute);
+        uniStormSystem.CalculateTimeFloat();
         RPCManager.PhotonView.RPC(nameof(RPCManager.SetUniStormTimeRPC), RpcTarget.Others, new object[] { uniStormSystem.Hour, uniStormSystem.Minute, uniStormSystem.m_TimeFloat });
+    }
+
+    public static void SetLobbyWeatherWithCommand(string name)
+    {
+        uniStormSystem.ChangeWeatherByName(name, true);
+        RPCManager.PhotonView.RPC(nameof(RPCManager.SetUniStormWeatherRPC), RpcTarget.Others, new object[] { name });
     }
 }
