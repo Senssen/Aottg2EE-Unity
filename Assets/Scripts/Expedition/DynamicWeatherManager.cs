@@ -24,14 +24,13 @@ public class DynamicWeatherManager : MonoBehaviour
         if (SceneLoader.SceneName != SceneName.InGame)
             return;
 
-        Debug.Log("<color=green> INITIALIZE UNISTORM CALLED </color>");
         if (PhotonNetwork.IsMasterClient)
         {
             if (SettingsManager.InGameUI.Misc.DynamicWeatherEnabled.Value)
             {
                 SetupUniStorm();
                 uniStormSystem.OnWeatherChangeEvent.AddListener(SetLobbyWeather);
-                uniStormSystem.OnTimeChangeEvent.AddListener(SetLobbyWeather);
+                uniStormSystem.OnSliderEndEvent.AddListener(SetLobbyTime);
             }
         }
         else
@@ -95,6 +94,6 @@ public class DynamicWeatherManager : MonoBehaviour
     private static void SetLobbyTime()
     {
         uniStormSystem.CalculateHourAndMinute();
-        RPCManager.PhotonView.RPC(nameof(RPCManager.SetUniStormTimeRPC), RpcTarget.Others, new object[] { uniStormSystem.Hour, uniStormSystem.Minute });
+        RPCManager.PhotonView.RPC(nameof(RPCManager.SetUniStormTimeRPC), RpcTarget.Others, new object[] { uniStormSystem.Hour, uniStormSystem.Minute, uniStormSystem.m_TimeFloat });
     }
 }

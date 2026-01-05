@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UniStorm.Effects;
 using UniStorm.Utility;
+using UnityEngine.EventSystems;
 #if (ENABLE_INPUT_SYSTEM)
 using UnityEngine.InputSystem;
 #endif
@@ -30,6 +31,7 @@ namespace UniStorm
 
         //Events
         public UnityEvent OnTimeChangeEvent;
+        public UnityEvent OnSliderEndEvent;
         public UnityEvent OnHourChangeEvent;
         public UnityEvent OnDayChangeEvent;
         public UnityEvent OnMonthChangeEvent;
@@ -1591,6 +1593,15 @@ namespace UniStorm
             OnHourChangeEvent.AddListener(delegate { UpdateTimeSlider(); }); 
             TimeSlider.maxValue = 0.995f;
 
+            EventTrigger trigger = TimeSliderGameObject.GetComponent<EventTrigger>();
+            if (trigger == null)
+                trigger = TimeSliderGameObject.AddComponent<EventTrigger>();
+
+            EventTrigger.Entry entry = new EventTrigger.Entry();
+            entry.eventID = EventTriggerType.PointerUp;
+            entry.callback.AddListener((eventData) => { InvokeTimeSliderEnded(); });
+            trigger.triggers.Add(entry);
+
             WeatherButtonGameObject = GameObject.Find("Change Weather Button");
 
             WeatherDropdown = GameObject.Find("Weather Dropdown").GetComponent<Dropdown>();
@@ -1926,6 +1937,11 @@ namespace UniStorm
             m_TimeFloat = TimeSlider.value;
             TimeOfDayUpdateTimer = TimeOfDayUpdateSeconds;
             OnTimeChangeEvent.Invoke();
+        }
+
+        public void InvokeTimeSliderEnded()
+        {
+            OnSliderEndEvent.Invoke();
         }
 
         public void UpdateTimeSlider()

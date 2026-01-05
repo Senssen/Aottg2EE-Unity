@@ -349,11 +349,11 @@ namespace GameManagers
         }
 
         [PunRPC]
-        public void SetUniStormTimeRPC(int hour, int minute, PhotonMessageInfo info)
+        public void SetUniStormTimeRPC(int hour, int minute, float time, PhotonMessageInfo info)
         {
             ChatManager.AddLine($"<color=green>Master client has set the time of day to {hour}:{minute}.</color>");
-            DynamicWeatherManager.uniStormSystem.Hour = hour;
-            DynamicWeatherManager.uniStormSystem.Minute = minute;
+            DynamicWeatherManager.uniStormSystem.SetTime(hour, minute);
+            DynamicWeatherManager.uniStormSystem.m_TimeFloat = time;
         }
 
         #endregion
