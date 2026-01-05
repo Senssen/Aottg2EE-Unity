@@ -69,20 +69,6 @@ public class DynamicWeatherManager : MonoBehaviour
 
         Skybox skybox = SceneLoader.CurrentCamera.Camera.GetComponent<Skybox>();
         skybox.enabled = false;
-
-        _instance.StartCoroutine(_instance.DisableDaylight());
-    }
-
-    private IEnumerator DisableDaylight()
-    {
-        if (MapManager.MapLoaded == false)
-            yield return null;
-
-        GameObject daylight = GameObject.Find("Daylight");
-        if (daylight != null)
-            daylight.SetActive(false);
-        else
-            ChatManager.AddLine("<color=yellow>Could not find daylight on the scene!</color>");
     }
 
     private static void SetLobbyWeather()
