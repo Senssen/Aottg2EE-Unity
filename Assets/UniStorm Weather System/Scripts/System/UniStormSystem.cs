@@ -983,7 +983,7 @@ namespace UniStorm
             CurrentWeatherType = TempWeatherType;
             m_ReceivedCloudValue = GetCloudLevel(true);
             m_CloudDomeMaterial.SetFloat("_uCloudsCoverage", m_ReceivedCloudValue);
-            RenderSettings.fogDensity = CurrentWeatherType.FogDensity; // Look here ATA
+            RenderSettings.fogDensity = CurrentWeatherType.FogDensity;
             CurrentFogAmount = RenderSettings.fogDensity;
             UniStormWindZone.windMain = CurrentWeatherType.WindIntensity;
             CurrentWindIntensity = CurrentWeatherType.WindIntensity;
