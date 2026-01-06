@@ -1,4 +1,6 @@
 ﻿using GameManagers;
+using UniStorm;
+using Utility;
 
 namespace Settings
 {
@@ -37,6 +39,7 @@ namespace Settings
         // UniStorm related
         public BoolSetting DynamicWeatherEnabled = new BoolSetting(false);
         public BoolSetting VolumetricClouds = new BoolSetting(true);
+        public IntSetting CloudQuality = new IntSetting((int)UniStormSystem.CloudQualityEnum.High, minValue: 0, maxValue: (int)Util.EnumMaxValue<UniStormSystem.CloudQualityEnum>());
     }
 
     public enum PVPMode

@@ -2261,7 +2261,7 @@ namespace UniStorm
             }
         }
 
-        public void UpdateCloudSettings(CloudTypeEnum cloudType)
+        public void UpdateCloudRenderSettings(CloudTypeEnum cloudType)
         {
             CloudType = cloudType;
             SetCloudQuality();
@@ -2276,6 +2276,13 @@ namespace UniStorm
                     break;
             }
             m_UniStormClouds.SetCloudDetails(m_UniStormClouds.performance, m_UniStormClouds.cloudType, m_UniStormClouds.CloudShadowsTypeRef, true);
+        }
+
+        public void UpdateCloudQualitySettings(CloudQualityEnum quality)
+        {
+            CloudQuality = quality;
+            SetCloudSpeedValues();
+            m_UniStormClouds.SetCloudDetails((UniStormClouds.CloudPerformance)CloudQuality, m_UniStormClouds.cloudType, m_UniStormClouds.CloudShadowsTypeRef, true);
         }
 
         public void CalculateTimeFloat()

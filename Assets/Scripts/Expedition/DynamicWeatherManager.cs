@@ -86,7 +86,13 @@ public class DynamicWeatherManager : MonoBehaviour
     {
         bool isVolumetric = SettingsManager.InGameUI.Misc.VolumetricClouds.Value;
         UniStormSystem.CloudTypeEnum cloudType = isVolumetric ? UniStormSystem.CloudTypeEnum.Volumetric : UniStormSystem.CloudTypeEnum._2D;
-        uniStormSystem.UpdateCloudSettings(cloudType);
+        uniStormSystem.UpdateCloudRenderSettings(cloudType);
+    }
+
+    public static void ChangeCloudQuality()
+    {
+        UniStormSystem.CloudQualityEnum cloudQuality = (UniStormSystem.CloudQualityEnum)SettingsManager.InGameUI.Misc.CloudQuality.Value;
+        uniStormSystem.UpdateCloudQualitySettings(cloudQuality);
     }
 
     private static void SetLobbyTime()

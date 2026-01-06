@@ -81,9 +81,11 @@ namespace UI
          ElementFactory.CreateDropdownSetting(DoublePanelRight, style, settings.WaterFX, UIManager.GetLocale(cat, sub, "WaterFX"),
             UIManager.GetLocaleArray(cat, sub, "WaterFXOptions"), elementWidth: 200f);
          ElementFactory.CreateToggleSetting(DoublePanelRight, style, settings.HDR, UIManager.GetLocale(cat, sub, "HDR"), UIManager.GetLocale(cat, sub, "HDRTooltip"));
-            
+
          ElementFactory.CreateToggleSetting(DoublePanelLeft, style, miscSettings.VolumetricClouds, UIManager.GetLocale(cat, sub, "VolumetricClouds"),
             UIManager.GetLocale(cat, sub, "VolumetricCloudsTooltip"), onValueChanged: () => DynamicWeatherManager.ChangeCloudType());
+         ElementFactory.CreateDropdownSetting(DoublePanelLeft, style, miscSettings.CloudQuality, UIManager.GetLocale(cat, sub, "CloudQuality"),
+            UIManager.GetLocaleArray(cat, sub, "CloudQualityOptions"), elementWidth: 200f, onDropdownOptionSelect: () => DynamicWeatherManager.ChangeCloudQuality());
       }
 
         protected void OnSelectPreset()
