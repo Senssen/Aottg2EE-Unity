@@ -2298,15 +2298,17 @@ namespace UniStorm
             }
         }
 
-        public void ChangeWeatherByName(string name, bool useTransition)
+        public bool ChangeWeatherByName(string name, bool useTransition)
         {
             WeatherType weather = AllWeatherTypes.Find(item => item.WeatherTypeName == name);
             if (weather == null)
-                throw new System.Exception($"Weather \"{name}\" does not exist in the list of weathers");
+                return false;
 
             CurrentWeatherType = weather;
             if (useTransition)
                 TransitionWeather();
+
+            return true;
         }
 
         public void CalculateHourAndMinute()

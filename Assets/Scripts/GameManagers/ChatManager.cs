@@ -378,7 +378,7 @@ namespace GameManagers
         {
             if (args.Length == 1)
             {
-                AddLine($"Current time: {DynamicWeatherManager.uniStormSystem.Hour} : {DynamicWeatherManager.uniStormSystem.Minute}");
+                AddLine($"Current time: {DynamicWeatherManager.GetSanitizedTimeValue(DynamicWeatherManager.uniStormSystem.Hour)} : {DynamicWeatherManager.GetSanitizedTimeValue(DynamicWeatherManager.uniStormSystem.Minute)}");
             }
             else if (CheckMC() && args.Length == 4 && int.TryParse(args[2], out int hour) && int.TryParse(args[3], out int minute))
             {
@@ -388,7 +388,7 @@ namespace GameManagers
                         hour = hour % 24;
                         minute = minute % 60;
                         DynamicWeatherManager.SetLobbyTimeWithCommand(hour, minute);
-                        AddLine($"Time set to {hour}:{minute}");
+                        AddLine($"Time set to {DynamicWeatherManager.GetSanitizedTimeValue(hour)}:{DynamicWeatherManager.GetSanitizedTimeValue(minute)}");
                         break;
                     default:
                         AddLine("Invalid argument passed!", ChatTextColor.Error);
@@ -413,8 +413,19 @@ namespace GameManagers
                         string args_joined = string.Join(" ", args);
                         string name = args_joined.Split("set")[1].Trim();
                         UnityEngine.Debug.Log(name);
-                        DynamicWeatherManager.SetLobbyWeatherWithCommand(name);
-                        AddLine($"Weather set to {name}");
+                        bool success = DynamicWeatherManager.SetLobbyWeatherWithCommand(name);
+                        if (success)
+                        {
+                            AddLine($"Weather set to {name}");
+                        }
+                        else
+                        {
+                            AddLine($"{name} does not exist in the weather profiles list. Current List:", ChatTextColor.Error);
+                            foreach (var weather in DynamicWeatherManager.uniStormSystem.AllWeatherTypes)
+                            {
+                                AddLine($"{weather.WeatherTypeName}");
+                            }
+                        }
                         break;
                     default:
                         AddLine("Invalid argument passed!", ChatTextColor.Error);

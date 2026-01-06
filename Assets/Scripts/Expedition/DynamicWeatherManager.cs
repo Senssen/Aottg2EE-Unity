@@ -122,9 +122,22 @@ public class DynamicWeatherManager : MonoBehaviour
         RPCManager.PhotonView.RPC(nameof(RPCManager.SetUniStormTimeRPC), RpcTarget.Others, new object[] { uniStormSystem.Hour, uniStormSystem.Minute, uniStormSystem.m_TimeFloat });
     }
 
-    public static void SetLobbyWeatherWithCommand(string name)
+    public static bool SetLobbyWeatherWithCommand(string name)
     {
-        uniStormSystem.ChangeWeatherByName(name, true);
-        RPCManager.PhotonView.RPC(nameof(RPCManager.SetUniStormWeatherRPC), RpcTarget.Others, new object[] { name });
+        bool success = uniStormSystem.ChangeWeatherByName(name, true);
+        if (success)
+        {
+            RPCManager.PhotonView.RPC(nameof(RPCManager.SetUniStormWeatherRPC), RpcTarget.Others, new object[] { name });
+            return true;
+        }
+
+        return false;
+    }
+
+    public static string GetSanitizedTimeValue(int value)
+    {
+        if (value < 10)
+            return $"0{value}";
+        return $"{value}";
     }
 }

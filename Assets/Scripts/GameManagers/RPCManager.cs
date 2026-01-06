@@ -344,14 +344,15 @@ namespace GameManagers
         [PunRPC]
         public void SetUniStormWeatherRPC(string weatherName, PhotonMessageInfo info)
         {
-            ChatManager.AddLine($"<color=green>Master client has set the weather to {weatherName}.</color>");
-            DynamicWeatherManager.uniStormSystem.ChangeWeatherByName(weatherName, useTransition: true);
+            bool success = DynamicWeatherManager.uniStormSystem.ChangeWeatherByName(weatherName, useTransition: true);
+            if (success)
+                ChatManager.AddLine($"<color=green>Master client has set the weather to {weatherName}.</color>");
         }
 
         [PunRPC]
         public void SetUniStormTimeRPC(int hour, int minute, float time, PhotonMessageInfo info)
         {
-            ChatManager.AddLine($"<color=green>Master client has set the time of day to {hour}:{minute}.</color>");
+            ChatManager.AddLine($"<color=green>Master client has set the time of day to {DynamicWeatherManager.GetSanitizedTimeValue(hour)}:{DynamicWeatherManager.GetSanitizedTimeValue(minute)}.</color>");
             DynamicWeatherManager.uniStormSystem.SetTime(hour, minute);
             DynamicWeatherManager.uniStormSystem.m_TimeFloat = time;
         }
