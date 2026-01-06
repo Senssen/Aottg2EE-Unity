@@ -33,7 +33,10 @@ namespace Settings
         public FloatSetting ProximityMaxDistance = new FloatSetting(80f, minValue: 1f);
         public IntSetting HumanHealth = new IntSetting(1, minValue: 1);
         public IntSetting ShifterHealth = new IntSetting(1000, minValue: 1);
+
+        // UniStorm related
         public BoolSetting DynamicWeatherEnabled = new BoolSetting(false);
+        public BoolSetting VolumetricClouds = new BoolSetting(true);
     }
 
     public enum PVPMode

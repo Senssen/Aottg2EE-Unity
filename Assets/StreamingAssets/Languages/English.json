@@ -317,6 +317,8 @@
 		"Graphics.WaterFX": "Water FX",
 		"Graphics.WaterFXOptions": ["Off", "Low", "Medium", "High"],
 		"Graphics.HDR": "HDR",
+		"Graphics.VolumetricClouds": "Volumetric Clouds",
+		"Graphics.VolumetricCloudsTooltip": "If enabled, clouds from Dynamic Weathers will be 3D. If disabled, they will be rendered as 2D.",
 		"Graphics.HDRTooltip": "HDR lighting for high dynamic range monitors.",
 		"Graphics.WeaponTrail": "Weapon trail",
 		"Graphics.WeaponTrailOptions": ["Off", "Mine", "All"],

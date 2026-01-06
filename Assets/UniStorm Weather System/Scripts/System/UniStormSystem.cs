@@ -838,36 +838,7 @@ namespace UniStorm
             }
 
             Material m_CloudsMaterial = m_UniStormClouds.skyMaterial;
-            if (CustomizeQuality == CustomizeQualityEnum.Yes && CloudType == CloudTypeEnum.Volumetric)
-            {
-                if (CloudQuality == CloudQualityEnum.Ultra)
-                {
-                    m_CloudsMaterial.SetFloat("_UseHighConvergenceSpeed", 1);
-                    m_CloudDomeMaterial.SetFloat("_DistantCloudUpdateSpeed", ConvergenceSpeed);
-                    Shader.SetGlobalFloat("CLOUD_MARCH_STEPS", NearMarchSteps);
-                    Shader.SetGlobalFloat("DISTANT_CLOUD_MARCH_STEPS", DistantMarchSteps);
-                }
-                else
-                {
-                    m_CloudsMaterial.SetFloat("_UseHighConvergenceSpeed", 0);
-                    Shader.SetGlobalFloat("DISTANT_CLOUD_MARCH_STEPS", 10);
-                }
-            }
-            else
-            {
-                if (CloudQuality == CloudQualityEnum.Ultra) //If CustomizeQuality is not used, apply the default Ultra settings.
-                {
-                    m_CloudsMaterial.SetFloat("_UseHighConvergenceSpeed", 1);
-                    m_CloudDomeMaterial.SetFloat("_DistantCloudUpdateSpeed", 75);
-                    Shader.SetGlobalFloat("CLOUD_MARCH_STEPS", 100);
-                    Shader.SetGlobalFloat("DISTANT_CLOUD_MARCH_STEPS", 10);
-                }
-                else
-                {
-                    m_CloudsMaterial.SetFloat("_UseHighConvergenceSpeed", 0);
-                    Shader.SetGlobalFloat("DISTANT_CLOUD_MARCH_STEPS", 10);
-                }
-            }
+            SetCloudSpeedValues();
 
             //Enable Single Pass support for UniStorm's clouds, given that the VR settings are enabled.
             if (VRStateData.VREnabled && VRStateData.StereoRenderingMode == VRState.StereoRenderingModes.SinglePass)
@@ -957,40 +928,7 @@ namespace UniStorm
                 }
             }
 
-            if (CloudType == CloudTypeEnum.Volumetric)
-            {
-                m_UniStormClouds.cloudType = UniStormClouds.CloudType.Volumetric;
-
-                CloudProfile m_CP = CurrentWeatherType.CloudProfileComponent;
-                m_CloudsMaterial.SetFloat("_uCloudsBaseEdgeSoftness", m_CP.EdgeSoftness);
-                m_CloudsMaterial.SetFloat("_uCloudsBottomSoftness", m_CP.BaseSoftness);
-                m_CloudsMaterial.SetFloat("_uCloudsDetailStrength", m_CP.DetailStrength);
-                m_CloudsMaterial.SetFloat("_uCloudsDensity", m_CP.Density);
-                m_CloudsMaterial.SetFloat("_uCloudsDetailScale", 1000f);
-
-                if (QualitySettings.activeColorSpace == ColorSpace.Gamma)
-                {
-                    m_CloudsMaterial.SetFloat("_uCloudsCoverageBias", m_CP.CoverageBias);
-                    m_CloudsMaterial.SetFloat("_uCloudsDetailStrength", m_CP.DetailStrength);
-                }
-                else
-                {
-                    m_CloudsMaterial.SetFloat("_uCloudsCoverageBias", 0.02f);
-                    m_CloudsMaterial.SetFloat("_uCloudsDetailStrength", m_DetailStrength);
-                }
-
-                m_CloudsMaterial.SetFloat("_uCloudsBaseScale", 1.72f);
-            }
-            else if (CloudType == CloudTypeEnum._2D)
-            {
-                m_UniStormClouds.cloudType = UniStormClouds.CloudType.TwoD;
-                m_CloudsMaterial.SetFloat("_uCloudsBaseEdgeSoftness", 0.05f);
-                m_CloudsMaterial.SetFloat("_uCloudsBottomSoftness", 0.15f);
-                m_CloudsMaterial.SetFloat("_uCloudsDetailStrength", 0.1f);
-                m_CloudsMaterial.SetFloat("_uCloudsDensity", 1f);
-                m_CloudsMaterial.SetFloat("_uCloudsBaseScale", 1.5f);
-                m_CloudsMaterial.SetFloat("_uCloudsDetailScale", 700f);
-            }
+            SetCloudQuality();
         }
 
         //Initialize our starting weather so it fades in instantly on start
@@ -1045,7 +983,7 @@ namespace UniStorm
             CurrentWeatherType = TempWeatherType;
             m_ReceivedCloudValue = GetCloudLevel(true);
             m_CloudDomeMaterial.SetFloat("_uCloudsCoverage", m_ReceivedCloudValue);
-            RenderSettings.fogDensity = CurrentWeatherType.FogDensity;
+            RenderSettings.fogDensity = CurrentWeatherType.FogDensity; // Look here ATA
             CurrentFogAmount = RenderSettings.fogDensity;
             UniStormWindZone.windMain = CurrentWeatherType.WindIntensity;
             CurrentWindIntensity = CurrentWeatherType.WindIntensity;
@@ -2249,6 +2187,95 @@ namespace UniStorm
         {
             Hour = hour;
             Minute = minute;
+        }
+
+        private void SetCloudQuality()
+        {
+            if (CloudType == CloudTypeEnum.Volumetric)
+            {
+                m_UniStormClouds.cloudType = UniStormClouds.CloudType.Volumetric;
+
+                CloudProfile m_CP = CurrentWeatherType.CloudProfileComponent;
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsBaseEdgeSoftness", m_CP.EdgeSoftness);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsBottomSoftness", m_CP.BaseSoftness);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsDetailStrength", m_CP.DetailStrength);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsDensity", m_CP.Density);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsDetailScale", 1000f);
+
+                if (QualitySettings.activeColorSpace == ColorSpace.Gamma)
+                {
+                    m_UniStormClouds.skyMaterial.SetFloat("_uCloudsCoverageBias", m_CP.CoverageBias);
+                    m_UniStormClouds.skyMaterial.SetFloat("_uCloudsDetailStrength", m_CP.DetailStrength);
+                }
+                else
+                {
+                    m_UniStormClouds.skyMaterial.SetFloat("_uCloudsCoverageBias", 0.02f);
+                    m_UniStormClouds.skyMaterial.SetFloat("_uCloudsDetailStrength", m_DetailStrength);
+                }
+
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsBaseScale", 1.72f);
+            }
+            else if (CloudType == CloudTypeEnum._2D)
+            {
+                m_UniStormClouds.cloudType = UniStormClouds.CloudType.TwoD;
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsBaseEdgeSoftness", 0.05f);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsBottomSoftness", 0.15f);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsDetailStrength", 0.1f);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsDensity", 1f);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsBaseScale", 1.5f);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsDetailScale", 700f);
+            }
+        }
+
+        public void SetCloudSpeedValues()
+        {
+            if (CustomizeQuality == CustomizeQualityEnum.Yes && CloudType == CloudTypeEnum.Volumetric)
+            {
+                if (CloudQuality == CloudQualityEnum.Ultra)
+                {
+                    m_UniStormClouds.skyMaterial.SetFloat("_UseHighConvergenceSpeed", 1);
+                    m_CloudDomeMaterial.SetFloat("_DistantCloudUpdateSpeed", ConvergenceSpeed);
+                    Shader.SetGlobalFloat("CLOUD_MARCH_STEPS", NearMarchSteps);
+                    Shader.SetGlobalFloat("DISTANT_CLOUD_MARCH_STEPS", DistantMarchSteps);
+                }
+                else
+                {
+                    m_UniStormClouds.skyMaterial.SetFloat("_UseHighConvergenceSpeed", 0);
+                    Shader.SetGlobalFloat("DISTANT_CLOUD_MARCH_STEPS", 10);
+                }
+            }
+            else
+            {
+                if (CloudQuality == CloudQualityEnum.Ultra) //If CustomizeQuality is not used, apply the default Ultra settings.
+                {
+                    m_UniStormClouds.skyMaterial.SetFloat("_UseHighConvergenceSpeed", 1);
+                    m_CloudDomeMaterial.SetFloat("_DistantCloudUpdateSpeed", 75);
+                    Shader.SetGlobalFloat("CLOUD_MARCH_STEPS", 100);
+                    Shader.SetGlobalFloat("DISTANT_CLOUD_MARCH_STEPS", 10);
+                }
+                else
+                {
+                    m_UniStormClouds.skyMaterial.SetFloat("_UseHighConvergenceSpeed", 0);
+                    Shader.SetGlobalFloat("DISTANT_CLOUD_MARCH_STEPS", 10);
+                }
+            }
+        }
+
+        public void UpdateCloudSettings(CloudTypeEnum cloudType)
+        {
+            CloudType = cloudType;
+            SetCloudQuality();
+            SetCloudSpeedValues();
+            switch (cloudType)
+            {
+                case CloudTypeEnum._2D:
+                    m_UniStormClouds.cloudType = UniStormClouds.CloudType.TwoD;
+                    break;
+                default:
+                    m_UniStormClouds.cloudType = UniStormClouds.CloudType.Volumetric;
+                    break;
+            }
+            m_UniStormClouds.SetCloudDetails(m_UniStormClouds.performance, m_UniStormClouds.cloudType, m_UniStormClouds.CloudShadowsTypeRef, true);
         }
 
         public void CalculateTimeFloat()

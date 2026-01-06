@@ -82,6 +82,13 @@ public class DynamicWeatherManager : MonoBehaviour
             PhotonNetwork.CurrentRoom.CustomProperties.Add("DynamicWeatherEnabled", true);
     }
 
+    public static void ChangeCloudType()
+    {
+        bool isVolumetric = SettingsManager.InGameUI.Misc.VolumetricClouds.Value;
+        UniStormSystem.CloudTypeEnum cloudType = isVolumetric ? UniStormSystem.CloudTypeEnum.Volumetric : UniStormSystem.CloudTypeEnum._2D;
+        uniStormSystem.UpdateCloudSettings(cloudType);
+    }
+
     private static void SetLobbyTime()
     {
         uniStormSystem.CalculateHourAndMinute();
