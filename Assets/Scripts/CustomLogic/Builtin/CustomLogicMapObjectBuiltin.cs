@@ -7,6 +7,7 @@ using System.Linq;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 using UnityEngine.AI;
+using Unity.VisualScripting;
 
 namespace CustomLogic
 {
@@ -31,6 +32,7 @@ namespace CustomLogic
                 if (name == "Daylight")
                 {
                     var light = Value.GameObject.AddComponent<Light>();
+                    light.AddComponent<DaylightDisable>(); // i will murder someone if i have to come back to this.
                     light.type = LightType.Directional;
                     light.color = ((CustomLogicColorBuiltin)parameters[1]).Value.ToColor();
                     light.intensity = parameters[2].UnboxToFloat();

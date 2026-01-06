@@ -373,6 +373,68 @@ namespace GameManagers
             }
         }
 
+        [CommandAttribute("time", "/time [Action][Hour][Minute]: Shows the current time or sets time to the given arguments.")]
+        private static void HandleTimeAction(string[] args)
+        {
+            if (args.Length == 1)
+            {
+                AddLine($"Current time: {DynamicWeatherManager.GetSanitizedTimeValue(DynamicWeatherManager.uniStormSystem.Hour)} : {DynamicWeatherManager.GetSanitizedTimeValue(DynamicWeatherManager.uniStormSystem.Minute)}");
+            }
+            else if (CheckMC() && args.Length == 4 && int.TryParse(args[2], out int hour) && int.TryParse(args[3], out int minute))
+            {
+                switch (args[1])
+                {
+                    case "set":
+                        hour = hour % 24;
+                        minute = minute % 60;
+                        DynamicWeatherManager.SetLobbyTimeWithCommand(hour, minute);
+                        AddLine($"Time set to {DynamicWeatherManager.GetSanitizedTimeValue(hour)}:{DynamicWeatherManager.GetSanitizedTimeValue(minute)}");
+                        break;
+                    default:
+                        AddLine("Invalid argument passed!", ChatTextColor.Error);
+                        AddLine("Example usage: /time set 15 30");
+                        break;
+                }
+            }
+        }
+
+        [CommandAttribute("weather", "/weather [Action][Name]: Sets weather to a given weather by name.")]
+        private static void HandleWeatherAction(string[] args)
+        {
+            if (args.Length == 1)
+            {
+                AddLine($"Current weather: {DynamicWeatherManager.uniStormSystem.CurrentWeatherType.WeatherTypeName}");
+            }
+            else if (CheckMC())
+            {
+                switch (args[1])
+                {
+                    case "set":
+                        string args_joined = string.Join(" ", args);
+                        string name = args_joined.Split("set")[1].Trim();
+                        UnityEngine.Debug.Log(name);
+                        bool success = DynamicWeatherManager.SetLobbyWeatherWithCommand(name);
+                        if (success)
+                        {
+                            AddLine($"Weather set to {name}");
+                        }
+                        else
+                        {
+                            AddLine($"{name} does not exist in the weather profiles list. Current List:", ChatTextColor.Error);
+                            foreach (var weather in DynamicWeatherManager.uniStormSystem.AllWeatherTypes)
+                            {
+                                AddLine($"{weather.WeatherTypeName}");
+                            }
+                        }
+                        break;
+                    default:
+                        AddLine("Invalid argument passed!", ChatTextColor.Error);
+                        AddLine("Example usage: /weather set MyWeatherProfile");
+                        break;
+                }
+            }
+        }
+
         private static bool TryParseVector3(string input, out Vector3 result)
         {
             try 

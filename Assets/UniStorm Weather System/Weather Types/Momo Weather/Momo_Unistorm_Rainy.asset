@@ -23,7 +23,7 @@ MonoBehaviour:
   AuroraInnerColor: {r: 0, g: 1, b: 0, a: 1}
   MinimumFogLevel: 300
   MaximumFogLevel: 600
-  FogDensity: 0.0006
+  FogDensity: 0.001
   FogLightFalloff: 0.65
   FogHeight: 0.75
   CameraFogHeight: 1
@@ -63,8 +63,8 @@ MonoBehaviour:
   WindBendingLevel: 0.2
   WindIntensity: 0.18
   WeatherEffect: {fileID: 8169954288300150300, guid: 76daa83e9c904d748803458ea258a491, type: 3}
-  ParticleEffectAmount: 200
-  ParticleEffectVector: {x: 0, y: 28, z: 0}
+  ParticleEffectAmount: 3000
+  ParticleEffectVector: {x: 0, y: 0, z: 0}
   AdditionalWeatherEffect: {fileID: 0}
   AdditionalParticleEffectAmount: 200
   AdditionalParticleEffectVector: {x: 0, y: 28, z: 0}

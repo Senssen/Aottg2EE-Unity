@@ -101,20 +101,30 @@ namespace ApplicationManagers
         {
             if (CustomSceneLoad)
             {
+                HandlePostSceneLoad();
                 CustomSceneLoad = false;
                 return;
             }
-            CreateGameManager();
-            CreateCamera();
-            EventManager.InvokeLoadScene(SceneName);
+            else
+            {
+                CreateGameManager();
+                CreateCamera();
+                EventManager.InvokeLoadScene(SceneName);
+                HandlePostSceneLoad();
+            }
         }
 
-        public static void HandleCustomSceneLoad()
+        public static void HandlePostSceneLoad()
         {
             GameObject flareSetup = GameObject.Find("ProFlareBatch (MegaAtlas)");
             GameObject gameCamera = GameObject.FindWithTag("MainCamera");
-            if (flareSetup != null && flareSetup.TryGetComponent(out ProFlareBatch batch) && gameCamera != null)
-                batch.SwitchCamera(gameCamera.GetComponent<Camera>());
+            if (gameCamera != null && gameCamera.TryGetComponent(out Camera camera))
+            {
+                DynamicWeatherManager.InitializeUniStorm();
+
+                if (flareSetup != null && flareSetup.TryGetComponent(out ProFlareBatch batch))
+                    batch.SwitchCamera(camera);
+            }
         }
     }
 

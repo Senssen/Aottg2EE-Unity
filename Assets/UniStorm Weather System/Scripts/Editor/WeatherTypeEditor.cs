@@ -183,7 +183,7 @@ namespace UniStorm.Utility
             GUI.backgroundColor = Color.white;
             EditorGUILayout.Space();
 
-            self.FogDensity = EditorGUILayout.Slider("Fog Desnity", self.FogDensity, 0.0f, 0.04f);
+            self.FogDensity = EditorGUILayout.Slider("Fog Density", self.FogDensity, 0.0f, 0.04f);
             GUI.backgroundColor = new Color(0.1f, 0.1f, 0.1f, 0.19f);
             EditorGUILayout.LabelField("Controls UniStorm's Fog Density.", EditorStyles.helpBox);
             GUI.backgroundColor = Color.white;

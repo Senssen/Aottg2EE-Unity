@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UniStorm.Effects;
 using UniStorm.Utility;
+using UnityEngine.EventSystems;
 #if (ENABLE_INPUT_SYSTEM)
 using UnityEngine.InputSystem;
 #endif
@@ -29,6 +30,8 @@ namespace UniStorm
         UniStormClouds m_UniStormClouds;
 
         //Events
+        public UnityEvent OnTimeChangeEvent;
+        public UnityEvent OnSliderEndEvent;
         public UnityEvent OnHourChangeEvent;
         public UnityEvent OnDayChangeEvent;
         public UnityEvent OnMonthChangeEvent;
@@ -88,11 +91,13 @@ namespace UniStorm
         public EnableFeature GetPlayerAtRuntime = EnableFeature.Disabled;
         public EnableFeature UseRuntimeDelay = EnableFeature.Disabled;
         public GetPlayerMethodEnum GetPlayerMethod = GetPlayerMethodEnum.ByTag;
+        public bool IsMasterClient = true;
         public enum GetPlayerMethodEnum { ByTag, ByName };
         public string PlayerTag = "Player";
         public string PlayerName = "Player";
         public string CameraTag = "MainCamera";
         public string CameraName = "MainCamera";
+        private readonly Quaternion _lockedRotation = Quaternion.identity;
 
         //Time
         public System.DateTime UniStormDate;
@@ -676,7 +681,7 @@ namespace UniStorm
 
             CalculatePrecipiation();
             CreateSun();
-            CreateMoon();            
+            CreateMoon();
 
             //Intialize the other components and set the proper settings from within the editor
             GameObject TempAudioSource = new GameObject("UniStorm Time of Day Sounds");
@@ -804,7 +809,7 @@ namespace UniStorm
             CalculateTimeOfDay();
             CalculateSeason();
             UpdateCelestialLightShafts();
-            StartCoroutine(InitializeCloudShadows());           
+            StartCoroutine(InitializeCloudShadows());
 
             if (CurrentWeatherType.UseAuroras == WeatherType.Yes_No.Yes)
             {
@@ -833,36 +838,7 @@ namespace UniStorm
             }
 
             Material m_CloudsMaterial = m_UniStormClouds.skyMaterial;
-            if (CustomizeQuality == CustomizeQualityEnum.Yes && CloudType == CloudTypeEnum.Volumetric)
-            {
-                if (CloudQuality == CloudQualityEnum.Ultra)
-                {
-                    m_CloudsMaterial.SetFloat("_UseHighConvergenceSpeed", 1);
-                    m_CloudDomeMaterial.SetFloat("_DistantCloudUpdateSpeed", ConvergenceSpeed);
-                    Shader.SetGlobalFloat("CLOUD_MARCH_STEPS", NearMarchSteps);
-                    Shader.SetGlobalFloat("DISTANT_CLOUD_MARCH_STEPS", DistantMarchSteps);
-                }
-                else
-                {
-                    m_CloudsMaterial.SetFloat("_UseHighConvergenceSpeed", 0);
-                    Shader.SetGlobalFloat("DISTANT_CLOUD_MARCH_STEPS", 10);
-                }
-            }
-            else
-            {
-                if (CloudQuality == CloudQualityEnum.Ultra) //If CustomizeQuality is not used, apply the default Ultra settings.
-                {
-                    m_CloudsMaterial.SetFloat("_UseHighConvergenceSpeed", 1);
-                    m_CloudDomeMaterial.SetFloat("_DistantCloudUpdateSpeed", 75);
-                    Shader.SetGlobalFloat("CLOUD_MARCH_STEPS", 100);
-                    Shader.SetGlobalFloat("DISTANT_CLOUD_MARCH_STEPS", 10);
-                }
-                else
-                {
-                    m_CloudsMaterial.SetFloat("_UseHighConvergenceSpeed", 0);
-                    Shader.SetGlobalFloat("DISTANT_CLOUD_MARCH_STEPS", 10);
-                }
-            }
+            SetCloudSpeedValues();
 
             //Enable Single Pass support for UniStorm's clouds, given that the VR settings are enabled.
             if (VRStateData.VREnabled && VRStateData.StereoRenderingMode == VRState.StereoRenderingModes.SinglePass)
@@ -952,40 +928,7 @@ namespace UniStorm
                 }
             }
 
-            if (CloudType == CloudTypeEnum.Volumetric)
-            {
-                m_UniStormClouds.cloudType = UniStormClouds.CloudType.Volumetric;
-
-                CloudProfile m_CP = CurrentWeatherType.CloudProfileComponent;
-                m_CloudsMaterial.SetFloat("_uCloudsBaseEdgeSoftness", m_CP.EdgeSoftness);
-                m_CloudsMaterial.SetFloat("_uCloudsBottomSoftness", m_CP.BaseSoftness);
-                m_CloudsMaterial.SetFloat("_uCloudsDetailStrength", m_CP.DetailStrength);
-                m_CloudsMaterial.SetFloat("_uCloudsDensity", m_CP.Density);
-                m_CloudsMaterial.SetFloat("_uCloudsDetailScale", 1000f);
-
-                if (QualitySettings.activeColorSpace == ColorSpace.Gamma)
-                {
-                    m_CloudsMaterial.SetFloat("_uCloudsCoverageBias", m_CP.CoverageBias);
-                    m_CloudsMaterial.SetFloat("_uCloudsDetailStrength", m_CP.DetailStrength);
-                }
-                else
-                {
-                    m_CloudsMaterial.SetFloat("_uCloudsCoverageBias", 0.02f);
-                    m_CloudsMaterial.SetFloat("_uCloudsDetailStrength", m_DetailStrength);
-                }
-
-                m_CloudsMaterial.SetFloat("_uCloudsBaseScale", 1.72f);
-            }
-            else if (CloudType == CloudTypeEnum._2D)
-            {
-                m_UniStormClouds.cloudType = UniStormClouds.CloudType.TwoD;
-                m_CloudsMaterial.SetFloat("_uCloudsBaseEdgeSoftness", 0.05f);
-                m_CloudsMaterial.SetFloat("_uCloudsBottomSoftness", 0.15f);
-                m_CloudsMaterial.SetFloat("_uCloudsDetailStrength", 0.1f);
-                m_CloudsMaterial.SetFloat("_uCloudsDensity", 1f);
-                m_CloudsMaterial.SetFloat("_uCloudsBaseScale", 1.5f);
-                m_CloudsMaterial.SetFloat("_uCloudsDetailScale", 700f);
-            }
+            SetCloudQuality();
         }
 
         //Initialize our starting weather so it fades in instantly on start
@@ -1590,6 +1533,15 @@ namespace UniStorm
             OnHourChangeEvent.AddListener(delegate { UpdateTimeSlider(); }); 
             TimeSlider.maxValue = 0.995f;
 
+            EventTrigger trigger = TimeSliderGameObject.GetComponent<EventTrigger>();
+            if (trigger == null)
+                trigger = TimeSliderGameObject.AddComponent<EventTrigger>();
+
+            EventTrigger.Entry entry = new EventTrigger.Entry();
+            entry.eventID = EventTriggerType.PointerUp;
+            entry.callback.AddListener((eventData) => { InvokeTimeSliderEnded(); });
+            trigger.triggers.Add(entry);
+
             WeatherButtonGameObject = GameObject.Find("Change Weather Button");
 
             WeatherDropdown = GameObject.Find("Weather Dropdown").GetComponent<Dropdown>();
@@ -1720,7 +1672,7 @@ namespace UniStorm
                     //m_UniStormClouds.numRendersPerFrame = RendersPerFrame;
                 }
 
-                if (UseUniStormMenu == EnableFeature.Enabled)
+                if (IsMasterClient && UseUniStormMenu == EnableFeature.Enabled)
                 {
                     //Some versions of Unity cannot have the Canvas disabled without causing issues with dropdown menus.
                     //So, disable the button and slider gameobjects then move the dropdown menu up 300 units so it is no longer visible. 
@@ -1819,6 +1771,12 @@ namespace UniStorm
                 }
 
             }
+        }
+
+        void LateUpdate()
+        {
+            if (m_EffectsTransform != null)
+                m_EffectsTransform.transform.rotation = _lockedRotation;
         }
 
         //Generate and return a random cloud intensity based on the current weather type cloud level
@@ -1924,6 +1882,12 @@ namespace UniStorm
         {
             m_TimeFloat = TimeSlider.value;
             TimeOfDayUpdateTimer = TimeOfDayUpdateSeconds;
+            OnTimeChangeEvent.Invoke();
+        }
+
+        public void InvokeTimeSliderEnded()
+        {
+            OnSliderEndEvent.Invoke();
         }
 
         public void UpdateTimeSlider()
@@ -2217,11 +2181,151 @@ namespace UniStorm
             }
         }
 
+        #region AoTTG2:EE Additions
+
+        public void SetTime(int hour, int minute)
+        {
+            Hour = hour;
+            Minute = minute;
+        }
+
+        private void SetCloudQuality()
+        {
+            if (CloudType == CloudTypeEnum.Volumetric)
+            {
+                m_UniStormClouds.cloudType = UniStormClouds.CloudType.Volumetric;
+
+                CloudProfile m_CP = CurrentWeatherType.CloudProfileComponent;
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsBaseEdgeSoftness", m_CP.EdgeSoftness);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsBottomSoftness", m_CP.BaseSoftness);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsDetailStrength", m_CP.DetailStrength);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsDensity", m_CP.Density);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsDetailScale", 1000f);
+
+                if (QualitySettings.activeColorSpace == ColorSpace.Gamma)
+                {
+                    m_UniStormClouds.skyMaterial.SetFloat("_uCloudsCoverageBias", m_CP.CoverageBias);
+                    m_UniStormClouds.skyMaterial.SetFloat("_uCloudsDetailStrength", m_CP.DetailStrength);
+                }
+                else
+                {
+                    m_UniStormClouds.skyMaterial.SetFloat("_uCloudsCoverageBias", 0.02f);
+                    m_UniStormClouds.skyMaterial.SetFloat("_uCloudsDetailStrength", m_DetailStrength);
+                }
+
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsBaseScale", 1.72f);
+            }
+            else if (CloudType == CloudTypeEnum._2D)
+            {
+                m_UniStormClouds.cloudType = UniStormClouds.CloudType.TwoD;
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsBaseEdgeSoftness", 0.05f);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsBottomSoftness", 0.15f);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsDetailStrength", 0.1f);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsDensity", 1f);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsBaseScale", 1.5f);
+                m_UniStormClouds.skyMaterial.SetFloat("_uCloudsDetailScale", 700f);
+            }
+        }
+
+        public void SetCloudSpeedValues()
+        {
+            if (CustomizeQuality == CustomizeQualityEnum.Yes && CloudType == CloudTypeEnum.Volumetric)
+            {
+                if (CloudQuality == CloudQualityEnum.Ultra)
+                {
+                    m_UniStormClouds.skyMaterial.SetFloat("_UseHighConvergenceSpeed", 1);
+                    m_CloudDomeMaterial.SetFloat("_DistantCloudUpdateSpeed", ConvergenceSpeed);
+                    Shader.SetGlobalFloat("CLOUD_MARCH_STEPS", NearMarchSteps);
+                    Shader.SetGlobalFloat("DISTANT_CLOUD_MARCH_STEPS", DistantMarchSteps);
+                }
+                else
+                {
+                    m_UniStormClouds.skyMaterial.SetFloat("_UseHighConvergenceSpeed", 0);
+                    Shader.SetGlobalFloat("DISTANT_CLOUD_MARCH_STEPS", 10);
+                }
+            }
+            else
+            {
+                if (CloudQuality == CloudQualityEnum.Ultra) //If CustomizeQuality is not used, apply the default Ultra settings.
+                {
+                    m_UniStormClouds.skyMaterial.SetFloat("_UseHighConvergenceSpeed", 1);
+                    m_CloudDomeMaterial.SetFloat("_DistantCloudUpdateSpeed", 75);
+                    Shader.SetGlobalFloat("CLOUD_MARCH_STEPS", 100);
+                    Shader.SetGlobalFloat("DISTANT_CLOUD_MARCH_STEPS", 10);
+                }
+                else
+                {
+                    m_UniStormClouds.skyMaterial.SetFloat("_UseHighConvergenceSpeed", 0);
+                    Shader.SetGlobalFloat("DISTANT_CLOUD_MARCH_STEPS", 10);
+                }
+            }
+        }
+
+        public void UpdateCloudRenderSettings(CloudTypeEnum cloudType)
+        {
+            CloudType = cloudType;
+            SetCloudQuality();
+            SetCloudSpeedValues();
+            switch (cloudType)
+            {
+                case CloudTypeEnum._2D:
+                    m_UniStormClouds.cloudType = UniStormClouds.CloudType.TwoD;
+                    break;
+                default:
+                    m_UniStormClouds.cloudType = UniStormClouds.CloudType.Volumetric;
+                    break;
+            }
+            m_UniStormClouds.SetCloudDetails(m_UniStormClouds.performance, m_UniStormClouds.cloudType, m_UniStormClouds.CloudShadowsTypeRef, true);
+        }
+
+        public void UpdateCloudQualitySettings(CloudQualityEnum quality)
+        {
+            CloudQuality = quality;
+            SetCloudSpeedValues();
+            m_UniStormClouds.SetCloudDetails((UniStormClouds.CloudPerformance)CloudQuality, m_UniStormClouds.cloudType, m_UniStormClouds.CloudShadowsTypeRef, true);
+        }
+
+        public void CalculateTimeFloat()
+        {
+            float StartingMinuteFloat = (int)Minute;
+            if (RealWorldTime == EnableFeature.Disabled)
+            {
+                m_TimeFloat = (float)Hour / 24 + StartingMinuteFloat / 1440;
+            }
+            else if (RealWorldTime == EnableFeature.Enabled)
+            {
+                m_TimeFloat = (float)System.DateTime.Now.Hour / 24 + (float)System.DateTime.Now.Minute / 1440;
+            }
+        }
+
+        public bool ChangeWeatherByName(string name, bool useTransition)
+        {
+            WeatherType weather = AllWeatherTypes.Find(item => item.WeatherTypeName == name);
+            if (weather == null)
+                return false;
+
+            CurrentWeatherType = weather;
+            if (useTransition)
+                TransitionWeather();
+
+            return true;
+        }
+
+        public void CalculateHourAndMinute()
+        {
+            float m_HourFloat = m_TimeFloat * 24;
+            Hour = (int)m_HourFloat;
+            float m_MinuteFloat = m_HourFloat * 60;
+            Minute = (int)m_MinuteFloat % 60;
+        }
+
+        #endregion AoTTG2:EE Additions
+
         //Check our generated weather to see if it's time to update the weather.
         //If it is, slowly transition the weather according to the current weather type scriptable object
         void CheckWeather()
         {
-            if (m_WeatherGenerated && WeatherGeneration == EnableFeature.Enabled)
+            if (IsMasterClient && m_WeatherGenerated && WeatherGeneration == EnableFeature.Enabled)
             {
                 if (Hour == HourToChangeWeather || WeatherGenerationMethod == WeatherGenerationMethodEnum.Hourly)
                 {

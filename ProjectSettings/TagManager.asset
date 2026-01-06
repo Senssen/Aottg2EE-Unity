@@ -8,6 +8,7 @@ TagManager:
   - Speaker
   - Expedition Menu Player Button
   - Fire
+  - UniStorm System
   layers:
   - Default
   - TransparentFX

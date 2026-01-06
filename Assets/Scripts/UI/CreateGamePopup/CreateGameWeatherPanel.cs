@@ -19,6 +19,7 @@ namespace UI
             ElementStyle style = new ElementStyle(titleWidth: 180f, themePanel: ThemePanel);
             ColorPickPopup colorPickPopup = UIManager.CurrentMenu.ColorPickPopup;
             WeatherSettings settings = SettingsManager.WeatherSettings;
+            InGameMiscSettings inGameMisc = SettingsManager.InGameUI.Misc;
             settings.WeatherSets.SelectedSetIndex.Value = SettingsManager.InGameUI.WeatherIndex.Value;
             ElementFactory.CreateDropdownSetting(DoublePanelLeft, new ElementStyle(titleWidth: 140f, themePanel: ThemePanel), settings.WeatherSets.GetSelectedSetIndex(),
                 "Weather set", settings.WeatherSets.GetSetNames(), elementWidth: 205f, onDropdownOptionSelect: () => OnWeatherSetSelected(),
@@ -38,6 +39,8 @@ namespace UI
             WeatherSet set = (WeatherSet)settings.WeatherSets.GetSelectedSet();
             CreateHorizontalDivider(DoublePanelLeft);
             ElementStyle toggleStyle = new ElementStyle(titleWidth: 150f, themePanel: ThemePanel);
+            ElementFactory.CreateToggleSetting(DoublePanelLeft, style, inGameMisc.DynamicWeatherEnabled, "Enable dynamic weather",
+                tooltip: "Enabling this setting overrides dropdown weather types with volumetric clouds and a smooth day cycle.");
             ElementFactory.CreateToggleSetting(DoublePanelLeft, style, set.UseSchedule, "Use schedule",
                 tooltip: "Follow a programmed weather schedule.");
             ElementFactory.CreateToggleSetting(DoublePanelLeft, style, set.ScheduleLoop, "Loop schedule");

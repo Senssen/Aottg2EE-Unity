@@ -110,6 +110,9 @@ namespace Weather
 
         public static void OnFinishLoading()
         {
+            if (IsOverriddenByDynamicWeathers())
+                return;
+
             _instance.RestartWeather();
         }
 
@@ -183,6 +186,9 @@ namespace Weather
         public static Vector3 GetWeatherForce()
         {
             Vector3 finalForce = Vector3.zero;
+            if (IsOverriddenByDynamicWeathers())
+                return finalForce;
+
             if (_instance._currentRainForce > 0f && _instance._effects[WeatherEffect.Rain]._level > 0f)
                 finalForce += _instance._currentRainForce * Vector3.down;
             if (_instance._currentSnowForce > 0f && _instance._effects[WeatherEffect.Snow]._level > 0f)
@@ -282,7 +288,7 @@ namespace Weather
 
         private void FixedUpdate()
         {
-            if (SceneLoader.SceneName != SceneName.InGame || !_finishedLoading)
+            if (SceneLoader.SceneName != SceneName.InGame || !_finishedLoading || IsOverriddenByDynamicWeathers())
                 return;
             _currentTime += Time.fixedDeltaTime;
             if (_targetWeatherStartTimes.Count > 0)
@@ -330,6 +336,9 @@ namespace Weather
 
         public override void OnPlayerEnteredRoom(Player player)
         {
+            if (IsOverriddenByDynamicWeathers())
+                return;
+
             if (PhotonNetwork.IsMasterClient)
             {
                 RPCManager.PhotonView.RPC("SetWeatherRPC", player, new object[]{ StringCompression.Compress(_currentWeather.SerializeToJsonString()),
@@ -553,8 +562,13 @@ namespace Weather
             _instance.StartCoroutine(_instance.WaitAndFinishOnSetWeather(currentWeatherJson, startWeatherJson, targetWeatherJson, targetWeatherStartTimes,
                 targetWeatherEndTimes, currentTime));
         }
+        
+        public static bool IsOverriddenByDynamicWeathers()
+        {
+            return DynamicWeatherManager.IsEnabled();
+        }
 
-        private IEnumerator WaitAndFinishOnSetWeather(byte[] currentWeatherJson, byte[] startWeatherJson, byte[] targetWeatherJson, 
+        private IEnumerator WaitAndFinishOnSetWeather(byte[] currentWeatherJson, byte[] startWeatherJson, byte[] targetWeatherJson,
             Dictionary<int, float> targetWeatherStartTimes, Dictionary<int, float> targetWeatherEndTimes, float currentTime)
         {
             while (!_finishedLoading)
