@@ -19,6 +19,11 @@ public class DynamicWeatherManager : MonoBehaviour
         _instance = this;
     }
 
+    public static bool IsEnabled()
+    {
+        return PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("DynamicWeatherEnabled");
+    }
+
     public static void InitializeUniStorm()
     {
         if (SceneLoader.SceneName != SceneName.InGame)

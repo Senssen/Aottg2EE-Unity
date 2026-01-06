@@ -565,8 +565,7 @@ namespace Weather
         
         public static bool IsOverriddenByDynamicWeathers()
         {
-            InGameMiscSettings inGameMisc = SettingsManager.InGameUI.Misc;
-            return inGameMisc.DynamicWeatherEnabled.Value;
+            return DynamicWeatherManager.IsEnabled();
         }
 
         private IEnumerator WaitAndFinishOnSetWeather(byte[] currentWeatherJson, byte[] startWeatherJson, byte[] targetWeatherJson,

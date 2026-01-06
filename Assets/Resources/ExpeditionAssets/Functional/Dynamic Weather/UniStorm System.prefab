@@ -55,6 +55,12 @@ MonoBehaviour:
   UpdateMarchStepsDuringRuntime: 1
   ColorSpaceSuggestionDismissed: 0
   RendersPerFrame: 1
+  OnTimeChangeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSliderEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
   OnHourChangeEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -90,7 +96,7 @@ MonoBehaviour:
   UniStormMenuKey: 277
   UniStormCanvas: {fileID: 0}
   m_MenuToggle: 0
-  TabNumber: 3
+  TabNumber: 2
   TimeTabNumbers: 0
   WeatherTabNumbers: 1
   CelestialTabNumbers: 0
@@ -99,8 +105,8 @@ MonoBehaviour:
   TimeSoundsFoldout: 1
   TimeMusicFoldout: 1
   SunFoldout: 0
-  MoonFoldout: 1
-  AtmosphereFoldout: 0
+  MoonFoldout: 0
+  AtmosphereFoldout: 1
   FogFoldout: 1
   WeatherFoldout: 1
   LightningFoldout: 1
@@ -119,6 +125,7 @@ MonoBehaviour:
   GetPlayerAtRuntime: 0
   UseRuntimeDelay: 0
   GetPlayerMethod: 0
+  IsMasterClient: 1
   PlayerTag: MainCamera
   PlayerName: FPS Player
   CameraTag: MainCamera
