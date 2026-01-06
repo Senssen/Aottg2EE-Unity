@@ -97,6 +97,7 @@ namespace UniStorm
         public string PlayerName = "Player";
         public string CameraTag = "MainCamera";
         public string CameraName = "MainCamera";
+        private readonly Quaternion _lockedRotation = Quaternion.identity;
 
         //Time
         public System.DateTime UniStormDate;
@@ -1832,6 +1833,12 @@ namespace UniStorm
                 }
 
             }
+        }
+
+        void LateUpdate()
+        {
+            if (m_EffectsTransform != null)
+                m_EffectsTransform.transform.rotation = _lockedRotation;
         }
 
         //Generate and return a random cloud intensity based on the current weather type cloud level
