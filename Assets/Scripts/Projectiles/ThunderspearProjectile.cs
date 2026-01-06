@@ -162,7 +162,7 @@ namespace Projectiles
                     {
                         float timePassed = Time.fixedTime - _embedTime;
                         float minimumTime = critRng;
-                        float maximumTime = critRng + critTime;
+                        float maximumTime = critRng + critWindow;
                         if (timePassed >= minimumTime && timePassed <= maximumTime)
                         {
                             _radius = _radius * GetStat("RadiusEmbed1Multiplier");
