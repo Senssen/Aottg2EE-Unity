@@ -49,10 +49,10 @@ namespace Projectiles
         float _embedTime;
         float critRng;
         //Adjust these for the crit timing
-        float critRngMin = 0.5f;
-        float critRngMax = 1.65f;
-        float embedLifeTime = 2f;
-        float critWindow = 0.3f;
+        float critRngMin = 0.5f; //The minimum time before crit can happen, should never be lower than 0
+        float critRngMax = 1.7f; //The maximum time a crit can happen, should never be higher than embedLifeTime - critWindow
+        float embedLifeTime = 2f; //How long the TS will stay embedded
+        float critWindow = 0.3f; //the crit time window, should never be higher than embedLifeTime - critRngMax
         bool playedCritAudio = false;
         bool playedFizzleAudio = false;
         bool _usesEmbed = false;
