@@ -47,6 +47,9 @@ namespace Projectiles
         Vector3 _startPosition = Vector3.zero;
         bool _isAA = false;
         float _embedTime;
+        float critRng;
+        bool playedCritAudio = false;
+        bool playedFizzleAudio = false;
         bool _usesEmbed = false;
         public static Color CritColor = new Color(0.475f, 0.7f, 1f);
 
@@ -74,7 +77,25 @@ namespace Projectiles
                 main.startColor = _color;
             }
         }
-
+        public void TSAudio()
+        {
+            if(_isEmbed)
+            {
+                float timePassed = Time.fixedTime - _embedTime;
+                ChatManager.SendChatAll(critRng.ToString());
+                if (critRng > 0f && timePassed >= critRng && !playedCritAudio)
+                {
+                    critAudio.Play();
+                    playedCritAudio = true;
+                }
+                if (critRng > 0f && timePassed > critRng + 0.35f && !playedFizzleAudio)
+                {
+                    fizzleAudio.Play();
+                    chargeAudio.Stop();
+                    playedFizzleAudio = true;
+                }
+            }
+        }
         private void OnCollisionEnter(Collision collision)
         {
             if (photonView.IsMine && !Disabled)
@@ -86,7 +107,7 @@ namespace Projectiles
                 if (SettingsManager.InGameCurrent.Misc.ThunderspearPVP.Value || !_usesEmbed)
                 {
                     Explode();
-                }
+                }   
                 else
                 {
                     _isEmbed = true;
@@ -99,12 +120,11 @@ namespace Projectiles
                     _embedPosition = collision.transform.InverseTransformPoint(collision.contacts[0].point + _velocity * embedDistance);
                     _transform.position = collision.contacts[0].point + _velocity * embedDistance;
                     _transform.rotation = Quaternion.LookRotation(_velocity);
-                    var travelDistance = Vector3.Distance(_startPosition, _transform.position);
-                    float embed1Time = GetStat("Embed1Time") + GetStat("Embed1TimeMultiplier") * InitialPlayerVelocity.magnitude;
-                    embed1Time = Mathf.Min(embed1Time, GetStat("Embed1TimeMax"));
-                    embed1Time = Mathf.Max(embed1Time, GetStat("Embed1TimeMin"));
-                    float embed2Time = Mathf.Max(GetStat("Embed2TimeTotal") - travelDistance * GetStat("Embed2TimeMultiplier"), 0f);
-                    _timeLeft = embed1Time + embed2Time;
+                    playedCritAudio = false;
+                    playedFizzleAudio = false;
+                    chargeAudio.Play();
+                    _timeLeft = 2f;
+                    critRng = UnityEngine.Random.Range(0.3f, 1.65f);
                     if (Vector3.Distance(_transform.position, _startPosition) < GetStat("AATriggerRange"))
                     {
                         _isAA = true;
@@ -112,7 +132,6 @@ namespace Projectiles
                 }
             }
         }
-
 
         protected override void OnExceedLiveTime()
         {
@@ -127,6 +146,7 @@ namespace Projectiles
         {
             if (!Disabled)
             {
+                chargeAudio.Stop();
                 float effectRadius;
                 float restrictAngle = GetStat("RestrictAngle");
                 Color color = _color;
@@ -137,10 +157,9 @@ namespace Projectiles
                     if (_isEmbed)
                     {
                         float timePassed = Time.fixedTime - _embedTime;
-                        float embed1Time = GetStat("Embed1Time") + GetStat("Embed1TimeMultiplier") * InitialPlayerVelocity.magnitude;
-                        embed1Time = Mathf.Min(embed1Time, GetStat("Embed1TimeMax"));
-                        embed1Time = Mathf.Max(embed1Time, GetStat("Embed1TimeMin"));
-                        if (timePassed <= embed1Time)
+                        float minimumTime = critRng;
+                        float maximumTime = critRng + 0.35f;
+                        if (timePassed >= minimumTime && timePassed <= maximumTime)
                         {
                             _radius = _radius * GetStat("RadiusEmbed1Multiplier");
                             restrictAngle = GetStat("RestrictAngleEmbed1");
@@ -153,6 +172,7 @@ namespace Projectiles
                         }
                     }
                     effectRadius = _radius * 4f;
+                    critRng = 0f;
                 }
                 int killedPlayer = KillPlayersInRadius(_radius);
                 int killedTitan = KillTitansInRadius(_radius, restrictAngle);
@@ -194,8 +214,8 @@ namespace Projectiles
                 return;
             if (SettingsManager.InGameCurrent.Misc.ThunderspearPVP.Value)
                 return;
-            float radius = CharacterData.HumanWeaponInfo["Thunderspear"]["StunBlockRadius"].AsFloat / 1.6f;
-            float range = CharacterData.HumanWeaponInfo["Thunderspear"]["StunRange"].AsFloat / 1.6f;
+            float radius = CharacterData.HumanWeaponInfo["Thunderspear"]["StunBlockRadius"].AsFloat / 1.4f;
+            float range = CharacterData.HumanWeaponInfo["Thunderspear"]["StunRange"].AsFloat / 1.4f;
             Vector3 direction = _owner.Cache.Transform.position - transform.position;
             RaycastHit hit;
             if (Vector3.Distance(_owner.Cache.Transform.position, transform.position) < range)
@@ -333,6 +353,7 @@ namespace Projectiles
 
         protected void FixedUpdate()
         {
+            TSAudio();
             if (_photonView.IsMine)
             {
                 if (_isEmbed)
