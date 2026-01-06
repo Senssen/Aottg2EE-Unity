@@ -75,11 +75,14 @@ public class DynamicWeatherManager : MonoBehaviour
 
     private static void HandleRoomProperty(bool enabled)
     {
-        bool exists = PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("DynamicWeatherEnabled");
-        if (exists && !enabled)
-            PhotonNetwork.CurrentRoom.CustomProperties.Remove("DynamicWeatherEnabled");
-        else if (!exists && enabled)
-            PhotonNetwork.CurrentRoom.CustomProperties.Add("DynamicWeatherEnabled", true);
+        var props = new ExitGames.Client.Photon.Hashtable();
+
+        if (enabled)
+            props["DynamicWeatherEnabled"] = true;
+        else
+            props["DynamicWeatherEnabled"] = null; // remove
+
+        PhotonNetwork.CurrentRoom.SetCustomProperties(props);
     }
 
     public static void ChangeCloudType()
