@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeatherTypeName: Momo Day Cloudy
   CloudProfileComponent: {fileID: 11400000, guid: 2abfa647742d6174bacc9b765f51f9c3, type: 2}
-  SunIntensity: 0.4
+  SunIntensity: 0.6
   CloudShadowIntensity: 1.5
-  MoonIntensity: 0.3
+  MoonIntensity: 0.4
   UseAuroras: 1
   AuroraIntensity: 0.4
   AuroraOuterColor: {r: 0, g: 1, b: 1, a: 1}

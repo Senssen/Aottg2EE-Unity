@@ -3361,7 +3361,6 @@ namespace Characters
         public void DieToTS() //Added by Momo Dec 6 2023 to kill people too close to the explosion. and print 100 damage.
         {
             GetHit("Thunderspear", 100, "Thunderspear", "");
-            Die();
         }
 
         public void SetInterpolation(bool interpolate)
