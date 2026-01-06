@@ -26,9 +26,10 @@ public class DynamicWeatherManager : MonoBehaviour
 
         if (PhotonNetwork.IsMasterClient)
         {
-            if (SettingsManager.InGameUI.Misc.DynamicWeatherEnabled.Value)
+            bool enabled = SettingsManager.InGameUI.Misc.DynamicWeatherEnabled.Value;
+            HandleRoomProperty(enabled);
+            if (enabled)
             {
-                PhotonNetwork.CurrentRoom.CustomProperties.Add("DynamicWeatherEnabled", true);
                 SetupUniStorm();
                 uniStormSystem.OnWeatherChangeEvent.AddListener(SetLobbyWeather);
                 uniStormSystem.OnSliderEndEvent.AddListener(SetLobbyTime);
@@ -70,6 +71,15 @@ public class DynamicWeatherManager : MonoBehaviour
 
         Skybox skybox = SceneLoader.CurrentCamera.Camera.GetComponent<Skybox>();
         skybox.enabled = false;
+    }
+
+    private static void HandleRoomProperty(bool enabled)
+    {
+        bool exists = PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("DynamicWeatherEnabled");
+        if (exists && !enabled)
+            PhotonNetwork.CurrentRoom.CustomProperties.Remove("DynamicWeatherEnabled");
+        else if (!exists && enabled)
+            PhotonNetwork.CurrentRoom.CustomProperties.Add("DynamicWeatherEnabled", true);
     }
 
     private static void SetLobbyTime()
