@@ -48,6 +48,11 @@ namespace Projectiles
         bool _isAA = false;
         float _embedTime;
         float critRng;
+        //Adjust these for the crit timing
+        float critRngMin = 0.5f;
+        float critRngMax = 1.65f;
+        float embedLifeTime = 2f;
+        float critWindow = 0.3f;
         bool playedCritAudio = false;
         bool playedFizzleAudio = false;
         bool _usesEmbed = false;
@@ -87,7 +92,7 @@ namespace Projectiles
                     critAudio.Play();
                     playedCritAudio = true;
                 }
-                if (critRng > 0f && timePassed > critRng + 0.35f && !playedFizzleAudio)
+                if (critRng > 0f && timePassed > critRng + critWindow && !playedFizzleAudio)
                 {
                     fizzleAudio.Play();
                     chargeAudio.Stop();
@@ -122,8 +127,8 @@ namespace Projectiles
                     playedCritAudio = false;
                     playedFizzleAudio = false;
                     chargeAudio.Play();
-                    _timeLeft = 2f;
-                    critRng = UnityEngine.Random.Range(0.3f, 1.65f);
+                    _timeLeft = embedLifeTime;
+                    critRng = UnityEngine.Random.Range(critRngMin, critRngMax);
                     if (Vector3.Distance(_transform.position, _startPosition) < GetStat("AATriggerRange"))
                     {
                         _isAA = true;
@@ -157,7 +162,7 @@ namespace Projectiles
                     {
                         float timePassed = Time.fixedTime - _embedTime;
                         float minimumTime = critRng;
-                        float maximumTime = critRng + 0.35f;
+                        float maximumTime = critRng + critTime;
                         if (timePassed >= minimumTime && timePassed <= maximumTime)
                         {
                             _radius = _radius * GetStat("RadiusEmbed1Multiplier");
