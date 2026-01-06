@@ -82,7 +82,6 @@ namespace Projectiles
             if(_isEmbed)
             {
                 float timePassed = Time.fixedTime - _embedTime;
-                ChatManager.SendChatAll(critRng.ToString());
                 if (critRng > 0f && timePassed >= critRng && !playedCritAudio)
                 {
                     critAudio.Play();

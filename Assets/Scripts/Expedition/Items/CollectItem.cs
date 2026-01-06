@@ -47,6 +47,21 @@ public class CollectItem : MonoBehaviour
                         human.Stats.CurrentGas = human.Stats.MaxGas;
                     }
                 }
+                else if (_itemType == RoleItems.SupplyItem.HalfGas)
+                {
+                    if (human.Stats.CurrentGas == human.Stats.MaxGas)
+                        return;
+
+                    logistician.GasCollectSound.Play();
+                    if (DroppedByDead)
+                    {
+                        human.Stats.CurrentGas = human.Stats.MaxGas * 0.1f;
+                    }
+                    else
+                    {
+                        human.Stats.CurrentGas = human.Stats.MaxGas * 0.5f;
+                    }
+                }
                 else if (_itemType == RoleItems.SupplyItem.Weapon)
                 {
                     BaseUseable Weapon = human.Weapon;

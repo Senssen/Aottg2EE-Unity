@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5405384984707700023}
   - component: {fileID: 7582068818839658250}
   m_Layer: 0
-  m_Name: SpinningSupplyGasPrefab
+  m_Name: SpinningSupplyGasPrefabHalf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd7f487b7f63c24ebb6496ebb2f6dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemType: 1
+  _itemType: 0
   DroppedByDead: 0
 --- !u!1 &8142202789150022795
 GameObject:
