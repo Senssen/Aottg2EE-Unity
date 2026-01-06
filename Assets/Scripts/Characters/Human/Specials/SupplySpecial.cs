@@ -16,8 +16,9 @@ namespace Characters
         public SupplySpecial(BaseCharacter owner): base(owner)
         {
             UsesLeft = -1;
-
-            Cooldown = 1500f;
+            MaxUses = -1;
+            Cooldown = 1500;
+            SetCooldownLeft(0);
         }
 
         protected override void Activate()
@@ -32,12 +33,6 @@ namespace Characters
             PhotonNetwork.Instantiate(ResourcePaths.Logistician + "/SpinningSupplyGasPrefabHalf", position, _human.Cache.Transform.rotation, 0);
             PhotonNetwork.Instantiate(ResourcePaths.Logistician + "/SpinningSupplyBladePrefab", position, _human.Cache.Transform.rotation, 0);
             UsesLeft = -1;
-        }
-
-        public override void Reset()
-        {
-            base.Reset();
-            SetCooldownLeft(0f);
         }
     }
 }
