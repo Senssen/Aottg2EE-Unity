@@ -234,6 +234,8 @@
 		"General.CameraClippingTooltip": "Allow camera to clip through walls and objects.",
 		"General.MinimapEnabled": "Minimap on",
 		"General.MinimapHeight": "Minimap height",
+		"General.FlareMarkers": "Flare Markers",
+		"General.FlareMarkersTooltip": "Enable on screen UI markers for fired acoustic flares",
 		"General.SnapshotsEnabled": "Snapshots on",
 		"General.SnapshotsShowInGame": "Snapshots in-game",
 		"General.SnapshotsMinimumDamage": "Snapshots min damage",

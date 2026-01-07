@@ -1,4 +1,5 @@
-﻿using Settings;
+﻿using Projectiles;
+using Settings;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -44,6 +45,8 @@ namespace UI
             ElementFactory.CreateToggleSetting(DoublePanelRight, style, settings.MinimapEnabled, UIManager.GetLocale(cat, sub, "MinimapEnabled"));
             ElementFactory.CreateInputSetting(DoublePanelRight, style, settings.MinimapCameraHeight, UIManager.GetLocale(cat, sub, "MinimapHeight"),
                 elementWidth: 100f);
+            ElementFactory.CreateToggleSetting(DoublePanelRight, style, settings.FlareMarkers, UIManager.GetLocale(cat, sub, "FlareMarkers"),
+                tooltip: UIManager.GetLocale(cat, sub, "FlareMarkersTooltip"), onValueChanged: () => AcousticFlareController.ChangeAcousticFlaresVisibility(settings.FlareMarkers.Value));
             ElementFactory.CreateToggleSetting(DoublePanelRight, style, settings.SnapshotsEnabled, UIManager.GetLocale(cat, sub, "SnapshotsEnabled"));
             ElementFactory.CreateToggleSetting(DoublePanelRight, style, settings.SnapshotsShowInGame, UIManager.GetLocale(cat, sub, "SnapshotsShowInGame"));
             ElementFactory.CreateInputSetting(DoublePanelRight, style, settings.SnapshotsMinimumDamage, UIManager.GetLocale(cat, sub, "SnapshotsMinimumDamage"),

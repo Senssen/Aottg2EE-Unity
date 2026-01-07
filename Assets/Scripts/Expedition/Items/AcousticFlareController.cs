@@ -11,12 +11,21 @@ namespace Projectiles
 {
     static class AcousticFlareController
     {
+        public static readonly float _maxLife = 180f;
+
         public static void FireAcousticFlare(Vector3 position, Quaternion rotation)
         {
             GameObject marker = PhotonNetwork.Instantiate(ResourcePaths.UI + "/Expedition/AcousticFlareMarker", position, rotation, 0);
-            AcousticFlare _settings = marker.GetComponent<AcousticFlare>();
-            _settings.Setup(marker.transform, PhotonNetwork.LocalPlayer);
+            AcousticFlare acousticFlare = marker.GetComponent<AcousticFlare>();
+            acousticFlare.Setup(marker.transform, PhotonNetwork.LocalPlayer);
             PhotonNetwork.Instantiate(ResourcePaths.Projectiles + "/AcousticParticle", position, rotation, 0);
+        }
+
+        public static void ChangeAcousticFlaresVisibility(bool visible)
+        {
+            AcousticFlare[] acousticFlares = GameObject.FindObjectsByType<AcousticFlare>(FindObjectsSortMode.None);
+            for (int i = 0; i < acousticFlares.Length; i++)
+                acousticFlares[i].marker.SetActive(visible);
         }
     }
 }

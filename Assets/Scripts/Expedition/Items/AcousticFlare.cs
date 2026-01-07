@@ -2,43 +2,37 @@ using ApplicationManagers;
 using GameManagers;
 using Photon.Pun;
 using Photon.Realtime;
+using Projectiles;
 using Settings;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AcousticFlare : MonoBehaviourPun, IPunObservable
+public class AcousticFlare : MonoBehaviourPun
 {
-    [SerializeField]
-    private Canvas canvas;
-    [SerializeField]
-    private GameObject marker;
+    [SerializeField] private Canvas canvas;
+    [SerializeField] public GameObject marker; // the gameobject inside the canvas that parents the UI elements
 
-    [SerializeField]
-    private RawImage bannerImage;
+    [SerializeField] private RawImage bannerImage;
 
-    [SerializeField]
-    Text ownerName;
+    [SerializeField] private Text ownerName;
 
-    [SerializeField]
-    Text distance;
+    [SerializeField] private Text distance;
 
-    [SerializeField]
-    private AudioSource ringingSound;
-    [SerializeField]
-    private AudioSource flareSound;
+    [SerializeField] private AudioSource ringingSound;
+    [SerializeField] private AudioSource flareSound;
 
     private Transform uiTransform;
 
     private float minX;
     private float minY;
-    private float timeLeft = 180f;
+    private float timeLeft = AcousticFlareController._maxLife;
+    private static readonly int minRingingRange = 250;
 
     public void Setup(Transform _transform, Player _player)
     {
-        PhotonView photonView = GetComponent<PhotonView>();
         Color _color = GenerateRandomColor();
         if (photonView.IsMine)
-            photonView.RPC("SetupRPC", RpcTarget.AllBuffered, new object[] { _transform.position, _transform.rotation, _transform.localScale, _player, _color });
+            photonView.RPC(nameof(SetupRPC), RpcTarget.AllBuffered, new object[] { _transform.position, _transform.rotation, _transform.localScale, _player, _color });
     }
 
     [PunRPC]
@@ -50,59 +44,17 @@ public class AcousticFlare : MonoBehaviourPun, IPunObservable
         uiTransform.transform.rotation = _rotation;
         uiTransform.transform.localScale = _scale;
 
-
         minX = 0;
         minY = 0;
-        ownerName.text = _player.GetStringProperty(PlayerProperty.Name);
-        ownerName.text = RemoveColorTagsFromName(ownerName.text);
+        ownerName.text = RemoveColorTagsFromName(_player.GetStringProperty(PlayerProperty.Name));
         bannerImage.color = _color;
 
         flareSound.Play();
 
-        if ((int)Vector3.Distance(uiTransform.position, SceneLoader.CurrentCamera.Camera.transform.position) < 250)
-        {
+        if ((int)Vector3.Distance(uiTransform.position, SceneLoader.CurrentCamera.Camera.transform.position) < minRingingRange)
             ringingSound.Play();
-        }
-
 
         UI.MinimapHandler.CreateWaypointMinimapIcon(uiTransform);
-    }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(this.uiTransform.position);
-            stream.SendNext(this.uiTransform.rotation);
-            stream.SendNext(this.uiTransform.localScale);
-            stream.SendNext(new Vector4(bannerImage.color.r, bannerImage.color.g, bannerImage.color.b, bannerImage.color.a));
-            stream.SendNext(this.ownerName.text);
-            stream.SendNext(this.distance != null ? this.distance.text : "");
-        }
-        else
-        {
-            uiTransform.position = (Vector3)stream.ReceiveNext();
-            uiTransform.rotation = (Quaternion)stream.ReceiveNext();
-            uiTransform.localScale = (Vector3)stream.ReceiveNext();
-
-            Vector4 colorVector = (Vector4)stream.ReceiveNext();
-            bannerImage.color = new Color(colorVector.x, colorVector.y, colorVector.z, colorVector.w);
-
-            ownerName.text = (string)stream.ReceiveNext();
-            if (distance != null)
-            {
-                distance.text = (string)stream.ReceiveNext();
-            }
-            else
-            {
-                Debug.LogError("Distance text component is null");
-            }
-
-            ownerName.text = RemoveColorTagsFromName(ownerName.text);
-
-            minX = 0;
-            minY = 0;
-        }
     }
 
     private void ChangeCanvasLocation()
@@ -115,13 +67,9 @@ public class AcousticFlare : MonoBehaviourPun, IPunObservable
         if (Vector3.Dot((uiTransform.position - SceneLoader.CurrentCamera.Camera.transform.position), SceneLoader.CurrentCamera.Camera.transform.forward) < 0)
         {
             if (pos.x < Screen.width / 2)
-            {
                 pos.x = Screen.width - minX;
-            }
-            else 
-            {
+            else
                 pos.x = minX;
-            }
         }
 
         pos.x = Mathf.Clamp(pos.x, minX, Screen.width - minX);
@@ -187,26 +135,28 @@ public class AcousticFlare : MonoBehaviourPun, IPunObservable
 
     private Color GenerateRandomColor()
     {
-        float red = Random.Range(.01f, .99f);  
-        float green = Random.Range(.01f, .99f);
-        float blue = Random.Range(.01f, .99f); 
+        float r = Random.Range(.01f, .99f);  
+        float g = Random.Range(.01f, .99f);
+        float b = Random.Range(.01f, .99f); 
 
-        return new Color(red, green, blue, .5f);
+        return new Color(r, g, b, .5f);
     }
 
     private void DestroySelf()
     {
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 
     private void Update()
     {
-        timeLeft -= Time.deltaTime;
-        if (timeLeft <= 0)
-            DestroySelf();
+        if (photonView.AmOwner)
+        {
+            timeLeft -= Time.deltaTime;
+            if (timeLeft <= 0)
+                DestroySelf();
+        }
 
-
-        if ( SceneLoader.CurrentCamera.Camera != null && uiTransform != null )
+        if (SceneLoader.CurrentCamera.Camera != null && uiTransform != null)
         {
             ChangeCanvasLocation();
             ScaleUIElements();
