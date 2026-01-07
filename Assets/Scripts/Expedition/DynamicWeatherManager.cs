@@ -26,7 +26,7 @@ public class DynamicWeatherManager : MonoBehaviour
         else if (PhotonNetwork.CurrentRoom == null)
             return false;
         else
-            PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("DynamicWeatherEnabled");
+            return PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("DynamicWeatherEnabled");
     }
 
     public static void InitializeUniStorm()
