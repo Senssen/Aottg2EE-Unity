@@ -19,6 +19,7 @@ using Controllers;
 using Photon.Voice.PUN;
 using Anticheat;
 using System.Globalization;
+using UnityEngine.SceneManagement;
 
 namespace GameManagers
 {
@@ -1064,6 +1065,13 @@ namespace GameManagers
                 float time = CustomLogicManager.Evaluator.CurrentTime;
                 string feed = ChatManager.GetColorString("(" + Util.FormatFloat(time, 2) + ")", ChatTextColor.System) + " Round started.";
                 ChatManager.AddFeed(feed);
+            }
+
+            if (SceneLoader.SceneName == SceneName.InGame)
+            {    
+                DaylightDisable[] daylightDisable = GameObject.FindObjectsByType<DaylightDisable>(FindObjectsSortMode.None);
+                for (int i = 0; i < daylightDisable.Length; i++)
+                    daylightDisable[i].HandleDisable();
             }
         }
 

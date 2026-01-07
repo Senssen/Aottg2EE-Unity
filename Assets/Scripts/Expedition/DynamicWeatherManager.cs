@@ -21,7 +21,10 @@ public class DynamicWeatherManager : MonoBehaviour
 
     public static bool IsEnabled()
     {
-        return PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("DynamicWeatherEnabled");
+        if (PhotonNetwork.OfflineMode)
+            return SettingsManager.InGameUI.Misc.DynamicWeatherEnabled.Value;
+        else
+            return PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("DynamicWeatherEnabled");
     }
 
     public static void InitializeUniStorm()

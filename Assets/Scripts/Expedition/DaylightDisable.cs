@@ -11,7 +11,7 @@ public class DaylightDisable : MonoBehaviour
     // Because of this, we need to ensure that the daylight component is disabled on its own game object when it awakens, without any other dependency.
 
     // (Fuck custom logic.)
-    void Awake()
+    public void HandleDisable()
     {
         if (DynamicWeatherManager.IsEnabled())
             gameObject.SetActive(false);
