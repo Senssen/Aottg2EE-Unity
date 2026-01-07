@@ -53,9 +53,6 @@ public class DynamicWeatherManager : MonoBehaviour
 
     public static void SetupUniStorm(int hour = -1, int minute = -1, string weatherName = "")
     {
-        if (uniStormSystem != null)
-            Destroy(uniStormSystem.gameObject);
-
         GameObject uniStormGo = ResourceManager.InstantiateAsset<GameObject>(ResourcePaths.DynamicWeather, "UniStorm System");
         uniStormSystem = uniStormGo.GetComponent<UniStormSystem>();
 

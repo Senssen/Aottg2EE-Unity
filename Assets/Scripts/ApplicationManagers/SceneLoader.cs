@@ -50,6 +50,7 @@ namespace ApplicationManagers
             else
                 SceneManager.LoadScene(0);
             FullscreenHandler.UpdateFPS();
+            ClearOldUniStorm();
         }
 
         private static void CreateGameManager()
@@ -125,6 +126,12 @@ namespace ApplicationManagers
                 if (flareSetup != null && flareSetup.TryGetComponent(out ProFlareBatch batch))
                     batch.SwitchCamera(camera);
             }
+        }
+
+        private static void ClearOldUniStorm()
+        {
+            if (DynamicWeatherManager.uniStormSystem != null)
+                Destroy(DynamicWeatherManager.uniStormSystem.gameObject);
         }
     }
 
