@@ -28,43 +28,40 @@ public class AcousticFlare : MonoBehaviourPun
     private float timeLeft = AcousticFlareController._maxLife;
     private static readonly int minRingingRange = 250;
 
-    public void Setup(Transform _transform, Player _player)
+    public void Setup(Player _player)
     {
         Color _color = GenerateRandomColor();
         if (photonView.IsMine)
-            photonView.RPC(nameof(SetupRPC), RpcTarget.AllBuffered, new object[] { _transform.position, _transform.rotation, _transform.localScale, _player, _color });
+            photonView.RPC(nameof(SetupRPC), RpcTarget.AllBuffered, new object[] { RemoveColorTagsFromName(_player.GetStringProperty(PlayerProperty.Name)), _color.r, _color.g, _color.b });
     }
 
     [PunRPC]
-    private void SetupRPC(Vector3 _position, Quaternion _rotation, Vector3 _scale, Player _player, Color _color, PhotonMessageInfo info)
+    private void SetupRPC(string _name, float _r, float _g, float _b, PhotonMessageInfo info)
     {
-        uiTransform = gameObject.GetComponent<Transform>();
-
-        uiTransform.transform.position = _position;
-        uiTransform.transform.rotation = _rotation;
-        uiTransform.transform.localScale = _scale;
-
         minX = 0;
         minY = 0;
-        ownerName.text = RemoveColorTagsFromName(_player.GetStringProperty(PlayerProperty.Name));
-        bannerImage.color = _color;
+        ownerName.text = _name;
+        bannerImage.color = new Color(_r, _g, _b, .5f);
 
-        flareSound.Play();
+        if (PhotonNetwork.Time - info.SentServerTime < 0.5f)
+        {
+            flareSound.Play();
 
-        if ((int)Vector3.Distance(uiTransform.position, SceneLoader.CurrentCamera.Camera.transform.position) < minRingingRange)
-            ringingSound.Play();
+            if ((int)Vector3.Distance(transform.position, SceneLoader.CurrentCamera.Camera.transform.position) < minRingingRange)
+                ringingSound.Play();
+        }
 
-        UI.MinimapHandler.CreateWaypointMinimapIcon(uiTransform);
+        UI.MinimapHandler.CreateWaypointMinimapIcon(transform);
     }
 
     private void ChangeCanvasLocation()
     {
-        Vector3 pos = SceneLoader.CurrentCamera.Camera.WorldToViewportPoint(uiTransform.position);
+        Vector3 pos = SceneLoader.CurrentCamera.Camera.WorldToViewportPoint(gameObject.transform.position);
 
         pos.x *= canvas.pixelRect.width;
         pos.y *= canvas.pixelRect.height;
 
-        if (Vector3.Dot((uiTransform.position - SceneLoader.CurrentCamera.Camera.transform.position), SceneLoader.CurrentCamera.Camera.transform.forward) < 0)
+        if (Vector3.Dot(gameObject.transform.position - SceneLoader.CurrentCamera.Camera.transform.position, SceneLoader.CurrentCamera.Camera.transform.forward) < 0)
         {
             if (pos.x < Screen.width / 2)
                 pos.x = Screen.width - minX;
@@ -78,29 +75,29 @@ public class AcousticFlare : MonoBehaviourPun
         marker.transform.position = pos;
 
         if (SceneLoader.CurrentCamera.Camera != null && distance != null)
-            distance.text = "-" + ((int)Vector3.Distance(uiTransform.position, SceneLoader.CurrentCamera.Camera.transform.position)).ToString() + "U-";
+            distance.text = "-" + ((int)Vector3.Distance(gameObject.transform.position, SceneLoader.CurrentCamera.Camera.transform.position)).ToString() + "U-";
     }
 
     private void ScaleUIElements()
     {
-        float _distanceValue = Vector3.Distance(uiTransform.position, SceneLoader.CurrentCamera.Camera.transform.position);
+        float _distanceValue = Vector3.Distance(gameObject.transform.position, SceneLoader.CurrentCamera.Camera.transform.position);
 
         if (_distanceValue > 200f && _distanceValue < 10000f)
         {
             float scale = 50f / _distanceValue;
-            marker.transform.localScale = new Vector2( Mathf.Clamp(scale, 0.25f, .75f), Mathf.Clamp(scale, 0.25f, .75f));
+            marker.transform.localScale = new Vector2(Mathf.Clamp(scale, 0.25f, .75f), Mathf.Clamp(scale, 0.25f, .75f));
         }
         else 
-            marker.transform.localScale = new Vector2( .25f, .25f);
+            marker.transform.localScale = new Vector2(.25f, .25f);
     }
 
     private void ScaleOpacity()
     {
-        float _distanceValue = Vector3.Distance(uiTransform.position, SceneLoader.CurrentCamera.Camera.transform.position);
+        float _distanceValue = Vector3.Distance(gameObject.transform.position, SceneLoader.CurrentCamera.Camera.transform.position);
         if (_distanceValue > 130f && _distanceValue <= 10000f)
         {
             float scale = _distanceValue / 1500f;
-            ApplyOpacity( Mathf.Clamp(scale, .2f, .7f));
+            ApplyOpacity(Mathf.Clamp(scale, .2f, .7f));
         }
         else
         {
@@ -156,20 +153,11 @@ public class AcousticFlare : MonoBehaviourPun
                 DestroySelf();
         }
 
-        if (SceneLoader.CurrentCamera.Camera != null && uiTransform != null)
+        if (SceneLoader.CurrentCamera.Camera != null)
         {
             ChangeCanvasLocation();
             ScaleUIElements();
             ScaleOpacity();
-        }
-
-        if (SettingsManager.GeneralSettings.FlareMarkers.Value && !marker.activeInHierarchy)
-        {
-            marker.SetActive(true);
-        }
-        if (!SettingsManager.GeneralSettings.FlareMarkers.Value && marker.activeInHierarchy)
-        {
-            marker.SetActive(false);
         }
     }
 }

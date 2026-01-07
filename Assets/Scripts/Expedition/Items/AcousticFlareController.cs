@@ -17,7 +17,7 @@ namespace Projectiles
         {
             GameObject marker = PhotonNetwork.Instantiate(ResourcePaths.UI + "/Expedition/AcousticFlareMarker", position, rotation, 0);
             AcousticFlare acousticFlare = marker.GetComponent<AcousticFlare>();
-            acousticFlare.Setup(marker.transform, PhotonNetwork.LocalPlayer);
+            acousticFlare.Setup(PhotonNetwork.LocalPlayer);
             PhotonNetwork.Instantiate(ResourcePaths.Projectiles + "/AcousticParticle", position, rotation, 0);
         }
 
