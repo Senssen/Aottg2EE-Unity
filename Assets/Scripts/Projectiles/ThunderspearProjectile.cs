@@ -46,13 +46,13 @@ namespace Projectiles
         Vector3 _embedPosition = Vector3.zero;
         Vector3 _startPosition = Vector3.zero;
         bool _isAA = false;
-        float _embedTime;
         float critRng;
         //Adjust these for the crit timing
         const float critRngMin = 0.5f; //The minimum time before crit can happen, should never be lower than 0
         const float critRngMax = 1.7f; //The maximum time a crit can happen, should never be higher than embedLifeTime - critWindow
         const float embedLifeTime = 2f; //How long the TS will stay embedded
         const float critWindow = 0.3f; //the crit time window, should never be higher than embedLifeTime - critRngMax
+        float timePassed = 0f;
         bool playedCritAudio = false;
         bool playedFizzleAudio = false;
         bool _usesEmbed = false;
@@ -86,7 +86,6 @@ namespace Projectiles
         {
             if(_isEmbed)
             {
-                float timePassed = Time.fixedTime - _embedTime;
                 if (critRng > 0f && timePassed >= critRng && !playedCritAudio)
                 {
                     critAudio.Play();
@@ -115,7 +114,6 @@ namespace Projectiles
                 else
                 {
                     _isEmbed = true;
-                    _embedTime = Time.fixedTime;
                     _velocity = (-collision.contacts[0].normal + _velocity.normalized).normalized;
                     _embedParent = collision.transform;
                     float embedDistance = 0.1f;
@@ -126,6 +124,7 @@ namespace Projectiles
                     _transform.rotation = Quaternion.LookRotation(_velocity);
                     playedCritAudio = false;
                     playedFizzleAudio = false;
+                    timePassed = 0f;
                     chargeAudio.Play();
                     _timeLeft = embedLifeTime;
                     critRng = UnityEngine.Random.Range(critRngMin, critRngMax);
@@ -160,7 +159,6 @@ namespace Projectiles
                 {
                     if (_isEmbed)
                     {
-                        float timePassed = Time.fixedTime - _embedTime;
                         float minimumTime = critRng;
                         float maximumTime = critRng + critWindow;
                         if (timePassed >= minimumTime && timePassed <= maximumTime)
@@ -357,6 +355,7 @@ namespace Projectiles
 
         protected void FixedUpdate()
         {
+            timePassed += Time.fixedDeltaTime;
             TSAudio();
             if (_photonView.IsMine)
             {
