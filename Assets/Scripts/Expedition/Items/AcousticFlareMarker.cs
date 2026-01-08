@@ -1,3 +1,4 @@
+using System;
 using ApplicationManagers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,7 @@ public class AcousticFlareMarker : MonoBehaviour
 {
     private AcousticFlare AcousticFlare;
     private Canvas HUDCanvas;
+    [SerializeField] private RawImage MarkerImage;
     [SerializeField] private RawImage BannerImage;
     [SerializeField] private Text OwnerText;
     [SerializeField] private Text DistanceText;
@@ -15,20 +17,17 @@ public class AcousticFlareMarker : MonoBehaviour
     private static readonly float MinMarkerScale = .125f;
     private static readonly float MaxMarkerScale = .5f;
     private static readonly float InitializeTime = 2f;
-    private float _currentTime = InitializeTime;
+    private float _currentTime;
     private bool _initialized = false;
-
-    void Awake()
-    {
-        ApplyOpacity(0);
-    }
 
     public void Setup(AcousticFlare _acousticFlare, string _ownerName, Color _bannerColor)
     {
+        _currentTime = InitializeTime;
         HUDCanvas = GetComponentInParent<Canvas>();
         AcousticFlare = _acousticFlare;
         OwnerText.text = _ownerName;
         BannerImage.color = _bannerColor;
+        ApplyOpacity(0);
     }
 
     private void ChangeCanvasLocation()
@@ -57,13 +56,18 @@ public class AcousticFlareMarker : MonoBehaviour
 
     private void ScaleSize()
     {
+        Vector2 targetScale;
         if (AcousticFlare.Distance > 200f && AcousticFlare.Distance < MaxRenderDistance)
         {
-            float scale = 50f / AcousticFlare.Distance;
-            transform.localScale = new Vector2(Mathf.Clamp(scale, MinMarkerScale, MaxMarkerScale), Mathf.Clamp(scale, MinMarkerScale, MaxMarkerScale));
+            float scale = Math.Clamp(50f / AcousticFlare.Distance, MinMarkerScale, MaxMarkerScale);
+            targetScale = new Vector2(scale, scale);
         }
-        else 
-            transform.localScale = new Vector2(MinMarkerScale, MinMarkerScale);
+        else
+        {
+            targetScale = new Vector2(MinMarkerScale, MinMarkerScale);
+        }
+
+        transform.localScale = Vector2.Lerp(transform.localScale, targetScale, Time.deltaTime * 2.5f);
     }
 
     private void ScaleOpacity()
@@ -84,19 +88,19 @@ public class AcousticFlareMarker : MonoBehaviour
 
     private void ApplyOpacity(float opacity)
     {
-        foreach (Transform child in transform)
-        {
-            if (child.TryGetComponent(out Text _text))
-                _text.color = new Color(_text.color.r, _text.color.g, _text.color.b, opacity);
-            if (child.TryGetComponent(out RawImage _rawImage))
-                _rawImage.color = new Color(_rawImage.color.r, _rawImage.color.g, _rawImage.color.b, opacity);
-        }
+        MarkerImage.color = new Color(MarkerImage.color.r, MarkerImage.color.g, MarkerImage.color.b, opacity);
+        BannerImage.color = new Color(BannerImage.color.r, BannerImage.color.g, BannerImage.color.b, opacity);
+        OwnerText.color = new Color(OwnerText.color.r, OwnerText.color.g, OwnerText.color.b, opacity);
+        DistanceText.color = new Color(DistanceText.color.r, DistanceText.color.g, DistanceText.color.b, opacity);
     }
 
     public void OnUpdate()
     {
         if (AcousticFlare == null)
+        {
+            Destroy(gameObject);
             return;
+        }
 
         if (_currentTime > 0)
             _currentTime -= Time.deltaTime;

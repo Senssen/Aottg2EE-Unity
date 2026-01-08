@@ -4924,7 +4924,7 @@ MonoBehaviour:
   BannerColor: {r: 0, g: 0, b: 0, a: 0}
   RingingSound: {fileID: 7283410848424468746}
   FlareSound: {fileID: 8961408820590230740}
-  _distance: 0
+  Distance: 0
 --- !u!82 &8961408820590230740
 AudioSource:
   m_ObjectHideFlags: 0
