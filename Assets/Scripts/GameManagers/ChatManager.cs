@@ -396,6 +396,25 @@ namespace GameManagers
                         break;
                 }
             }
+            else if (CheckMC() && args.Length == 2)
+            {
+                switch (args[1])
+                {
+                    case "flow":
+                        DynamicWeatherManager.SetLobbyTimeFlow(true);
+                        AddLine("Time flow enabled");
+                        break;
+                    case "noflow":
+                        DynamicWeatherManager.SetLobbyTimeFlow(false);
+                        AddLine("Time flow disabled");
+                        break;
+                    default:
+                        AddLine("Invalid argument passed!", ChatTextColor.Error);
+                        AddLine("Example usage: /time flow");
+                        AddLine("Example usage: /time noflow");
+                        break;
+                }
+            }
         }
 
         [CommandAttribute("weather", "/weather [Action][Name]: Sets weather to a given weather by name.")]

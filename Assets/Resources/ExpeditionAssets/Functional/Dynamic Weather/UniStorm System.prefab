@@ -96,7 +96,7 @@ MonoBehaviour:
   UniStormMenuKey: 277
   UniStormCanvas: {fileID: 0}
   m_MenuToggle: 0
-  TabNumber: 3
+  TabNumber: 1
   TimeTabNumbers: 0
   WeatherTabNumbers: 1
   CelestialTabNumbers: 0

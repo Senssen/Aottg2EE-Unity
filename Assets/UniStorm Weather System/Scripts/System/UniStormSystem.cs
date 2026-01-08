@@ -2183,6 +2183,11 @@ namespace UniStorm
 
         #region AoTTG2:EE Additions
 
+        public void SetTimeFlow(EnableFeature enable)
+        {
+            TimeFlow = enable;
+        }
+
         public void SetTime(int hour, int minute)
         {
             Hour = hour;

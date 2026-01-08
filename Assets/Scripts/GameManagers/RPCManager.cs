@@ -12,6 +12,7 @@ using UnityEngine.SceneManagement;
 using Characters;
 using Photon.Realtime;
 using Settings;
+using UniStorm;
 
 namespace GameManagers
 {
@@ -331,14 +332,15 @@ namespace GameManagers
             int _hour = DynamicWeatherManager.uniStormSystem.Hour;
             int _minute = DynamicWeatherManager.uniStormSystem.Minute;
             string _weatherName = DynamicWeatherManager.uniStormSystem.CurrentWeatherType.WeatherTypeName;
+            UniStormSystem.EnableFeature _timeFlow = DynamicWeatherManager.uniStormSystem.TimeFlow;
 
-            PhotonView.RPC(nameof(ReceiveTimeAndWeatherRPC), info.Sender, new object[] { _hour, _minute, _weatherName });
+            PhotonView.RPC(nameof(ReceiveTimeAndWeatherRPC), info.Sender, new object[] { _hour, _minute, _weatherName, (int)_timeFlow });
         }
 
         [PunRPC]
-        public void ReceiveTimeAndWeatherRPC(int hour, int minute, string weatherName, PhotonMessageInfo info)
+        public void ReceiveTimeAndWeatherRPC(int hour, int minute, string weatherName, int _timeFlow, PhotonMessageInfo info)
         {
-            DynamicWeatherManager.SetupUniStorm(hour, minute, weatherName);
+            DynamicWeatherManager.SetupUniStorm(hour, minute, weatherName, _timeFlow);
         }
 
         [PunRPC]
@@ -355,6 +357,13 @@ namespace GameManagers
             ChatManager.AddLine($"<color=green>Master client has set the time of day to {DynamicWeatherManager.GetSanitizedTimeValue(hour)}:{DynamicWeatherManager.GetSanitizedTimeValue(minute)}.</color>");
             DynamicWeatherManager.uniStormSystem.SetTime(hour, minute);
             DynamicWeatherManager.uniStormSystem.m_TimeFloat = time;
+        }
+
+        [PunRPC]
+        public void SetUniStormTimeFlowRPC(int timeFlow, PhotonMessageInfo info)
+        {
+            if (timeFlow == 0 || timeFlow == 1)
+                DynamicWeatherManager.uniStormSystem.SetTimeFlow((UniStormSystem.EnableFeature)timeFlow);
         }
 
         #endregion

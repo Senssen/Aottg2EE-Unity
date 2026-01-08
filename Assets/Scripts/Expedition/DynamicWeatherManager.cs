@@ -51,7 +51,7 @@ public class DynamicWeatherManager : MonoBehaviour
         }
     }
 
-    public static void SetupUniStorm(int hour = -1, int minute = -1, string weatherName = "")
+    public static void SetupUniStorm(int hour = -1, int minute = -1, string weatherName = "", int timeFlow = -1)
     {
         GameObject uniStormGo = ResourceManager.InstantiateAsset<GameObject>(ResourcePaths.DynamicWeather, "UniStorm System");
         uniStormSystem = uniStormGo.GetComponent<UniStormSystem>();
@@ -62,8 +62,11 @@ public class DynamicWeatherManager : MonoBehaviour
         if (hour >= 0 && minute >= 0)
             uniStormSystem.SetTime(hour, minute);
 
+        if (timeFlow == 0 || timeFlow == 1)
+            uniStormSystem.SetTimeFlow((UniStormSystem.EnableFeature)timeFlow);
+
         if (!PhotonNetwork.IsMasterClient)
-            uniStormSystem.IsMasterClient = false;
+                uniStormSystem.IsMasterClient = false;
 
         DisableCameraAndSkybox();
     }
@@ -134,6 +137,13 @@ public class DynamicWeatherManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public static void SetLobbyTimeFlow(bool enable)
+    {
+        UniStormSystem.EnableFeature timeFlow = enable ? UniStormSystem.EnableFeature.Enabled : UniStormSystem.EnableFeature.Disabled;
+        uniStormSystem.SetTimeFlow(timeFlow);
+        RPCManager.PhotonView.RPC(nameof(RPCManager.SetUniStormTimeFlowRPC), RpcTarget.Others, new object[] { timeFlow });
     }
 
     public static string GetSanitizedTimeValue(int value)
