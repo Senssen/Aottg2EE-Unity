@@ -18,14 +18,14 @@ namespace Projectiles
             GameObject marker = PhotonNetwork.Instantiate(ResourcePaths.UI + "/Expedition/AcousticFlareMarker", position, rotation, 0);
             AcousticFlare acousticFlare = marker.GetComponent<AcousticFlare>();
             acousticFlare.Setup(PhotonNetwork.LocalPlayer);
-            PhotonNetwork.Instantiate(ResourcePaths.Projectiles + "/AcousticParticle", position, rotation, 0);
+            PhotonNetwork.Instantiate(ResourcePaths.Projectiles + "/AcousticParticle", position, rotation);
         }
 
         public static void ChangeAcousticFlaresVisibility(bool visible)
         {
             AcousticFlare[] acousticFlares = GameObject.FindObjectsByType<AcousticFlare>(FindObjectsSortMode.None);
             for (int i = 0; i < acousticFlares.Length; i++)
-                acousticFlares[i].marker.SetActive(visible);
+                acousticFlares[i].Marker.SetActive(visible);
         }
     }
 }

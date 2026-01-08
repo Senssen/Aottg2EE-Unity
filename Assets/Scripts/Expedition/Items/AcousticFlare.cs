@@ -9,19 +9,19 @@ using UnityEngine.UI;
 
 public class AcousticFlare : MonoBehaviourPun
 {
-    [SerializeField] private Canvas canvas;
-    [SerializeField] public GameObject marker; // the gameobject inside the canvas that parents the UI elements
+    [SerializeField] private Canvas Canvas;
+    [SerializeField] public GameObject Marker; // the gameobject inside the Canvas that parents the UI elements
 
-    [SerializeField] private RawImage bannerImage;
+    [SerializeField] private RawImage BannerImage;
 
-    [SerializeField] private Text ownerName;
+    [SerializeField] private Text OwnerText;
 
-    [SerializeField] private Text distance;
+    [SerializeField] private Text DistanceText;
 
-    [SerializeField] private AudioSource ringingSound;
-    [SerializeField] private AudioSource flareSound;
+    [SerializeField] private AudioSource RingingSound;
+    [SerializeField] private AudioSource FlareSound;
 
-    private Transform uiTransform;
+    private float _distance = 0f;
 
     private float minX;
     private float minY;
@@ -40,15 +40,15 @@ public class AcousticFlare : MonoBehaviourPun
     {
         minX = 0;
         minY = 0;
-        ownerName.text = _name;
-        bannerImage.color = new Color(_r, _g, _b, .5f);
+        OwnerText.text = _name;
+        BannerImage.color = new Color(_r, _g, _b, .5f);
 
         if (PhotonNetwork.Time - info.SentServerTime < 0.5f)
         {
-            flareSound.Play();
+            FlareSound.Play();
 
             if ((int)Vector3.Distance(transform.position, SceneLoader.CurrentCamera.Camera.transform.position) < minRingingRange)
-                ringingSound.Play();
+                RingingSound.Play();
         }
 
         UI.MinimapHandler.CreateWaypointMinimapIcon(transform);
@@ -58,8 +58,8 @@ public class AcousticFlare : MonoBehaviourPun
     {
         Vector3 pos = SceneLoader.CurrentCamera.Camera.WorldToViewportPoint(gameObject.transform.position);
 
-        pos.x *= canvas.pixelRect.width;
-        pos.y *= canvas.pixelRect.height;
+        pos.x *= Canvas.pixelRect.width;
+        pos.y *= Canvas.pixelRect.height;
 
         if (Vector3.Dot(gameObject.transform.position - SceneLoader.CurrentCamera.Camera.transform.position, SceneLoader.CurrentCamera.Camera.transform.forward) < 0)
         {
@@ -72,31 +72,28 @@ public class AcousticFlare : MonoBehaviourPun
         pos.x = Mathf.Clamp(pos.x, minX, Screen.width - minX);
         pos.y = Mathf.Clamp(pos.y, minY, Screen.height - minY);
 
-        marker.transform.position = pos;
+        Marker.transform.position = pos;
 
-        if (SceneLoader.CurrentCamera.Camera != null && distance != null)
-            distance.text = "-" + ((int)Vector3.Distance(gameObject.transform.position, SceneLoader.CurrentCamera.Camera.transform.position)).ToString() + "U-";
+        if (SceneLoader.CurrentCamera.Camera != null && DistanceText != null)
+            DistanceText.text =  $"-{(int)_distance}U-";
     }
 
     private void ScaleUIElements()
     {
-        float _distanceValue = Vector3.Distance(gameObject.transform.position, SceneLoader.CurrentCamera.Camera.transform.position);
-
-        if (_distanceValue > 200f && _distanceValue < 10000f)
+        if (_distance > 200f && _distance < 10000f)
         {
-            float scale = 50f / _distanceValue;
-            marker.transform.localScale = new Vector2(Mathf.Clamp(scale, 0.25f, .75f), Mathf.Clamp(scale, 0.25f, .75f));
+            float scale = 50f / _distance;
+            Marker.transform.localScale = new Vector2(Mathf.Clamp(scale, 0.25f, .75f), Mathf.Clamp(scale, 0.25f, .75f));
         }
         else 
-            marker.transform.localScale = new Vector2(.25f, .25f);
+            Marker.transform.localScale = new Vector2(.25f, .25f);
     }
 
     private void ScaleOpacity()
     {
-        float _distanceValue = Vector3.Distance(gameObject.transform.position, SceneLoader.CurrentCamera.Camera.transform.position);
-        if (_distanceValue > 130f && _distanceValue <= 10000f)
+        if (_distance > 130f && _distance <= 10000f)
         {
-            float scale = _distanceValue / 1500f;
+            float scale = _distance / 1500f;
             ApplyOpacity(Mathf.Clamp(scale, .2f, .7f));
         }
         else
@@ -107,7 +104,7 @@ public class AcousticFlare : MonoBehaviourPun
 
     private void ApplyOpacity(float opacity)
     {
-        foreach (Transform child in marker.transform)
+        foreach (Transform child in Marker.transform)
         {
             RawImage _rawImage = child.gameObject.GetComponent<RawImage>();
             Text _text = child.gameObject.GetComponent<Text>();
@@ -152,6 +149,8 @@ public class AcousticFlare : MonoBehaviourPun
             if (timeLeft <= 0)
                 DestroySelf();
         }
+
+        _distance = Vector3.Distance(gameObject.transform.position, SceneLoader.CurrentCamera.Camera.transform.position);
 
         if (SceneLoader.CurrentCamera.Camera != null)
         {
