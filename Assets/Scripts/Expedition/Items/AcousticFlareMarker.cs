@@ -30,13 +30,12 @@ public class AcousticFlareMarker : MonoBehaviour
 
     private void ChangeCanvasLocation()
     {
-        Vector3 flarePosition = AcousticFlare.transform.position;
-        Vector3 viewportPosition = SceneLoader.CurrentCamera.Camera.WorldToViewportPoint(flarePosition);
+        Vector3 viewportPosition = SceneLoader.CurrentCamera.Camera.WorldToViewportPoint(AcousticFlare.transform.position);
 
         viewportPosition.x *= HUDCanvas.pixelRect.width;
         viewportPosition.y *= HUDCanvas.pixelRect.height;
 
-        if (Vector3.Dot(flarePosition - SceneLoader.CurrentCamera.Camera.transform.position, SceneLoader.CurrentCamera.Camera.transform.forward) < 0)
+        if (Vector3.Dot(AcousticFlare.transform.position - SceneLoader.CurrentCamera.Camera.transform.position, SceneLoader.CurrentCamera.Camera.transform.forward) < 0)
         {
             if (viewportPosition.x < Screen.width / 2)
                 viewportPosition.x = Screen.width - ViewportMinX;
