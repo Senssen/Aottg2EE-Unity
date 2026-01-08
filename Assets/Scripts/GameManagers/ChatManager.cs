@@ -400,13 +400,13 @@ namespace GameManagers
             {
                 switch (args[1])
                 {
-                    case "flow":
-                        DynamicWeatherManager.SetLobbyTimeFlow(true);
-                        AddLine("Time flow enabled");
-                        break;
-                    case "noflow":
+                    case "pause":
                         DynamicWeatherManager.SetLobbyTimeFlow(false);
-                        AddLine("Time flow disabled");
+                        AddLine("Time paused");
+                        break;
+                    case "unpause":
+                        DynamicWeatherManager.SetLobbyTimeFlow(true);
+                        AddLine("Time unpaused");
                         break;
                     default:
                         AddLine("Invalid argument passed!", ChatTextColor.Error);
