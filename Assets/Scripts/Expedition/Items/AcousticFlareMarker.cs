@@ -14,6 +14,9 @@ public class AcousticFlareMarker : MonoBehaviour
     private static readonly int MaxRenderDistance = 10000;
     private static readonly float MinMarkerScale = .125f;
     private static readonly float MaxMarkerScale = .5f;
+    private static readonly float InitializeTime = 2f;
+    private float _currentTime = InitializeTime;
+    private bool _initialized = false;
 
     void Awake()
     {
@@ -46,7 +49,7 @@ public class AcousticFlareMarker : MonoBehaviour
         viewportPosition.x = Mathf.Clamp(viewportPosition.x, ViewportMinX, Screen.width - ViewportMinX);
         viewportPosition.y = Mathf.Clamp(viewportPosition.y, ViewportMinY, Screen.height - ViewportMinY);
 
-        transform.position = viewportPosition;
+        transform.position = new Vector3(viewportPosition.x, viewportPosition.y, 0);
 
         if (SceneLoader.CurrentCamera.Camera != null && DistanceText != null)
             DistanceText.text = $"-{(int)AcousticFlare.Distance}U-";
@@ -65,6 +68,9 @@ public class AcousticFlareMarker : MonoBehaviour
 
     private void ScaleOpacity()
     {
+        if (!_initialized)
+            return;
+
         if (AcousticFlare.Distance > 130f && AcousticFlare.Distance <= MaxRenderDistance)
         {
             float scale = AcousticFlare.Distance / 1500f;
@@ -92,7 +98,12 @@ public class AcousticFlareMarker : MonoBehaviour
         if (AcousticFlare == null)
             return;
 
-        else if (SceneLoader.CurrentCamera.Camera != null)
+        if (_currentTime > 0)
+            _currentTime -= Time.deltaTime;
+        else
+            _initialized = true;
+
+        if (SceneLoader.CurrentCamera.Camera != null)
         {
             ChangeCanvasLocation();
             ScaleSize();

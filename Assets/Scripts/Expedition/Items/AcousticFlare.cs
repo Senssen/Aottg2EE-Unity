@@ -47,6 +47,7 @@ public class AcousticFlare : MonoBehaviourPun
         if (expeditionUi && expeditionUi.TryGetComponent(out ExpeditionUiManager expeditionUiManager) && expeditionUiManager.FlareMarkers)
         {
             GameObject go = Instantiate(m_markerPrefab, expeditionUiManager.FlareMarkers);
+            go.transform.SetPositionAndRotation(expeditionUiManager.FlareMarkers.transform.position, expeditionUiManager.FlareMarkers.transform.rotation);
             Marker = go.GetComponent<AcousticFlareMarker>();
             Marker.Setup(this, OwnerName, BannerColor);
         }
