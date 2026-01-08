@@ -153,6 +153,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5304547071539217315}
+  - {fileID: 6029730305356840720}
   - {fileID: 8418267322543144770}
   - {fileID: 874776406738039233}
   m_Father: {fileID: 974243097467367966}
@@ -10995,6 +10996,7 @@ MonoBehaviour:
   LogisticianMaxSupplyInput: {fileID: 2687925253979009689}
   HorseAutorun: {fileID: 1736157865711396716}
   HumanAutorun: {fileID: 3966681244528111036}
+  FlareMarkers: {fileID: 6029730305356840720}
   NonLethalCannonText: {fileID: 8225075023367326694}
 --- !u!114 &437955393226296028
 MonoBehaviour:
@@ -12730,6 +12732,41 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6139685307210453776
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6029730305356840720}
+  m_Layer: 0
+  m_Name: FlareMarkers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6029730305356840720
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6139685307210453776}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2128822864173524634}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -7, y: -8}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6296256798347838488
 GameObject:
   m_ObjectHideFlags: 0

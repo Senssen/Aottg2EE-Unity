@@ -15,17 +15,16 @@ namespace Projectiles
 
         public static void FireAcousticFlare(Vector3 position, Quaternion rotation)
         {
-            GameObject marker = PhotonNetwork.Instantiate(ResourcePaths.UI + "/Expedition/AcousticFlareMarker", position, rotation, 0);
-            AcousticFlare acousticFlare = marker.GetComponent<AcousticFlare>();
+            GameObject go = PhotonNetwork.Instantiate(ResourcePaths.UI + "/Expedition/AcousticFlare", position, rotation, 0);
+            AcousticFlare acousticFlare = go.GetComponent<AcousticFlare>();
             acousticFlare.Setup(PhotonNetwork.LocalPlayer);
-            PhotonNetwork.Instantiate(ResourcePaths.Projectiles + "/AcousticParticle", position, rotation);
         }
 
         public static void ChangeAcousticFlaresVisibility(bool visible)
         {
-            AcousticFlare[] acousticFlares = GameObject.FindObjectsByType<AcousticFlare>(FindObjectsSortMode.None);
-            for (int i = 0; i < acousticFlares.Length; i++)
-                acousticFlares[i].Marker.SetActive(visible);
+            AcousticFlareMarker[] acousticFlareMarkerss = GameObject.FindObjectsByType<AcousticFlareMarker>(FindObjectsSortMode.None);
+            for (int i = 0; i < acousticFlareMarkerss.Length; i++)
+                acousticFlareMarkerss[i].gameObject.SetActive(visible);
         }
     }
 }

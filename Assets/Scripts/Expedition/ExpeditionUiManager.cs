@@ -9,32 +9,22 @@ using GameManagers;
 using System.Text.RegularExpressions;
 public class ExpeditionUiManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject CanvasObj;
-    [SerializeField]
-    private GameObject TabsParent;
-    [SerializeField]
-    private GameObject PlayerListTab;
-    [SerializeField]
-    private GameObject SettingsTab;
-    [SerializeField]
-    private ScrollRect PlayerListScrollArea;
-    [SerializeField]
-    private float AnimationDuration = 0.5f;
-    [SerializeField]
-    private InputField CoordsInput;
-    [SerializeField]
-    private InputField LogisticianMaxSupplyInput;
+    [SerializeField] private GameObject CanvasObj;
+    [SerializeField] private GameObject TabsParent;
+    [SerializeField] private GameObject PlayerListTab;
+    [SerializeField] private GameObject SettingsTab;
+    [SerializeField] private ScrollRect PlayerListScrollArea;
+    [SerializeField] private float AnimationDuration = 0.5f;
+    [SerializeField] private InputField CoordsInput;
+    [SerializeField] private InputField LogisticianMaxSupplyInput;
 
-    [SerializeField]
-    private GameObject HorseAutorun;
-    [SerializeField]
-    private GameObject HumanAutorun;
+    [SerializeField] private GameObject HorseAutorun;
+    [SerializeField] private GameObject HumanAutorun;
+    [SerializeField] public Transform FlareMarkers;
 
     private GeneralInputSettings _generalInputSettings;
 
-    [SerializeField]
-    private TMP_Text NonLethalCannonText;
+    [SerializeField] private TMP_Text NonLethalCannonText;
 
 
     private void Start()
