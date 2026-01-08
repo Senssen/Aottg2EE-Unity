@@ -21,12 +21,12 @@ public class AcousticFlare : MonoBehaviourPun
     [SerializeField] private AudioSource RingingSound;
     [SerializeField] private AudioSource FlareSound;
 
-    private float _distance = 0f;
+    private readonly float ViewportMinX = 0f;
+    private readonly float ViewportMinY = 0f;
+    private static readonly int MinRingRange = 250;
 
-    private float minX;
-    private float minY;
-    private float timeLeft = AcousticFlareController._maxLife;
-    private static readonly int minRingingRange = 250;
+    private float _distance = 0f;
+    private float _timeLeft = AcousticFlareController._maxLife;
 
     public void Setup(Player _player)
     {
@@ -38,8 +38,6 @@ public class AcousticFlare : MonoBehaviourPun
     [PunRPC]
     private void SetupRPC(string _name, float _r, float _g, float _b, PhotonMessageInfo info)
     {
-        minX = 0;
-        minY = 0;
         OwnerText.text = _name;
         BannerImage.color = new Color(_r, _g, _b, .5f);
 
@@ -47,7 +45,7 @@ public class AcousticFlare : MonoBehaviourPun
         {
             FlareSound.Play();
 
-            if ((int)Vector3.Distance(transform.position, SceneLoader.CurrentCamera.Camera.transform.position) < minRingingRange)
+            if ((int)Vector3.Distance(transform.position, SceneLoader.CurrentCamera.Camera.transform.position) < MinRingRange)
                 RingingSound.Play();
         }
 
@@ -56,23 +54,23 @@ public class AcousticFlare : MonoBehaviourPun
 
     private void ChangeCanvasLocation()
     {
-        Vector3 pos = SceneLoader.CurrentCamera.Camera.WorldToViewportPoint(gameObject.transform.position);
+        Vector3 viewportPosition = SceneLoader.CurrentCamera.Camera.WorldToViewportPoint(gameObject.transform.position);
 
-        pos.x *= Canvas.pixelRect.width;
-        pos.y *= Canvas.pixelRect.height;
+        viewportPosition.x *= Canvas.pixelRect.width;
+        viewportPosition.y *= Canvas.pixelRect.height;
 
         if (Vector3.Dot(gameObject.transform.position - SceneLoader.CurrentCamera.Camera.transform.position, SceneLoader.CurrentCamera.Camera.transform.forward) < 0)
         {
-            if (pos.x < Screen.width / 2)
-                pos.x = Screen.width - minX;
+            if (viewportPosition.x < Screen.width / 2)
+                viewportPosition.x = Screen.width - ViewportMinX;
             else
-                pos.x = minX;
+                viewportPosition.x = ViewportMinX;
         }
 
-        pos.x = Mathf.Clamp(pos.x, minX, Screen.width - minX);
-        pos.y = Mathf.Clamp(pos.y, minY, Screen.height - minY);
+        viewportPosition.x = Mathf.Clamp(viewportPosition.x, ViewportMinX, Screen.width - ViewportMinX);
+        viewportPosition.y = Mathf.Clamp(viewportPosition.y, ViewportMinY, Screen.height - ViewportMinY);
 
-        Marker.transform.position = pos;
+        Marker.transform.position = viewportPosition;
 
         if (SceneLoader.CurrentCamera.Camera != null && DistanceText != null)
             DistanceText.text =  $"-{(int)_distance}U-";
@@ -145,8 +143,8 @@ public class AcousticFlare : MonoBehaviourPun
     {
         if (photonView.AmOwner)
         {
-            timeLeft -= Time.deltaTime;
-            if (timeLeft <= 0)
+            _timeLeft -= Time.deltaTime;
+            if (_timeLeft <= 0)
                 DestroySelf();
         }
 
