@@ -117,6 +117,7 @@ namespace ApplicationManagers
 
         public static void HandlePostSceneLoad()
         {
+            ClearOldUniStorm();
             GameObject flareSetup = GameObject.Find("ProFlareBatch (MegaAtlas)");
             GameObject gameCamera = GameObject.FindWithTag("MainCamera");
             if (gameCamera != null && gameCamera.TryGetComponent(out Camera camera))
