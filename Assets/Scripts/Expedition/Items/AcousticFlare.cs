@@ -8,7 +8,7 @@ using UnityEngine;
 public class AcousticFlare : MonoBehaviourPun
 {
     public GameObject m_markerPrefab;
-    public AcousticFlareMarker Marker; // the gameobject inside the Canvas that parents the UI elements
+    public AcousticFlareMarker Marker;
     public string OwnerName;
     public Color BannerColor;
     [SerializeField] private AudioSource RingingSound;
@@ -62,9 +62,9 @@ public class AcousticFlare : MonoBehaviourPun
 
     private Color GenerateRandomColor()
     {
-        float r = Random.Range(.01f, .99f);  
+        float r = Random.Range(.01f, .99f);
         float g = Random.Range(.01f, .99f);
-        float b = Random.Range(.01f, .99f); 
+        float b = Random.Range(.01f, .99f);
 
         return new Color(r, g, b, .5f);
     }
@@ -86,5 +86,10 @@ public class AcousticFlare : MonoBehaviourPun
 
         Distance = (transform.position - SceneLoader.CurrentCamera.Camera.transform.position).magnitude;
         Marker.OnUpdate();
+    }
+
+    void OnDestroy()
+    {
+        Destroy(Marker.gameObject);
     }
 }
