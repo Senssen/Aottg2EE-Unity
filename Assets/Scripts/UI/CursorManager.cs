@@ -36,6 +36,7 @@ namespace UI
         private Quaternion _arrowRightRotation;
         private bool _arrowLeftWhite;
         private bool _arrowRightWhite;
+        private RectTransform CachedCrosshairTransform;
 
         public static void Init()
         {
@@ -77,6 +78,11 @@ namespace UI
         public static void RefreshCursorLock()
         {
             return;
+        }
+
+        public static RectTransform GetCachedCrosshairTransform()
+        {
+            return _instance.CachedCrosshairTransform;
         }
 
         public static void SetPointer(bool force = false)
@@ -233,6 +239,7 @@ namespace UI
                     crosshairTransform.position = GetInGameMousePosition();
                 }
                 _instance._forceNextCrosshairUpdate = false;
+                _instance.CachedCrosshairTransform = (RectTransform)crosshairTransform;
             }
         }
 

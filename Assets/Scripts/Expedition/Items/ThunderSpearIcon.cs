@@ -38,11 +38,14 @@ public class ThunderSpearIcon : MonoBehaviour
 
     void Update()
     {
-        if (gameObject.activeInHierarchy)
-        {
-            Vector3 mousePosition = CursorManager.GetInGameMousePosition();
-            transform.position = new Vector3(mousePosition.x, mousePosition.y + 25f, mousePosition.z);
-        }
+        if (!gameObject.activeInHierarchy)
+        return;
+
+        RectTransform crosshair = CursorManager.GetCachedCrosshairTransform();
+        RectTransform self = (RectTransform)transform;
+
+        float scaledOffsetY = 25f * crosshair.lossyScale.y;
+        self.position = crosshair.position + new Vector3(0f, scaledOffsetY, 0f);
     }
 }
 
