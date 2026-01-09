@@ -109,7 +109,7 @@ MonoBehaviour:
   chargeAudio: {fileID: 9069619373323512373}
   fizzleAudio: {fileID: 8821291858986871}
   critAudio: {fileID: 8965786962434086899}
-  m_critPrefab: {fileID: 6271066907830655591, guid: 8508511b44d551e4a92deeb29d237469, type: 3}
+  tsIcon: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 0

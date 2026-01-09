@@ -16614,6 +16614,7 @@ MonoBehaviour:
   _attackButtonRelease: 0
   _reelInWaitForRelease: 0
   PassengerHorse: {fileID: 0}
+  expeditionUiManager: {fileID: 0}
 --- !u!114 &11414280
 MonoBehaviour:
   m_ObjectHideFlags: 0
