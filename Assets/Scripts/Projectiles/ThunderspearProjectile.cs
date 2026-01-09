@@ -58,6 +58,7 @@ namespace Projectiles
         bool _usesEmbed = false;
         public static Color CritColor = new Color(0.475f, 0.7f, 1f);
         public ThunderSpearIcon tsIcon;
+        private bool wasIconDeactivated = false;
 
         protected override void SetupSettings(object[] settings)
         {
@@ -142,25 +143,30 @@ namespace Projectiles
             }
         }
 
-        protected override void OnExceedLiveTime()
+        private void DeactivateHUDIcon()
         {
-            _wasMaxRange = true;
-            if(!_isEmbed)
-            Explode();
-            else
-            DestroySelf();
+            if (!wasIconDeactivated)
+            {
+                wasIconDeactivated = true;
+                tsIcon.Activate(false);
+            }
         }
 
-        public override void DestroySelf()
+        protected override void OnExceedLiveTime()
         {
-            tsIcon.Activate(false);
-            base.DestroySelf();
+            DeactivateHUDIcon();
+            _wasMaxRange = true;
+            if (!_isEmbed)
+                Explode();
+            else
+                DestroySelf();
         }
 
         public void Explode()
         {
             if (!Disabled)
             {
+                DeactivateHUDIcon();
                 chargeAudio.Stop();
                 float effectRadius;
                 float restrictAngle = GetStat("RestrictAngle");
