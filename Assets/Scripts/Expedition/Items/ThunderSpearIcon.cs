@@ -44,7 +44,7 @@ public class ThunderSpearIcon : MonoBehaviour
         RectTransform crosshair = CursorManager.GetCachedCrosshairTransform();
         RectTransform self = (RectTransform)transform;
 
-        float scaledOffsetY = 25f * crosshair.lossyScale.y;
+        float scaledOffsetY = (25f * crosshair.lossyScale.y) + 5f;
         self.position = crosshair.position + new Vector3(0f, scaledOffsetY, 0f);
     }
 }
