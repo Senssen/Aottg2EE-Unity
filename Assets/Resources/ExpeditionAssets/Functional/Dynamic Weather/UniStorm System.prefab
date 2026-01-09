@@ -96,7 +96,7 @@ MonoBehaviour:
   UniStormMenuKey: 277
   UniStormCanvas: {fileID: 0}
   m_MenuToggle: 0
-  TabNumber: 3
+  TabNumber: 2
   TimeTabNumbers: 0
   WeatherTabNumbers: 1
   CelestialTabNumbers: 0
@@ -1824,7 +1824,34 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1.0023234
+      value: 1.4966943
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 4.009901
+      value: 1.7940286
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 5.9554453
+      value: 1.7940286
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 9.766013
+      value: 1.4966943
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1833,7 +1860,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 24
-      value: 1.0023234
+      value: 1.4966943
       inSlope: 0
       outSlope: 0
       tangentMode: 0
