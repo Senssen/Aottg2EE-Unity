@@ -9277,7 +9277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultColor: {r: 1, g: 1, b: 1, a: 1}
-  CritColor: {r: 0.6462264, g: 1, b: 0.920401, a: 1}
+  CritColor: {r: 0.46855342, g: 0.80426925, b: 1, a: 1}
 --- !u!1 &4796756472118229985
 GameObject:
   m_ObjectHideFlags: 0
