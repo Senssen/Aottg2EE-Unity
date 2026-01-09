@@ -20,7 +20,8 @@ public class ExpeditionUiManager : MonoBehaviour
 
     [SerializeField] private GameObject HorseAutorun;
     [SerializeField] private GameObject HumanAutorun;
-    [SerializeField] public Transform FlareMarkers;
+    public Transform FlareMarkers;
+    public ThunderSpearIcon ThunderSpearIcon;
 
     private GeneralInputSettings _generalInputSettings;
 

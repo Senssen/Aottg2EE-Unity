@@ -57,9 +57,11 @@ namespace Projectiles
         bool playedFizzleAudio = false;
         bool _usesEmbed = false;
         public static Color CritColor = new Color(0.475f, 0.7f, 1f);
+        public ThunderSpearIcon tsIcon;
 
         protected override void SetupSettings(object[] settings)
         {
+            tsIcon = ((Human)_owner).expeditionUiManager.ThunderSpearIcon;
             _radius = (float)settings[0];
             _color = (Color)settings[1];
             _usesEmbed = (bool)settings[2];
@@ -88,11 +90,13 @@ namespace Projectiles
             {
                 if (critRng > 0f && timePassed >= critRng && !playedCritAudio)
                 {
+                    tsIcon.SetColor(EmbedState.Crit);
                     critAudio.Play();
                     playedCritAudio = true;
                 }
                 if (critRng > 0f && timePassed > critRng + critWindow && !playedFizzleAudio)
                 {
+                    tsIcon.SetColor(EmbedState.Default);
                     fizzleAudio.Play();
                     chargeAudio.Stop();
                     playedFizzleAudio = true;
@@ -110,7 +114,7 @@ namespace Projectiles
                 if (SettingsManager.InGameCurrent.Misc.ThunderspearPVP.Value || !_usesEmbed)
                 {
                     Explode();
-                }   
+                }
                 else
                 {
                     _isEmbed = true;
@@ -132,6 +136,8 @@ namespace Projectiles
                     {
                         _isAA = true;
                     }
+
+                    tsIcon.Activate(true);
                 }
             }
         }
@@ -143,6 +149,12 @@ namespace Projectiles
             Explode();
             else
             DestroySelf();
+        }
+
+        public override void DestroySelf()
+        {
+            tsIcon.Activate(false);
+            base.DestroySelf();
         }
 
         public void Explode()

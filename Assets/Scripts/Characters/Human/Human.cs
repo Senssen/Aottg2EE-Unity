@@ -135,7 +135,7 @@ namespace Characters
         private bool _isReelingOut;
         private Dictionary<BaseTitan, float> _lastNapeHitTimes = new Dictionary<BaseTitan, float>();
         public Horse PassengerHorse = null;
-        private ExpeditionUiManager expeditionUiManager;
+        public ExpeditionUiManager expeditionUiManager;
         private WagoneerMenuManager wagoneerMenuManager;
 
         protected override void CreateDetection()
