@@ -41,7 +41,7 @@ public class ThunderSpearIcon : MonoBehaviour
         if (gameObject.activeInHierarchy)
         {
             Vector3 mousePosition = CursorManager.GetInGameMousePosition();
-            transform.position = new Vector3(mousePosition.x, mousePosition.y + 25f, mousePosition.z);
+            transform.position = new Vector3(mousePosition.x, mousePosition.y + 28f, mousePosition.z);
         }
     }
 }
