@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5898127834174176499}
   - component: {fileID: 7922481929788637093}
   - component: {fileID: 1097119580799883586}
+  - component: {fileID: 4767797820436117571}
   m_Layer: 23
   m_Name: Momo_Carpenter_CubeFBX
   m_TagString: Untagged
@@ -19,21 +20,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!4 &3438273048604765746
-Transform:
+--- !u!224 &3438273048604765746
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2990886986182001050}
-  serializedVersion: 2
   m_LocalRotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
-  m_LocalPosition: {x: 87.98, y: -0.287673, z: -37.471855}
+  m_LocalPosition: {x: 0, y: 0, z: -37.471855}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 87.98, y: -0.287673}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &5898127834174176499
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -105,3 +110,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6, y: 6, z: 6}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!222 &4767797820436117571
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2990886986182001050}
+  m_CullTransparentMesh: 1
